@@ -52,45 +52,10 @@ io.on('connection', (socket) => {
 
   io.sockets.emit('connected', socketUsername)
 
-  socket.on('game_request', ({ username, requests }) => {
-    io.to(username).emit('game_request', {
-      username: socketUsername,
-      requests,
-    })
+  socket.on('createOrder', () => {
+    io.to('admin@appname.com').emit('createOrder')
   })
-  socket.on(
-    'accepted_game_request',
-    ({ username, requests, playing_now, game, coins }) => {
-      io.to(username).emit('accepted_game_request', {
-        username: socketUsername,
-        requests,
-        playing_now,
-        game,
-        coins,
-      })
-    }
-  )
-  socket.on('friend_request', ({ username, requests }) => {
-    io.to(username).emit('friend_request', {
-      username: socketUsername,
-      requests,
-    })
-  })
-  socket.on('accepted_friend_request', ({ username, requests, friends }) => {
-    io.to(username).emit('accepted_friend_request', {
-      username: socketUsername,
-      requests,
-      friends,
-    })
-  })
-  socket.on('change_current_player', (username) => {
-    io.to(username).emit('change_current_player', socketUsername)
-  })
-  socket.on('direct_message', (username) => {
-    io.to(username).emit('direct_message', socketUsername)
-  })
-
-  socket.on('disconnection', () => {
-    io.sockets.emit('disconnection', socketUsername)
+  socket.on('updateOrders', (email) => {
+    io.to(email).emit('updateOrders')
   })
 })
