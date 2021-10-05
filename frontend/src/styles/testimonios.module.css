@@ -1,0 +1,44 @@
+.cardTestimony {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    min-height: 50vh;
+    width: 48vw;
+    background-color: whitesmoke;
+}
+.boxTestimony {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+}
+.line {
+    width: 25%;
+    border-width: 0;
+    height: 3px;
+    background-color: #fe6849;
+}
+.circle {
+    border: solid 3px #fe6849;
+    width: 6rem;
+    height: 6rem;
+    border-radius: 100px 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.descriptionTestimony {
+    width: 50%;
+}
+.nameTestimony {
+    text-align: center;
+    font-weight: 700;
+}
+.descriptionTestimony {
+    text-align: center;
+    margin-bottom: -5%;
+}

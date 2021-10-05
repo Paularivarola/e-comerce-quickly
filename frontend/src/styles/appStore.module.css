@@ -1,0 +1,53 @@
+.mainApp {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.descriptionBox {
+    width: 30%;
+}
+.titleBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.title {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #fe6849;
+}
+.text {
+    text-align: center;
+    margin-bottom: 5%;
+    font-size: 1rem;
+    color: slategrey;
+}
+.sistemBox {
+    display: flex;
+}
+.sistemContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.picture {
+    width: 40%;
+}
+.sistem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.textSistem {
+    text-align: center;
+    font-size: 0.8rem;
+    margin-left: 4%;
+    font-weight: 500;
+    color: slategrey;
+}
+.pictureSistem {
+    width: 20%
+}
