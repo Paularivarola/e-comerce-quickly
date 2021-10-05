@@ -1,28 +1,45 @@
 const express = require('express')
-const productControllers = require('../controllers/productControllers')
-const userControllers = require('../controllers/userControllers')
+const userControllers = require('../controllers/app/userControllers')
+const productControllers = require('../controllers/app/productControllers')
+const orderControllers = require('../controllers/app/orderControllers')
+const passport = require('../config/passport').authenticate('jwt', {
+  session: false,
+})
+const validatorSignUp = require('../controllers/middlewares/validator')
+//Validar con joi las actualizaciones de usuario
 
 const router = express.Router()
 
+//USERS
+router.route('/user/signUp').post(validatorSignUp, userControllers.signUp)
+router.route('/user/logIn').post(userControllers.logIn)
+router.route('/user/verifyToken').post(passport, userControllers.verifyToken)
+router
+  .route('/user')
+  .put(passport, userControllers.updateUser)
+  .delete(passport, userControllers.deleteUser)
 
 // PRODUCTS
-router.route('/producto/:id')
-    .get(productControllers.readProduct)
-    .put(productControllers.updateProduct)
-    .delete(productControllers.deleteProduct)
+router
+  .route('/products')
+  .get(productControllers.getProducts)
+  .put(passport, productControllers.manageCart)
 
-router.route('/productos')
-    .post(productControllers.createProduct)
-    .get(productControllers.readAll)
+//ORDERS
+router
+  .route('/orders')
+  .post(orderControllers.createOrder)
+  .put(orderControllers.cancellOrder)
 
-// USERS
-// router.route('/user/:id')
-//     .get(userControllers.readUser)
-//     .update(userControllers.updateUser)
-//     .delete(userControllers.deleteUser)
+// router
+//   .route("/producto/:id")
+//   .get(productControllers.readProduct)11
+//   .put(productControllers.updateProduct)
+//   .delete(productControllers.deleteProduct);
 
-router.route('/users')
-    .post(userControllers.createUser)
-    .get(userControllers.readAllUsers)
+// router
+//   .route("/productos")
+//   .post(productControllers.createProduct)
+//   .get(productControllers.readAll);
 
 module.exports = router
