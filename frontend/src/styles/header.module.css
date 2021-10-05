@@ -1,1 +1,29 @@
 /* borrar */
+
+.logo {
+  width: 25vw;
+}
+
+.user {
+    width: 5vw;
+}
+
+.containerNavegation {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 15vh;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.navegation a {
+  padding: 6vh 2vw;
+  text-decoration: none;
+}
+
+.active {
+  background-color: #fe6849;
+  color: #fff;
+  height: 100%;
+  text-decoration: none;
+}

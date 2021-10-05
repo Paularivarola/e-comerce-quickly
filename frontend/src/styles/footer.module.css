@@ -1,1 +1,29 @@
 /* borrar */
+
+.containerFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    width: 25vw;
+}
+
+.iconsFooter {
+    width: 2vw;
+    padding: 1vw;
+}
+
+.parrafo {
+    padding: 0vh 1vw 0vh 0vw;
+}
+
+.boxIcons {
+    padding: 1vw;
+    text-align: center;
+}
+
+.map {
+    width: 25vw;
+}

@@ -11,6 +11,7 @@ import Profile from './pages/Profile';
 import stylesCris from "./styles/stylesCris.css"
 import Dashboard from './components/Admin/Dashboard'
 
+
 const App = () => {
   return (
     <BrowserRouter>

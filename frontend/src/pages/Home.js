@@ -5,14 +5,16 @@ import AppStore from '../components/AppStore'
 import Testimonios from '../components/Testimonios'
 
 const Home = () => {
-    return (
-        <>
-            <Hero/>
-            <PromosCarousel/>
-            <AppStore/>
-            <Testimonios/>
-        </>
-    )
+  return (
+    <>
+      <Header />
+      <Hero />
+      <PromosCarousel />
+      <AppStore />
+      <Testimonios />
+      <Footer />
+    </>
+  )
 }
 
-export default Home
+export default Home;
