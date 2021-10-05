@@ -1,1 +1,53 @@
 /* borrar */
+
+.logo {
+  width: 20vw;
+}
+
+.user {
+  width: 5vw;
+}
+
+.containerNavegation {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 15vh;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.navegation a {
+  padding: 6vh 2vw;
+  text-decoration: none;
+
+}
+
+.active {
+  background-color: #fe6849;
+  color: #fff;
+  height: 90%;
+  text-decoration: none;
+}
+
+
+@media screen and (max-width: 1218px) {
+  header {
+    background-color: lightcoral;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  header {
+    background-color: violet;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  header {
+    background-color: seagreen;
+  }
+
+  .containerNavegation {
+    flex-wrap: wrap;
+  }
+}

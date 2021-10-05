@@ -1,1 +1,56 @@
 /* borrar */
+
+.containerFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    width: 20vw;
+}
+
+.iconsFooter {
+    width: 2vw;
+    padding: 1vw;
+}
+
+.parrafo {
+    padding: 0vh 1vw 0vh 0vw;
+}
+
+.boxIcons {
+    padding: 1vw;
+    text-align: center;
+}
+
+.map {
+    width: 25vw;
+}
+
+@media screen and (max-width: 1920px) {
+    footer {
+      background-color: indigo;
+    }
+  }
+  
+  @media screen and (max-width: 1218px) {
+    footer {
+      background-color: lightcoral;
+    }
+  }
+  
+  @media screen and (max-width: 800px) {
+    footer {
+      background-color:violet;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    footer {
+      background-color:seagreen;
+    }
+
+  
+  }
+

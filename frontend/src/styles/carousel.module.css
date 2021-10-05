@@ -1,0 +1,42 @@
+.carouselContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.carouselBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.carousel {
+    align-self: center;
+    width: 50%;
+    height: 70vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.promo {
+    width: 25%;
+    height: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-top: solid 2px #fe6849;
+    border-bottom: solid 2px #fe6849;
+}
+.promoH3 {
+    font-size: 2rem;
+    color: #fe6849;
+}
+.promoDesc {
+    text-align: center;
+    width: 80%;
+}
+.promoPrice {
+    margin-top: 10%;
+    font-size: 2rem;
+    color: #fe6849;
+}

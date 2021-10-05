@@ -3,6 +3,8 @@
     min-height: 100vh;
     display: flex;
 }
+
+
 .bodyContainer{
     display: flex;
     flex-direction: column;
@@ -11,12 +13,49 @@
 section.header{
     width: 100%;
     height: 11vh;
-    box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.44);
-    -webkit-box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.44);
-    -moz-box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.44);
+    box-shadow: 0px 1px 6px 0px rgba(0,0,0,0.44);
+    -webkit-box-shadow: 0px 1px 6px 0px rgba(0,0,0,0.44);
+    -moz-box-shadow: 0px 1px 6px 0px rgba(0,0,0,0.44);
     z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 3vw;
+    padding-left: 1vw;
 }
+
+section.header i{
+    font-size: 27px;
+    color: #cc533a;
+    cursor: pointer;
+    transition: all 300ms;
+}
+
+section.header i:hover{
+    color: #fe6849;
+}
+
+.userSection{
+    display: flex;
+    align-items: center;
+}
+
+.userSection i{
+    margin-right: 1em;
+}
+
+.profilePic{
+    width: 60px;
+    height: 60px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+
 .viewContainer{
     background-color: #F0F0FA;
     flex: 1
 }
+

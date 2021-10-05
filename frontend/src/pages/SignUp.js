@@ -33,14 +33,14 @@ const SignUp = (props) => {
 
     const submit = async (e) => {
         e.preventDefault()
-        if(!shift){
-            if(!user.mail.includes("@") || user.pass === null){
+        if (!shift) {
+            if (!user.mail.includes("@") || user.pass === null) {
                 alert("Todos los campos son obligatorios")
             }
             signIn(user)
         } else {
-            if(Object.keys(user).some((property) => user[property] === null) ||
-                !user.mail.includes("@")){
+            if (Object.keys(user).some((property) => user[property] === null) ||
+                !user.mail.includes("@")) {
                 alert("Todos los campos son obligatorios")
                 return false
             }
@@ -48,12 +48,12 @@ const SignUp = (props) => {
         }
     }
 
-    const signUp = async(sendUser) => {
+    const signUp = async (sendUser) => {
         console.log("sign Up!!", sendUser)
         await props.createUser(sendUser)
     }
 
-    const signIn = async(sendUser) => {
+    const signIn = async (sendUser) => {
         console.log("sign In!!", sendUser)
         await props.logUser(sendUser)
     }
@@ -71,25 +71,25 @@ const SignUp = (props) => {
                 {!shift ?
                     <form className={styles.boxForm}>
                         <input className={styles.contact} type="text" name="mail" placeholder="Ingresa tu email..."
-                        onChange={inputHandler} defaultValue={user.mail}/>
+                            onChange={inputHandler} defaultValue={user.mail} />
                         <input className={styles.contact} type="password" name="pass" placeholder="Ingresa tu contraseña..."
-                        onChange={inputHandler} defaultValue={user.pass}/>
+                            onChange={inputHandler} defaultValue={user.pass} />
                     </form>
                     :
                     <form className={styles.boxForm}>
                         <div className={styles.nameContent}>
                             <input className={styles.name} type="text" name="name" placeholder="Ingresa tu nombre..."
-                            onChange={inputHandler} defaultValue={user.name}/>
+                                onChange={inputHandler} defaultValue={user.name} />
                             <input className={styles.name} type="text" name="lastName" placeholder="Ingresa tu apellido..."
-                            onChange={inputHandler} defaultValue={user.lastName}/>
+                                onChange={inputHandler} defaultValue={user.lastName} />
                         </div>
                         <div className={styles.contactContent}>
                             <input className={styles.contact} type="text" name="mail" placeholder="Ingresa tu email..."
-                            onChange={inputHandler} defaultValue={user.mail}/>
+                                onChange={inputHandler} defaultValue={user.mail} />
                             <input className={styles.contact} type="password" name="pass" placeholder="Crea una contraseña..."
-                            onChange={inputHandler} defaultValue={user.pass}/>
+                                onChange={inputHandler} defaultValue={user.pass} />
                             <input className={styles.contact} type="password" name="repPass" placeholder="Repite la contraseña..."
-                            onChange={inputHandler} defaultValue={user.repPass}/>
+                                onChange={inputHandler} defaultValue={user.repPass} />
                         </div>
                     </form>
                 }
@@ -111,4 +111,4 @@ const mapDispatchToProps = {
     logUser: userActions.logUser,
 }
 
-export default connect(null,mapDispatchToProps)(SignUp)
+export default connect(null, mapDispatchToProps)(SignUp)
