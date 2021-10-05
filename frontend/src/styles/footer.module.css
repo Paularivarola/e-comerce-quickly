@@ -7,7 +7,7 @@
 }
 
 .logo {
-    width: 25vw;
+    width: 20vw;
 }
 
 .iconsFooter {
@@ -27,3 +27,30 @@
 .map {
     width: 25vw;
 }
+
+@media screen and (max-width: 1920px) {
+    footer {
+      background-color: indigo;
+    }
+  }
+  
+  @media screen and (max-width: 1218px) {
+    footer {
+      background-color: lightcoral;
+    }
+  }
+  
+  @media screen and (max-width: 800px) {
+    footer {
+      background-color:violet;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    footer {
+      background-color:seagreen;
+    }
+
+  
+  }
+
