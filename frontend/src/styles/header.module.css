@@ -1,11 +1,11 @@
 /* borrar */
 
 .logo {
-  width: 25vw;
+  width: 20vw;
 }
 
 .user {
-    width: 5vw;
+  width: 5vw;
 }
 
 .containerNavegation {
@@ -19,11 +19,35 @@
 .navegation a {
   padding: 6vh 2vw;
   text-decoration: none;
+
 }
 
 .active {
   background-color: #fe6849;
   color: #fff;
-  height: 100%;
+  height: 90%;
   text-decoration: none;
+}
+
+
+@media screen and (max-width: 1218px) {
+  header {
+    background-color: lightcoral;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  header {
+    background-color: violet;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  header {
+    background-color: seagreen;
+  }
+
+  .containerNavegation {
+    flex-wrap: wrap;
+  }
 }

@@ -8,19 +8,19 @@ const Footer = () => {
           <div>
             <img
               class={styles.logo}
-              src="../assets/logo-cocina-prueba.png"
+              src="/assets/logo-cocina-prueba.png"
               alt="logo"
             />
           </div>
           <div>
             <img
               class={styles.iconsFooter}
-              src="../assets/facebook.png"
+              src="/assets/facebook.png"
               alt="Facebook"
             />
             <img
               class={styles.iconsFooter}
-              src="../assets/twitter.png"
+              src="/assets/twitter.png"
               alt="Twitter"
             />
             <img
@@ -30,7 +30,7 @@ const Footer = () => {
             />
             <img
               class={styles.iconsFooter}
-              src="../assets/instagram.png"
+              src="/assets/instagram.png"
               alt="Instagram"
             />
           </div>
@@ -51,7 +51,7 @@ const Footer = () => {
           <p>Wholesale</p>
           <p>Contact Us</p>
         </div>
-        <img class={styles.map} src="../assets/mapa-prueba.png" alt="map" />
+        {/* <img class={styles.map} src="../assets/mapa-prueba.png" alt="map" /> */}
       </div>
     </footer>
   );
