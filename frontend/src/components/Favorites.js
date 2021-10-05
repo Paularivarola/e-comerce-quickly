@@ -1,7 +1,9 @@
+import ProductCard from "./ProductCard"
+
 const Favorites = () => {
 	return(
 		<div className="containFavorites">
-			<h1>hola mundo esto es favoritos</h1>
+			<ProductCard/>
 		</div>
 	)
 }

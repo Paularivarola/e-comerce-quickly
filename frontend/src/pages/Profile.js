@@ -39,7 +39,7 @@ const Profile = () => {
 				</div>
 				<div className="containButtonsAlerts">
 					<button onClick={() => cleanInputs(page)} style={{backgroundColor: "red",  color: "white", padding: "10px", margin: "5px"}}>
-						Yes
+						Si
 					</button>
 					<button onClick={() => toast.dismiss(t.id)} style={{backgroundColor: "red",  color: "white", padding: "10px", margin: "5px"}}>
 						No
@@ -57,7 +57,6 @@ const Profile = () => {
 		}else if(comp === "fav"){
 			const user = Object.values(updateUser).some((user) => user !== '')
 			const card = Object.values(createCard).some((card) => card !== '') 
-			console.log(!user)
 			if( user || card ){
 				confirm(<Favorites/>)
 				return false
@@ -66,7 +65,6 @@ const Profile = () => {
 		}else{
 			const user = Object.values(updateUser).some((user) => user !== '')
 			const card = Object.values(createCard).some((card) => card !== '') 
-			console.log(!user)
 			if( user || card ){
 				confirm(<History/>)
 				return false
@@ -86,8 +84,7 @@ const Profile = () => {
 			<div className="containerRenderView">
 				<div className="renderView">
 					{view}
-				</div>
-				
+				</div>	
 			</div>
 			<Toaster
 			containerStyle={{

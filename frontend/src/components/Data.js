@@ -1,5 +1,6 @@
 import { useState } from "react"
 import toast from "react-hot-toast"
+import Cards from "./Cards"
 
 const Data = (props) => {
 	const {setCard, setUser} = props
@@ -46,7 +47,10 @@ const Data = (props) => {
 		const confirm = () => {	
 			return (
 			toast.custom((t) => (
+				<>
+				{console.log(t)}
 				<div
+				
 					className={`${
 						t.visible ? 'animate-enter' : 'animate-leave'
 					} containAlerts`}
@@ -62,13 +66,14 @@ const Data = (props) => {
 					</div>
 					<div className="containButtonsAlerts">
 						<button onClick={() => cleanInputs(name)} style={{backgroundColor: "red",  color: "white", padding: "10px", margin: "5px"}}>
-							Yes
+							Si
 						</button>
 						<button onClick={() => toast.dismiss(t.id)} style={{backgroundColor: "red",  color: "white", padding: "10px", margin: "5px"}}>
 							No
 						</button>
 					</div>
 				</div>
+				</>
 			))
 			)
 		}
@@ -129,23 +134,16 @@ const Data = (props) => {
 							<div className="inputsDataUser">
 								<input type="text" placeholder="Numero de tarjeta" autoComplete="nope" onChange={inputHandlerCard} name="cardNumber"/>
 							</div>
+							<div className="inputsDataUser">
+								<input type="text" placeholder="Nombre" autoComplete="nope" onChange={inputHandlerCard} name="cardName"/>
+							</div>
 						</div>
 						<div className="bodyInputCard">
-							<div>
-								<div className="inputsDataUser">
-									<input type="text" placeholder="Nombre" autoComplete="nope" onChange={inputHandlerCard} name="cardName"/>
-								</div>
-								{/* <div className="inputsDataUser">
-									<input type="text" placeholder="Apellido" autoComplete="nope" onChange={inputHandlerCard} name="lastName"/>
-								</div> */}
+							<div className="inputsDataUser">
+								<input type="text" placeholder="Fecha de expiracion" autoComplete="nope" onChange={inputHandlerCard} name="cardExpDate"/>
 							</div>
-							<div>
-								<div className="inputsDataUser">
-									<input type="text" placeholder="Fecha de expiracion" autoComplete="nope" onChange={inputHandlerCard} name="cardExpDate"/>
-								</div>
-								<div className="inputsDataUser">
-									<input type="password" placeholder="Código de seguridad" autoComplete="nope" onChange={inputHandlerCard} name="CVC"/>
-								</div>
+							<div className="inputsDataUser">
+								<input type="password" placeholder="Código de seguridad" autoComplete="nope" onChange={inputHandlerCard} name="CVC"/>
 							</div>
 						</div>
 						<div className="footerInputCard">
@@ -162,10 +160,12 @@ const Data = (props) => {
 					</>
 					:
 					viewCard === "viewCard" &&
-						<div>
-							<h1>hola esto anda gegegegegege aca van las tarjetas</h1>
+						<div className="containCardsProfile">
+							<div className="cardsContain">
+								<Cards/>
+							</div>
 							<div className="containImageBack">
-							<div className="imageBack" style={{backgroundImage: 'url("/assets/volver.png")'}} onClick={() => viewForm("addCard")}></div>
+								<div className="imageBack" style={{backgroundImage: 'url("/assets/volver.png")'}} onClick={() => viewForm("addCard")}></div>
 							</div>
 						</div>
 					}	

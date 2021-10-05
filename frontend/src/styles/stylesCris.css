@@ -9,7 +9,7 @@ div.containerButtonCheck{
 }
 
 div.containerRenderView{
-	height: 80vh;
+	height: 100vh;
 	width: 100%;
 	padding: 2rem;
 }
@@ -23,7 +23,6 @@ div.containerButtonCheck button{
 	cursor: pointer;
 	background-color: white;
 	color:  black;
-
 }
 
 div.renderView{
@@ -33,7 +32,6 @@ div.renderView{
 	box-shadow: 0px -3px 17px 3px rgba(0,0,0,0.75);
 	-webkit-box-shadow: 0px -3px 17px 3px rgba(0,0,0,0.75);
 	-moz-box-shadow: 0px -3px 17px 3px rgba(0,0,0,0.75);
-
 }
 
 /* --- COMPONENTE DATOS ---*/
@@ -137,7 +135,7 @@ div.imageAddViewCard{
 	width: 50%;
 	
 }
-div.imageBack, div.imageAddViewCard{
+div.imageBack, div.imageAddViewCard, div.imageProduct, div.imageCards{
 	background-position: center;
 	background-size: contain;
 	background-repeat: no-repeat;
@@ -162,7 +160,7 @@ div.containHistory, div.containFavorites{
 	width: 100%;
 	height: 100%;
 	justify-content: center;
-	background-color: tomato;
+	overflow-y: auto;
 }
 
 div.containAlerts{
@@ -182,4 +180,104 @@ div.containButtonsAlerts button{
 }
 div.containerTextAlerts{
 	text-align: center;
+}
+
+/* --- FAV ---*/
+div.products{
+	display: grid;
+	width: 100%;
+	height: 100vh;
+	grid-template-columns: repeat(3, 1fr);
+	grid-auto-rows: minmax(550px, auto);
+	gap: 3rem;
+	padding: 3rem;
+
+}
+div.product{
+	display: flex;
+	flex-direction: column;
+	background-color: white;
+	border-radius: 15px;
+	height: 100%;
+	box-shadow: 8px 6px 5px 0px rgba(0,0,0,0.57);
+	-webkit-box-shadow: 8px 6px 5px 0px rgba(0,0,0,0.57);
+	-moz-box-shadow: 8px 6px 5px 0px rgba(0,0,0,0.57);
+}
+div.imageProduct{
+	background-size: cover;
+	height: 40vh;
+	width: 100%;
+	text-align: center;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	
+}
+div.productDescription,div.productTitle,h3.price,div.productButton{
+	padding: 10px;
+}
+div.productTitle,div.productDescription,div.productButton{
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	align-items: center;
+	text-align: center;
+}
+div.productDescription{
+	align-items: flex-start;
+	height: 30%;
+}
+h3.price{
+	background-color: tomato;
+	border-radius: 15px;
+}
+div.productButton button{ 
+	height: 7vh;
+	width: 30%;
+	border: none;
+	background-color: yellowgreen;
+	padding: 2px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+/* -- CARDS -- */
+
+div.cardsContain, div.containCardsProfile{
+	display: flex;
+	width: 100%;
+	height: 100%;
+}
+div.listImageCards{
+	width: 100%;
+	height: 100%;
+	padding: 1rem;
+	overflow-y: auto;
+}
+
+div.containCards{
+	width: 80%;
+	height: 20vh;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	border-radius: 15px;
+	margin-bottom: 0.5rem;
+	box-shadow: 3px 5px 10px 7px rgba(0,0,0,0.75);
+	-webkit-box-shadow: 3px 5px 10px 7px rgba(0,0,0,0.75);
+	-moz-box-shadow: 3px 5px 10px 7px rgba(0,0,0,0.75);
+}
+
+div.containCards button{
+	height: 10vh;
+	width: 8vw;
+	border: none;
+	background-color: darkred;
+	color: white;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+div.imageCards{
+	height: 20vh;
+	width: 30%;
+	margin-bottom: 0.3rem;
 }
