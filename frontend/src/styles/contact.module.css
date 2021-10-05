@@ -1,1 +1,172 @@
 /* borrar */
+
+.titleContact {
+  text-transform: uppercase;
+  color: #fe6849;
+  font-size: 3vw;
+  font-weight: bold;
+}
+
+.containerContact {
+  display: flex;
+  min-height: 95vh;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.deliveryImage {
+  background-position: center;
+  background-size: cover;
+  height: 80vh;
+  width: 40vw;
+  margin-bottom: 15vh;
+}
+
+.form {
+  margin-bottom: 20vh;
+}
+
+.form input,textarea {
+  background-color: #eaeaea;
+  border-radius: 1vw;
+  border: none;
+  color: #000;
+  padding: 2.5vh 0.5vw;
+  margin: 1vw;
+  outline: none;
+}
+
+.form textarea {
+  width: 43vw;
+  height: 25vh;
+  resize: none;
+  font-size: 16px;
+}
+
+::placeholder {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #000;
+}
+
+button {
+  background-color: #fe6849;
+  border-radius: 1.5vw;
+  color: #fff;
+  padding: 2vh 3vw;
+  border: none;
+  text-transform: uppercase;
+}
+
+
+
+@media screen and (max-width: 1280px) {
+
+  .containerContact {
+    justify-content: center;
+    align-items: center;
+  }
+  .deliveryImage {
+    height: 40vh;
+    width: 38vw;
+  }
+  .titleContact {
+    font-size: 3vw;
+  }
+  .form input {
+    width: 70%;
+    border-radius: 1vw;
+  }
+  .form textarea {
+    width: 70%;
+    border-radius: 2vw;
+  }
+  .containerImage {
+    margin-bottom: 20vw;
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .containerContact {
+    justify-content: center;
+    align-items: center;
+    background-color: yellow;
+  }
+  .deliveryImage {
+    height: 40vh;
+    width: 40vw;
+  }
+  .titleContact {
+    font-size: 5vw;
+  }
+  .form input {
+    width: 80%;
+    border-radius: 2vw;
+  }
+  .form textarea {
+    width: 80%;
+    border-radius: 3vw;
+  }
+  .containerImage {
+    margin-bottom: 20vw;
+  }
+}
+
+@media screen and (max-width: 576px) {
+    .containerContact {
+      justify-content: center;
+      align-items: center;
+      background-color: wheat;
+    }
+    .deliveryImage {
+      height: 40vh;
+      width: 40vw;
+    }
+    .titleContact {
+      font-size: 5vw;
+    }
+    .form input {
+      width: 80%;
+      border-radius: 2vw;
+    }
+    .form textarea {
+      width: 80%;
+      border-radius: 3vw;
+    }
+    .containerImage {
+      margin-bottom: 20vw;
+    }
+  }
+
+@media screen and (max-width: 480px) {
+  .containerContact {
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+
+  }
+  .deliveryImage {
+    height: 50vh;
+    width: 80vw;
+  }
+  .titleContact {
+    font-size: 8vw;
+  }
+
+  .form input {
+    width: 90%;
+    border-radius: 3vw;
+  }
+  .form textarea {
+    width: 90vw;
+    border-radius: 3vw;
+  }
+  .form button {
+    border-radius: 2vw;
+    width: 2vh 4vw;
+  }
+  .containerImage {
+    margin-bottom: 30vw;
+  }
+}
