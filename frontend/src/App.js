@@ -7,7 +7,8 @@ import Products from './pages/Products'
 import SignUp from './pages/SignUp'
 import Login from './pages/Login'
 import NotFound from './pages/NotFound'
-
+import Profile from './pages/Profile';
+import stylesCris from "./styles/stylesCris.css"
 const App = () => {
   return (
     <BrowserRouter>
@@ -17,6 +18,7 @@ const App = () => {
         <Route path='/login' component={Login} />
         <Route path='/signup' component={SignUp} />
         <Route path='/product/:id' component={Product} />
+        <Route path='/profile' component={Profile} />
         <Route path='/notfound' component={NotFound} />
         <Redirect to='/notfound' />
       </Switch>
