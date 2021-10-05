@@ -5,6 +5,7 @@ require('./config/database')
 require('./config/passport')
 const router = require('./routes/index')
 const admin = require('./routes/admin')
+const socket = require('socket.io')
 
 const app = express()
 
