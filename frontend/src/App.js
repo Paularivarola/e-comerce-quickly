@@ -8,6 +8,7 @@ import SignUp from './pages/SignUp'
 import Login from './pages/Login'
 import NotFound from './pages/NotFound'
 
+
 const App = () => {
   return (
     <BrowserRouter>
