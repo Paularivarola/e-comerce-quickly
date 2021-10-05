@@ -1,6 +1,6 @@
 const express = require('express')
-import productControllers from '../controllers/productControllers'
-import userControllers from '../controllers/userControllers'
+const productControllers = require('../controllers/productControllers')
+const userControllers = require('../controllers/userControllers')
 
 const router = express.Router()
 
@@ -15,11 +15,11 @@ router.route('/productos')
     .post(productControllers.createProduct)
     .get(productControllers.readAll)
 
-// USERS
-router.route('/user/:id')
-    .get(userControllers.readUser)
-    .update(userControllers.updateUser)
-    .delete(userControllers.deleteUser)
+// // USERS
+// router.route('/user/:id')
+//     .get(userControllers.readUser)
+//     .update(userControllers.updateUser)
+//     .delete(userControllers.deleteUser)
 
 router.route('/users')
     .post(userControllers.createUser)

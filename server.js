@@ -25,6 +25,7 @@ const PORT = process.env.PORT;
 const HOST = process.env.HOST || "0.0.0.0";
 
 //Server listening
-const server = app.listen(PORT, HOST, () =>
-    console.log(`Server listening on port ${PORT} (${HOST})`)
-);
+// const server = app.listen(PORT, HOST, () =>
+//     console.log(`Server listening on port ${PORT} (${HOST})`)
+// );
+app.listen(4000, () => console.log('Server listening on port 4000'))

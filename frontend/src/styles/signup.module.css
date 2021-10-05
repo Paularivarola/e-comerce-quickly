@@ -1,12 +1,6 @@
-html * {
-    margin: 0;
-    padding: 0;
-    box-sizing: 0;
-}
-
 .boxDiv{
-    width: 40%;
-    height: 70%;
+    width: 45%;
+    height: 85%;
     background-color:  #fe6849;
     display: flex;
     flex-direction: column;
@@ -48,20 +42,24 @@ html * {
     font-weight:600;
 }
 
-.nameContent{
+.nameContent, .contactContent{
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
+    gap: 1rem;
 }
 
 .name{
     width: 47%;
     height: 2rem;
+    padding-left: 1rem;
 }
 
 .contact{
     width: 100%;
     height: 2rem;
+    padding-left: 1rem;
 }
 
 .boxForm{
@@ -72,6 +70,73 @@ html * {
     gap: 1rem;
 }
 
-.h1, .p{
+.h1{
     margin: 2rem 0;
 }
+
+.submitButton{
+    margin: 2rem 0;
+    width: 7rem;
+    padding: 0.75rem;
+    text-align: center;
+    background-color: #ffb900;
+    font-weight: 600;
+}
+
+.submitButton:hover, .button:hover{
+    color: white;
+    text-decoration: underline;
+}
+
+@media screen and (max-width:1024px) {
+    .boxDiv{
+        padding: 2rem;
+    }
+
+    .boxForm{
+        gap: 0.75rem;
+    }
+
+    .button, .activeButton{
+        padding: 0.5rem;
+    }
+
+    .h1{
+        margin: 0.75rem 0;
+        text-align: center;
+    }
+
+    .name, .contact{
+        height: 1.75rem;
+    }
+
+    .submitButton{
+        padding: 0.5rem;
+        margin: 1.25rem 0;
+    }
+}
+@media screen and (max-width:768px) {
+    .nameContent{
+        gap: 0.75rem;
+    }
+
+    .name{
+        width: 100%;
+    }
+
+    .boxDiv{
+        width: 55%;
+        height: 92%;
+    }
+}
+@media screen and (max-width:425px) {
+    .boxDiv{
+        width: 100%;
+        height: 100%;
+    }
+
+    .h1{
+        margin: 0.7rem 0;
+    }
+}
+@media screen and (max-width:375px) {}
