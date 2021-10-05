@@ -9,11 +9,13 @@ import Login from './pages/Login'
 import NotFound from './pages/NotFound'
 import Profile from './pages/Profile';
 import stylesCris from "./styles/stylesCris.css"
+import Dashboard from './components/Admin/Dashboard'
+
 const App = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path='/' component={Home} />
+        <Route exact path='/' component={Dashboard} />
         <Route path='/contact' component={Contact} />
         <Route path='/login' component={Login} />
         <Route path='/signup' component={SignUp} />
