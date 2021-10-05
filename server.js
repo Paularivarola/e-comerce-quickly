@@ -46,11 +46,9 @@ io.use(
 )
 
 io.on('connection', (socket) => {
-  const socketUsername = socket.decoded_token._doc.username
+  const socketEmail = socket.decoded_token._doc.email
 
-  socket.join(socketUsername)
-
-  io.sockets.emit('connected', socketUsername)
+  socket.join(socketEmail)
 
   socket.on('createOrder', () => {
     io.to('admin@appname.com').emit('createOrder')
