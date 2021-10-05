@@ -53,32 +53,32 @@ const SignUp = () => {
     }
 
     return (
-        <main class={styles.mainSign}>
-            <div class={styles.boxDiv}>
-                <div class={styles.boxButton}>
-                    <p class={!shift ? styles.activeButton : styles.button}
+        <main className={styles.mainSign}>
+            <div className={styles.boxDiv}>
+                <div className={styles.boxButton}>
+                    <p className={!shift ? styles.activeButton : styles.button}
                         onClick={() => setShift(false)}>Ingresá</p>
-                    <p class={shift ? styles.activeButton : styles.button}
+                    <p className={shift ? styles.activeButton : styles.button}
                         onClick={() => setShift(true)}>Registrate</p>
                 </div>
-                <h1 class={styles.h1}>{!shift ? "Crea una cuenta" : "Ingresa con tus datos"}</h1>
+                <h1 className={styles.h1}>{!shift ? "Crea una cuenta" : "Ingresa con tus datos"}</h1>
                 {!shift ?
-                    <form class={styles.boxForm}>
-                        <input class={styles.contact} type="text" name="email" placeholder="Ingresa tu email..." required onChange={inputHandler} />
-                        <input class={styles.contact} type="password" name="pass" placeholder="Ingresa tu contraseña..." required onChange={inputHandler} />
+                    <form className={styles.boxForm}>
+                        <input className={styles.contact} type="text" name="email" placeholder="Ingresa tu email..." required onChange={inputHandler} />
+                        <input className={styles.contact} type="password" name="pass" placeholder="Ingresa tu contraseña..." required onChange={inputHandler} />
                     </form>
                     :
-                    <form class={styles.boxForm}>
-                        <div class={styles.nameContent}>
-                            <input class={styles.name} type="text" name="name" placeholder="Ingresa tu nombre..." required onChange={inputHandler} />
-                            <input class={styles.name} type="text" name="lastName" placeholder="Ingresa tu apellido..." required onChange={inputHandler} />
+                    <form className={styles.boxForm}>
+                        <div className={styles.nameContent}>
+                            <input className={styles.name} type="text" name="name" placeholder="Ingresa tu nombre..." required onChange={inputHandler} />
+                            <input className={styles.name} type="text" name="lastName" placeholder="Ingresa tu apellido..." required onChange={inputHandler} />
                         </div>
-                        <input class={styles.contact} type="text" name="email" placeholder="Ingresa tu email..." required onChange={inputHandler} />
-                        <input class={styles.contact} type="password" name="pass" placeholder="Crea una contraseña..." required onChange={inputHandler} />
-                        <input class={styles.contact} type="password" name="repPass" placeholder="Repite la contraseña..." required onChange={inputHandler} />
+                        <input className={styles.contact} type="text" name="email" placeholder="Ingresa tu email..." required onChange={inputHandler} />
+                        <input className={styles.contact} type="password" name="pass" placeholder="Crea una contraseña..." required onChange={inputHandler} />
+                        <input className={styles.contact} type="password" name="repPass" placeholder="Repite la contraseña..." required onChange={inputHandler} />
                     </form>
                 }
-                <p class={styles.p} onClick={submit}>Enviar!</p>
+                <p className={styles.p} onClick={submit}>Enviar!</p>
                 <GoogleLogin
                     clientId="700780098168-b35ln15khokfkbats4tm4sl7cbcv3bup.apps.googleusercontent.com"
                     buttonText="or use Google acaunt"

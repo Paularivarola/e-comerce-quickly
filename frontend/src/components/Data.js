@@ -1,34 +1,83 @@
 import { useState } from "react"
+import toast from "react-hot-toast"
 
-const Data = () => {
+const Data = (props) => {
+	const {setCard, setUser} = props
 	const [updateUser, setUpdateUser] =useState({
 		name: "",
 		lastName: "",
 		email: "",
 		password: "",
-		src: "",
 	})
-	const [createTarget, setCreateTarget] =useState({
-		name: "",
-		lastName: "",
-		expirationDate:"",
-		code: "",
+
+	const [createCard, setCreateCard] =useState({
+		cardName: "",
+		cardExpDate:"",
+		CVC: "",
 		DNI: "",
+		cardNumber: "",
 	})
 	
 	const [viewUser, SetViewUser] =useState("profile")
 	const [viewCard, setViewCard] =useState("")
+
 	const inputHandlerProfile = (e) => {
-		console.log(e)
+		setUpdateUser({...updateUser, [e.target.name]: e.target.value.trim() })
+		setUser({...updateUser, [e.target.name]: e.target.value.trim() })
 	}
 
 	const inputHandlerCard= (e) => {
-		console.log(e)
+		setCreateCard({...createCard, [e.target.name]: e.target.value.trim() })
+		setCard({...createCard, [e.target.name]: e.target.value.trim() })
 	}
 
-
-
-
+	const cleanInputs = (name) =>{
+		setUser({})
+		setCard({})
+		setCreateCard({})
+		setUpdateUser({})
+		setViewCard("")
+		SetViewUser(name)
+	} 
+	const viewForm = (name) => {
+		const user = Object.values(updateUser).some((user) => user !== '')
+		const card = Object.values(createCard).some((card) => card !== '') 
+		if(card || user){	
+		const confirm = () => {	
+			return (
+			toast.custom((t) => (
+				<div
+					className={`${
+						t.visible ? 'animate-enter' : 'animate-leave'
+					} containAlerts`}
+					style={{ display: "flex", alignContent: "center", alignItems: "center", padding: "20px 30px", borderRadius: "35px"}}
+					>
+					<div className="containerTextAlerts">
+						<p className="">
+							Perderas los cambios no guardados
+						</p>
+						<p className="">
+							estas seguro ? 
+						</p>
+					</div>
+					<div className="containButtonsAlerts">
+						<button onClick={() => cleanInputs(name)} style={{backgroundColor: "red",  color: "white", padding: "10px", margin: "5px"}}>
+							Yes
+						</button>
+						<button onClick={() => toast.dismiss(t.id)} style={{backgroundColor: "red",  color: "white", padding: "10px", margin: "5px"}}>
+							No
+						</button>
+					</div>
+				</div>
+			))
+			)
+		}
+		confirm()
+		return false
+		}
+		SetViewUser(name)
+		setViewCard("")
+	}
 
 	return(
 		<div className="containerData">
@@ -38,8 +87,8 @@ const Data = () => {
 				</div>
 				<h1>NOMBRE DE LA PERSONA</h1>
 				<div className="buttonsProfile">
-					<button onClick={() => SetViewUser("profile")}>Perfil</button>
-					<button onClick={() => SetViewUser("cards")}>Tarjetas</button>
+					<button onClick={() => viewForm("profile")}>Perfil</button>
+					<button onClick={() => viewForm("addCard")}>Tarjetas</button>
 				</div>
 			</div>
 			<div className="containAllProfile">
@@ -60,9 +109,6 @@ const Data = () => {
 						<div className="inputsDataUser">
 							<input type="password" placeholder="Contraseña" autoComplete="nope" name="password" onChange={inputHandlerProfile}/>
 						</div>
-						<div className="inputsDataUser">
-							<input type="text" placeholder="Imagen" autoComplete="nope" name="src" onChange={inputHandlerProfile}/>
-						</div>
 					</form>
 				</div>	
 				:
@@ -81,24 +127,24 @@ const Data = () => {
 						<h2>Agregar Tarjeta</h2>
 						<div className="headerInputCard">
 							<div className="inputsDataUser">
-								<input type="text" placeholder="Numero de tarjeta" autoComplete="nope" onChange={inputHandlerCard}/>
+								<input type="text" placeholder="Numero de tarjeta" autoComplete="nope" onChange={inputHandlerCard} name="cardNumber"/>
 							</div>
 						</div>
 						<div className="bodyInputCard">
 							<div>
 								<div className="inputsDataUser">
-									<input type="text" placeholder="Nombre" autoComplete="nope" onChange={inputHandlerCard} name="name"/>
+									<input type="text" placeholder="Nombre" autoComplete="nope" onChange={inputHandlerCard} name="cardName"/>
 								</div>
-								<div className="inputsDataUser">
+								{/* <div className="inputsDataUser">
 									<input type="text" placeholder="Apellido" autoComplete="nope" onChange={inputHandlerCard} name="lastName"/>
-								</div>
+								</div> */}
 							</div>
 							<div>
 								<div className="inputsDataUser">
-									<input type="text" placeholder="Fecha de expiracion" autoComplete="nope" onChange={inputHandlerCard} name="expirationDate"/>
+									<input type="text" placeholder="Fecha de expiracion" autoComplete="nope" onChange={inputHandlerCard} name="cardExpDate"/>
 								</div>
 								<div className="inputsDataUser">
-									<input type="password" placeholder="Código de seguridad" autoComplete="nope" onChange={inputHandlerCard} name="code"/>
+									<input type="password" placeholder="Código de seguridad" autoComplete="nope" onChange={inputHandlerCard} name="CVC"/>
 								</div>
 							</div>
 						</div>
@@ -111,7 +157,7 @@ const Data = () => {
 					<div className="imageCard" style={{backgroundImage: 'url("/assets/tarjeta.png")'}}>
 					</div>
 					<div className="containImageBack">
-						<div className="imageBack" style={{backgroundImage: 'url("/assets/volver.png")'}} onClick={() => setViewCard("")}></div>
+						<div className="imageBack" style={{backgroundImage: 'url("/assets/volver.png")'}} onClick={() => viewForm("addCard")}></div>
 					</div>
 					</>
 					:
@@ -119,7 +165,7 @@ const Data = () => {
 						<div>
 							<h1>hola esto anda gegegegegege aca van las tarjetas</h1>
 							<div className="containImageBack">
-							<div className="imageBack" style={{backgroundImage: 'url("/assets/volver.png")'}} onClick={() => setViewCard("")}></div>
+							<div className="imageBack" style={{backgroundImage: 'url("/assets/volver.png")'}} onClick={() => viewForm("addCard")}></div>
 							</div>
 						</div>
 					}	

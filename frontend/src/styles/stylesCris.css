@@ -165,3 +165,21 @@ div.containHistory, div.containFavorites{
 	background-color: tomato;
 }
 
+div.containAlerts{
+	background-color: black;
+	display: flex;
+	flex-direction: column;
+	color: white;
+	justify-content: center;
+}
+div.containButtonsAlerts{
+	flex-direction: row;
+
+}
+div.containButtonsAlerts button{
+	border: none;
+	border-radius: 15px;
+}
+div.containerTextAlerts{
+	text-align: center;
+}
