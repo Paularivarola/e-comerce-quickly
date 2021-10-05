@@ -15,13 +15,14 @@ const App = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path='/' component={Dashboard} />
+        <Route exact path='/' component={Home} />
         <Route path='/contact' component={Contact} />
         <Route path='/login' component={Login} />
         <Route path='/signup' component={SignUp} />
         <Route path='/product/:id' component={Product} />
         <Route path='/profile' component={Profile} />
         <Route path='/notfound' component={NotFound} />
+        <Route path='/dashboard' component={Dashboard} />
         <Redirect to='/notfound' />
       </Switch>
     </BrowserRouter>
