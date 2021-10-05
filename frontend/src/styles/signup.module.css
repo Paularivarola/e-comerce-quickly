@@ -1,1 +1,77 @@
-/* borrar */
+html * {
+    margin: 0;
+    padding: 0;
+    box-sizing: 0;
+}
+
+.boxDiv{
+    width: 40%;
+    height: 70%;
+    background-color:  #fe6849;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3rem;
+}
+
+.mainSign{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+}
+
+.boxButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.activeButton{
+    width: 10rem;
+    padding: 0.75rem;
+    text-align: center;
+    background-color: #ffb900;
+    font-weight: 600;
+}
+
+.button{
+    width: 10rem;
+    padding: 0.75rem;
+    text-align: center;
+    background-color: black;
+    color: white;
+    font-weight:600;
+}
+
+.nameContent{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.name{
+    width: 47%;
+    height: 2rem;
+}
+
+.contact{
+    width: 100%;
+    height: 2rem;
+}
+
+.boxForm{
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.h1, .p{
+    margin: 2rem 0;
+}
