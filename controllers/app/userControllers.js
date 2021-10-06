@@ -1,73 +1,71 @@
 const User = require('../../models/User')
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
 const userControllers = {
   signUp: async (req, res) => {
-    const { firstName, lastName, password, email, google } = req.body
+    const { firstName, lastName, password, email, google, src } = req.body
     const pw = bcrypt.hashSync(password)
     try {
-      if (await User.findOne({ email: email })) {
-        throw new Error('Ya estás registrado con Google')
-      }
-      const newUser = new User({
-        firstName,
-        lastName,
-        password: pw,
-        email,
-        google: google || false,
+      if (await User.findOne({ 'data.email': email })) throw new Error('Ya estás registrado')
+      let newUser = new User({
+        data: { firstName, lastName, password: pw, email, google: google || false },
       })
+      let picture
+      if (req.files) {
+        const { fileImg } = req.files
+        picture = `${newUser._id}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`
+        fileImg.mv(`${__dirname}/../../assets/${newUser._id}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`, (err) => {
+          if (err) return console.log(err)
+        })
+      } else {
+        picture = src ? src : 'assets/user.png'
+      }
+      newUser.data.src = picture
       await newUser.save()
-      const token = jwt.sign(newUser, process.env.SECRETORKEY)
+      const token = jwt.sign({ ...newUser }, process.env.SECRETORKEY)
       res.json({
         success: true,
         user: {
           firstName,
-          src: 'assets/genericUser.jpg',
+          src: picture,
         },
         userData: newUser,
         token,
       })
     } catch (error) {
-      error.message.includes('Google')
-        ? res.json({ error: [{ message: error.message }] })
-        : res.json({ success: false, error: error.message })
+      console.log(error)
+      error.message.includes('Google') ? res.json({ error: [{ message: error.message }] }) : res.json({ success: false, error: error.message })
     }
   },
   logIn: async (req, res) => {
     const { email, password, google } = req.body
     try {
-      let user = await User.findOne({ email: email })
+      let user = await User.findOne({ 'data.email': email })
       if (!user) throw new Error('No encotramos una cuenta asociada a ese email')
-      if ((user.google && !google) || (user.facebook && !facebook)) {
+      if (user.data.google && !google) {
         throw new Error('Debes iniciar sesión con Google')
       }
-      let match = user && bcrypt.compareSync(password, user.password)
+      let match = user && bcrypt.compareSync(password, user.data.password)
       if (!match) throw new Error('Contraseña incorrecta')
-      const token = jwt.sign(user, process.env.SECRETORKEY)
+      const token = jwt.sign({ ...user }, process.env.SECRETORKEY)
       res.json({
         success: true,
         user: {
-          firstName: user.firstName,
-          src: user.src,
+          firstName: user.data.firstName,
+          src: user.data.src,
         },
         userData: user,
         token,
       })
     } catch (error) {
+      console.log(error)
       res.json({ success: false, error: error.message })
     }
   },
   updateUser: async (req, res) => {
     const { _id } = req.user
-    const {
-      action,
-      updateUserData,
-      productId,
-      newPaymentCard,
-      paymentCardId,
-      newAddress,
-      addressId,
-    } = req.body
+    const { action, updateUserData, productId, newPaymentCard, paymentCardId, newAddress, addressId } = req.body
 
     let operation
     switch (action) {
@@ -115,9 +113,9 @@ const userControllers = {
     }
   },
   deleteUser: async (req, res) => {
-    const { _id, password } = req.user
+    const { _id, data } = req.user
     try {
-      let match = bcrypt.compareSync(req.body.password, password)
+      let match = bcrypt.compareSync(req.body.password, data.password)
       if (!match) throw new Error('Contraseña incorrecta')
       await User.findOneAndDelete({ _id })
       res.json({ success: true })
@@ -129,8 +127,8 @@ const userControllers = {
     res.json({
       success: true,
       user: {
-        firstName: req.user.firstName,
-        src: req.user.src,
+        firstName: req.user.data.firstName,
+        src: req.user.data.src,
       },
       userData: req.user,
       token: req.body.token,

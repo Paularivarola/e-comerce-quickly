@@ -1,7 +1,7 @@
-const passport = require("passport");
-const jwtStrategy = require("passport-jwt").Strategy;
-const extractJwt = require("passport-jwt").ExtractJwt;
-const User = require("../models/User");
+const passport = require('passport')
+const jwtStrategy = require('passport-jwt').Strategy
+const extractJwt = require('passport-jwt').ExtractJwt
+const User = require('../models/User')
 
 module.exports = passport.use(
   new jwtStrategy(
@@ -13,11 +13,11 @@ module.exports = passport.use(
       User.findOne({ _id: payload._doc._id })
         .then((response) => {
           if (!response) {
-            return done(null, false);
+            return done(null, false)
           }
-          return done(null, response);
+          return done(null, response)
         })
-        .catch((err) => done(err, false));
+        .catch((err) => done(err, false))
     }
   )
-);
+)
