@@ -3,7 +3,6 @@ const User = require("../../models/User");
 
 const orderControllers = {
   createOrder: async (req, res) => {
-    const { _id } = req.user;
     const { products, delivery, paymentMethod } = req.body;
     const date = new Date();
     try {
@@ -15,11 +14,15 @@ const orderControllers = {
         delivery,
       });
       await newOrder.save();
-      await User.findOneAndUpdate(
-        { _id },
-        { $push: { ordersId: newOrder._id } },
-        { new: true }
-      );
+      if(req.user){
+        const { _id } = req.user;
+       let userData =  await User.findOneAndUpdate(
+          { _id },
+          { $push: { ordersId: newOrder._id } },
+          { new: true }
+        );
+        res.json({ success: true, response: {newOrder,userData} })
+      }
       res.json({ success: true, response: newOrder });
     } catch (error) {
       res.json({ success: false, error: error.message });

@@ -10,7 +10,9 @@ const Data = (props) => {
 		email: "",
 		password: "",
 	})
-
+	const [imageUser, setImageUser] = useState({
+		src: ""
+	})
 	const [createCard, setCreateCard] = useState({
 		cardName: "",
 		cardExpDate: "",
@@ -26,12 +28,10 @@ const Data = (props) => {
 		setUpdateUser({ ...updateUser, [e.target.name]: e.target.value.trim() })
 		setUser({ ...updateUser, [e.target.name]: e.target.value.trim() })
 	}
-
 	const inputHandlerCard = (e) => {
 		setCreateCard({ ...createCard, [e.target.name]: e.target.value.trim() })
 		setCard({ ...createCard, [e.target.name]: e.target.value.trim() })
 	}
-
 	const cleanInputs = (name) => {
 		setUser({})
 		setCard({})
@@ -39,6 +39,18 @@ const Data = (props) => {
 		setUpdateUser({})
 		setViewCard("")
 		SetViewUser(name)
+	}
+	const fileHandler = e =>{
+		setImageUser({
+			...imageUser,
+			[e.target.name] : e.target.files[0]
+		})
+	
+		//le madamos fd al back. 
+	}
+	const submitFile = e =>{
+		const fd = new FormData()
+		fd.append("src", imageUser.src)
 	}
 	const viewForm = (name) => {
 		const user = Object.values(updateUser).some((user) => user !== '')

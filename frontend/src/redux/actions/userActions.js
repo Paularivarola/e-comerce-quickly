@@ -1,11 +1,12 @@
 import axios from 'axios'
 import Swal from 'sweetalert2'
+const HOST = "http://localhost:4000"
 
 const userActions = {
   createUser: (user, props) => {
     return async (dispatch) => {
       try {
-        let res = await axios.post('http://localhost:4000/api/user/signUp', user)
+        let res = await axios.post(`${HOST}/api/user/signUp`, user)
         if (res.data.success) {
           const { user, userData, token } = res.data
           let keep = false
@@ -34,7 +35,7 @@ const userActions = {
   logUser: (user, props) => {
     return async (dispatch) => {
       try {
-        let res = await axios.post('http://localhost:4000/api/user/logIn', { ...user })
+        let res = await axios.post(`${HOST}/api/user/logIn`, { ...user })
         if (res.data.success) {
           const { user, userData, token } = res.data
           let keep = false
@@ -69,7 +70,7 @@ const userActions = {
     return async (dispatch) => {
       let token = localStorage.getItem('token')
       try {
-        let response = await axios.get('http://localhost:4000/api/user/token', {
+        let response = await axios.get(`${HOST}/api/user/token`, {
           headers: {
             Authorization: 'Bearer ' + token,
           },

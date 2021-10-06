@@ -69,46 +69,27 @@ const userControllers = {
     const { _id } = req.user
     const { action, updateUserData, productId, newPaymentCard, paymentCardId, newAddress, addressId } = req.body
 
-    let operation
-    switch (action) {
-      case 'updateData':
-        operation = { ...updateUserData }
-        break
-      case 'addFav':
-        operation = {
-          $push: { favs: productId },
-        }
-        break
-      case 'deleteFav':
-        operation = {
-          $pull: { favs: productId },
-        }
-        break
-      case 'addPaymentCard':
-        operation = {
-          $push: { paymentCards: newPaymentCard },
-        }
-        break
-      case 'deletePaymentCard':
-        operation = {
-          $pull: { paymentCards: { _id: paymentCardId } },
-        }
-        break
-      case 'addAddress':
-        operation = {
-          $push: { addresses: newAddress },
-        }
-        break
-      case 'deleteAddress':
-        operation = {
-          $pull: { addresses: { _id: addressId } },
-        }
-        break
-      default:
-        throw new Error()
-    }
+    let operation = 
+    action === 'updateData'
+    ? { ...updateUserData }
+    : action === 'addFav'
+    ? { $push: { favs: productId } }
+    : action === 'deleteFav'
+    ? { $pull: { favs: productId }}
+    : action === 'addPaymentCard'
+    ? { $push: { paymentCards: newPaymentCard }}
+    : action === 'deletePaymentCard'
+    ? { $pull: { paymentCards: { _id: paymentCardId } }}
+    : action === 'addAddress'
+    ? { $push: { addresses: newAddress } }
+    : action === 'deleteAddress' 
+    ? { $pull: { addresses: { _id: addressId } } }
+    : null 
+
+    let options = { new: true }
     try {
-      let user = await User.findOneAndUpdate({ _id }, operation, { new: true })
+      if(!operation) throw new Error()
+      let user = await User.findOneAndUpdate({ _id }, operation, options )
       res.json({ success: true, response: user })
     } catch (error) {
       res.json({ success: false, error: error.message })
