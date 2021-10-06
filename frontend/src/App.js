@@ -6,14 +6,39 @@ import Product from './pages/Product'
 import Products from './pages/Products'
 import NotFound from './pages/NotFound'
 import Profile from './pages/Profile'
-import stylesCris from './styles/stylesCris.css'
 import AdminPanel from './components/Admin/AdminPanel'
 import SignForm from './pages/SignForm'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import { useEffect, useState } from 'react'
+import io from 'socket.io-client'
+import { connect } from 'react-redux'
+import socketActions from './redux/actions/socketActions'
 
-const App = () => {
-  // console.log(window.location)
+const App = (props) => {
+  const [socket, setSocket] = useState(null)
+  useEffect(() => {
+    if (!localStorage.getItem('socket') && !localStorage.getItem('token')) {
+      setSocket(io('http://localhost:4000'))
+    }
+  }, [])
+
+  useEffect(() => {
+    if (socket && !localStorage.getItem('socket')) {
+      socket.on('socketId', ({ socketId }) => {
+        localStorage.setItem('socket', socketId)
+        let socketLS = io('http://localhost:4000', { query: { socketId } })
+        props.setSocketLS(socketLS)
+      })
+    }
+  }, [socket])
+
+  if (socket && localStorage.getItem('socket')) {
+    socket.on('createOrder', () => {
+      console.log('hola')
+    })
+  }
+
   return (
     <BrowserRouter>
       <Header />
@@ -32,4 +57,8 @@ const App = () => {
   )
 }
 
-export default App
+const mapDispatchToProps = {
+  setSocketLS: socketActions.setSocketLS,
+}
+
+export default connect(null, mapDispatchToProps)(App)

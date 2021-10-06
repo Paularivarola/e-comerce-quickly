@@ -36,6 +36,7 @@ const HOST = process.env.HOST || '0.0.0.0'
 
 //Server listening
 const server = app.listen(PORT, HOST, () => console.log(`Server listening on port ${PORT} (${HOST})`))
+
 const io = socket(server, {
   cors: {
     origin: '*',
@@ -43,24 +44,19 @@ const io = socket(server, {
   },
 })
 
-const socketioJwt = require('socketio-jwt')
-
-io.use(
-  socketioJwt.authorize({
-    secret: process.env.SECRETORKEY,
-    handshake: true,
-  })
-)
-
 io.on('connection', (socket) => {
-  const socketEmail = socket.decoded_token._doc.email
-
-  socket.join(socketEmail)
+  io.to(socket.id).emit('socketId', { socketId: socket.id })
+  const socketId = socket.handshake.query.socketId
+  socket.join(socketId)
 
   socket.on('createOrder', () => {
-    io.to('admin@appname.com').emit('createOrder')
+    io.to('cQfXFPNiSXOkbOQJAAAB').emit('createOrder')
   })
-  socket.on('updateOrders', (email) => {
-    io.to(email).emit('updateOrders')
+  socket.on('createOrder', () => {
+    io.to('cQfXFPNiSXOkbOQJAAAB').emit('createOrder')
+  })
+
+  socket.on('updateOrders', (socketId) => {
+    io.to(socketId).emit('updateOrders')
   })
 })

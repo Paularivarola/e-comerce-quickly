@@ -1,6 +1,6 @@
 import axios from 'axios'
 import Swal from 'sweetalert2'
-const HOST = "http://localhost:4000"
+const HOST = 'http://localhost:4000'
 
 const userActions = {
   createUser: (user, props) => {
@@ -10,7 +10,8 @@ const userActions = {
         if (res.data.success) {
           const { user, userData, token } = res.data
           let keep = false
-          JSON.parse(localStorage.getItem('cart')).length > 0 &&
+          localStorage.getItem('cart') &&
+            JSON.parse(localStorage.getItem('cart')).length > 0 &&
             Swal.fire({
               title: 'Desea conservar el carrito actual?',
               icon: 'question',
@@ -39,7 +40,8 @@ const userActions = {
         if (res.data.success) {
           const { user, userData, token } = res.data
           let keep = false
-          JSON.parse(localStorage.getItem('cart')).length > 0 &&
+          localStorage.getItem('cart') &&
+            JSON.parse(localStorage.getItem('cart')).length > 0 &&
             Swal.fire({
               title: 'Desea conservar el carrito actual?',
               icon: 'question',
