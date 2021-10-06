@@ -16,13 +16,14 @@ const orderActions = {
 		}
 	},
 
+	// const { products, delivery, paymentMethod } = req.body
 	createOrder: (order) => {
 		return async (dispatch, getState) => {
 			try{
 				const res = await axios.post(`${HOST}/api/orders`, order)
 				if(!res.data.success) throw new Error(res.data.error)
-				dispatch({ type: "CREATE_ORDER", payload: "" })
-				return { success: true, response: res.data.response, error: null }
+				const {newOrder, userData} = res.data.response 
+				return dispatch({ type: "CREATE_ORDER", payload: {newOrder, userData}})
 			}catch(e){
 				return { success: false, response: null, error: e.message }
 			}
