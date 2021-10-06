@@ -9,7 +9,7 @@ const userControllers = {
     try {
       if (await User.findOne({ 'data.email': email })) throw new Error('Ya estás registrado')
       let newUser = new User({
-        data: { firstName, lastName, password: pw, email, google: google || false },
+        data: { firstName, lastName, password: pw, email, google },
       })
       let picture
       if (req.files) {
@@ -29,6 +29,7 @@ const userControllers = {
         user: {
           firstName,
           src: picture,
+          google,
         },
         userData: newUser,
         token,
@@ -54,6 +55,7 @@ const userControllers = {
         user: {
           firstName: user.data.firstName,
           src: user.data.src,
+          google: user.data.google,
         },
         userData: user,
         token,
@@ -129,6 +131,7 @@ const userControllers = {
       user: {
         firstName: req.user.data.firstName,
         src: req.user.data.src,
+        google: req.user.data.google,
       },
       userData: req.user,
       token: req.body.token,
