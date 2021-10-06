@@ -6,20 +6,22 @@ const userControllers = {
   signUp: async (req, res) => {
     const { firstName, lastName, password, email, google, src } = req.body
     const pw = bcrypt.hashSync(password)
-    let picture
-    if (req.files) {
-      const { fileImg } = req.files
-      picture = fileImg ? `${email.split('@')[0]}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}` : src ? src : '/assets/user.png'
-      fileImg &&
-        fileImg.mv(`${__dirname}/../../assets/${email.split('@')[0]}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`, (err) => {
-          if (err) return console.log(err)
-        })
-    }
     try {
       if (await User.findOne({ 'data.email': email })) throw new Error('Ya estás registrado')
-      const newUser = new User({
-        data: { firstName, lastName, password: pw, email, google: google || false, src: picture },
+      let newUser = new User({
+        data: { firstName, lastName, password: pw, email, google: google || false },
       })
+      let picture
+      if (req.files) {
+        const { fileImg } = req.files
+        picture = `${newUser._id}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`
+        fileImg.mv(`${__dirname}/../../assets/${newUser._id}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`, (err) => {
+          if (err) return console.log(err)
+        })
+      } else {
+        picture = src ? src : 'assets/user.png'
+      }
+      newUser.data.src = picture
       await newUser.save()
       const token = jwt.sign({ ...newUser }, process.env.SECRETORKEY)
       res.json({
