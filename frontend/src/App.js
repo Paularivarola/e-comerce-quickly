@@ -9,7 +9,7 @@ import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
 import stylesCris from "./styles/stylesCris.css";
-import Dashboard from "./components/Admin/Dashboard";
+import AdminPanel from "./components/Admin/AdminPanel";
 
 
 const App = () => {
@@ -23,7 +23,7 @@ const App = () => {
         <Route path='/product/:id' component={Product} />
         <Route path='/profile' component={Profile} />
         <Route path='/notfound' component={NotFound} />
-        <Route path='/dashboard' component={Dashboard} />
+        <Route path='/dashboard' component={AdminPanel} />
         <Redirect to='/notfound' />
       </Switch>
     </BrowserRouter>
