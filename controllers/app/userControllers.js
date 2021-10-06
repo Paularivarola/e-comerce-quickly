@@ -29,7 +29,7 @@ const userControllers = {
         user: {
           firstName,
           src: picture,
-          google,
+          google: newUser.data.google,
         },
         userData: newUser,
         token,

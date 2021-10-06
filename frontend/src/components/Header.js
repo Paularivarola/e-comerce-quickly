@@ -12,7 +12,6 @@ const Header = (props) => {
     // eslint-disable-next-line
   }, [])
   window.onclick = (e) => e.target.id !== 'userMenu' && setUserMenu(false)
-
   return (
     <header>
       <nav className={styles.containerNavegation}>

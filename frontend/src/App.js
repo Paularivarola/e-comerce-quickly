@@ -1,19 +1,16 @@
-import "./App.css";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import Home from "./pages/Home";
-import Contact from "./pages/Contact";
-import Product from "./pages/Product";
-import Products from "./pages/Products";
-import SignUp from "./pages/SignUp";
-import Login from "./pages/Login";
-import NotFound from "./pages/NotFound";
-import Profile from "./pages/Profile";
-import stylesCris from "./styles/stylesCris.css";
-import AdminPanel from "./components/Admin/AdminPanel";
+import './App.css'
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+import Home from './pages/Home'
+import Contact from './pages/Contact'
+import Product from './pages/Product'
+import Products from './pages/Products'
+import NotFound from './pages/NotFound'
+import Profile from './pages/Profile'
+import stylesCris from './styles/stylesCris.css'
+import AdminPanel from './components/Admin/AdminPanel'
 import SignForm from './pages/SignForm'
 import Header from './components/Header'
 import Footer from './components/Footer'
-
 
 const App = () => {
   return (
