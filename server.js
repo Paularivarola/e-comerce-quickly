@@ -9,9 +9,9 @@ const socket = require('socket.io')
 const path = require('path')
 const fileUpload = require('express-fileupload')
 
-
 const app = express()
 
+app.use(express.static('assets'))
 app.use(cors())
 app.use(express.json())
 app.use(

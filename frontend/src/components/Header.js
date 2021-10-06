@@ -12,7 +12,6 @@ const Header = (props) => {
     // eslint-disable-next-line
   }, [])
   window.onclick = (e) => e.target.id !== 'userMenu' && setUserMenu(false)
-
   return (
     <header>
       <nav className={styles.containerNavegation}>
@@ -32,7 +31,7 @@ const Header = (props) => {
         </div>
         <div className={styles.userData} onClick={() => setUserMenu(true)}>
           {props.user && <h2>{props.user.firstName}</h2>}
-          <img id='userMenu' className={styles.user} src={props.user ? 'http://localhost:4000/' + props.user.src : '/assets/user.png'} alt='logo' />
+          <img id='userMenu' className={styles.user} src={props.user ? (!props.user.google ? 'http://localhost:4000/' + props.user.src : props.user.src) : '/assets/user.png'} alt='logo' />
         </div>
         {userMenu && (
           <div className={styles.userMenuContainer}>
