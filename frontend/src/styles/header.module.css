@@ -8,6 +8,42 @@
   width: 5vw;
 }
 
+.userData {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 15vw;
+}
+
+.userMenuContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 15vh;
+  right: 3vw;
+  width: 10vw;
+  height: 15vh;
+  background-color: #fe6849;
+  padding: 2vw;
+  border-radius: 20%;
+}
+
+.userMenu {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  box-shadow: 1px 1px 2px black;
+  border-radius: 20%;
+}
+
+.userMenu a {
+  color: black;
+  margin: 1vh 0;
+  text-align: center;
+}
+
 .containerNavegation {
   display: flex;
   justify-content: space-around;
@@ -19,7 +55,6 @@
 .navegation a {
   padding: 6vh 2vw;
   text-decoration: none;
-
 }
 
 .active {
@@ -28,7 +63,6 @@
   height: 90%;
   text-decoration: none;
 }
-
 
 @media screen and (max-width: 1218px) {
   header {
