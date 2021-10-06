@@ -17,7 +17,7 @@ const App = () => {
   console.log()
   return (
     <BrowserRouter>
-      {/* <Header /> */}
+      <Header />
       <Switch>
         <Route exact path='/' component={Home} />
         <Route path='/contact' component={Contact} />
@@ -28,7 +28,7 @@ const App = () => {
         <Route path='/dashboard' component={AdminPanel} />
         <Redirect to='/notfound' />
       </Switch>
-      {/* <Footer /> */}
+      <Footer />
     </BrowserRouter>
   )
 }
