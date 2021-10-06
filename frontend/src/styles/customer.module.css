@@ -34,6 +34,14 @@ table.customersTable th{
     color: white;
 }
 
+.customersTable tbody tr:nth-child(2n-1){
+    background-color: white;
+}
+
+.customersTable tbody tr:nth-child(2n){
+    background-color: #eee;
+}
+
 .customersTable tbody td{
     padding: 5px 0;
 }
@@ -45,6 +53,9 @@ table.customersTable th{
     background-size: cover;
     background-repeat: no-repeat;
     cursor: pointer;
+    margin: 3px 10px;
 }
 
-.buttonsSection
+.buttonsSection button:first-child{
+    margin-right: 5px;
+}

@@ -36,6 +36,30 @@ const Customers = () => {
                                     <Button variant="outlined" color="error" size="small"><MdEdit />Borrar</Button>
                                 </td>
                             </tr>
+                            <tr>
+                                <td>
+                                    <div className={styles.profilePic} style={{ backgroundImage: "url('https://www.tsensor.online/wp-content/uploads/2020/04/avatar-icon-png-105-images-in-collection-page-3-avatarpng-512_512.png')" }}></div>
+                                </td>
+                                <td>Daniel Sepúlveda</td>
+                                <td>d.sepulveda.perez@gmail.com</td>
+                                <td>3 / $152.254</td>
+                                <td className={styles.buttonsSection}>
+                                    <Button variant="contained" color="info" size="small"><MdEdit />Editar</Button>
+                                    <Button variant="outlined" color="error" size="small"><MdEdit />Borrar</Button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div className={styles.profilePic} style={{ backgroundImage: "url('https://www.tsensor.online/wp-content/uploads/2020/04/avatar-icon-png-105-images-in-collection-page-3-avatarpng-512_512.png')" }}></div>
+                                </td>
+                                <td>Daniel Sepúlveda</td>
+                                <td>d.sepulveda.perez@gmail.com</td>
+                                <td>3 / $152.254</td>
+                                <td className={styles.buttonsSection}>
+                                    <Button variant="contained" color="info" size="small"><MdEdit />Editar</Button>
+                                    <Button variant="outlined" color="error" size="small"><MdEdit />Borrar</Button>
+                                </td>
+                            </tr>
                         </tbody>
                         <tfooter>
 

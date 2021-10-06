@@ -4,8 +4,6 @@ import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import Product from "./pages/Product";
 import Products from "./pages/Products";
-import SignUp from "./pages/SignUp";
-import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
 import stylesCris from "./styles/stylesCris.css";
@@ -16,9 +14,10 @@ import Footer from './components/Footer'
 
 
 const App = () => {
+  console.log()
   return (
     <BrowserRouter>
-      <Header />
+      {/* <Header /> */}
       <Switch>
         <Route exact path='/' component={Home} />
         <Route path='/contact' component={Contact} />
@@ -29,7 +28,7 @@ const App = () => {
         <Route path='/dashboard' component={AdminPanel} />
         <Redirect to='/notfound' />
       </Switch>
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   )
 }
