@@ -1,0 +1,50 @@
+.customerContainer{
+    padding: 5vh 2vw;
+}
+
+.infoTable{
+    height: 800px;
+    background-color: whitesmoke;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.tableHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+}
+
+.tableContainer{
+    display: flex;
+    justify-content: center;
+}
+
+table.customersTable{
+    margin-top: 3vh;
+    width: 95%;
+    border: none;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+table.customersTable th{
+    background-color: #fe6849;
+    padding: 5px 0;
+    color: white;
+}
+
+.customersTable tbody td{
+    padding: 5px 0;
+}
+
+.profilePic{
+    width: 40px;
+    height: 40px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.buttonsSection

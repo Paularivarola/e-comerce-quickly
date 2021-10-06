@@ -1,14 +1,19 @@
-import './App.css'
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
-import Home from './pages/Home'
-import Contact from './pages/Contact'
-import Product from './pages/Product'
+import "./App.css";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import Home from "./pages/Home";
+import Contact from "./pages/Contact";
+import Product from "./pages/Product";
+import Products from "./pages/Products";
+import SignUp from "./pages/SignUp";
+import Login from "./pages/Login";
+import NotFound from "./pages/NotFound";
+import Profile from "./pages/Profile";
+import stylesCris from "./styles/stylesCris.css";
+import AdminPanel from "./components/Admin/AdminPanel";
 import SignForm from './pages/SignForm'
-import NotFound from './pages/NotFound'
-import Profile from './pages/Profile'
-import Dashboard from './components/Admin/Dashboard'
 import Header from './components/Header'
 import Footer from './components/Footer'
+
 
 const App = () => {
   return (
@@ -21,7 +26,7 @@ const App = () => {
         <Route path='/product/:id' component={Product} />
         <Route path='/profile' component={Profile} />
         <Route path='/notfound' component={NotFound} />
-        <Route path='/dashboard' component={Dashboard} />
+        <Route path='/dashboard' component={AdminPanel} />
         <Redirect to='/notfound' />
       </Switch>
       <Footer />
