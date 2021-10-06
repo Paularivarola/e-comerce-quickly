@@ -25,6 +25,7 @@ table.customersTable{
     width: 95%;
     border: none;
     border-collapse: collapse;
+    text-align: center;
 }
 
 table.customersTable th{
@@ -45,3 +46,5 @@ table.customersTable th{
     background-repeat: no-repeat;
     cursor: pointer;
 }
+
+.buttonsSection

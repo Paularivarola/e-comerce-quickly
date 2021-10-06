@@ -30,8 +30,8 @@ const Customers = () => {
                                 </td>
                                 <td>Daniel Sepúlveda</td>
                                 <td>d.sepulveda.perez@gmail.com</td>
-                                <td></td>
-                                <td>
+                                <td>3 / $152.254</td>
+                                <td className={styles.buttonsSection}>
                                     <Button variant="contained" color="info" size="small"><MdEdit />Editar</Button>
                                     <Button variant="outlined" color="error" size="small"><MdEdit />Borrar</Button>
                                 </td>
