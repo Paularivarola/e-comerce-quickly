@@ -50,7 +50,7 @@ const Testimonios = () => {
             draggable
             focusOnSelect={false}
             infinite
-            itemClass=""
+            itemClass="cajita"
             keyBoardControl
             minimumTouchDrag={80}
             renderButtonGroupOutside={false}
