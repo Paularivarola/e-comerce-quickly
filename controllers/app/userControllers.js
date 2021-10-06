@@ -6,10 +6,19 @@ const userControllers = {
   signUp: async (req, res) => {
     const { firstName, lastName, password, email, google, src } = req.body
     const pw = bcrypt.hashSync(password)
+    let picture
+    if (req.files) {
+      const { fileImg } = req.files
+      picture = fileImg ? `${email.split('@')[0]}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}` : src ? src : '/assets/user.png'
+      fileImg &&
+        fileImg.mv(`${__dirname}/../../assets/${email.split('@')[0]}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`, (err) => {
+          if (err) return console.log(err)
+        })
+    }
     try {
-      if (await User.findOne({ email })) throw new Error('Ya estás registrado')
+      if (await User.findOne({ 'data.email': email })) throw new Error('Ya estás registrado')
       const newUser = new User({
-        data: { firstName, lastName, password: pw, email, google: google || false, src: src || 'assets/genericUser.jpg' },
+        data: { firstName, lastName, password: pw, email, google: google || false, src: picture },
       })
       await newUser.save()
       const token = jwt.sign({ ...newUser }, process.env.SECRETORKEY)
@@ -17,7 +26,7 @@ const userControllers = {
         success: true,
         user: {
           firstName,
-          src: src || '/assets/user.png',
+          src: picture,
         },
         userData: newUser,
         token,

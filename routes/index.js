@@ -9,7 +9,7 @@ const validatorSignUp = require('../controllers/middlewares/validatorSignUp')
 const router = express.Router()
 
 //USERS
-router.route('/user/signUp').post(validatorSignUp, userControllers.signUp)
+router.route('/user/signUp').post(userControllers.signUp) //validatorSignUp, userControllers.signUp
 router.route('/user/logIn').post(userControllers.logIn)
 router.route('/user/token').get(
   passport.authenticate('jwt', {

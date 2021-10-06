@@ -12,6 +12,8 @@ const SignForm = (props) => {
     email: '',
     password: '',
     repPass: '',
+    src: null,
+    google: false,
   })
   const [shift, setShift] = useState(props.match.params.susi === 'signup')
 
@@ -38,7 +40,7 @@ const SignForm = (props) => {
   const inputHandler = (e) => {
     setUser({
       ...user,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.name === 'src' ? e.target.files[0] : e.target.value,
     })
   }
 
@@ -68,8 +70,16 @@ const SignForm = (props) => {
   const submit = (e) => {
     e.preventDefault()
     if (!validatorFront()) return false
+    const { firstName, lastName, email, password, google, src } = user
+    const fd = new FormData()
+    fd.append('email', email)
+    fd.append('password', password)
     if (shift) {
-      props.createUser(user, props)
+      fd.append('firstName', firstName)
+      fd.append('lastName', lastName)
+      fd.append('google', google)
+      fd.append(google ? 'src' : 'fileImg', src)
+      props.createUser(fd, props)
     } else {
       props.logUser(user, props)
     }
@@ -102,6 +112,7 @@ const SignForm = (props) => {
               <input className={styles.contact} type='text' name='email' placeholder='Ingresa tu email...' onChange={inputHandler} defaultValue={user.email} />
               <input className={styles.contact} type='password' name='password' placeholder='Crea una contraseña...' onChange={inputHandler} defaultValue={user.password} />
               <input className={styles.contact} type='password' name='repPass' placeholder='Repite la contraseña...' onChange={inputHandler} defaultValue={user.repPass} />
+              <input className={styles.contact} type='file' name='src' placeholder='Agregá una foto de perfil' onChange={inputHandler} defaultValue={user.src} />
             </div>
           </form>
         )}

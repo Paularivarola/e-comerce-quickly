@@ -5,7 +5,7 @@ const userActions = {
   createUser: (user, props) => {
     return async (dispatch) => {
       try {
-        let res = await axios.post('http://localhost:4000/api/user/signUp', { ...user })
+        let res = await axios.post('http://localhost:4000/api/user/signUp', user)
         if (res.data.success) {
           const { user, userData, token } = res.data
           let keep = false
