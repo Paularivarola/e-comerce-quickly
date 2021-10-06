@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;900&display=swap');
+
+
 html * {
   margin: 0;
   padding: 0;
@@ -9,9 +12,10 @@ div.containAllProfile{
   height: 100%;
   padding: 0.2rem;
 }
-.cajita {
+.carouselTestimonies {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+  padding: 2%;
 }
 
