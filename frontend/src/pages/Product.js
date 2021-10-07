@@ -11,11 +11,22 @@ const Product = (props) => {
     // }, [])
 
     const price = 100 //debería venir por props
-    const [totalPrice, setTotalPrice] = useState(price)
-    var [sizeFries, setSizeFries] = useState(0)
+    const sizeFries = [
+        { size: "Chicas", cost: 0 },
+        { size: "Medianas", cost: 10 },
+        { size: "Grandes", cost: 20 }] //debería venir de props y si no existe debe ser []
+    const extrasChoices = [
+        { type: "Carne", cost: 20 },
+        { type: "Queso", cost: 10 },
+        { type: "Cebolla", cost: 5 },
+        { type: "Gaseosa 500cc", cost: 35 }] //debería venir de props y estar siempre (aunque sea una gaseosa)
+
+    const [fries, setFries] = useState("Chicas")
+    const [extras, setExtras] = useState([])
+    const [extrasCost, setExtrasCost] = useState(0)
     const [totalAmount, setTotalAmount] = useState(1)
-    var [extras, setExtras] = useState([])
-    var [deleteExtras, setDeleteExtras] = useState([])
+    const [unitaryPrice, setUnitaryPrice] = useState(price)
+    const [totalPrice, setTotalPrice] = useState(unitaryPrice)
 
     const amount = (operation) => {
 
@@ -29,33 +40,37 @@ const Product = (props) => {
     }
 
     const addFries = (fries) => {
-        setSizeFries(fries)
+        setFries(fries)
     }
 
     const addExtras = (extra) => {
         if (!extras.includes(extra)) {
             setExtras([...extras, extra])
         } else {
-            if (extras.includes(extra)) {
-                var resultado = extras.filter((item) => item.extra === extra)
-                setDeleteExtras(resultado)
-            }
-            console.log("borrar") //que se borre si ya está incuido!!
-            console.log(extra)
+            setExtras(extras.filter((e) => e !== extra))
         }
     }
 
     useEffect(() => {
-        console.log(extras)
-        setTotalPrice(price + sizeFries + (extras.length * 10))
-    }, [sizeFries, extras])
-
+        let amount = 0
+        extrasChoices.forEach(extra => {
+            if (extras.includes(extra.type)) amount = amount + extra.cost
+        })
+        setExtrasCost(amount)
+    }, [extras])
 
     useEffect(() => {
-        console.log(extras)
-        setTotalPrice(price - sizeFries - (deleteExtras.length / 10))
+        let friesCost = 0
+        sizeFries.forEach(size => {
+            if (fries.includes(size.size)) friesCost = friesCost + size.cost
+        }) //se puede hacer mejor con find
 
-    }, [sizeFries, deleteExtras])
+        setUnitaryPrice(price + friesCost + extrasCost)
+    }, [sizeFries, extrasCost])
+
+    useEffect(() => {
+        setTotalPrice(unitaryPrice * totalAmount)
+    }, [unitaryPrice, totalAmount])
 
     const addToCart = () => {
         console.log("agregar a mi orden!!!")
@@ -77,7 +92,7 @@ const Product = (props) => {
                         <div className={styles.title}>
                             <h3>Descripcion:</h3>
                             <p>Hamburguesa de carne 100% vacuna, salsa casera, cheddar, lechuga, tomate, cebolla,
-                                pan de papa. Incluye porción de papas</p>
+                                pan de papa. Incluye porción de papas chicas</p>
                         </div>
 
                         <div className={styles.order}>
@@ -95,39 +110,37 @@ const Product = (props) => {
 
                     <div className={styles.cardPrice}>
                         <div className={styles.choices}>
-                            <div>
-                                <h3 className={styles.h3}>Tamaño papas</h3>
+                            {sizeFries.length !== 0 &&
                                 <div>
-                                    <input type="radio" name="papas" value="chicas" id="chicas" defaultChecked onClick={() => addFries(0)} />
-                                    <label className={styles.input} for="chicas">Chicas</label>
-                                </div>
-                                <div>
-                                    <input type="radio" name="papas" value="medianas" id="medianas" onClick={() => addFries(10)} />
-                                    <label className={styles.input} for="medianas">Medianas <span className={styles.span}>USD 10</span></label>
-                                </div>
-                                <div>
-                                    <input type="radio" name="papas" value="grandes" id="grandes" onClick={() => addFries(20)} />
-                                    <label className={styles.input} for="grandes">Grandes <span className={styles.span}>USD 20</span></label>
-                                </div>
-                            </div>
+                                    <h3 className={styles.h3}>Tamaño papas</h3>
+                                    {sizeFries.map(size =>
+                                        <div>
+                                            <input type="radio" name="extras" value={size.size} id={size.size}
+                                                onClick={() => addFries(size.size)} defaultChecked={size.cost === 0 && "checked"} />
+
+                                            <label className={styles.input} for={size.size}>
+                                                {size.size}{size.cost !== 0 && <span className={styles.span}> (USD {size.cost})</span>}
+                                            </label>
+                                        </div>
+                                    )}
+                                </div>}
                             <div>
                                 <h3 className={styles.h3}>Extras</h3>
-                                <div>
-                                    <input type="checkbox" name="extras" value="carne" id="carne" onClick={() => addExtras("carne")} />
-                                    <label className={styles.input} for="carne">Carne <span className={styles.span}>USD 10</span></label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="extras" value="queso" id="queso" onClick={() => addExtras("queso")} />
-                                    <label className={styles.input} for="queso">Queso <span className={styles.span}>USD 10</span></label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="extras" value="cebolla" id="cebolla" onClick={() => addExtras("cebolla")} />
-                                    <label className={styles.input} for="cebolla">Cebolla <span className={styles.span}>USD 10</span></label>
-                                </div>
+                                {extrasChoices.map(extra =>
+                                    <div>
+                                        <input type="checkbox" name="extras" value={extra.type} id={extra.type}
+                                            onClick={() => addExtras(extra.type)} />
+
+                                        <label className={styles.input} for={extra.type}>
+                                            {extra.type} <span className={styles.span}>(USD {extra.cost})</span>
+                                        </label>
+                                    </div>
+                                )}
                             </div>
                         </div>
                         <div>
-                            <h2>USD {totalPrice}</h2>
+                            <h4>Unidad: USD {unitaryPrice}</h4>
+                            <h2>Total: USD {totalPrice}</h2>
                         </div>
                     </div>
                 </div>
