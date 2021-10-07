@@ -1,85 +1,57 @@
 import Data from '../components/Data'
 import History from '../components/History'
 import Favorites from '../components/Favorites'
+import NavLateral from '../components/NavLateral'
 import styles from '../styles/profile.module.css'
-import { useState } from 'react'
-import toast, { Toaster } from 'react-hot-toast'
+import { Toaster } from 'react-hot-toast'
 import { connect } from 'react-redux'
-import userActions from '../redux/actions/userActions'
-import { useEffect } from 'react'
-
+import { useEffect, useState } from 'react'
 
 const Profile = (props) => {
-  const [updateUser, setUpdateUser] = useState({})
-  const [createCard, setCreateCard] = useState({})
-  const [view, setView] = useState("")
-  const cleanInputs = (page) => {
-    setUpdateUser({})
-    setCreateCard({})
-    setView(page)
-  }
+  const [view, setView] = useState('')
+  const [subComp, setSubComp] = useState('')
+  useEffect(() => {
+    let page = props.match.params.page
+    setView(
+      page === 'fav' ? (
+        <Favorites favorites={props.userData?.favouriteProductsId} />
+      ) : page === 'his' ? (
+        <History orders={props.userData?.ordersId} />
+      ) : (
+        <Data user={props.userData?.data} subComp={subComp} />
+      )
+    )
+  }, [props.userData, props.match.params])
 
-  useEffect(() =>{
-    setView(<Data user={props.userData?.data} setCard={setCreateCard} setUser={setUpdateUser} />)
-  },[props.userData])
-  const confirm = (page) => {
-    return toast.custom((t) => (
-      <div
-        className={`${t.visible ? 'animate-enter' : 'animate-leave'} containAlerts`}
-        style={{ display: 'flex', alignContent: 'center', alignItems: 'center', padding: '15px 15px', borderRadius: '25px' }}
-      >
-        <div className='containerTextAlerts'>
-          <p className=''>Perderas los cambios no guardados</p>
-          <p className=''>estas seguro ?</p>
-        </div>
-        <div className='containButtonsAlerts'>
-          <button onClick={() => cleanInputs(page)} style={{ backgroundColor: 'red', color: 'white', padding: '10px', margin: '5px' }}>
-            Si
-          </button>
-          <button onClick={() => toast.dismiss(t.id)} style={{ backgroundColor: 'red', color: 'white', padding: '10px', margin: '5px' }}>
-            No
-          </button>
-        </div>
-      </div>
-    ))
-  }
-
-  const selectComponent = (component) => {
-    let comp = component
-    if (comp === 'data') {
-      setView(<Data user={props.userData.data} setCard={setCreateCard} setUser={setUpdateUser} />)
+  const selectComponent = (comp) => {
+    if (comp === 'acc') {
+      setView(<Data user={props.userData?.data} />)
     } else if (comp === 'fav') {
-      const user = Object.values(updateUser).some((user) => user !== '')
-      const card = Object.values(createCard).some((card) => card !== '')
-      if (user || card) {
-        confirm(<Favorites favorites={props.userData.favouriteProductsId} />)
-        return false
-      }
-      setView(<Favorites favorites={props.userData.favouriteProductsId}/>)
+      setView(<Favorites favorites={props.userData?.favouriteProductsId} />)
     } else {
-      const user = Object.values(updateUser).some((user) => user !== '')
-      const card = Object.values(createCard).some((card) => card !== '')
-      if (user || card) {
-        confirm(<History orders={props.userData.ordersId} />)
-        return false
-      }
-      setView(<History orders={props.userData.ordersId}/>)
+      setView(<History orders={props.userData?.ordersId} />)
     }
   }
 
+  const navItems = [
+    { comp: 'fav', name: 'Favoritos' },
+    { comp: 'his', name: 'Mis Pedidos' },
+    {
+      comp: 'acc',
+      name: 'Mi cuenta',
+      desplegable: [
+        { comp: 'personalData', name: 'Datos Personales' },
+        { comp: 'changePassword', name: 'Cambiar Contraseña' },
+        { comp: 'adresses', name: 'Direcciones' },
+        { comp: 'payment', name: 'Métodos de Pago' },
+        { comp: 'notif', name: 'Notificaciones' },
+      ],
+    },
+  ]
+
   return (
-    <>
-      <div className={styles.containerButtonCheck}>
-        <button styles={styles.buttonCheck} onClick={() => selectComponent('fav')}>
-          Favoritos
-        </button>
-        <button styles={styles.buttonCheck} onClick={() => selectComponent('his')}>
-          Historial
-        </button>
-        <button styles={styles.buttonCheck} onClick={() => selectComponent('data')}>
-          Datos
-        </button>
-      </div>
+    <div style={{ display: 'flex', padding: '0 2vw' }}>
+      <NavLateral selectComponent={selectComponent} setSubComp={setSubComp} navItems={navItems} />
       <div className={styles.containerRenderView}>
         <div className={styles.renderView}>{view}</div>
       </div>
@@ -94,17 +66,15 @@ const Profile = (props) => {
           duration: 1500,
         }}
       />
-    </>
+    </div>
   )
 }
 
 const mapStateToProps = (state) => {
-  return{
-    userData: state.users.userData
+  return {
+    userData: state.users.userData,
   }
 }
-const mapDispachToProps = {
+const mapDispachToProps = {}
 
-}
-
-export default connect(mapStateToProps, mapDispachToProps)(Profile) 
+export default connect(mapStateToProps, mapDispachToProps)(Profile)

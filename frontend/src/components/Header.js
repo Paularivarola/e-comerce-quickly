@@ -73,16 +73,27 @@ const Header = (props) => {
                 {!props.user ? (
                   <>
                     <NavLink className={styles.textRoute} to='/sign-forms/signin'>
-                      Sign In
+                      Ingresar
                     </NavLink>
                     <NavLink className={styles.textRoute} to='/sign-forms/signup'>
-                      Sign Up
+                      Registrarse
                     </NavLink>
                   </>
                 ) : (
-                  <NavLink className={styles.textRoute} onClick={() => props.logOut()} to='/'>
-                    Log Out
-                  </NavLink>
+                  <>
+                    <NavLink className={styles.textRoute} to='/profile/fav'>
+                      Favoritos
+                    </NavLink>
+                    <NavLink className={styles.textRoute} to='/profile/his'>
+                      Mis Pedidos
+                    </NavLink>
+                    <NavLink className={styles.textRoute} to='/profile/acc'>
+                      Mi Cuenta
+                    </NavLink>
+                    <NavLink className={styles.textRoute} onClick={() => props.logOut()} to='/'>
+                      Salir
+                    </NavLink>
+                  </>
                 )}
               </div>
             </div>

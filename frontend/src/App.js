@@ -60,7 +60,7 @@ const App = (props) => {
         <Route path='/contact' component={Contact} />
         <Route path='/sign-forms/:susi' component={SignForm} />
         <Route path='/products' component={Products} />
-        <Route path='/profile' component={Profile} />
+        <Route path='/profile/:page' component={Profile} />
         <Route path='/notfound' component={NotFound} />
         <Route path='/admin/dashboard' render={() => <AdminPanel view={'Escritorio'} />} />
         <Route exact path='/admin/clientes' render={() => <AdminPanel view={'Clientes'} />} />
