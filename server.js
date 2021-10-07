@@ -35,7 +35,9 @@ const PORT = process.env.PORT
 const HOST = process.env.HOST || '0.0.0.0'
 
 //Server listening
-const server = app.listen(PORT, HOST, () => console.log(`Server listening on port ${PORT} (${HOST})`))
+const server = app.listen(PORT, HOST, () =>
+  console.log(`Server listening on port ${PORT} (${HOST})`)
+)
 
 const io = socket(server, {
   cors: {
@@ -45,18 +47,30 @@ const io = socket(server, {
 })
 
 io.on('connection', (socket) => {
-  io.to(socket.id).emit('socketId', { socketId: socket.id })
-  const socketId = socket.handshake.query.socketId
-  socket.join(socketId)
+  const { socketId, admin } = socket.handshake.query
+
+  socketId
+    ? socket.join(admin ? 'admins' : socketId)
+    : io.to(socket.id).emit('socketId', { socketId: socket.id })
+
+  //  !admin
+  //   ? socket.on('createOrder', () => {
+  //       io.to('615dfda3ac8bf6ad5f495470').emit('createOrder')
+  //     }) &&
+  //     socket.on('cancellOrder', () => {
+  //       io.to('615dfda3ac8bf6ad5f495470').emit('cancellOrder')
+  //     })
+  //   : socket.on('updateOrders', () => {
+  //       io.to('w1KgI3CGGP914GTyAAAJ').emit('updateOrders')
+  //     })
 
   socket.on('createOrder', () => {
-    io.to('cQfXFPNiSXOkbOQJAAAB').emit('createOrder')
+    io.to('admins').emit('createOrder')
   })
-  socket.on('createOrder', () => {
-    io.to('cQfXFPNiSXOkbOQJAAAB').emit('createOrder')
+  socket.on('cancellOrder', () => {
+    io.to('admins').emit('cancellOrder')
   })
-
-  socket.on('updateOrders', (socketId) => {
-    io.to(socketId).emit('updateOrders')
+  socket.on('updateOrders', () => {
+    io.to('w1KgI3CGGP914GTyAAAJ').emit('updateOrders')
   })
 })

@@ -9,18 +9,24 @@ import socketActions from '../redux/actions/socketActions'
 const Header = (props) => {
   const [userMenu, setUserMenu] = useState(false)
   useEffect(() => {
-    if (localStorage.getItem('token')) {
+    localStorage.getItem('socket') &&
       props.setSocketLS(localStorage.getItem('socket'))
-      props.verifyToken()
-    }
+    localStorage.getItem('token') && props.verifyToken()
+
     // eslint-disable-next-line
   }, [])
-  console.log(props.socket)
+
+  // console.log(props.socket?.id)
+
   window.onclick = (e) => e.target.id !== 'userMenu' && setUserMenu(false)
   return (
     <header>
       <nav className={styles.containerNavegation}>
-        <img className={styles.logo} src='/assets/logo-cocina-prueba.png' alt='logo' />
+        <img
+          className={styles.logo}
+          src='/assets/logo-cocina-prueba.png'
+          alt='logo'
+        />
         <div className={styles.navegation}>
           <NavLink exact activeClassName={styles.active} to='/'>
             Home

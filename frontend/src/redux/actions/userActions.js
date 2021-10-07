@@ -1,5 +1,6 @@
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import io from 'socket.io-client'
 const HOST = 'http://localhost:4000'
 
 const userActions = {
@@ -26,7 +27,15 @@ const userActions = {
               }
             })
           props.history.push('/')
-          dispatch({ type: 'LOG_IN', payload: { user, userData, token, keep } })
+          localStorage.setItem('socket', userData._id)
+          let socket = io('http://localhost:4000', {
+            query: { socketId: userData._id, admin: userData.data.admin.flag },
+          })
+          dispatch({ type: 'SET_SOCKET', payload: { socket } })
+          return dispatch({
+            type: 'LOG_IN',
+            payload: { user, userData, token, keep },
+          })
         }
       } catch (error) {
         console.log(error)
@@ -56,7 +65,15 @@ const userActions = {
               }
             })
           props.history.push('/')
-          dispatch({ type: 'LOG_IN', payload: { user, userData, token, keep } })
+          localStorage.setItem('socket', userData._id)
+          let socket = io('http://localhost:4000', {
+            query: { socketId: userData._id, admin: userData.data.admin.flag },
+          })
+          dispatch({ type: 'SET_SOCKET', payload: { socket } })
+          return dispatch({
+            type: 'LOG_IN',
+            payload: { user, userData, token, keep },
+          })
         }
       } catch (error) {
         console.log(error)
@@ -77,6 +94,14 @@ const userActions = {
             Authorization: 'Bearer ' + token,
           },
         })
+        localStorage.setItem('socket', response.data.userData._id)
+        let socket = io('http://localhost:4000', {
+          query: {
+            socketId: response.data.userData._id,
+            admin: response.data.userData.data.admin.flag,
+          },
+        })
+        dispatch({ type: 'SET_SOCKET', payload: { socket } })
         dispatch({
           type: 'LOG_IN',
           payload: { ...response.data, token },

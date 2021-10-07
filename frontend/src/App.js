@@ -24,24 +24,37 @@ const App = (props) => {
   }, [])
 
   useEffect(() => {
-    if (socket && !localStorage.getItem('socket')) {
+    if (socket) {
       socket.on('socketId', ({ socketId }) => {
-        localStorage.setItem('socket', socketId)
-        let socketLS = io('http://localhost:4000', { query: { socketId } })
-        props.setSocketLS(socketLS)
+        if (!localStorage.getItem('socket')) {
+          localStorage.setItem('socket', socketId)
+          props.setSocketLS(socketId)
+        }
       })
     }
   }, [socket])
 
-  if (socket && localStorage.getItem('socket')) {
-    socket.on('createOrder', () => {
-      console.log('hola')
-    })
+  if (props.socket && localStorage.getItem('socket')) {
+    if (props.userData?.data?.admin?.flag) {
+      props.socket.on('createOrder', () => {
+        console.log('order created')
+      })
+      props.socket.on('cancellOrder', () => {
+        console.log('order cancelled')
+      })
+    } else {
+      props.socket.on('updateOrders', () => {
+        console.log('order updated')
+      })
+    }
   }
 
   return (
     <BrowserRouter>
       <Header />
+      <button onClick={() => props.socket.emit('createOrder')}>create</button>
+      <button onClick={() => props.socket.emit('cancellOrder')}>cancell</button>
+      <button onClick={() => props.socket.emit('updateOrders')}>update</button>
       <Switch>
         <Route exact path='/' component={Home} />
         <Route path='/contact' component={Contact} />
@@ -57,8 +70,15 @@ const App = (props) => {
   )
 }
 
+const mapStateToProps = (state) => {
+  return {
+    userData: state.users.userData, //PARA ADMINS
+    socket: state.users.socket,
+  }
+}
+
 const mapDispatchToProps = {
   setSocketLS: socketActions.setSocketLS,
 }
 
-export default connect(null, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)
