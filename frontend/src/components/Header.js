@@ -9,8 +9,7 @@ import socketActions from '../redux/actions/socketActions'
 const Header = (props) => {
   const [userMenu, setUserMenu] = useState(false)
   useEffect(() => {
-    localStorage.getItem('socket') &&
-      props.setSocketLS(localStorage.getItem('socket'))
+    localStorage.getItem('socket') && props.setSocketLS(localStorage.getItem('socket'))
     localStorage.getItem('token') && props.verifyToken()
 
     // eslint-disable-next-line
@@ -23,30 +22,16 @@ const Header = (props) => {
     if (props.user && e.target.id !== 'userMenu') setUserMenu(false)
   }
 
-  console.log(props.user?.src)
   return (
     <header>
       <div className={styles.boxNavigation}>
         <nav className={styles.containerNavegation}>
-          <img
-            className={styles.logo}
-            src='/assets/logo-cocina-prueba.png'
-            alt='logo'
-          />
+          <img className={styles.logo} src='/assets/logo-cocina-prueba.png' alt='logo' />
           <div className={styles.navegation}>
-            <NavLink
-              className={styles.textRoute}
-              exact
-              activeClassName={styles.active}
-              to='/'
-            >
+            <NavLink className={styles.textRoute} exact activeClassName={styles.active} to='/'>
               Home
             </NavLink>
-            <NavLink
-              className={styles.textRoute}
-              activeClassName={styles.active}
-              to='/products'
-            >
+            <NavLink className={styles.textRoute} activeClassName={styles.active} to='/products'>
               Menu
             </NavLink>
             <NavLink className={styles.textRoute} to='/'>
@@ -55,18 +40,11 @@ const Header = (props) => {
             <NavLink className={styles.textRoute} to='/'>
               Pedidos
             </NavLink>
-            <NavLink
-              className={styles.textRoute}
-              activeClassName={styles.active}
-              to='/contact'
-            >
+            <NavLink className={styles.textRoute} activeClassName={styles.active} to='/contact'>
               Contacto
             </NavLink>
           </div>
-          <div
-            className={styles.userData}
-            onClick={() => setUserMenu(!userMenu)}
-          >
+          <div className={styles.userData} onClick={() => setUserMenu(!userMenu)}>
             {props.user && (
               <h2 id='userName' className={styles.userName}>
                 {props.user.firstName}
@@ -94,25 +72,15 @@ const Header = (props) => {
               <div className={styles.userMenu}>
                 {!props.user ? (
                   <>
-                    <NavLink
-                      className={styles.textRoute}
-                      to='/sign-forms/signin'
-                    >
+                    <NavLink className={styles.textRoute} to='/sign-forms/signin'>
                       Sign In
                     </NavLink>
-                    <NavLink
-                      className={styles.textRoute}
-                      to='/sign-forms/signup'
-                    >
+                    <NavLink className={styles.textRoute} to='/sign-forms/signup'>
                       Sign Up
                     </NavLink>
                   </>
                 ) : (
-                  <NavLink
-                    className={styles.textRoute}
-                    onClick={() => props.logOut()}
-                    to='/'
-                  >
+                  <NavLink className={styles.textRoute} onClick={() => props.logOut()} to='/'>
                     Log Out
                   </NavLink>
                 )}

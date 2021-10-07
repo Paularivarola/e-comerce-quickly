@@ -13,12 +13,11 @@ const Products = (props) => {
   const [product, setProduct] = useState(null)
 
   const setModal = (bool, product) => {
-    console.log(product)
     setMod(bool)
     setProduct(product)
   }
   window.onclick = (e) => {
-    if (e.target.id !== 'productModal') setMod(false)
+    if (e.target.dataset.modal === 'closeModal') setMod(false)
   }
   return (
     <div className={styles.mainProducts}>
