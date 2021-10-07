@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react';
 
 const Product = () => {
     const price = 100 //debería venir por props
-    const [totalPrice, setTotalPrice] = useState(price)
     var [sizeFries, setSizeFries] = useState(0)
     const [totalAmount, setTotalAmount] = useState(1)
     var [extras, setExtras] = useState([])
-    var [deleteExtras, setDeleteExtras] = useState([])
+    const [unitaryPrice, setUnitaryPrice] = useState(price)
+    const [totalPrice, setTotalPrice] = useState(unitaryPrice)
 
     const amount = (operation) => {
         if(operation==="sum"){
@@ -28,26 +28,18 @@ const Product = () => {
         if(!extras.includes(extra)) {
             setExtras([...extras, extra])
         } else {
-           if(extras.includes(extra)) {
-          var resultado = extras.filter((item) => item.extra === extra)
-          setDeleteExtras(resultado)
-           }
-            console.log("borrar") //que se borre si ya está incuido!!
-            console.log(extra)
+            setExtras(extras.filter((e) => e !== extra))
         }
     }
 
     useEffect(() => {
         console.log(extras)
-        setTotalPrice(price + sizeFries + (extras.length*10))
+        setUnitaryPrice(price + sizeFries + (extras.length*10))
     }, [sizeFries, extras])
     
-
     useEffect(() => {
-            console.log(extras)
-            setTotalPrice(price - sizeFries - (deleteExtras.length / 10))
-
-    }, [sizeFries, deleteExtras])
+        setTotalPrice(unitaryPrice*totalAmount)
+    },[unitaryPrice ,totalAmount])
 
     const addToCart = () => {
         console.log("agregar a mi orden!!!")
@@ -119,7 +111,8 @@ const Product = () => {
                             </div>
                         </div>
                         <div>
-                            <h2>USD {totalPrice}</h2>
+                            <h4>Unidad: USD {unitaryPrice}</h4>
+                            <h2>Total: USD {totalPrice}</h2>
                         </div>
                     </div>
                 </div>
