@@ -3,6 +3,7 @@ import styles from '../styles/products.module.css'
 import { BiCategory } from "react-icons/bi"
 import { MdShoppingCart } from "react-icons/md"
 import { connect } from "react-redux";
+import { BsFillCaretRightFill } from "react-icons/bs"
 
 const Products = (props) => {
     console.log(props)
@@ -14,7 +15,7 @@ const Products = (props) => {
                     <BiCategory style={{ color: '#fe6849', fontSize: '1.5em', marginRight: '5%' }}/><p className={styles.categoriesTitle}> Categorias</p>
                 </div>
                 <div className={styles.boxShop}>
-                    <p className={styles.welcome}>Hola {props.user.firstName}! ¿Qué vas a comer hoy?</p>
+                    <p className={styles.welcome}>Hola {props.user && props.user.firstName}! ¿Qué vas a comer hoy?</p>
                     <button className={styles.carritoBtn}>
                         <MdShoppingCart style={{ color: 'white', fontSize: '1.8em', marginRight: '5%' }}/> Carrito
                     </button>
