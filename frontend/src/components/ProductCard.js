@@ -55,8 +55,8 @@ const ProductCard = ({ product, setModal }) => {
           {star}
         </div>
       </div>
-      <button className={styles.addBtn} onClick={() => setModal(true, product)}>
-        <MdShoppingCart style={{ color: 'white', fontSize: '1.8em', marginRight: '5%' }} /> +
+      <button id='productModal' className={styles.addBtn} onClick={() => setModal(true, product)}>
+        <MdShoppingCart id='productModal' style={{ color: 'white', fontSize: '1.8em', marginRight: '5%' }} /> +
       </button>
     </div>
   )

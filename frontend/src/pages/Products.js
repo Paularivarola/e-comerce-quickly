@@ -17,7 +17,9 @@ const Products = (props) => {
     setMod(bool)
     setProduct(product)
   }
-
+  window.onclick = (e) => {
+    if (e.target.id !== 'productModal') setMod(false)
+  }
   return (
     <div className={styles.mainProducts}>
       <div className={styles.categories}>
