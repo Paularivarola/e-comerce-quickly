@@ -14,7 +14,9 @@
   width: 4rem;
   height: 4rem;
   border-radius: 100px;
-  /* background-color: tomato; */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .userData {
@@ -22,7 +24,7 @@
   align-items: center;
   justify-content: space-around;
   width: 11vw;
-  /* background-color: teal; */
+  cursor: pointer;
 }
 
 .userMenuContainer {
@@ -91,4 +93,3 @@
   font-size: 1rem;
   color: slategrey;
 }
-
