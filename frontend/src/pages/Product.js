@@ -8,6 +8,7 @@ const Product = () => {
     var [sizeFries, setSizeFries] = useState(0)
     const [totalAmount, setTotalAmount] = useState(1)
     var [extras, setExtras] = useState([])
+    var [deleteExtras, setDeleteExtras] = useState([])
 
     const amount = (operation) => {
         if(operation==="sum"){
@@ -27,7 +28,12 @@ const Product = () => {
         if(!extras.includes(extra)) {
             setExtras([...extras, extra])
         } else {
+           if(extras.includes(extra)) {
+          var resultado = extras.filter((item) => item.extra === extra)
+          setDeleteExtras(resultado)
+           }
             console.log("borrar") //que se borre si ya está incuido!!
+            console.log(extra)
         }
     }
 
@@ -36,6 +42,12 @@ const Product = () => {
         setTotalPrice(price + sizeFries + (extras.length*10))
     }, [sizeFries, extras])
     
+
+    useEffect(() => {
+            console.log(extras)
+            setTotalPrice(price - sizeFries - (deleteExtras.length / 10))
+
+    }, [sizeFries, deleteExtras])
 
     const addToCart = () => {
         console.log("agregar a mi orden!!!")

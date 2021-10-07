@@ -1,7 +1,7 @@
 /* borrar */
 
 .logo {
-  width: 20vw;
+  width: 10vw;
 }
 
 .user {
@@ -64,24 +64,3 @@
   text-decoration: none;
 }
 
-@media screen and (max-width: 1218px) {
-  header {
-    background-color: lightcoral;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  header {
-    background-color: violet;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  header {
-    background-color: seagreen;
-  }
-
-  .containerNavegation {
-    flex-wrap: wrap;
-  }
-}

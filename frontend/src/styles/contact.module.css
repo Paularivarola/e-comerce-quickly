@@ -9,10 +9,11 @@
 
 .containerContact {
   display: flex;
-  min-height: 95vh;
+  min-height: 80vh;
   justify-content: center;
   align-items: center;
   text-align: center;
+  padding-top: 4vh;
 }
 
 .deliveryImage {
@@ -22,10 +23,10 @@
   width: 40vw;
   margin-bottom: 15vh;
 }
-
+/* 
 .form {
   margin-bottom: 20vh;
-}
+} */
 
 .form input,textarea {
   background-color: #eaeaea;
@@ -79,20 +80,22 @@ button {
     width: 70%;
     border-radius: 1vw;
   }
+  .containerLink {
+    display: none;
+  }
   .form textarea {
     width: 70%;
     border-radius: 2vw;
   }
-  .containerImage {
+  /* .containerImage {
     margin-bottom: 20vw;
-  }
+  } */
 }
 
 @media screen and (max-width: 880px) {
   .containerContact {
     justify-content: center;
     align-items: center;
-    background-color: yellow;
   }
   .deliveryImage {
     height: 40vh;
@@ -118,7 +121,6 @@ button {
     .containerContact {
       justify-content: center;
       align-items: center;
-      background-color: wheat;
     }
     .deliveryImage {
       height: 40vh;
@@ -147,8 +149,7 @@ button {
 
   }
   .deliveryImage {
-    height: 50vh;
-    width: 80vw;
+    display: none;
   }
   .titleContact {
     font-size: 8vw;

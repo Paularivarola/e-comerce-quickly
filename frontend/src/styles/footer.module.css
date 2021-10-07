@@ -1,56 +1,73 @@
 /* borrar */
 
 .containerFooter {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  padding: 2vw;
+
 }
 
 .logo {
-    width: 20vw;
+  width: 10vw;
 }
 
 .iconsFooter {
-    width: 2vw;
-    padding: 1vw;
+  width: 2vw;
+ padding: 0.5vw;
 }
 
 .parrafo {
-    padding: 0vh 1vw 0vh 0vw;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
 }
 
 .boxIcons {
-    padding: 1vw;
-    text-align: center;
+  padding: 1vw;
+  text-align: center;
 }
 
 .map {
-    width: 25vw;
+  width: 25vw;
 }
 
-@media screen and (max-width: 1920px) {
-    footer {
-      background-color: indigo;
-    }
-  }
-  
-  @media screen and (max-width: 1218px) {
-    footer {
-      background-color: lightcoral;
-    }
-  }
-  
-  @media screen and (max-width: 800px) {
-    footer {
-      background-color:violet;
-    }
-  }
-  
-  @media screen and (max-width: 480px) {
-    footer {
-      background-color:seagreen;
-    }
 
-  
+/* @media screen and (max-width: 480px) {
+  .containerFooter {
+    flex-direction: column;
   }
+  .logo {
+    width: 50vw;
+  }
+  .containerParrafo {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .parrafo {
+    display: none;
+  }
+} */
+
+
+
+@media only screen and (min-width: 425px) {
+}
+
+@media only screen and (min-width: 576px) {
+}
+
+@media only screen and (min-width: 768px) {
+}
+
+@media only screen and (min-width: 991px) {
+}
+@media only screen and (min-width: 1024px) {
+}
+
+@media only screen and (min-width: 1440px) {
+}
+
+@media only screen and (min-width: 2560px) {
+}
 
