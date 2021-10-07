@@ -35,7 +35,10 @@ const PORT = process.env.PORT
 const HOST = process.env.HOST || '0.0.0.0'
 
 //Server listening
-const server = app.listen(PORT, HOST, () => console.log(`Server listening on port ${PORT} (${HOST})`))
+const server = app.listen(PORT, HOST, () =>
+  console.log(`Server listening on port ${PORT} (${HOST})`)
+)
+
 const io = socket(server, {
   cors: {
     origin: '*',
@@ -43,24 +46,31 @@ const io = socket(server, {
   },
 })
 
-const socketioJwt = require('socketio-jwt')
-
-io.use(
-  socketioJwt.authorize({
-    secret: process.env.SECRETORKEY,
-    handshake: true,
-  })
-)
-
 io.on('connection', (socket) => {
-  const socketEmail = socket.decoded_token._doc.email
+  const { socketId, admin } = socket.handshake.query
 
-  socket.join(socketEmail)
+  socketId
+    ? socket.join(admin ? 'admins' : socketId)
+    : io.to(socket.id).emit('socketId', { socketId: socket.id })
+
+  //  !admin
+  //   ? socket.on('createOrder', () => {
+  //       io.to('615dfda3ac8bf6ad5f495470').emit('createOrder')
+  //     }) &&
+  //     socket.on('cancellOrder', () => {
+  //       io.to('615dfda3ac8bf6ad5f495470').emit('cancellOrder')
+  //     })
+  //   : socket.on('updateOrders', () => {
+  //       io.to('w1KgI3CGGP914GTyAAAJ').emit('updateOrders')
+  //     })
 
   socket.on('createOrder', () => {
-    io.to('admin@appname.com').emit('createOrder')
+    io.to('admins').emit('createOrder')
   })
-  socket.on('updateOrders', (email) => {
-    io.to(email).emit('updateOrders')
+  socket.on('cancellOrder', () => {
+    io.to('admins').emit('cancellOrder')
+  })
+  socket.on('updateOrders', () => {
+    io.to('w1KgI3CGGP914GTyAAAJ').emit('updateOrders')
   })
 })

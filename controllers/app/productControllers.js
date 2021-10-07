@@ -12,6 +12,7 @@ const productControllers = {
   },
   manageCart: async (req, res) => {
     const { product, action } = req.body
+    let searchOption = action === 'changeQuantity' ? { 'cart.productId': product.productId } : { _id }
     let operation =
       action === 'add'
         ? { $push: { cart: product } }
@@ -20,10 +21,6 @@ const productControllers = {
         : action === 'setCart'
         ? { $set: { cart: product } }
         : { $set: { 'cart.$.quantity': product.quantity } }
-    let searchOption =
-      action === 'changeQuantity'
-        ? { 'cart.productId': product.productId }
-        : { _id }
     let options = { new: true }
     try {
       let user = await User.findOneAndUpdate(searchOption, operation, options)

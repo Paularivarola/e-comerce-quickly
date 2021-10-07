@@ -1,15 +1,18 @@
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import io from 'socket.io-client'
+const HOST = 'http://localhost:4000'
 
 const userActions = {
   createUser: (user, props) => {
     return async (dispatch) => {
       try {
-        let res = await axios.post('http://localhost:4000/api/user/signUp', user)
+        let res = await axios.post(`${HOST}/api/user/signUp`, user)
         if (res.data.success) {
           const { user, userData, token } = res.data
           let keep = false
-          JSON.parse(localStorage.getItem('cart')).length > 0 &&
+          localStorage.getItem('cart') &&
+            JSON.parse(localStorage.getItem('cart')).length > 0 &&
             Swal.fire({
               title: 'Desea conservar el carrito actual?',
               icon: 'question',
@@ -24,7 +27,15 @@ const userActions = {
               }
             })
           props.history.push('/')
-          dispatch({ type: 'LOG_IN', payload: { user, userData, token, keep } })
+          localStorage.setItem('socket', userData._id)
+          let socket = io('http://localhost:4000', {
+            query: { socketId: userData._id, admin: userData.data.admin.flag },
+          })
+          dispatch({ type: 'SET_SOCKET', payload: { socket } })
+          return dispatch({
+            type: 'LOG_IN',
+            payload: { user, userData, token, keep },
+          })
         }
       } catch (error) {
         console.log(error)
@@ -34,11 +45,12 @@ const userActions = {
   logUser: (user, props) => {
     return async (dispatch) => {
       try {
-        let res = await axios.post('http://localhost:4000/api/user/logIn', { ...user })
+        let res = await axios.post(`${HOST}/api/user/logIn`, { ...user })
         if (res.data.success) {
           const { user, userData, token } = res.data
           let keep = false
-          JSON.parse(localStorage.getItem('cart')).length > 0 &&
+          localStorage.getItem('cart') &&
+            JSON.parse(localStorage.getItem('cart')).length > 0 &&
             Swal.fire({
               title: 'Desea conservar el carrito actual?',
               icon: 'question',
@@ -53,7 +65,15 @@ const userActions = {
               }
             })
           props.history.push('/')
-          dispatch({ type: 'LOG_IN', payload: { user, userData, token, keep } })
+          localStorage.setItem('socket', userData._id)
+          let socket = io('http://localhost:4000', {
+            query: { socketId: userData._id, admin: userData.data.admin.flag },
+          })
+          dispatch({ type: 'SET_SOCKET', payload: { socket } })
+          return dispatch({
+            type: 'LOG_IN',
+            payload: { user, userData, token, keep },
+          })
         }
       } catch (error) {
         console.log(error)
@@ -69,11 +89,19 @@ const userActions = {
     return async (dispatch) => {
       let token = localStorage.getItem('token')
       try {
-        let response = await axios.get('http://localhost:4000/api/user/token', {
+        let response = await axios.get(`${HOST}/api/user/token`, {
           headers: {
             Authorization: 'Bearer ' + token,
           },
         })
+        localStorage.setItem('socket', response.data.userData._id)
+        let socket = io('http://localhost:4000', {
+          query: {
+            socketId: response.data.userData._id,
+            admin: response.data.userData.data.admin.flag,
+          },
+        })
+        dispatch({ type: 'SET_SOCKET', payload: { socket } })
         dispatch({
           type: 'LOG_IN',
           payload: { ...response.data, token },
