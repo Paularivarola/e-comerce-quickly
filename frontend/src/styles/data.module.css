@@ -4,7 +4,6 @@ div.containerData{
 	height: 100%;
 	width: 100%;
 	align-items: center;
-	background-color: blue;
 }
 
 div.containerProfile button{
@@ -26,7 +25,6 @@ div.containerProfile{
 	align-items: center;
 	text-align: center;
 	height: 100%;
-	background-color: brown;
 }
 
 div.imageProfile{
@@ -42,7 +40,6 @@ div.containAllProfile{
 	width: 100%;
 	height: 100%;
 	padding: 0.2rem;
-	background-color: chocolate;
 }
 
 div.containerCardProfile, div.containerDateProfile{
@@ -51,35 +48,42 @@ div.containerCardProfile, div.containerDateProfile{
 	text-align: center;
 	height: 100%;
 	width: 100%;
-	justify-content: center;
 	padding: 1.5rem;
-	background-color: cadetblue;
+	padding-left: 0;
+	background-image: url("https://tuswallpapersgratis.com/wp-content/plugins/download-wallpaper-resized/wallpaper.php?x=3840&y=2160&file=https://tuswallpapersgratis.com/wp-content/uploads/2013/11/Lluvia-de-hamburguesas-2-wallpaper.jpg");
+	background-position: center;
+	background-size: contain;
+	background-repeat: no-repeat;
 }
+
 div.containerDateProfile form{
-	background-color: cornflowerblue;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	padding: 1rem;
-	width: 40%;
-	height: 80%;
+	padding: 3rem;
+	width: 50%;
+	height: 90%;
+	border-radius: 1rem;
 }
+
 div.inputsDataUser{
 	width: 100%;
-	height: 8vh;
+	height: 10vh;
 	padding: 0.2rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	text-align: center;
 	align-items: center;
-	background-color: coral;
+	background-color: rgba(255, 255, 255, 0.555);
+	
 }
 
 div.inputsDataUser input{
 	border: none;
+	width: 70%;
 	padding: 0.8rem;
-	border-bottom: 1px solid black;
+	border-bottom: 1px solid rgb(0, 0, 0);
 	background-color: transparent;
 }

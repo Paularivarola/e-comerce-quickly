@@ -4,18 +4,24 @@ import Favorites from '../components/Favorites'
 import styles from '../styles/profile.module.css'
 import { useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
+import { connect } from 'react-redux'
+import userActions from '../redux/actions/userActions'
+import { useEffect } from 'react'
 
-const Profile = () => {
+
+const Profile = (props) => {
   const [updateUser, setUpdateUser] = useState({})
   const [createCard, setCreateCard] = useState({})
-  const [view, setView] = useState(<Data setCard={setCreateCard} setUser={setUpdateUser} />)
-
+  const [view, setView] = useState("")
   const cleanInputs = (page) => {
     setUpdateUser({})
     setCreateCard({})
     setView(page)
   }
 
+  useEffect(() =>{
+    setView(<Data user={props.userData?.data} setCard={setCreateCard} setUser={setUpdateUser} />)
+  },[props.userData])
   const confirm = (page) => {
     return toast.custom((t) => (
       <div
@@ -41,37 +47,37 @@ const Profile = () => {
   const selectComponent = (component) => {
     let comp = component
     if (comp === 'data') {
-      setView(<Data setCard={setCreateCard} setUser={setUpdateUser} />)
+      setView(<Data user={props.userData.data} setCard={setCreateCard} setUser={setUpdateUser} />)
     } else if (comp === 'fav') {
       const user = Object.values(updateUser).some((user) => user !== '')
       const card = Object.values(createCard).some((card) => card !== '')
       if (user || card) {
-        confirm(<Favorites />)
+        confirm(<Favorites favorites={props.userData.favouriteProductsId} />)
         return false
       }
-      setView(<Favorites />)
+      setView(<Favorites favorites={props.userData.favouriteProductsId}/>)
     } else {
       const user = Object.values(updateUser).some((user) => user !== '')
       const card = Object.values(createCard).some((card) => card !== '')
       if (user || card) {
-        confirm(<History />)
+        confirm(<History orders={props.userData.ordersId} />)
         return false
       }
-      setView(<History />)
+      setView(<History orders={props.userData.ordersId}/>)
     }
   }
 
   return (
     <>
       <div className={styles.containerButtonCheck}>
-        <button styles={styles.buttonCheck} onClick={() => selectComponent('data')}>
-          Datos
-        </button>
         <button styles={styles.buttonCheck} onClick={() => selectComponent('fav')}>
           Favoritos
         </button>
         <button styles={styles.buttonCheck} onClick={() => selectComponent('his')}>
           Historial
+        </button>
+        <button styles={styles.buttonCheck} onClick={() => selectComponent('data')}>
+          Datos
         </button>
       </div>
       <div className={styles.containerRenderView}>
@@ -92,4 +98,13 @@ const Profile = () => {
   )
 }
 
-export default Profile
+const mapStateToProps = (state) => {
+  return{
+    userData: state.users.userData
+  }
+}
+const mapDispachToProps = {
+
+}
+
+export default connect(mapStateToProps, mapDispachToProps)(Profile) 

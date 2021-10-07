@@ -4,6 +4,9 @@ import Cards from "./Cards"
 import styles from '../styles/data.module.css'
 
 const Data = (props) => {
+	console.log(props)
+	const {user} = props
+
 	const { setCard, setUser } = props
 	const [updateUser, setUpdateUser] = useState({
 		name: "",
@@ -24,6 +27,7 @@ const Data = (props) => {
 
 	const [viewUser, SetViewUser] = useState("profile")
 	const [viewCard, setViewCard] = useState("")
+	const [editMode, setEditMode] = useState(false)
 
 	const inputHandlerProfile = (e) => {
 		setUpdateUser({ ...updateUser, [e.target.name]: e.target.value.trim() })
@@ -115,13 +119,13 @@ const Data = (props) => {
 						<form>
 							<h2>Tus datos principales</h2>
 							<div className={styles.inputsDataUser}>
-								<input type="text" placeholder="Nombre" autoComplete="nope" name="name" onChange={inputHandlerProfile} />
+								<input type="text" placeholder="Nombre" autoComplete="nope" name="name" onChange={inputHandlerProfile} defaultValue={user?.firstName}/>
 							</div>
 							<div className={styles.inputsDataUser}>
-								<input type="text" placeholder="Apellido" autoComplete="nope" name="lastName" onChange={inputHandlerProfile} />
+								<input type="text" placeholder="Apellido" autoComplete="nope" name="lastName" onChange={inputHandlerProfile} defaultValue={user?.lastName}/>
 							</div>
 							<div className={styles.inputsDataUser}>
-								<input type="text" placeholder="Correo" autoComplete="nope" name="email" onChange={inputHandlerProfile} />
+								<input type="text" placeholder="Correo" autoComplete="nope" name="email" onChange={inputHandlerProfile} defaultValue={user?.email}/>
 							</div>
 							<div className={styles.inputsDataUser}>
 								<input type="password" placeholder="Contraseña" autoComplete="nope" name="password" onChange={inputHandlerProfile} />
