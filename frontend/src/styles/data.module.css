@@ -1,0 +1,85 @@
+div.containerData{
+	display: flex;
+	padding: 1rem;
+	height: 100%;
+	width: 100%;
+	align-items: center;
+	background-color: blue;
+}
+
+div.containerProfile button{
+	width: 10vh;
+	height: 6vh;
+	margin: 6px;
+	padding: 2px;
+	font-weight: bold;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+div.containerProfile{
+	width: 28%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	text-align: center;
+	height: 100%;
+	background-color: brown;
+}
+
+div.imageProfile{
+	height: 60%;
+	width: 90%;
+	background-position: center;
+	background-size: contain;
+	background-repeat: no-repeat;
+	padding: 1rem;	
+}
+
+div.containAllProfile{
+	width: 100%;
+	height: 100%;
+	padding: 0.2rem;
+	background-color: chocolate;
+}
+
+div.containerCardProfile, div.containerDateProfile{
+	display: flex;
+	align-items: center;
+	text-align: center;
+	height: 100%;
+	width: 100%;
+	justify-content: center;
+	padding: 1.5rem;
+	background-color: cadetblue;
+}
+div.containerDateProfile form{
+	background-color: cornflowerblue;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 1rem;
+	width: 40%;
+	height: 80%;
+}
+div.inputsDataUser{
+	width: 100%;
+	height: 8vh;
+	padding: 0.2rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+	background-color: coral;
+}
+
+div.inputsDataUser input{
+	border: none;
+	padding: 0.8rem;
+	border-bottom: 1px solid black;
+	background-color: transparent;
+}

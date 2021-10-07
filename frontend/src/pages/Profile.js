@@ -63,7 +63,7 @@ const Profile = () => {
 
   return (
     <>
-      <div className='containerButtonCheck'>
+      <div className={styles.containerButtonCheck}>
         <button styles={styles.buttonCheck} onClick={() => selectComponent('data')}>
           Datos
         </button>
@@ -74,8 +74,8 @@ const Profile = () => {
           Historial
         </button>
       </div>
-      <div className='containerRenderView'>
-        <div className='renderView'>{view}</div>
+      <div className={styles.containerRenderView}>
+        <div className={styles.renderView}>{view}</div>
       </div>
       <Toaster
         containerStyle={{
