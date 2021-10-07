@@ -13,7 +13,6 @@ const Products = (props) => {
   const [product, setProduct] = useState(null)
 
   const setModal = (bool, product) => {
-    console.log(product)
     setMod(bool)
     setProduct(product)
   }
@@ -94,45 +93,45 @@ let products = [
     name: 'nombre producto',
     category: 'categoria',
     description: 'Acá va a ir toda la descripción del producto que quieran comprar la gentessss',
-    price: '100',
+    price: 100,
     ingredients: 'jamon, tomate, muzzarella',
-    stock: 'ni idea',
+    stock: 5,
   },
   {
     img: '/assets/pizzas.jpeg',
     name: 'nombre producto',
     category: 'categoria',
     description: 'Acá va a ir toda la descripción del producto que quieran comprar la gentessss',
-    price: '100',
+    price: 100,
     ingredients: 'jamon, tomate, muzzarella',
-    stock: 'ni idea',
+    stock: 5,
   },
   {
     img: '/assets/pizzas.jpeg',
     name: 'nombre producto',
     category: 'categoria',
     description: 'Acá va a ir toda la descripción del producto que quieran comprar la gentessss',
-    price: '100',
+    price: 100,
     ingredients: 'jamon, tomate, muzzarella',
-    stock: 'ni idea',
+    stock: 5,
   },
   {
     img: '/assets/pizzas.jpeg',
     name: 'nombre producto',
     category: 'categoria',
     description: 'Acá va a ir toda la descripción del producto que quieran comprar la gentessss',
-    price: '100',
+    price: 100,
     ingredients: 'jamon, tomate, muzzarella',
-    stock: 'ni idea',
+    stock: 5,
   },
   {
     img: '/assets/pizzas.jpeg',
     name: 'nombre producto',
     category: 'categoria',
     description: 'Acá va a ir toda la descripción del producto que quieran comprar la gentessss',
-    price: '100',
+    price: 100,
     ingredients: 'jamon, tomate, muzzarella',
-    stock: 'ni idea',
+    stock: 5,
   },
 ]
 
