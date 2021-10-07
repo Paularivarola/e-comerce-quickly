@@ -35,9 +35,9 @@ router.route('/orders')
 //   .put(productControllers.updateProduct)
 //   .delete(productControllers.deleteProduct);
 
-// router
-//   .route("/productos")
-//   .post(productControllers.createProduct)
-//   .get(productControllers.readAll);
+router
+  .route("/productos")
+  // .post(productControllers.createProduct)
+  // .get(productControllers.readAll);
 
 module.exports = router

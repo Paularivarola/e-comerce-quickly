@@ -60,6 +60,7 @@ const App = (props) => {
         <Route exact path='/' component={Home} />
         <Route path='/contact' component={Contact} />
         <Route path='/sign-forms/:susi' component={SignForm} />
+        <Route path='/products' component={Products} />
         <Route path='/product/:id' component={Product} />
         <Route path='/profile' component={Profile} />
         <Route path='/notfound' component={NotFound} />

@@ -1,18 +1,26 @@
-/* borrar */
+.boxNavigation {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 5%;
+}
 
 .logo {
-  width: 20vw;
+  width: 10vw;
 }
 
 .user {
-  width: 5vw;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 100px;
 }
 
 .userData {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 15vw;
+  width: 11vw;
 }
 
 .userMenuContainer {
@@ -22,7 +30,7 @@
   position: absolute;
   top: 15vh;
   right: 3vw;
-  width: 10vw;
+  width: 18vw;
   height: 15vh;
   background-color: #fe6849;
   padding: 2vw;
@@ -50,6 +58,9 @@
   align-items: center;
   height: 15vh;
   border-bottom: 1px solid #e0e0e0;
+  width: 100%;
+  align-self: center;
+  color: slategray;
 }
 
 .navegation a {
@@ -57,11 +68,20 @@
   text-decoration: none;
 }
 
+.textRoute {
+  color: slategrey;
+}
+
 .active {
   background-color: #fe6849;
   color: #fff;
-  height: 90%;
   text-decoration: none;
+
+}
+
+.userName {
+  font-size: 1rem;
+  color: slategrey;
 }
 
 @media screen and (max-width: 1218px) {

@@ -4,6 +4,7 @@ import AppStore from '../components/AppStore'
 import Testimonios from '../components/Testimonios'
 
 const Home = () => {
+
   return (
     <>
       <Hero />

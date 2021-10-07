@@ -21,57 +21,48 @@ const Header = (props) => {
   window.onclick = (e) => e.target.id !== 'userMenu' && setUserMenu(false)
   return (
     <header>
-      <nav className={styles.containerNavegation}>
-        <img
-          className={styles.logo}
-          src='/assets/logo-cocina-prueba.png'
-          alt='logo'
-        />
-        <div className={styles.navegation}>
-          <NavLink exact activeClassName={styles.active} to='/'>
-            Home
-          </NavLink>
-          <NavLink activeClassName={styles.active} to='/product'>
-            Platos
-          </NavLink>
-          <NavLink to='/'>Promos</NavLink>
-          <NavLink to='/'>Pedidos</NavLink>
-          <NavLink activeClassName={styles.active} to='/contact'>
-            Contacto
-          </NavLink>
-        </div>
-        <div className={styles.userData} onClick={() => setUserMenu(true)}>
-          {props.user && <h2>{props.user.firstName}</h2>}
+      <div class={styles.boxNavigation}>
+        <nav className={styles.containerNavegation}>
           <img
-            id='userMenu'
-            className={styles.user}
-            src={
-              props.user
-                ? !props.user.google
-                  ? 'http://localhost:4000/' + props.user.src
-                  : props.user.src
-                : '/assets/user.png'
-            }
+            className={styles.logo}
+            src='/assets/logo-cocina-prueba.png'
             alt='logo'
           />
-        </div>
-        {userMenu && (
-          <div className={styles.userMenuContainer}>
-            <div className={styles.userMenu}>
-              {!props.user ? (
-                <>
-                  <NavLink to='/sign-forms/signin'>Sign In</NavLink>
-                  <NavLink to='/sign-forms/signup'>Sign Up</NavLink>
-                </>
-              ) : (
-                <NavLink onClick={() => props.logOut()} to='/'>
-                  Log Out
-                </NavLink>
-              )}
-            </div>
+          <div className={styles.navegation}>
+            <NavLink className={styles.textRoute} exact activeClassName={styles.active} to='/'>
+              Home
+            </NavLink>
+            <NavLink className={styles.textRoute} activeClassName={styles.active} to='/products'>
+              Menu
+            </NavLink>
+            <NavLink className={styles.textRoute} to='/'>Promos</NavLink>
+            <NavLink className={styles.textRoute} to='/'>Pedidos</NavLink>
+            <NavLink className={styles.textRoute} activeClassName={styles.active} to='/contact'>
+              Contacto
+            </NavLink>
           </div>
-        )}
-      </nav>
+          <div className={styles.userData} onClick={() => setUserMenu(!userMenu)}>
+            {props.user && <h2 className={styles.userName}>{props.user.firstName}</h2>}
+            <div id='userMenu' className={styles.user} style={{ backgroundImage: `url("${props.user ? (!props.user.google ? 'http://localhost:4000/' + props.user.src : props.user.src) : '/assets/user.png'}")` }} alt='logo'></div>
+          </div>
+          {userMenu && (
+            <div className={styles.userMenuContainer}>
+              <div className={styles.userMenu}>
+                {!props.user ? (
+                  <>
+                    <NavLink className={styles.textRoute} to='/sign-forms/signin'>Sign In</NavLink>
+                    <NavLink className={styles.textRoute} to='/sign-forms/signup'>Sign Up</NavLink>
+                  </>
+                ) : (
+                  <NavLink className={styles.textRoute} onClick={() => props.logOut()} to='/'>
+                    Log Out
+                  </NavLink>
+                )}
+              </div>
+            </div>
+          )}
+        </nav>
+      </div>
     </header>
   )
 }

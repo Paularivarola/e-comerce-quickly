@@ -32,3 +32,10 @@ div.containAllProfile{
   font-size: 18px;
   font-weight: 600
 }
+.carouselTestimonies {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 2%;
+}
+
