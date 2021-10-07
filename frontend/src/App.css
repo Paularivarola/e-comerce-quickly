@@ -7,11 +7,6 @@ html * {
   box-sizing: border-box;
 
 }
-div.containAllProfile{
-  width: 90%;
-  height: 100%;
-  padding: 0.2rem;
-}
 
 .MuiPaper-root{
   background-color: transparent !important;
