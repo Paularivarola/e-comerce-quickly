@@ -165,32 +165,32 @@ div.productButton button{
 
 div.cardsContain, div.containCardsProfile{
 	display: flex;
-	/* width: 100%; */
-	/* height: 100%; */
+	width: 100%;
+	height: 100%;
 }
 div.listImageCards{
-	/* width: 100%; */
-	/* height: 100%; */
-	/* padding: 1rem; */
+	width: 100%;
+	height: 100%;
+	padding: 1rem;
 	overflow-y: auto;
 }
 
 div.containCards{
-	/* width: 80%; */
-	/* height: 20vh; */
+	width: 80%;
+	height: 20vh;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
 	border-radius: 15px;
-	/* margin-bottom: 0.5rem; */
+	margin-bottom: 0.5rem;
 	box-shadow: 3px 5px 10px 7px rgba(0,0,0,0.75);
 	-webkit-box-shadow: 3px 5px 10px 7px rgba(0,0,0,0.75);
 	-moz-box-shadow: 3px 5px 10px 7px rgba(0,0,0,0.75);
 }
 
 div.containCards button{
-	/* height: 10vh; */
-	/* width: 8vw; */
+	height: 10vh;
+	width: 8vw;
 	border: none;
 	background-color: darkred;
 	color: white;
@@ -199,7 +199,7 @@ div.containCards button{
 }
 
 div.imageCards{
-	/* height: 20vh; */
-	/* width: 30%; */
+	height: 20vh;
+	width: 30%;
 	margin-bottom: 0.3rem;
 }

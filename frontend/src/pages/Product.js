@@ -8,8 +8,15 @@ const Product = (props) => {
     // useEffect(() => {
     //     props.getProd()
     // }, [])
-
-    const price = 100 //debería venir por props
+    const product = { //debería venir por props
+        name: "Super Hamburguesa",
+        img: "https://i.postimg.cc/yWq5xyLZ/hamburguesas.png",
+        category: "", //para vicular con los extras (?
+        description: "Hamburguesa de carne 100% vacuna, salsa casera, cheddar, lechuga, tomate, cebolla, pan de papa. Incluye porción de papas chicas",
+        price: 100,
+        ingredients: "", //ni idea dónde usar esto
+        stock: 10,
+    }
     const sizeFries = [
         { size: "Chicas", cost: 0 },
         { size: "Medianas", cost: 10 },
@@ -24,17 +31,15 @@ const Product = (props) => {
     const [extras, setExtras] = useState([])
     const [extrasCost, setExtrasCost] = useState(0)
     const [totalAmount, setTotalAmount] = useState(1)
-    const [unitaryPrice, setUnitaryPrice] = useState(price)
+    const [unitaryPrice, setUnitaryPrice] = useState(product.price)
     const [totalPrice, setTotalPrice] = useState(unitaryPrice)
 
     const amount = (operation) => {
 
         if (operation === "sum") {
-            setTotalAmount(totalAmount + 1)
+            if (totalAmount < product.stock) setTotalAmount(totalAmount + 1)
         } else {
-            if (totalAmount > 1) {
-                setTotalAmount(totalAmount - 1)
-            }
+            if (totalAmount > 1) setTotalAmount(totalAmount - 1)
         }
     }
 
@@ -59,12 +64,9 @@ const Product = (props) => {
     }, [extras])
 
     useEffect(() => {
-        let friesCost = 0
-        sizeFries.forEach(size => {
-            if (fries.includes(size.size)) friesCost = friesCost + size.cost
-        }) //se puede hacer mejor con find
+        let friesCost = (sizeFries.find(size => size.size === fries)).cost
 
-        setUnitaryPrice(price + friesCost + extrasCost)
+        setUnitaryPrice(product.price + friesCost + extrasCost)
     }, [sizeFries, extrasCost])
 
     useEffect(() => {
@@ -84,14 +86,13 @@ const Product = (props) => {
                     <div className={styles.cardInfo}>
 
                         <div className={styles.title}>
-                            <h1>Super Hamburguesa</h1>
+                            <h1>{product.name}</h1>
                             <p>La más grande la más bella</p>
                         </div>
 
                         <div className={styles.title}>
                             <h3>Descripcion:</h3>
-                            <p>Hamburguesa de carne 100% vacuna, salsa casera, cheddar, lechuga, tomate, cebolla,
-                                pan de papa. Incluye porción de papas chicas</p>
+                            <p>{product.description}</p>
                         </div>
 
                         <div className={styles.order}>
@@ -105,7 +106,7 @@ const Product = (props) => {
 
                     </div>
 
-                    <img className={styles.cardPicture} src="https://i.postimg.cc/yWq5xyLZ/hamburguesas.png" />
+                    <img className={styles.cardPicture} src={product.img} />
 
                     <div className={styles.cardPrice}>
                         <div className={styles.choices}>

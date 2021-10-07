@@ -18,10 +18,15 @@ const Header = (props) => {
 
   // console.log(props.socket?.id)
 
-  window.onclick = (e) => e.target.id !== 'userMenu' && setUserMenu(false)
+  window.onclick = (e) => {
+    if (e.target.id !== 'userMenu') setUserMenu(false)
+    if (props.user && e.target.id !== 'userMenu') setUserMenu(false)
+  }
+
+  console.log(props.user?.src)
   return (
     <header>
-      <div class={styles.boxNavigation}>
+      <div className={styles.boxNavigation}>
         <nav className={styles.containerNavegation}>
           <img
             className={styles.logo}
@@ -29,32 +34,85 @@ const Header = (props) => {
             alt='logo'
           />
           <div className={styles.navegation}>
-            <NavLink className={styles.textRoute} exact activeClassName={styles.active} to='/'>
+            <NavLink
+              className={styles.textRoute}
+              exact
+              activeClassName={styles.active}
+              to='/'
+            >
               Home
             </NavLink>
-            <NavLink className={styles.textRoute} activeClassName={styles.active} to='/products'>
+            <NavLink
+              className={styles.textRoute}
+              activeClassName={styles.active}
+              to='/products'
+            >
               Menu
             </NavLink>
-            <NavLink className={styles.textRoute} to='/'>Promos</NavLink>
-            <NavLink className={styles.textRoute} to='/'>Pedidos</NavLink>
-            <NavLink className={styles.textRoute} activeClassName={styles.active} to='/contact'>
+            <NavLink className={styles.textRoute} to='/'>
+              Promos
+            </NavLink>
+            <NavLink className={styles.textRoute} to='/'>
+              Pedidos
+            </NavLink>
+            <NavLink
+              className={styles.textRoute}
+              activeClassName={styles.active}
+              to='/contact'
+            >
               Contacto
             </NavLink>
           </div>
-          <div className={styles.userData} onClick={() => setUserMenu(!userMenu)}>
-            {props.user && <h2 className={styles.userName}>{props.user.firstName}</h2>}
-            <div id='userMenu' className={styles.user} style={{ backgroundImage: `url("${props.user ? (!props.user.google ? 'http://localhost:4000/' + props.user.src : props.user.src) : '/assets/user.png'}")` }} alt='logo'></div>
+          <div
+            className={styles.userData}
+            onClick={() => setUserMenu(!userMenu)}
+          >
+            {props.user && (
+              <h2 id='userName' className={styles.userName}>
+                {props.user.firstName}
+              </h2>
+            )}
+            <div
+              id='userMenu'
+              className={styles.user}
+              style={{
+                backgroundImage: `url("${
+                  props.user
+                    ? props.user.google
+                      ? props.user.src
+                      : props.user.src !== 'assets/user.png'
+                      ? 'http://localhost:4000/' + props.user.src
+                      : '/assets/user.png'
+                    : '/assets/user.png'
+                }")`,
+              }}
+              alt='logo'
+            ></div>
           </div>
           {userMenu && (
             <div className={styles.userMenuContainer}>
               <div className={styles.userMenu}>
                 {!props.user ? (
                   <>
-                    <NavLink className={styles.textRoute} to='/sign-forms/signin'>Sign In</NavLink>
-                    <NavLink className={styles.textRoute} to='/sign-forms/signup'>Sign Up</NavLink>
+                    <NavLink
+                      className={styles.textRoute}
+                      to='/sign-forms/signin'
+                    >
+                      Sign In
+                    </NavLink>
+                    <NavLink
+                      className={styles.textRoute}
+                      to='/sign-forms/signup'
+                    >
+                      Sign Up
+                    </NavLink>
                   </>
                 ) : (
-                  <NavLink className={styles.textRoute} onClick={() => props.logOut()} to='/'>
+                  <NavLink
+                    className={styles.textRoute}
+                    onClick={() => props.logOut()}
+                    to='/'
+                  >
                     Log Out
                   </NavLink>
                 )}

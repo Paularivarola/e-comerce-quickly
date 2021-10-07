@@ -53,24 +53,14 @@ io.on('connection', (socket) => {
     ? socket.join(admin ? 'admins' : socketId)
     : io.to(socket.id).emit('socketId', { socketId: socket.id })
 
-  //  !admin
-  //   ? socket.on('createOrder', () => {
-  //       io.to('615dfda3ac8bf6ad5f495470').emit('createOrder')
-  //     }) &&
-  //     socket.on('cancellOrder', () => {
-  //       io.to('615dfda3ac8bf6ad5f495470').emit('cancellOrder')
-  //     })
-  //   : socket.on('updateOrders', () => {
-  //       io.to('w1KgI3CGGP914GTyAAAJ').emit('updateOrders')
-  //     })
-
-  socket.on('createOrder', () => {
-    io.to('admins').emit('createOrder')
-  })
-  socket.on('cancellOrder', () => {
-    io.to('admins').emit('cancellOrder')
-  })
-  socket.on('updateOrders', () => {
-    io.to('w1KgI3CGGP914GTyAAAJ').emit('updateOrders')
-  })
+  !admin
+    ? socket.on('createOrder', () => {
+        io.to('615dfda3ac8bf6ad5f495470').emit('createOrder')
+      }) &&
+      socket.on('cancellOrder', () => {
+        io.to('615dfda3ac8bf6ad5f495470').emit('cancellOrder')
+      })
+    : socket.on('updateOrders', () => {
+        io.to('w1KgI3CGGP914GTyAAAJ').emit('updateOrders')
+      })
 })

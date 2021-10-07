@@ -7,17 +7,25 @@ const userControllers = {
     const { firstName, lastName, password, email, google, src } = req.body
     const pw = bcrypt.hashSync(password)
     try {
-      if (await User.findOne({ 'data.email': email })) throw new Error('Ya estás registrado')
+      if (await User.findOne({ 'data.email': email }))
+        throw new Error('Ya estás registrado')
       let newUser = new User({
         data: { firstName, lastName, password: pw, email, google },
       })
       let picture
       if (req.files) {
         const { fileImg } = req.files
-        picture = `${newUser._id}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`
-        fileImg.mv(`${__dirname}/../../assets/${newUser._id}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`, (err) => {
-          if (err) return console.log(err)
-        })
+        picture = `${newUser._id}.${
+          fileImg.name.split('.')[fileImg.name.split('.').length - 1]
+        }`
+        fileImg.mv(
+          `${__dirname}/../../assets/${newUser._id}.${
+            fileImg.name.split('.')[fileImg.name.split('.').length - 1]
+          }`,
+          (err) => {
+            if (err) return console.log(err)
+          }
+        )
       } else {
         picture = src ? src : 'assets/user.png'
       }
@@ -36,14 +44,17 @@ const userControllers = {
       })
     } catch (error) {
       console.log(error)
-      error.message.includes('Google') ? res.json({ error: [{ message: error.message }] }) : res.json({ success: false, error: error.message })
+      error.message.includes('Google')
+        ? res.json({ error: [{ message: error.message }] })
+        : res.json({ success: false, error: error.message })
     }
   },
   logIn: async (req, res) => {
     const { email, password, google } = req.body
     try {
       let user = await User.findOne({ 'data.email': email })
-      if (!user) throw new Error('No encotramos una cuenta asociada a ese email')
+      if (!user)
+        throw new Error('No encotramos una cuenta asociada a ese email')
       if (user.data.google && !google) {
         throw new Error('Debes iniciar sesión con Google')
       }
@@ -67,29 +78,37 @@ const userControllers = {
   },
   updateUser: async (req, res) => {
     const { _id } = req.user
-    const { action, updateUserData, productId, newPaymentCard, paymentCardId, newAddress, addressId } = req.body
+    const {
+      action,
+      updateUserData,
+      productId,
+      newPaymentCard,
+      paymentCardId,
+      newAddress,
+      addressId,
+    } = req.body
 
-    let operation = 
-    action === 'updateData'
-    ? { ...updateUserData }
-    : action === 'addFav'
-    ? { $push: { favs: productId } }
-    : action === 'deleteFav'
-    ? { $pull: { favs: productId }}
-    : action === 'addPaymentCard'
-    ? { $push: { paymentCards: newPaymentCard }}
-    : action === 'deletePaymentCard'
-    ? { $pull: { paymentCards: { _id: paymentCardId } }}
-    : action === 'addAddress'
-    ? { $push: { addresses: newAddress } }
-    : action === 'deleteAddress' 
-    ? { $pull: { addresses: { _id: addressId } } }
-    : null 
+    let operation =
+      action === 'updateData'
+        ? { ...updateUserData }
+        : action === 'addFav'
+        ? { $push: { favs: productId } }
+        : action === 'deleteFav'
+        ? { $pull: { favs: productId } }
+        : action === 'addPaymentCard'
+        ? { $push: { paymentCards: newPaymentCard } }
+        : action === 'deletePaymentCard'
+        ? { $pull: { paymentCards: { _id: paymentCardId } } }
+        : action === 'addAddress'
+        ? { $push: { addresses: newAddress } }
+        : action === 'deleteAddress'
+        ? { $pull: { addresses: { _id: addressId } } }
+        : null
 
     let options = { new: true }
     try {
-      if(!operation) throw new Error()
-      let user = await User.findOneAndUpdate({ _id }, operation, options )
+      if (!operation) throw new Error()
+      let user = await User.findOneAndUpdate({ _id }, operation, options)
       res.json({ success: true, response: user })
     } catch (error) {
       res.json({ success: false, error: error.message })
