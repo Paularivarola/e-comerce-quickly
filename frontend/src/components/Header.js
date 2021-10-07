@@ -30,7 +30,7 @@ const Header = (props) => {
         <nav className={styles.containerNavegation}>
           <img
             className={styles.logo}
-            src='/assets/logo-cocina-prueba.png'
+            src='/assets/logoLDC.png'
             alt='logo'
           />
           <div className={styles.navegation}>
