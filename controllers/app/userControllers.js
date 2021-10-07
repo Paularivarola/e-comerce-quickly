@@ -7,25 +7,17 @@ const userControllers = {
     const { firstName, lastName, password, email, google, src } = req.body
     const pw = bcrypt.hashSync(password)
     try {
-      if (await User.findOne({ 'data.email': email }))
-        throw new Error('Ya estás registrado')
+      if (await User.findOne({ 'data.email': email })) throw new Error('Ya estás registrado')
       let newUser = new User({
         data: { firstName, lastName, password: pw, email, google },
       })
       let picture
       if (req.files) {
         const { fileImg } = req.files
-        picture = `${newUser._id}.${
-          fileImg.name.split('.')[fileImg.name.split('.').length - 1]
-        }`
-        fileImg.mv(
-          `${__dirname}/../../assets/${newUser._id}.${
-            fileImg.name.split('.')[fileImg.name.split('.').length - 1]
-          }`,
-          (err) => {
-            if (err) return console.log(err)
-          }
-        )
+        picture = `${newUser._id}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`
+        fileImg.mv(`${__dirname}/../../assets/${newUser._id}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`, (err) => {
+          if (err) return console.log(err)
+        })
       } else {
         picture = src ? src : 'assets/user.png'
       }
@@ -44,17 +36,14 @@ const userControllers = {
       })
     } catch (error) {
       console.log(error)
-      error.message.includes('Google')
-        ? res.json({ error: [{ message: error.message }] })
-        : res.json({ success: false, error: error.message })
+      error.message.includes('Google') ? res.json({ error: [{ message: error.message }] }) : res.json({ success: false, error: error.message })
     }
   },
   logIn: async (req, res) => {
     const { email, password, google } = req.body
     try {
       let user = await User.findOne({ 'data.email': email })
-      if (!user)
-        throw new Error('No encotramos una cuenta asociada a ese email')
+      if (!user) throw new Error('No encotramos una cuenta asociada a ese email')
       if (user.data.google && !google) {
         throw new Error('Debes iniciar sesión con Google')
       }
@@ -67,6 +56,7 @@ const userControllers = {
           firstName: user.data.firstName,
           src: user.data.src,
           google: user.data.google,
+          admin: user.data.admin,
         },
         userData: user,
         token,
@@ -78,15 +68,7 @@ const userControllers = {
   },
   updateUser: async (req, res) => {
     const { _id } = req.user
-    const {
-      action,
-      userData,
-      productId,
-      newPaymentCard,
-      paymentCardId,
-      newAddress,
-      addressId,
-    } = req.body
+    const { action, userData, productId, newPaymentCard, paymentCardId, newAddress, addressId } = req.body
 
     let operation =
       action === 'updateData'
@@ -132,6 +114,7 @@ const userControllers = {
         firstName: req.user.data.firstName,
         src: req.user.data.src,
         google: req.user.data.google,
+        admin: req.user.data.admin,
       },
       userData: req.user,
       token: req.body.token,

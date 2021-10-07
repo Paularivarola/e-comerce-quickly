@@ -56,7 +56,7 @@ const Header = (props) => {
               style={{
                 backgroundImage: `url("${
                   props.user
-                    ? props.user.google
+                    ? props.user.google || props.user.admin
                       ? props.user.src
                       : props.user.src !== 'assets/user.png'
                       ? 'http://localhost:4000/' + props.user.src

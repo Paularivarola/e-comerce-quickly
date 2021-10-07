@@ -6,7 +6,7 @@ import { MdShoppingCart } from 'react-icons/md'
 import { connect } from 'react-redux'
 import { BsFillCaretRightFill } from 'react-icons/bs'
 import Product from '../components/Product'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const Products = (props) => {
   const [mod, setMod] = useState(false)
@@ -19,6 +19,16 @@ const Products = (props) => {
   window.onclick = (e) => {
     if (e.target.dataset.modal === 'closeModal') setMod(false)
   }
+
+  useEffect(() => {
+    if (mod) {
+      document.getElementsByTagName('body')[0].style.overflow = 'hidden'
+      document.getElementsByTagName('body')[0].style.height = '100vh'
+    } else {
+      document.getElementsByTagName('body')[0].style = ''
+    }
+  }, [mod])
+
   return (
     <div className={styles.mainProducts}>
       <div className={styles.categories}>
