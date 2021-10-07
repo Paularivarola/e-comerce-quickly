@@ -12,7 +12,7 @@ const Product = (props) => {
         {type:"Carne", cost:20},
         {type:"Queso", cost: 10},
         {type:"Cebolla", cost: 5},
-        {type:"Gaseosa 500cc", cost:35}] //debería venir de props
+        {type:"Gaseosa 500cc", cost:35}] //debería venir de props y estar siempre (aunque sea una gaseosa)
     
     const [fries, setFries] = useState("Chicas")
     const [extras, setExtras] = useState([])
