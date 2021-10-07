@@ -7,6 +7,7 @@ import Payment from './Payment'
 import Notifications from './Notifications'
 
 const Data = (props) => {
+  console.log(props)
   const { user, subComp } = props
   const [view, setView] = useState(<PersonalData user={user} />)
   useEffect(() => {
