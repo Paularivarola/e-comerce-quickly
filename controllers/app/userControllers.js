@@ -80,7 +80,7 @@ const userControllers = {
     const { _id } = req.user
     const {
       action,
-      updateUserData,
+      userData,
       productId,
       newPaymentCard,
       paymentCardId,
@@ -90,7 +90,7 @@ const userControllers = {
 
     let operation =
       action === 'updateData'
-        ? { ...updateUserData }
+        ? { ...userData }
         : action === 'addFav'
         ? { $push: { favs: productId } }
         : action === 'deleteFav'
