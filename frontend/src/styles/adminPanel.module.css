@@ -4,7 +4,6 @@
     display: flex;
 }
 
-
 .bodyContainer{
     display: flex;
     flex-direction: column;
@@ -20,6 +19,14 @@ section.header{
     align-items: center;
     padding-right: 3vw;
     padding-left: 1vw;
+}
+
+.mainContainer *{
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.mainContainer h1, h2, p, span{
+    color: #222;
 }
 
 section.header i{
@@ -54,6 +61,7 @@ section.header i:hover{
 
 .viewContainer{
     background-color: #F0F0FA;
-    flex: 1
+    flex: 1;
+    padding: 5vh 2vw;
 }
 

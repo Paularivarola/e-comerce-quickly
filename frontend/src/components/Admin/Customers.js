@@ -1,15 +1,17 @@
 import styles from '../../styles/customer.module.css'
-import { MdEdit, MdDelete } from "react-icons/md";
+import { MdEdit, MdDelete, MdPersonAdd } from "react-icons/md";
 import * as React from 'react';
-import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
 const Customers = () => {
+    window.scrollTo(0, 0)
     return (
         <section className={styles.customerContainer}>
             <div className={styles.infoTable}>
                 <div className={styles.tableHeader}>
                     <h2>Clientes</h2>
+                    <Button variant="contained" color="info" size="medium" onClick={() => alert('hola')}><MdPersonAdd />Agregar</Button>
+
                 </div>
                 <hr />
                 <div className={styles.tableContainer}>
@@ -33,7 +35,7 @@ const Customers = () => {
                                 <td>3 / $152.254</td>
                                 <td className={styles.buttonsSection}>
                                     <Button variant="contained" color="info" size="small"><MdEdit />Editar</Button>
-                                    <Button variant="outlined" color="error" size="small"><MdEdit />Borrar</Button>
+                                    <Button variant="outlined" color="error" size="small"><MdDelete />Borrar</Button>
                                 </td>
                             </tr>
                             <tr>
@@ -61,9 +63,9 @@ const Customers = () => {
                                 </td>
                             </tr>
                         </tbody>
-                        <tfooter>
+                        <tfoot>
 
-                        </tfooter>
+                        </tfoot>
                     </table>
                 </div>
             </div>

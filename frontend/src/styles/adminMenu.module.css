@@ -25,7 +25,7 @@
 span.navItem,
 span.navItemActive{
     font-size: 20px;
-    padding: .3em 0;
+    /* padding: .3em 0; */
     padding-left: 1vw;
     color: #444;
     /* color: #3c4b64; */
@@ -51,4 +51,17 @@ span.navItem:hover{
 
 .close{
 display: none;
+}
+
+.abierto{
+    background-color: yellow;
+    animation: prueba 3s linear;
+    height: auto;
+    overflow: unset;
+}
+
+.cerrado{
+    height: 0;
+    background-color: blue;
+    overflow: hidden;
 }

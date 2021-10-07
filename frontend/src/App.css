@@ -12,3 +12,23 @@ div.containAllProfile{
   height: 100%;
   padding: 0.2rem;
 }
+
+.MuiPaper-root{
+  background-color: transparent !important;
+}
+
+.priceContainer{
+  display: flex;
+  justify-content: space-between;
+}
+
+.priceContainer span{
+  color: red;
+  font-weight: 600;
+}
+
+.cardPrice{
+  color: green;
+  font-size: 18px;
+  font-weight: 600
+}

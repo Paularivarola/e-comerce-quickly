@@ -1,34 +1,43 @@
 import styles from '../../styles/dashboard.module.css'
+import styles2 from '../../styles/customer.module.css'
+import Visits from './Visits';
 
 import { FaClipboardList, FaUserTie, FaCashRegister } from "react-icons/fa";
 import { MdShoppingCart } from 'react-icons/md'
+import Categories from './Categories';
+import DashboardCard from './DashboardCard';
+import ProductCard from './ProductCard';
+import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom'
+import OrdersHistory from './OrdersHistory';
+import { MdEdit, MdDelete, MdPersonAdd } from "react-icons/md";
 
 const Dashboard = (props) => {
+    window.scrollTo(0, 0)
+    console.log(props)
     return (
         <section className={styles.dashboardContainer}>
-            <h1>Welcome Back, Admin.</h1>
+            <h1>Bienvenido, Admin.</h1>
+
             <div className={styles.resumeContainer}>
-                <div className={styles.resumeBox}>
-                    <div className={styles.boxOne}><MdShoppingCart /></div>
-                    <div className={styles.data}>
-                        <p>Productos Activos</p>
-                        <span onClick={() => props.setView('Productos')}>52</span>
-                    </div>
-                </div>
-                <div className={styles.resumeBox}>
-                    <div className={styles.boxTwo}><FaClipboardList /></div>
-                    <div className={styles.data}>
-                        <p>Pedidos de Hoy</p>
-                        <span>5</span>
-                    </div>
-                </div>
-                <div className={styles.resumeBox}>
-                    <div className={styles.boxThree}><FaUserTie /></div>
-                    <div className={styles.data}>
-                        <p>Usuarios Registrados</p>
-                        <span>15</span>
-                    </div>
-                </div>
+                <DashboardCard
+                    data={{ title: 'Productos Activos', qty: 53, route: 'productos' }}
+                    icon={<MdShoppingCart />}
+                    setView={props.setView} view='Productos'
+                    color={styles.boxOne}
+                />
+                <DashboardCard
+                    data={{ title: 'Pedidos de Hoy', qty: 5, route: 'pedidos' }}
+                    icon={<FaClipboardList />}
+                    setView={props.setView} view='Pedidos'
+                    color={styles.boxTwo}
+                />
+                <DashboardCard
+                    data={{ title: 'Usuarios Registrados', qty: 15, route: 'clientes' }}
+                    icon={<FaUserTie />}
+                    setView={props.setView} view='Clientes'
+                    color={styles.boxThree}
+                />
                 <div className={styles.resumeBox}>
                     <div className={styles.boxFour}><FaCashRegister /></div>
                     <div className={styles.data}>
@@ -37,74 +46,71 @@ const Dashboard = (props) => {
                     </div>
                 </div>
             </div>
+
             <section className={styles.tableContainer}>
                 <div className={styles.infoTable}>
                     <div className={styles.tableHeader}>
                         <h2>Pedidos Pendientes</h2>
-                        <button>Ver todos</button>
+                        <Button variant="contained" color="info" size="medium" onClick={() => props.setView('Pedidos')}><Link to='/admin/productos'>Ver Todos</Link></Button>
                     </div>
                     <hr />
+                    <div className={styles.orders}>
+                        <span>No existen pedidos pendientes</span>
+                    </div>
                 </div>
                 <div className={styles.infoTable}>
                     <div className={styles.tableHeader}>
                         <h2>Pedidos Completados</h2>
-                        <button>Ver todos</button>
+                        <Button variant="contained" color="info" size="medium" onClick={() => props.setView('Pedidos')}><Link to='/admin/productos'>Ver Todos</Link></Button>
                     </div>
                     <hr />
+                    <div className={styles2.tableContainer}>
+                        <table className={styles2.customersTable}>
+                            <thead>
+                                <tr>
+                                    <th>Orden N°</th>
+                                    <th>Cliente</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>354</td>
+                                    <td>Rafael Mian</td>
+                                    <td>$15.790</td>
+                                </tr>
+                                <tr>
+                                    <td>352</td>
+                                    <td>Daniel Sepúlveda</td>
+                                    <td>$25.890</td>
+                                </tr>
+                                <tr>
+                                    <td>351</td>
+                                    <td>Cristian Tortoza</td>
+                                    <td>$36.560</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+
+                            </tfoot>
+                        </table>
+                    </div>
 
                 </div>
             </section>
+
             <section className={styles.topProducts}>
                 <div className={styles.tableHeader}>
                     <h2>Productos Más Vendidos</h2>
-                    <button>Ver todos</button>
+                    <Button variant="contained" color="info" size="medium" onClick={() => props.setView('Productos')}><Link to='/admin/productos'>Ver Todos</Link></Button>
+
                 </div>
                 <hr />
                 <div className={styles.bestSeller}>
-                    <div className="product">
-                        <div className="imageProduct" style={{ backgroundImage: 'url("/assets/pizzas.jpeg")', height: '150px' }}>
-                        </div>
-                        <div className="productTitle">
-                            <h2>producto</h2>
-                            <h3 className="price">$150</h3>
-                        </div>
-                        <div className="productButton">
-                            <button>Editar</button>
-                        </div>
-                    </div>
-                    <div className="product">
-                        <div className="imageProduct" style={{ backgroundImage: 'url("/assets/pizzas.jpeg")', height: '150px' }}>
-                        </div>
-                        <div className="productTitle">
-                            <h2>producto</h2>
-                            <h3 className="price">$150</h3>
-                        </div>
-                        <div className="productButton">
-                            <button>Editar</button>
-                        </div>
-                    </div>
-                    <div className="product">
-                        <div className="imageProduct" style={{ backgroundImage: 'url("/assets/pizzas.jpeg")', height: '150px' }}>
-                        </div>
-                        <div className="productTitle">
-                            <h2>producto</h2>
-                            <h3 className="price">$150</h3>
-                        </div>
-                        <div className="productButton">
-                            <button>Editar</button>
-                        </div>
-                    </div>
-                    <div className="product">
-                        <div className="imageProduct" style={{ backgroundImage: 'url("/assets/pizzas.jpeg")', height: '150px' }}>
-                        </div>
-                        <div className="productTitle">
-                            <h2>producto</h2>
-                            <h3 className="price">$150</h3>
-                        </div>
-                        <div className="productButton">
-                            <button>Editar</button>
-                        </div>
-                    </div>
+                    <ProductCard data={{ name: 'Nombre de Producto', image: '/assets/pizzas.jpeg', price: 150 }} />
+                    <ProductCard data={{ name: 'Nombre de Producto', image: '/assets/pizzas.jpeg', price: 150 }} />
+                    <ProductCard data={{ name: 'Nombre de Producto', image: '/assets/pizzas.jpeg', price: 150 }} />
+                    <ProductCard data={{ name: 'Nombre de Producto', image: '/assets/pizzas.jpeg', price: 150 }} />
                 </div>
             </section>
 
@@ -112,16 +118,24 @@ const Dashboard = (props) => {
             <section className={styles.tableContainerBig}>
                 <div className={styles.infoTable}>
                     <div className={styles.tableHeader}>
-                        <h2>Cantidad de Visitas</h2>
+                        <h2>Visitas últimos 7 días</h2>
                     </div>
                     <hr />
+                    <Visits />
                 </div>
                 <div className={styles.infoTable}>
                     <div className={styles.tableHeader}>
-                        <h2>Pedidos Completados</h2>
-                        <button>Ver todos</button>
+                        <h2>Productos por categoría</h2>
                     </div>
                     <hr />
+                    <Categories />
+                </div>
+                <div className={styles.infoTable}>
+                    <div className={styles.tableHeader}>
+                        <h2>Pedidos últimos 7 días</h2>
+                    </div>
+                    <hr />
+                    <OrdersHistory />
                 </div>
             </section>
         </section>

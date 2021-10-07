@@ -12,10 +12,11 @@ import SignForm from './pages/SignForm'
 import Header from './components/Header'
 import Footer from './components/Footer'
 
-const App = () => {
+const App = (props) => {
+  console.log(props)
   return (
     <BrowserRouter>
-      <Header />
+      {!window.location.pathname.includes('/admin') && <Header />}
       <Switch>
         <Route exact path='/' component={Home} />
         <Route path='/contact' component={Contact} />
@@ -23,10 +24,14 @@ const App = () => {
         <Route path='/product/:id' component={Product} />
         <Route path='/profile' component={Profile} />
         <Route path='/notfound' component={NotFound} />
-        <Route path='/dashboard' component={AdminPanel} />
+        <Route path='/admin/dashboard' render={() => <AdminPanel view={'Escritorio'} />} />
+        <Route exact path='/admin/clientes' render={() => <AdminPanel view={'Clientes'} />} />
+        <Route exact path='/admin/pedidos' render={() => <AdminPanel view={'Pedidos'} />} />
+        <Route exact path='/admin/productos' render={() => <AdminPanel view={'Productos'} />} />
+        <Route exact path='/admin/productos/nuevo' render={() => <AdminPanel view={'Nuevo Producto'} />} />
         <Redirect to='/notfound' />
       </Switch>
-      <Footer />
+      {!window.location.pathname.includes('/admin') && <Footer />}
     </BrowserRouter>
   )
 }
