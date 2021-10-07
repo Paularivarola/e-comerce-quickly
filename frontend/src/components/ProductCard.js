@@ -56,7 +56,7 @@ const ProductCard = ({ product, setModal }) => {
         </div>
       </div>
       <button id='productModal' className={styles.addBtn} onClick={() => setModal(true, product)}>
-        <MdShoppingCart id='productModal' style={{ color: 'white', fontSize: '1.8em', marginRight: '5%' }} /> +
+        <MdShoppingCart id='productModal' style={{ color: 'white', fontSize: '1.8em', marginRight: '5%' }} onClick={() => setModal(true, product)} /> +
       </button>
     </div>
   )
