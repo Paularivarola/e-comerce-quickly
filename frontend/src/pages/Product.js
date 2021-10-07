@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import styles from '../styles/product.module.css'
 import { connect } from "react-redux"
 import productActions from '../redux/actions/productActions'

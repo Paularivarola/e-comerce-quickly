@@ -23,20 +23,14 @@ const Products = (props) => {
             </div>
             <div className={styles.productsGrid}>
                 <div className={styles.listBox}>
-                    <button className={styles.categoryBtn}><p>Categorias</p><BsFillCaretRightFill /></button>
-                    <button className={styles.categoryBtn}><p>Categorias</p></button>
-                    <button className={styles.categoryBtn}><p>Categorias</p></button>
-                    <button className={styles.categoryBtn}><p>Categorias</p></button>
-                    <button className={styles.categoryBtn}><p>Categorias</p></button>
-                    <button className={styles.categoryBtn}><p>Categorias</p></button>
-                    <button className={styles.categoryBtn}><p>Categorias</p></button>
-                    <button className={styles.categoryBtn}><p>Categorias</p></button>
-                    <button className={styles.categoryBtn}><p>Categorias</p></button>
-                    <button className={styles.categoryBtn}><p>Categorias</p></button>
-                    <button className={styles.categoryBtn}><p>Categorias</p></button>
-                    <button className={styles.categoryBtn}><p>Categorias</p></button>
-                    <button className={styles.categoryBtn}><p>Categorias</p></button>
-                    <button className={styles.categoryBtn}><p>Categorias</p></button>
+                    <button className={styles.categoryBtn}><p>Categorias</p><BsFillCaretRightFill style={{ color: '#fe6849', fontSize: '1.8em'}}/></button>
+                    <button className={styles.categoryBtn}><p>Categorias</p><BsFillCaretRightFill style={{ color: '#fe6849', fontSize: '1.8em'}}/></button>
+                    <button className={styles.categoryBtn}><p>Categorias</p><BsFillCaretRightFill style={{ color: '#fe6849', fontSize: '1.8em'}}/></button>
+                    <button className={styles.categoryBtn}><p>Categorias</p><BsFillCaretRightFill style={{ color: '#fe6849', fontSize: '1.8em'}}/></button>
+                    <button className={styles.categoryBtn}><p>Categorias</p><BsFillCaretRightFill style={{ color: '#fe6849', fontSize: '1.8em'}}/></button>
+                    <button className={styles.categoryBtn}><p>Categorias</p><BsFillCaretRightFill style={{ color: '#fe6849', fontSize: '1.8em'}}/></button>
+                    <button className={styles.categoryBtn}><p>Categorias</p><BsFillCaretRightFill style={{ color: '#fe6849', fontSize: '1.8em'}}/></button>
+                    <button className={styles.categoryBtn}><p>Categorias</p><BsFillCaretRightFill style={{ color: '#fe6849', fontSize: '1.8em'}}/></button>
                 </div>
                 <div className={styles.gridBox}>
                     <ProductCard/>

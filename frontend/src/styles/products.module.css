@@ -36,23 +36,42 @@
     width: 100%;
     min-height: 100vh;
     margin-top: 1%;
-    background-color: skyblue;
     display: flex;
     justify-content: center;
     align-items: flex-start;
     border: solid 1px rgb(212, 212, 212);
     border-radius: 5px;
-    background-color: rgb(252, 252, 252);
     box-shadow: 10px 10px 24px -14px rgba(0,0,0,0.48);
 }
 .listBox {
     width: 20%;
-    min-height: 100vh;
+    height: 100vh;
     border-right: solid 1px rgb(212, 212, 212);
+    background-color: rgb(252, 252, 252);
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+.listBox::-webkit-scrollbar{
+    width: 0.5rem;
+}
+
+.listBox::-webkit-scrollbar-thumb{
+    background-color: #fe674991;
+    border-radius: 8px;
 }
 .gridBox {
     flex: 1;
-    min-height: 100vh;
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+.gridBox::-webkit-scrollbar{
+    width: 0.5rem;
+}
+
+.gridBox::-webkit-scrollbar-thumb{
+    background-color: #fe674991;
+    border-radius: 8px;
 }
 .carritoBtn {
     display: flex;
@@ -60,6 +79,11 @@
     align-items: center;
     padding: 0;
     padding: 0.3rem 1rem;
+}
+.carritoBtn:hover {
+    cursor: pointer;
+    background-color: rgb(250, 143, 124);
+    transition: opacity .2s linear;
 }
 .welcome {
     color: #fe6849;
@@ -79,6 +103,15 @@
     border-bottom: solid 1px rgb(212, 212, 212);
     background-color: transparent;
     border-radius: 0;
-    background-color: violet;
-    
+    /* background-color: violet; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.categoryBtn>p {
+    color: slategrey;
+}
+.categoryBtn>p:hover {
+    cursor: pointer;
+    color: #fe6849;
 }
