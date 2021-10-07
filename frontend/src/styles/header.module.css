@@ -14,6 +14,9 @@
   width: 4rem;
   height: 4rem;
   border-radius: 100px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .userData {
@@ -21,6 +24,7 @@
   align-items: center;
   justify-content: space-around;
   width: 11vw;
+  cursor: pointer;
 }
 
 .userMenuContainer {
@@ -76,11 +80,9 @@
   background-color: #fe6849;
   color: #fff;
   text-decoration: none;
-
 }
 
 .userName {
   font-size: 1rem;
   color: slategrey;
 }
-
