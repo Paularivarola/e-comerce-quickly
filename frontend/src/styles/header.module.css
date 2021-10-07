@@ -36,9 +36,9 @@
   right: 3vw;
   width: 18vw;
   height: 15vh;
-  background-color: #fe6849;
-  padding: 2vw;
-  border-radius: 20%;
+  /* background-color: #fe6849; */
+  padding: 3.5vw;
+  margin-right: 2.3rem;
 }
 
 .userMenu {
@@ -47,13 +47,14 @@
   flex-direction: column;
   background-color: white;
   box-shadow: 1px 1px 2px black;
-  border-radius: 20%;
+  border-radius: 10px;
+  background-color: whitesmoke;
 }
 
 .userMenu a {
-  color: black;
+  color: slategray;
   margin: 1vh 0;
-  text-align: center;
+  text-align: center
 }
 
 .containerNavegation {
@@ -75,11 +76,17 @@
 .textRoute {
   color: slategrey;
 }
+.textRoute:hover {
+  color: #fe6849;
+}
 
 .active {
   background-color: #fe6849;
   color: #fff;
   text-decoration: none;
+}
+.active:hover{
+  color: white;
 }
 
 .userName {

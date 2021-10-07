@@ -4,12 +4,21 @@ import productActions from '../redux/actions/productActions'
 import { ImCancelCircle } from 'react-icons/im'
 import { useEffect, useState } from 'react'
 
-const Product = (props) => {
+const Product = ({ product, setMod, ...props }) => {
+  console.log(product)
   // useEffect(() => {
   //     props.getProd()
   // }, [])
-
-  const price = 100 //debería venir por props
+  //   const product = {
+  //     //debería venir por props
+  //     name: 'Super Hamburguesa',
+  //     img: 'https://i.postimg.cc/yWq5xyLZ/hamburguesas.png',
+  //     category: '', //para vicular con los extras (?
+  //     description: 'Hamburguesa de carne 100% vacuna, salsa casera, cheddar, lechuga, tomate, cebolla, pan de papa. Incluye porción de papas chicas',
+  //     price: 100,
+  //     ingredients: '', //ni idea dónde usar esto
+  //     stock: 10,
+  //   }
   const sizeFries = [
     { size: 'Chicas', cost: 0 },
     { size: 'Medianas', cost: 10 },
@@ -26,16 +35,14 @@ const Product = (props) => {
   const [extras, setExtras] = useState([])
   const [extrasCost, setExtrasCost] = useState(0)
   const [totalAmount, setTotalAmount] = useState(1)
-  const [unitaryPrice, setUnitaryPrice] = useState(price)
-  const [totalPrice, setTotalPrice] = useState(unitaryPrice)
+  const [unitaryPrice, setUnitaryPrice] = useState(product.price)
+  const [totalPrice, setTotalPrice] = useState(product.price)
 
   const amount = (operation) => {
     if (operation === 'sum') {
-      setTotalAmount(totalAmount + 1)
+      if (totalAmount < product.stock) setTotalAmount(totalAmount + 1)
     } else {
-      if (totalAmount > 1) {
-        setTotalAmount(totalAmount - 1)
-      }
+      if (totalAmount > 1) setTotalAmount(totalAmount - 1)
     }
   }
 
@@ -60,12 +67,9 @@ const Product = (props) => {
   }, [extras])
 
   useEffect(() => {
-    let friesCost = 0
-    sizeFries.forEach((size) => {
-      if (fries.includes(size.size)) friesCost = friesCost + size.cost
-    }) //se puede hacer mejor con find
+    let friesCost = sizeFries.find((size) => size.size === fries).cost
 
-    setUnitaryPrice(price + friesCost + extrasCost)
+    setUnitaryPrice(product.price + friesCost + extrasCost)
   }, [sizeFries, extrasCost])
 
   useEffect(() => {
@@ -76,40 +80,32 @@ const Product = (props) => {
     console.log('agregar a mi orden!!!')
   }
 
+  console.log(totalPrice)
+
   return (
     <main className={styles.main}>
       <div className={styles.card}>
-        <ImCancelCircle className={styles.exit} />
+        <ImCancelCircle className={styles.exit} onClick={() => setMod(false)} />
 
         <div className={styles.product}>
           <div className={styles.cardInfo}>
             <div className={styles.title}>
-              <h1>Super Hamburguesa</h1>
+              <h1>{product.name}</h1>
               <p>La más grande la más bella</p>
             </div>
 
             <div className={styles.title}>
               <h3>Descripcion:</h3>
-              <p>
-                Hamburguesa de carne 100% vacuna, salsa casera, cheddar,
-                lechuga, tomate, cebolla, pan de papa. Incluye porción de papas
-                chicas
-              </p>
+              <p>{product.description}</p>
             </div>
 
             <div className={styles.order}>
               <div className={styles.amount}>
-                <p
-                  className={styles.amountButton}
-                  onClick={() => amount('res')}
-                >
+                <p className={styles.amountButton} onClick={() => amount('res')}>
                   -
                 </p>
                 <p>{totalAmount}</p>
-                <p
-                  className={styles.amountButton}
-                  onClick={() => amount('sum')}
-                >
+                <p className={styles.amountButton} onClick={() => amount('sum')}>
                   +
                 </p>
               </div>
@@ -119,10 +115,7 @@ const Product = (props) => {
             </div>
           </div>
 
-          <img
-            className={styles.cardPicture}
-            src='https://i.postimg.cc/yWq5xyLZ/hamburguesas.png'
-          />
+          <img className={styles.cardPicture} src={product.img} />
 
           <div className={styles.cardPrice}>
             <div className={styles.choices}>
@@ -131,23 +124,11 @@ const Product = (props) => {
                   <h3 className={styles.h3}>Tamaño papas</h3>
                   {sizeFries.map((size) => (
                     <div>
-                      <input
-                        type='radio'
-                        name='extras'
-                        value={size.size}
-                        id={size.size}
-                        onClick={() => addFries(size.size)}
-                        defaultChecked={size.cost === 0 && 'checked'}
-                      />
+                      <input type='radio' name='extras' value={size.size} id={size.size} onClick={() => addFries(size.size)} defaultChecked={size.cost === 0 && 'checked'} />
 
                       <label className={styles.input} for={size.size}>
                         {size.size}
-                        {size.cost !== 0 && (
-                          <span className={styles.span}>
-                            {' '}
-                            (USD {size.cost})
-                          </span>
-                        )}
+                        {size.cost !== 0 && <span className={styles.span}> (USD {size.cost})</span>}
                       </label>
                     </div>
                   ))}
@@ -157,17 +138,10 @@ const Product = (props) => {
                 <h3 className={styles.h3}>Extras</h3>
                 {extrasChoices.map((extra) => (
                   <div>
-                    <input
-                      type='checkbox'
-                      name='extras'
-                      value={extra.type}
-                      id={extra.type}
-                      onClick={() => addExtras(extra.type)}
-                    />
+                    <input type='checkbox' name='extras' value={extra.type} id={extra.type} onClick={() => addExtras(extra.type)} />
 
                     <label className={styles.input} for={extra.type}>
-                      {extra.type}{' '}
-                      <span className={styles.span}>(USD {extra.cost})</span>
+                      {extra.type} <span className={styles.span}>(USD {extra.cost})</span>
                     </label>
                   </div>
                 ))}
