@@ -26,7 +26,11 @@ const Header = (props) => {
     <header>
       <div className={styles.boxNavigation}>
         <nav className={styles.containerNavegation}>
-          <img className={styles.logo} src='/assets/logo-cocina-prueba.png' alt='logo' />
+          <img
+            className={styles.logo}
+            src='/assets/logoLDC.png'
+            alt='logo'
+          />
           <div className={styles.navegation}>
             <NavLink className={styles.textRoute} exact activeClassName={styles.active} to='/'>
               Home
@@ -54,15 +58,14 @@ const Header = (props) => {
               id='userMenu'
               className={styles.user}
               style={{
-                backgroundImage: `url("${
-                  props.user
+                backgroundImage: `url("${props.user
                     ? props.user.google || props.user.admin
                       ? props.user.src
                       : props.user.src !== 'assets/user.png'
-                      ? 'http://localhost:4000/' + props.user.src
-                      : '/assets/user.png'
+                        ? 'http://localhost:4000/' + props.user.src
+                        : '/assets/user.png'
                     : '/assets/user.png'
-                }")`,
+                  }")`,
               }}
               alt='logo'
             ></div>
