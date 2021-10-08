@@ -73,9 +73,9 @@ const Product = ({ product, setMod, ...props }) => {
   }
 
   return (
-    <main className={styles.main}  onClick={() => setMod(false)}>
+    <main className={styles.main} >
       <div className={styles.card}>
-        <ImCancelCircle className={styles.exit} onClick={() => setMod(false)}/>
+        <ImCancelCircle className={styles.exit} onClick={() => setMod(false)} />
 
         <div className={styles.product}>
           <div className={styles.cardInfo}>
