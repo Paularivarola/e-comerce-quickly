@@ -2,7 +2,6 @@ import './App.css'
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import Home from './pages/Home'
 import Contact from './pages/Contact'
-import Product from './pages/Product'
 import Products from './pages/Products'
 import NotFound from './pages/NotFound'
 import Profile from './pages/Profile'
@@ -49,7 +48,6 @@ const App = (props) => {
     }
   }
 
-
   return (
     <BrowserRouter>
       {!window.location.pathname.includes('/admin') && <Header />}
@@ -61,7 +59,6 @@ const App = (props) => {
         <Route path='/contact' component={Contact} />
         <Route path='/sign-forms/:susi' component={SignForm} />
         <Route path='/products' component={Products} />
-        <Route path='/product/:id' component={Product} />
         <Route path='/profile' component={Profile} />
         <Route path='/notfound' component={NotFound} />
         <Route path='/admin/dashboard' render={() => <AdminPanel view={'Escritorio'} />} />
