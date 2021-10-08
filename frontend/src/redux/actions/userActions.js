@@ -114,6 +114,7 @@ const userActions = {
       }
     }
   },
+  updateUser: () => {},
 }
 
 export default userActions

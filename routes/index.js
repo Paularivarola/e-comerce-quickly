@@ -20,14 +20,11 @@ router.route('/user/token').get(
 // router.route('/user').put(passport, userControllers.updateUser).delete(passport, userControllers.deleteUser)
 
 // PRODUCTS
-router.route('/products')
-  .get(productControllers.getProducts)
-  // .put(passport, productControllers.manageCart)
+router.route('/products').get(productControllers.getProducts)
+// .put(passport, productControllers.manageCart)
 
 //ORDERS
-router.route('/orders')
-  .post(orderControllers.createOrder)
-  .put(orderControllers.cancellOrder)
+router.route('/orders').post(orderControllers.createOrder).put(orderControllers.cancellOrder)
 
 // router
 //   .route("/producto/:id")
@@ -35,9 +32,10 @@ router.route('/orders')
 //   .put(productControllers.updateProduct)
 //   .delete(productControllers.deleteProduct);
 
-router
-  .route("/productos")
-  // .post(productControllers.createProduct)
-  // .get(productControllers.readAll);
+router.route('/productos')
+// .post(productControllers.createProduct)
+// .get(productControllers.readAll);
+
+router.route('/create-payment-intent').post(userControllers.pay)
 
 module.exports = router

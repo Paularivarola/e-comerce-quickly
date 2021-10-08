@@ -1,6 +1,16 @@
 const User = require('../../models/User')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const stripe = require('stripe')(
+  'sk_test_51JiHmiD8MtlvyDMX4r6FFdMzuJU3h60v7z60iYIo1n2u4b5PeWUzzigyKCiPpMkoHXIJ4u0SWDvjsQ3BTXPz0wpn00mAvDx3wa'
+)
+
+const calculateOrderAmount = (items) => {
+  // Replace this constant with a calculation of the order's amount
+  // Calculate the order total on the server to prevent
+  // people from directly manipulating the amount on the client
+  return 1400
+}
 
 const userControllers = {
   signUp: async (req, res) => {
@@ -15,9 +25,12 @@ const userControllers = {
       if (req.files) {
         const { fileImg } = req.files
         picture = `${newUser._id}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`
-        fileImg.mv(`${__dirname}/../../assets/${newUser._id}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`, (err) => {
-          if (err) return console.log(err)
-        })
+        fileImg.mv(
+          `${__dirname}/../../assets/${newUser._id}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`,
+          (err) => {
+            if (err) return console.log(err)
+          }
+        )
       } else {
         picture = src ? src : 'assets/user.png'
       }
@@ -36,7 +49,9 @@ const userControllers = {
       })
     } catch (error) {
       console.log(error)
-      error.message.includes('Google') ? res.json({ error: [{ message: error.message }] }) : res.json({ success: false, error: error.message })
+      error.message.includes('Google')
+        ? res.json({ error: [{ message: error.message }] })
+        : res.json({ success: false, error: error.message })
     }
   },
   logIn: async (req, res) => {
@@ -118,6 +133,17 @@ const userControllers = {
       },
       userData: req.user,
       token: req.body.token,
+    })
+  },
+  pay: async (req, res) => {
+    const { items } = req.body
+    // Create a PaymentIntent with the order amount and currency
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: calculateOrderAmount(items),
+      currency: 'usd',
+    })
+    res.json({
+      clientSecret: paymentIntent.client_secret,
     })
   },
 }

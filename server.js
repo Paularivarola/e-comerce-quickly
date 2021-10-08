@@ -35,9 +35,7 @@ const PORT = process.env.PORT
 const HOST = process.env.HOST || '0.0.0.0'
 
 //Server listening
-const server = app.listen(PORT, HOST, () =>
-  console.log(`Server listening on port ${PORT} (${HOST})`)
-)
+const server = app.listen(PORT, HOST, () => console.log(`Server listening on port ${PORT} (${HOST})`))
 
 const io = socket(server, {
   cors: {
@@ -49,9 +47,7 @@ const io = socket(server, {
 io.on('connection', (socket) => {
   const { socketId, admin } = socket.handshake.query
 
-  socketId
-    ? socket.join(admin ? 'admins' : socketId)
-    : io.to(socket.id).emit('socketId', { socketId: socket.id })
+  socketId ? socket.join(admin ? 'admins' : socketId) : io.to(socket.id).emit('socketId', { socketId: socket.id })
 
   !admin
     ? socket.on('createOrder', () => {

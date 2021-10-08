@@ -7,6 +7,8 @@ import Products from './pages/Products'
 import NotFound from './pages/NotFound'
 import Profile from './pages/Profile'
 import AdminPanel from './components/Admin/AdminPanel'
+import Card from './components/CARD'
+
 import SignForm from './pages/SignForm'
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -58,6 +60,7 @@ const App = (props) => {
       <Switch>
         <Route exact path='/' component={Home} />
         <Route path='/contact' component={Contact} />
+        <Route path='/card' component={Card} />
         <Route path='/sign-forms/:susi' component={SignForm} />
         <Route path='/products' component={Products} />
         <Route path='/profile/:page' component={Profile} />
