@@ -8,28 +8,34 @@ import { connect } from 'react-redux'
 import { useEffect, useState } from 'react'
 
 const Profile = (props) => {
+  const [formConfirm, setFormConfirm] =useState({})
   const [view, setView] = useState('')
   const [subComp, setSubComp] = useState('')
+  
   useEffect(() => {
+    let verification = Object.values(formConfirm).some((input) => input !== "")
+    if(verification){
+      alert("todo mal")
+    }
     let page = props.match.params.page
     setView(
       page === 'fav' ? (
-        <Favorites favorites={props.userData?.favouriteProductsId} />
+        <Favorites favorites={props.userData?.favouriteProductsId} setFormConfirm={setFormConfirm}/>
       ) : page === 'his' ? (
-        <History orders={props.userData?.ordersId} />
+        <History orders={props.userData?.ordersId} setFormConfirm={setFormConfirm}/>
       ) : (
-        <Data user={props.userData?.data} subComp={subComp} />
+        <Data user={props.userData?.data} subComp={subComp} setFormConfirm={setFormConfirm}/>
       )
     )
   }, [props.userData, props.match.params])
 
   const selectComponent = (comp) => {
     if (comp === 'acc') {
-      setView(<Data user={props.userData?.data} />)
+      setView(<Data user={props.userData?.data} setFormConfirm={setFormConfirm}/>)
     } else if (comp === 'fav') {
-      setView(<Favorites favorites={props.userData?.favouriteProductsId} />)
+      setView(<Favorites favorites={props.userData?.favouriteProductsId} setFormConfirm={setFormConfirm}/>)
     } else {
-      setView(<History orders={props.userData?.ordersId} />)
+      setView(<History orders={props.userData?.ordersId} setFormConfirm={setFormConfirm}/>)
     }
   }
 

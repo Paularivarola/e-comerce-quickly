@@ -1,36 +1,11 @@
+import * as React from 'react';
 import styles from '../styles/productCard.module.css'
-import { BsStar, BsStarHalf, BsStarFill } from 'react-icons/bs'
-import { MdShoppingCart } from 'react-icons/md'
+import { MdShoppingCart } from "react-icons/md"
+import Rating from '@mui/material/Rating';
+import Stack from '@mui/material/Stack';
+import { connect } from "react-redux";
 
-const ProductCard = ({ product, setModal }) => {
-  let star = (
-    <BsStar
-      style={{
-        color: 'rgb(216, 205, 56)',
-        fontSize: '1.3em',
-        marginRight: '5%',
-      }}
-    />
-  )
-  let starHalf = (
-    <BsStarHalf
-      style={{
-        color: 'rgb(216, 205, 56)',
-        fontSize: '1.3em',
-        marginRight: '5%',
-      }}
-    />
-  )
-  let starFill = (
-    <BsStarFill
-      style={{
-        color: 'rgb(216, 205, 56)',
-        fontSize: '1.3em',
-        marginRight: '5%',
-      }}
-    />
-  )
-
+const ProductCard = ({ product, setModal, user }) => {
   return (
     <div className={styles.product}>
       <div className={styles.productBox}>
@@ -48,12 +23,11 @@ const ProductCard = ({ product, setModal }) => {
           <span className={styles.priceTitle}>Price: </span>$ {product.price}
         </p>
         <div className={styles.calification}>
-          {starFill}
-          {starFill}
-          {starFill}
-          {starHalf}
-          {star}
+          <Stack spacing={1}>
+            {!user ? <Rating name="half-rating-read" defaultValue={2.5} precision={0.5} readOnly /> : <Rating className={styles.rating} style={{ backgroundColor: 'yelow' }} name="half-rating" defaultValue={2.5} precision={0.5} />}
+          </Stack>
         </div>
+
       </div>
       <button data-modal='productModal' className={styles.addBtn} onClick={() => setModal(true, product)}>
         <MdShoppingCart style={{ color: 'white', fontSize: '1.8em', marginRight: '5%' }} /> +
@@ -62,4 +36,10 @@ const ProductCard = ({ product, setModal }) => {
   )
 }
 
-export default ProductCard
+const mapStateToProps = state => {
+  return {
+    user: state.users.user
+  }
+}
+
+export default connect(mapStateToProps)(ProductCard)

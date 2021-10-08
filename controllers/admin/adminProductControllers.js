@@ -1,9 +1,9 @@
 const Product = require("../../models/Product");
-
+const bcrypt = require("bcryptjs");
 const adminProductControllers = {
   createProduct: async (req, res) => {
     const { name, description, price, category, ingredients, stock } = req.body;
-    const { key } = req.user.admin;
+    const { key } = req.user.data.admin;
     try {
       const match = key && bcrypt.compareSync(process.env.SECRETORKEY, key);
       if (!match) throw new Error("key error");
@@ -15,7 +15,21 @@ const adminProductControllers = {
         ingredients,
         stock,
       });
-      newProduct = await newProduct.save();
+      let picture
+      console.log(req.files)
+      const { img } = req.files
+      picture = `${newProduct._id}.${img.name.split('.')[img.name.split('.').length - 1]
+        }`
+      img.mv(
+        `${__dirname}/../../assets/products/${newProduct._id}.${img.name.split('.')[img.name.split('.').length - 1]
+        }`,
+        (err) => {
+          if (err) return console.log(err)
+        }
+      )
+
+      newProduct.img = picture
+      await newProduct.save()
       res.json({
         success: true,
         response: newProduct,
@@ -25,7 +39,7 @@ const adminProductControllers = {
     }
   },
   updateProduct: async (req, res) => {
-    const { key } = req.user.admin;
+    const { key } = req.user.data.admin;
     try {
       const match = key && bcrypt.compareSync(process.env.SECRETORKEY, key);
       if (!match) throw new Error("key error");
@@ -40,7 +54,7 @@ const adminProductControllers = {
     }
   },
   deleteProduct: async (req, res) => {
-    const { key } = req.user.admin;
+    const { key } = req.user.data.admin;
     try {
       let match = key && bcrypt.compareSync(process.env.SECRETORKEY, key);
       if (!match) throw new Error("key error");

@@ -2,7 +2,7 @@ const Order = require("../../models/Order");
 
 const adminOrderControllers = {
   getOrders: async (req, res) => {
-    const { key } = req.user.admin;
+    const { key } = req.user.data.admin;
     try {
       let match = key && bcrypt.compareSync(process.env.SECRETORKEY, key);
       if (!match) throw new Error("key error");
@@ -13,7 +13,7 @@ const adminOrderControllers = {
     }
   },
   updateOrder: async (req, res) => {
-    const { key } = req.user.admin;
+    const { key } = req.user.data.admin;
     try {
       const match = key && bcrypt.compareSync(process.env.SECRETORKEY, key);
       if (!match) throw new Error("key error");
@@ -28,7 +28,7 @@ const adminOrderControllers = {
     }
   },
   deleteOrder: async (req, res) => {
-    const { key } = req.user.admin;
+    const { key } = req.user.data.admin;
     try {
       let match = key && bcrypt.compareSync(process.env.SECRETORKEY, key);
       if (!match) throw new Error("key error");

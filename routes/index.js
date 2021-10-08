@@ -26,16 +26,8 @@ router.route('/products').get(productControllers.getProducts)
 //ORDERS
 router.route('/orders').post(orderControllers.createOrder).put(orderControllers.cancellOrder)
 
-// router
-//   .route("/producto/:id")
-//   .get(productControllers.readProduct)11
-//   .put(productControllers.updateProduct)
-//   .delete(productControllers.deleteProduct);
-
-router.route('/productos')
-// .post(productControllers.createProduct)
-// .get(productControllers.readAll);
+//EMAIL
+router.route('/mail').post(passport.authenticate('jwt', { session: false }), userControllers.sendEmail)
 
 router.route('/create-payment-intent').post(userControllers.pay)
-
 module.exports = router

@@ -23,9 +23,9 @@ router
 
 router
   .route('/users')
-  .post(passport.authenticate('jwt', { session: false }), adminUserControllers.createAdminUser)
+  .post(adminUserControllers.createAdminUser)
   .get(passport.authenticate('jwt', { session: false }), adminUserControllers.getUsers)
-  .put(passport.authenticate('jwt', { session: false }), adminUserControllers.resetUsers)
+// .put(passport.authenticate('jwt', { session: false }), adminUserControllers.resetUsers)
 
 //ORDERS
 router

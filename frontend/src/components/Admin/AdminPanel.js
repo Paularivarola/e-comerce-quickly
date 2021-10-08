@@ -9,6 +9,11 @@ import Products from './Products'
 import Abandoned from './Abandoned'
 import Reviews from './Reviews'
 import Product from './Product'
+import { connect } from 'react-redux'
+import adminUsersActions from '../../redux/actions/admin/adminUserActions'
+import adminProductActions from '../../redux/actions/admin/adminProductActions'
+import adminOrderActions from '../../redux/actions/admin/adminOrderActions'
+import productActions from '../../redux/actions/productActions'
 
 const AdminPanel = (props) => {
     window.scrollTo(0, 0)
@@ -20,8 +25,14 @@ const AdminPanel = (props) => {
     useEffect(() => {
         document.title = 'Escritorio - Mi Cocina'
         setView(props.view)
+        props.getUsers()
+        props.getProducts()
+        props.getOrders()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    console.log(props)
+
 
     useEffect(() => {
         switch (view) {
@@ -70,4 +81,18 @@ const AdminPanel = (props) => {
     )
 }
 
-export default AdminPanel
+const mapStateToProps = state => {
+    return {
+        products: state.adminProducts.products,
+        orders: state.adminOrders.orders,
+        users: state.adminUsers.users
+    }
+}
+
+const mapDispatchToProps = {
+    getUsers: adminUsersActions.getUsers,
+    getProducts: productActions.getProducts,
+    getOrders: adminOrderActions.getOrders
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminPanel)
