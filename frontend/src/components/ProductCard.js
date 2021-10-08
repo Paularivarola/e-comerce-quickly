@@ -5,11 +5,11 @@ import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
 import { connect } from "react-redux";
 
-const ProductCard = ({ product, setModal }) => {
+const ProductCard = ({ product, setModal, user }) => {
   return (
     <div className={styles.product}>
       <div className={styles.productBox}>
-        <div className={styles.productImg} style={{ backgroundImage: url("${product.img}") }}></div>
+        <div className={styles.productImg} style={{ backgroundImage: `url("${product.img}")` }}></div>
         <div className={styles.productInfo}>
           <h3 className={styles.productName}>{product.name}</h3>
           <div></div>
@@ -24,7 +24,7 @@ const ProductCard = ({ product, setModal }) => {
         </p>
         <div className={styles.calification}>
           <Stack spacing={1}>
-            {!props.user ? <Rating name="half-rating-read" defaultValue={2.5} precision={0.5} readOnly /> : <Rating className={styles.rating} style={{ backgroundColor: 'yelow' }} name="half-rating" defaultValue={2.5} precision={0.5} />}
+            {!user ? <Rating name="half-rating-read" defaultValue={2.5} precision={0.5} readOnly /> : <Rating className={styles.rating} style={{ backgroundColor: 'yelow' }} name="half-rating" defaultValue={2.5} precision={0.5} />}
           </Stack>
         </div>
 
