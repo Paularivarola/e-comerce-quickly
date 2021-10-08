@@ -73,7 +73,7 @@ const Product = ({ product, setMod, ...props }) => {
   }
 
   return (
-    <main className={styles.main} >
+    <main data-modal='closeModal' className={styles.main}>
       <div className={styles.card}>
         <ImCancelCircle className={styles.exit} onClick={() => setMod(false)} />
 
@@ -111,11 +111,11 @@ const Product = ({ product, setMod, ...props }) => {
               {sizeFries.length !== 0 && (
                 <div>
                   <h3 className={styles.h3}>Tamaño papas</h3>
-                  {sizeFries.map((size) => (
-                    <div>
+                  {sizeFries.map((size, index) => (
+                    <div key={index}>
                       <input type='radio' name='extras' value={size.size} id={size.size} onClick={() => addFries(size.size)} defaultChecked={size.cost === 0 && 'checked'} />
 
-                      <label className={styles.input} for={size.size}>
+                      <label className={styles.input} htmlFor={size.size}>
                         {size.size}
                         {size.cost !== 0 && <span className={styles.span}> (USD {size.cost})</span>}
                       </label>
@@ -125,11 +125,11 @@ const Product = ({ product, setMod, ...props }) => {
               )}
               <div>
                 <h3 className={styles.h3}>Extras</h3>
-                {extrasChoices.map((extra) => (
-                  <div>
+                {extrasChoices.map((extra, index) => (
+                  <div key={index}>
                     <input type='checkbox' name='extras' value={extra.type} id={extra.type} onClick={() => addExtras(extra.type)} />
 
-                    <label className={styles.input} for={extra.type}>
+                    <label className={styles.input} htmlFor={extra.type}>
                       {extra.type} <span className={styles.span}>(USD {extra.cost})</span>
                     </label>
                   </div>

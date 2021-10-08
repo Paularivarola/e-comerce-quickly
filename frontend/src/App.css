@@ -1,22 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;900&display=swap');
 
-#root{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  min-height: 100vh;
-}
-
 html * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 
-}
-div.containAllProfile{
-  width: 90%;
-  height: 100%;
-  padding: 0.2rem;
 }
 
 .MuiPaper-root{

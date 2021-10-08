@@ -8,7 +8,7 @@ const Hero = () => {
         <>
             <div className={styles.heroContainer}>
                 <div className={styles.boxCall}>
-                    <h1 className={styles.heroH1}>Si tenés <span className={styles.spanRed}>miCocina,</span> tenés <span className={styles.spanGrey}>todo.</span></h1>
+                    <h1 className={styles.heroH1}>Con <span className={styles.spanRed}>lluvia de comida,</span> tenés <span className={styles.spanGrey}>todo.</span></h1>
                     <h3 className={styles.heroH3}>Disfrutá tu comida favorita desde la comodidad de tu casa.</h3>
                     <h4 className={styles.heroH4}>Vos pedis y nosotros nos encargamos del resto!</h4>
                     <NavLink to='/' className={styles.button}>Ver más categorias</NavLink>

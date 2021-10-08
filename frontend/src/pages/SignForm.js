@@ -85,6 +85,8 @@ const SignForm = (props) => {
     }
   }
 
+
+
   return (
     <main className={styles.mainSign}>
       <div className={styles.boxDiv}>
@@ -127,13 +129,17 @@ const SignForm = (props) => {
           cookiePolicy={'single_host_origin'}
         />
       </div>
+
+
     </main>
   )
 }
 
+
 const mapDispatchToProps = {
   createUser: userActions.createUser,
   logUser: userActions.logUser,
+
 }
 
 export default connect(null, mapDispatchToProps)(SignForm)

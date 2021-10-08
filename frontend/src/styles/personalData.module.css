@@ -1,0 +1,60 @@
+div.containPersonalData{
+	display: flex;
+	align-items: center;
+	padding: 1rem;
+	width: 100%;
+	height: 100%;
+	justify-content: center;
+	background-color: rgba(0, 0, 0, 0.267);
+}
+
+div.containImage, div.ImageEdit{
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+div.containImage{
+	height: 7rem;
+	width: 7rem;
+	border-radius: 100%;
+}
+div.containForm{
+	display: flex;
+	width: 70%;
+	height: 50%;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+form{
+	display: flex;
+	flex-direction: column;
+	width: 60%;
+}
+
+form div{
+	width: 100%;
+}
+
+div.containImageEdit{
+	height: 100%;
+	width: 10%;
+}
+
+div.ImageEdit{
+	height: 20%;
+	width: 100%;
+	cursor: pointer;
+}
+
+div.containForm button{
+	margin-top: 1rem;
+}
+div.containTitle{
+	height: 100%;
+	width: 70%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
