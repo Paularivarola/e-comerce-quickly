@@ -1,4 +1,10 @@
-import Data from '../components/Data'
+// import Data from '../components/Data'
+import styles2 from '../styles/data.module.css'
+import PersonalData from '../components/PersonalData'
+import ChangePassword from '../components/ChangePassword'
+import Addresses from '../components/Addresses'
+import Payment from '../components/Payment'
+import Notifications from '../components/Notifications'
 import History from '../components/History'
 import Favorites from '../components/Favorites'
 import NavLateral from '../components/NavLateral'
@@ -8,36 +14,16 @@ import { connect } from 'react-redux'
 import { useEffect, useState } from 'react'
 
 const Profile = (props) => {
-  const [formConfirm, setFormConfirm] =useState({})
-  const [view, setView] = useState('')
-  const [subComp, setSubComp] = useState('')
-  
-  useEffect(() => {
-    let verification = Object.values(formConfirm).some((input) => input !== "")
-    if(verification){
-      alert("todo mal")
-    }
-    let page = props.match.params.page
-    setView(
-      page === 'fav' ? (
-        <Favorites favorites={props.userData?.favouriteProductsId} setFormConfirm={setFormConfirm}/>
-      ) : page === 'his' ? (
-        <History orders={props.userData?.ordersId} setFormConfirm={setFormConfirm}/>
-      ) : (
-        <Data user={props.userData?.data} subComp={subComp} setFormConfirm={setFormConfirm}/>
-      )
-    )
-  }, [props.userData, props.match.params])
+  const [formConfirm, setFormConfirm] = useState({})
+  const [view, setView] = useState(props.match.params.page)
 
-  const selectComponent = (comp) => {
-    if (comp === 'acc') {
-      setView(<Data user={props.userData?.data} setFormConfirm={setFormConfirm}/>)
-    } else if (comp === 'fav') {
-      setView(<Favorites favorites={props.userData?.favouriteProductsId} setFormConfirm={setFormConfirm}/>)
-    } else {
-      setView(<History orders={props.userData?.ordersId} setFormConfirm={setFormConfirm}/>)
+  useEffect(() => {
+    let verification = Object.values(formConfirm).some((input) => input !== '')
+    if (verification) {
+      alert('todo mal')
     }
-  }
+    setView(props.match.params.page)
+  }, [props.match.params])
 
   const navItems = [
     { comp: 'fav', name: 'Favoritos' },
@@ -57,9 +43,31 @@ const Profile = (props) => {
 
   return (
     <div style={{ display: 'flex', padding: '0 2vw' }}>
-      <NavLateral selectComponent={selectComponent} setSubComp={setSubComp} navItems={navItems} />
+      <NavLateral navItems={navItems} />
       <div className={styles.containerRenderView}>
-        <div className={styles.renderView}>{view}</div>
+        <div className={styles.renderView}>
+          {view === 'fav' ? (
+            <Favorites favorites={props.userData?.favouriteProductsId} setFormConfirm={setFormConfirm} />
+          ) : view === 'his' ? (
+            <History orders={props.userData?.ordersId} setFormConfirm={setFormConfirm} />
+          ) : (
+            <div className={styles2.containerData}>
+              <div className={styles2.containAllProfile}>
+                {view === 'personalData' || view === 'acc' ? (
+                  <PersonalData user={props.userData?.data} setCancelForm={setFormConfirm} />
+                ) : view === 'changePassword' ? (
+                  <ChangePassword user={props.userData?.data} setCancelForm={setFormConfirm} />
+                ) : view === 'adresses' ? (
+                  <Addresses user={props.userData?.data} setCancelForm={setFormConfirm} />
+                ) : view === 'payment' ? (
+                  <Payment user={props.userData?.data} setCancelForm={setFormConfirm} />
+                ) : (
+                  <Notifications user={props.userData?.data} setCancelForm={setFormConfirm} />
+                )}
+              </div>
+            </div>
+          )}
+        </div>
       </div>
       <Toaster
         containerStyle={{

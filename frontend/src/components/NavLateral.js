@@ -8,10 +8,11 @@ const NavLateral = (props) => {
   return (
     // <header className={props.open ? `${styles.mainContainer}` : `${styles.close}`}>
     //   <img src='/assets/logo-cocina-prueba.png' style={{ width: '100%', marginTop: '5vh' }} alt='Logo' />
-    <nav className={styles.adminNav}>
+    <nav className={styles.navLat}>
       <div>
         {navItems?.map((item, index) => (
           <NavItems
+            key={item.comp}
             item={item}
             index={index}
             setSubComp={setSubComp}

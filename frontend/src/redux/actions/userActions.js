@@ -29,7 +29,7 @@ const userActions = {
           window.scrollTo(0, 0)
           props.history.push('/')
           localStorage.setItem('socket', userData._id)
-          let socket = io('http://localhost:4000', {
+          let socket = io(`${HOST}`, {
             query: { socketId: userData._id, admin: userData.data.admin.flag },
           })
           dispatch({ type: 'SET_SOCKET', payload: { socket } })
@@ -68,7 +68,7 @@ const userActions = {
           window.scrollTo(0, 0)
           props.history.push('/')
           localStorage.setItem('socket', userData._id)
-          let socket = io('http://localhost:4000', {
+          let socket = io(HOST, {
             query: { socketId: userData._id, admin: userData.data.admin.flag },
           })
           dispatch({ type: 'SET_SOCKET', payload: { socket } })
@@ -97,7 +97,7 @@ const userActions = {
           },
         })
         localStorage.setItem('socket', response.data.userData._id)
-        let socket = io('http://localhost:4000', {
+        let socket = io(HOST, {
           query: {
             socketId: response.data.userData._id,
             admin: response.data.userData.data.admin.flag,
@@ -110,11 +110,39 @@ const userActions = {
         })
       } catch (error) {
         console.log(error)
-        return dispatch({ type: 'LOG_OUT' })
+        // return dispatch({ type: 'LOG_OUT' })
       }
     }
   },
-  updateUser: () => {},
+  updateUser: ({ action, userData, fileImg, productId, newPaymentCard, paymentCardId, newAddress, addressId }) => {
+    return async (dispatch) => {
+      let token = localStorage.getItem('token')
+      let body = fileImg || {
+        action,
+        userData,
+        productId,
+        newPaymentCard,
+        paymentCardId,
+        newAddress,
+        addressId,
+      }
+      try {
+        let res = await axios.put(`${HOST}/api/user`, body, {
+          headers: {
+            Authorization: 'Bearer ' + token,
+          },
+        })
+        console.log(res.data)
+        return dispatch({
+          type: 'LOG_IN',
+          payload: { ...res.data, token, keep: true },
+        })
+      } catch (error) {
+        console.log(error)
+        // return dispatch({ type: 'LOG_OUT' })
+      }
+    }
+  },
 }
 
 export default userActions

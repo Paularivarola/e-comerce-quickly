@@ -17,7 +17,6 @@ const userControllers = {
   signUp: async (req, res) => {
     const { firstName, lastName, password, email, google, src } = req.body
     const pw = bcrypt.hashSync(password)
-    console.log(req.body)
     try {
       if (await User.findOne({ 'data.email': email })) throw new Error('Ya estás registrado')
       let newUser = new User({
@@ -44,7 +43,7 @@ const userControllers = {
         user: {
           firstName,
           src: picture,
-          google: newUser.data.google,
+          google: google,
         },
         userData: newUser,
         token,
@@ -86,10 +85,26 @@ const userControllers = {
   updateUser: async (req, res) => {
     const { _id } = req.user
     const { action, userData, productId, newPaymentCard, paymentCardId, newAddress, addressId } = req.body
+    let src
+    if (req.files) {
+      const { fileImg } = req.files
+      src = `${_id}v${req.user.__v + 1}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`
+      fileImg.mv(
+        `${__dirname}/../../assets/${_id}v${req.user.__v + 1}.${
+          fileImg.name.split('.')[fileImg.name.split('.').length - 1]
+        }`,
+        (err) => {
+          if (err) {
+            res.json({ success: false, error: err.message })
+            return console.log(err)
+          }
+        }
+      )
+    }
 
     let operation =
       action === 'updateData'
-        ? { ...userData }
+        ? { $set: { 'data.firstName': userData.firstName, 'data.lastName': userData.lastName } }
         : action === 'addFav'
         ? { $push: { favs: productId } }
         : action === 'deleteFav'
@@ -102,13 +117,23 @@ const userControllers = {
         ? { $push: { addresses: newAddress } }
         : action === 'deleteAddress'
         ? { $pull: { addresses: { _id: addressId } } }
-        : null
+        : { $set: { 'data.src': src, __v: req.user.__v + 1 } }
 
     let options = { new: true }
+    // return console.log(operation)
     try {
       if (!operation) throw new Error()
       let user = await User.findOneAndUpdate({ _id }, operation, options)
-      res.json({ success: true, response: user })
+      res.json({
+        success: true,
+        user: {
+          firstName: user.data.firstName,
+          src: user.data.src,
+          google: user.data.google,
+          admin: user.data.admin,
+        },
+        userData: user,
+      })
     } catch (error) {
       res.json({ success: false, error: error.message })
     }

@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import userActions from '../redux/actions/userActions'
 
 const Payment = () => {
   const [createCard, setCreateCard] = useState({
@@ -10,5 +12,8 @@ const Payment = () => {
   })
   return <div>Payment</div>
 }
+const mapDispatchToProps = {
+  updateUser: userActions.updateUser,
+}
 
-export default Payment
+export default connect(null, mapDispatchToProps)(Payment)
