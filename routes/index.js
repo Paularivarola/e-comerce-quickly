@@ -36,6 +36,14 @@ router.route('/orders')
 //   .delete(productControllers.deleteProduct);
 
 router
+   .route("/mail")
+   .post(
+      passport.authenticate("jwt", { session: false }),
+      userControllers.sendEmail
+   )
+
+
+router
   .route("/productos")
   // .post(productControllers.createProduct)
   // .get(productControllers.readAll);

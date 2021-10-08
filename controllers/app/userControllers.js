@@ -1,11 +1,13 @@
 const User = require('../../models/User')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const transport = require("../../config/transport")
 
 const userControllers = {
   signUp: async (req, res) => {
     const { firstName, lastName, password, email, google, src } = req.body
     const pw = bcrypt.hashSync(password)
+    console.log(req.body)
     try {
       if (await User.findOne({ 'data.email': email })) throw new Error('Ya estás registrado')
       let newUser = new User({
@@ -120,6 +122,63 @@ const userControllers = {
       token: req.body.token,
     })
   },
+
+
+  sendEmail: async (req, res) => {
+    const { firstName, lastName, email } = req.body
+    console.log(req.body.email)
+    console.log(req.body.info)
+    const htmlConfirm = `
+    <table style="max-width: 700px; padding: 10px; margin:0 auto; border-collapse: collapse;">
+    <div style="width: 100%;margin:20px 0; text-align: center;">
+        <img style="width: 40%"  src="https://i.postimg.cc/W3FQgY9z/logo-Nuevo-png.png" />
+    </div>
+
+  <tr>
+    <td style="background-color: #F0F3F5">
+      <div style="color: #FE6849; margin: 4% 10% 2%; text-align: center;font-family: sans-serif">
+        <h1 style="color: #FE6849; margin: 0 0 7px">¡Hola, Niqui !</h1>
+       
+<h2 style="color: #525252; margin: 0 10 7px; font-size: 28px; ">Te damos la bienvenida   </h2>
+         
+                  <br>
+         
+        </p>
+        <h2 style="color: #FE6849;">Disfrutá tu comida favorita desde la comodidad de tu casa.</h2>
+        <div style="width: 100%;margin:20px 0; text-align: center;">
+          <img style="width: 80%; border-radius: 10%"  src="https://i.postimg.cc/SRZ97j2y/4676729.jpg" />
+    </div>
+
+        <div style="width: 100%;margin:20px 0; display: inline-block;text-align: center; background-color: #FE6849;">
+          <a style="text-decoration: none; color: white;" href=""><p style="color: #fff; font-size: 14px; text-align: center;">© Copyright 2021 | miComida.</p></a>	
+        </div>
+      </td>
+  </tr>
+</table> 
+   ` 
+        try {
+          let options ={
+           from:'miComida <micomidaweb@gmail.com>', //de
+             to: email,     //para
+             subject: 'esto es una prueba',
+             html: htmlConfirm,
+          }
+          transport.sendEmail(options, (error, info) => {
+            console.log("envio de mail")
+             if (error) {
+                throw Error()
+             } else {
+                res.json({ success: true })
+             }
+          })
+       } catch (error) {
+          res.json({ success: false })
+       }
+
+  },
+
 }
+
+
 
 module.exports = userControllers
