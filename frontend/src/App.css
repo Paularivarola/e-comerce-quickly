@@ -6,7 +6,9 @@ html * {
   box-sizing: border-box;
 
 }
-
+button{
+  cursor: pointer;
+}
 .MuiPaper-root{
   background-color: transparent !important;
 }
