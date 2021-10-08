@@ -11,29 +11,32 @@ import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom'
 import OrdersHistory from './OrdersHistory';
 import { MdEdit, MdDelete, MdPersonAdd } from "react-icons/md";
+import { connect } from 'react-redux'
 
 const Dashboard = (props) => {
     window.scrollTo(0, 0)
-    console.log(props)
+    const todayOrders = props.orders.filter(order => order.date === Date.now())
+    console.log(props.orders)
+    // const todayIncome = 
     return (
         <section className={styles.dashboardContainer}>
             <h1>Bienvenido, Admin.</h1>
 
             <div className={styles.resumeContainer}>
                 <DashboardCard
-                    data={{ title: 'Productos Activos', qty: 53, route: 'productos' }}
+                    data={{ title: 'Productos Activos', qty: props.products.length, route: 'productos' }}
                     icon={<MdShoppingCart />}
                     setView={props.setView} view='Productos'
                     color={styles.boxOne}
                 />
                 <DashboardCard
-                    data={{ title: 'Pedidos de Hoy', qty: 5, route: 'pedidos' }}
+                    data={{ title: 'Pedidos de Hoy', qty: todayOrders.length, route: 'pedidos' }}
                     icon={<FaClipboardList />}
                     setView={props.setView} view='Pedidos'
                     color={styles.boxTwo}
                 />
                 <DashboardCard
-                    data={{ title: 'Usuarios Registrados', qty: 15, route: 'clientes' }}
+                    data={{ title: 'Usuarios Registrados', qty: props.users.length, route: 'clientes' }}
                     icon={<FaUserTie />}
                     setView={props.setView} view='Clientes'
                     color={styles.boxThree}
@@ -141,5 +144,11 @@ const Dashboard = (props) => {
         </section>
     )
 }
-
-export default Dashboard
+const mapStateToProps = state => {
+    return {
+        products: state.products.products,
+        orders: state.adminOrders.orders,
+        users: state.adminUsers.users
+    }
+}
+export default connect(mapStateToProps)(Dashboard)

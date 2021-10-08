@@ -1,4 +1,157 @@
-div.containerButtonCheck{
-	background-color: 
-	rgb(0, 32, 49);
+/* ---PAGE PROFILE---*/
+
+.mainProfile {
+	display: flex;
+	flex-direction: column;
+	padding: 0 5%;
+	margin-top: 2%;
 }
+.adminNav a {
+	color: slategray;
+	background-color: whitesmoke;
+	width: 40vw;
+}
+.products {
+	display: flex;
+	flex-direction: column;
+}
+.boxProfile {
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	border: solid 1px rgb(214, 214, 214);
+	margin-top: 1%;
+	border-radius: 5px;
+	width: 100%;
+	height: 105vh;
+	box-shadow: 10px 10px 10px -1px rgba(0,0,0,0.15);
+}
+.adminNav {
+	width: 20%;
+	background-color: rgba(253, 253, 253, 0.842);
+}
+.renderView {
+	width: 100%;
+	height: 100%;
+	background-color: white;
+	border-left: solid 1px rgb(207, 207, 207);
+	/* padding: 1rem; */
+	
+	/* background-color: whitesmoke; */
+	/* border: solid 1px rgba(216, 216, 216, 0.199); */
+	/* border-radius: 10px; */
+}
+.containerRenderView{
+	flex: 1;
+	height: 100%;
+	/* padding-top: 1%; */
+	/* background-color: rgba(255, 4, 4, 0.06); */
+}
+.boxItem {
+    padding: 0;
+    width: 100%;
+	padding: 0 5%;
+    text-align: start;
+    color: slategray;
+    text-transform: uppercase;
+    font-weight: 500;
+    border-bottom: solid 1px rgb(212, 212, 212);
+    border-right: solid 1px rgb(212, 212, 212);
+    background-color: transparent;
+    border-radius: 0;
+    /* background-color: violet; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.boxItem>a {
+    color: slategrey;
+	font-size: 1rem;
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.boxItem>a:hover {
+    cursor: pointer;
+    color: #fe6849;
+}
+.boxItem div {
+	padding: 0;
+	margin: 0;
+	/* background-color: tomato; */
+	width: 100%;
+	border: none;
+	box-shadow: none;
+	/* height: 100%; */
+}
+.boxItem a {
+	padding: 0;
+	background-color: transparent;
+	font-size: 1rem;
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.icon {
+	align-self: center;
+}
+.boxAcordeon {
+	display: flex;
+	align-items: center;
+	height: 6vh;
+}
+.boxAcordeon a {
+	text-transform: capitalize;
+}
+.boxAcordeon a:hover {
+	color: tomato;
+}
+.fovouritesTitle {
+	font-weight: 700;
+	font-size: 1.6rem;
+	text-align: center;
+	color: tomato;
+	width: 40%;
+}
+.boxFav {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 35vh;
+	background-color: whitesmoke;
+	border-bottom: solid 1px rgb(201, 201, 201);
+}
+.boxFav img {
+	width: 30%;
+}
+.boxNoFav {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	/* background-color: whitesmoke; */
+	/* border-bottom: solid 1px rgb(201, 201, 201); */
+}
+.boxNoFav img {
+	width: 60%;
+}
+.noFavouritesTitle {
+	font-weight: 700;
+	font-size: 1.5rem;
+	text-align: center;
+	color: tomato;
+	width: 50%;
+}
+
+div.containerButtonCheck{
+	/* background-color: rgb(187, 17, 17); */
+	width: 100%;
+	height: 15vh;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
+

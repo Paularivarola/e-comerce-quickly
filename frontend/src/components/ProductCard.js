@@ -5,11 +5,11 @@ import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
 import { connect } from "react-redux";
 
-const ProductCard = ({ product, setModal, user, url }) => {
+const ProductCard = ({ product, setModal, user }) => {
   return (
     <div className={styles.product}>
       <div className={styles.productBox}>
-        <div className={styles.productImg} style={{ backgroundImage: url("${product.img}") }}></div>
+        <div className={styles.productImg} style={{ backgroundImage: `url("${product.img}")` }}></div>
         <div className={styles.productInfo}>
           <h3 className={styles.productName}>{product.name}</h3>
           <div></div>

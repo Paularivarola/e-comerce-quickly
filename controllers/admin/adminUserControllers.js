@@ -7,15 +7,17 @@ const adminUserControllers = {
     // const { key } = req.user.admin;
     const pw = bcrypt.hashSync(password);
     try {
-      //   let match = key && bcrypt.compareSync(process.env.SECRETORKEY, key);
-      //   if (!match) throw new Error("key error"); // BORRAR PARA CREAR ADMIN DESDE INSOMNIA
+      // let match = key && bcrypt.compareSync(process.env.SECRETORKEY, key);
+      // if (!match) throw new Error("key error");
       const nuevaKey = bcrypt.hashSync(process.env.SECRETORKEY);
       const newUser = new User({
-        firstName,
-        lastName,
-        password: pw,
-        email,
-        admin: { flag: true, key: nuevaKey },
+        data: {
+          firstName,
+          lastName,
+          password: pw,
+          email,
+          admin: { flag: true, key: nuevaKey },
+        }
       });
       let user = await newUser.save();
       res.json({
@@ -27,8 +29,7 @@ const adminUserControllers = {
     }
   },
   getUsers: async (req, res) => {
-    const { key } = req.user.admin;
-    console.log(req.user.admin);
+    const { key } = req.user.data.admin;
     try {
       let match = key && bcrypt.compareSync(process.env.SECRETORKEY, key);
       if (!match) throw new Error("key error");
@@ -39,7 +40,7 @@ const adminUserControllers = {
     }
   },
   updateUser: async (req, res) => {
-    const { key } = req.user.admin;
+    const { key } = req.user.data.admin;
     try {
       let match = key && bcrypt.compareSync(process.env.SECRETORKEY, key);
       if (!match) throw new Error("key error");
@@ -54,20 +55,13 @@ const adminUserControllers = {
     }
   },
   deleteUser: async (req, res) => {
-    const { key } = req.user.admin;
+    const { key } = req.user.data.admin;
     try {
       let match = key && bcrypt.compareSync(process.env.SECRETORKEY, key);
       if (!match) throw new Error("key error");
       await User.findOneAndDelete({ _id: req.params.id });
+      console.log('llego')
       res.json({ success: true });
-    } catch (error) {
-      res.json({ success: false, error: error.message });
-    }
-  },
-  resetUsers: async (req, res) => {
-    try {
-      let modified = await User.updateMany({}, { ...req.body }, { new: true });
-      res.json({ success: true, modified });
     } catch (error) {
       res.json({ success: false, error: error.message });
     }

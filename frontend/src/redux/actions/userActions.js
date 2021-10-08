@@ -26,6 +26,7 @@ const userActions = {
                 keep = true
               }
             })
+          window.scrollTo(0, 0)
           props.history.push('/')
           localStorage.setItem('socket', userData._id)
           let socket = io('http://localhost:4000', {
@@ -64,6 +65,7 @@ const userActions = {
                 keep = true
               }
             })
+          window.scrollTo(0, 0)
           props.history.push('/')
           localStorage.setItem('socket', userData._id)
           let socket = io('http://localhost:4000', {

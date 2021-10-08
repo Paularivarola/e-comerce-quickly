@@ -6,17 +6,28 @@ import { MdShoppingCart } from 'react-icons/md'
 import { connect } from 'react-redux'
 import { BsFillCaretRightFill } from 'react-icons/bs'
 import Product from '../components/Product'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const Products = (props) => {
   const [mod, setMod] = useState(false)
   const [product, setProduct] = useState(null)
 
   const setModal = (bool, product) => {
-    console.log(product)
     setMod(bool)
     setProduct(product)
   }
+  window.onclick = (e) => {
+    if (e.target.dataset.modal === 'closeModal') setMod(false)
+  }
+
+  useEffect(() => {
+    if (mod) {
+      document.getElementsByTagName('body')[0].style.overflow = 'hidden'
+      document.getElementsByTagName('body')[0].style.height = '100vh'
+    } else {
+      document.getElementsByTagName('body')[0].style = ''
+    }
+  }, [mod])
 
   return (
     <div className={styles.mainProducts}>
@@ -94,45 +105,45 @@ let products = [
     name: 'nombre producto',
     category: 'categoria',
     description: 'Acá va a ir toda la descripción del producto que quieran comprar la gentessss',
-    price: '100',
+    price: 100,
     ingredients: 'jamon, tomate, muzzarella',
-    stock: 'ni idea',
+    stock: 5,
   },
   {
     img: '/assets/pizzas.jpeg',
     name: 'nombre producto',
     category: 'categoria',
     description: 'Acá va a ir toda la descripción del producto que quieran comprar la gentessss',
-    price: '100',
+    price: 100,
     ingredients: 'jamon, tomate, muzzarella',
-    stock: 'ni idea',
+    stock: 5,
   },
   {
     img: '/assets/pizzas.jpeg',
     name: 'nombre producto',
     category: 'categoria',
     description: 'Acá va a ir toda la descripción del producto que quieran comprar la gentessss',
-    price: '100',
+    price: 100,
     ingredients: 'jamon, tomate, muzzarella',
-    stock: 'ni idea',
+    stock: 5,
   },
   {
     img: '/assets/pizzas.jpeg',
     name: 'nombre producto',
     category: 'categoria',
     description: 'Acá va a ir toda la descripción del producto que quieran comprar la gentessss',
-    price: '100',
+    price: 100,
     ingredients: 'jamon, tomate, muzzarella',
-    stock: 'ni idea',
+    stock: 5,
   },
   {
     img: '/assets/pizzas.jpeg',
     name: 'nombre producto',
     category: 'categoria',
     description: 'Acá va a ir toda la descripción del producto que quieran comprar la gentessss',
-    price: '100',
+    price: 100,
     ingredients: 'jamon, tomate, muzzarella',
-    stock: 'ni idea',
+    stock: 5,
   },
 ]
 
