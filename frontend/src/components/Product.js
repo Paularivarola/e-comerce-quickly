@@ -8,16 +8,6 @@ const Product = ({ product, setMod, ...props }) => {
   // useEffect(() => {
   //     props.getProd()
   // }, [])
-  //   const product = {
-  //     //debería venir por props
-  //     name: 'Super Hamburguesa',
-  //     img: 'https://i.postimg.cc/yWq5xyLZ/hamburguesas.png',
-  //     category: '', //para vicular con los extras (?
-  //     description: 'Hamburguesa de carne 100% vacuna, salsa casera, cheddar, lechuga, tomate, cebolla, pan de papa. Incluye porción de papas chicas',
-  //     price: 100,
-  //     ingredients: '', //ni idea dónde usar esto
-  //     stock: 10,
-  //   }
   const sizeFries = [
     { size: 'Chicas', cost: 0 },
     { size: 'Medianas', cost: 10 },
@@ -39,7 +29,11 @@ const Product = ({ product, setMod, ...props }) => {
 
   const amount = (operation) => {
     if (operation === 'sum') {
-      if (totalAmount < product.stock) setTotalAmount(totalAmount + 1)
+      if (totalAmount < product.stock) {
+        setTotalAmount(totalAmount + 1)
+      } else {
+        alert("ha llegado al límite de este producto")
+      }
     } else {
       if (totalAmount > 1) setTotalAmount(totalAmount - 1)
     }
@@ -67,7 +61,6 @@ const Product = ({ product, setMod, ...props }) => {
 
   useEffect(() => {
     let friesCost = sizeFries.find((size) => size.size === fries).cost
-
     setUnitaryPrice(product.price + friesCost + extrasCost)
   }, [sizeFries, extrasCost])
 
@@ -88,7 +81,6 @@ const Product = ({ product, setMod, ...props }) => {
           <div className={styles.cardInfo}>
             <div className={styles.title}>
               <h1>{product.name}</h1>
-              <p>La más grande la más bella</p>
             </div>
 
             <div className={styles.title}>
