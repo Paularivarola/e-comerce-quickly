@@ -17,6 +17,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  border: solid 2px rgba(255, 99, 71, 0.5);
 }
 
 .userData {

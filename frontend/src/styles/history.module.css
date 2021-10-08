@@ -1,0 +1,74 @@
+.mainHistory {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+.boxHistory {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 35%;
+	background-color: whitesmoke;
+	border-bottom: solid 1px rgb(201, 201, 201);
+}
+.boxHistory img {
+	width: 30%;
+}
+.boxDelivery {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 40%;
+}
+.state {
+	font-weight: 700;
+	font-size: 1.6rem;
+	text-align: center;
+	color: tomato;
+    padding: 2% 0;
+	/* width: 40%; */
+}
+.text {
+    color: slategray;
+}
+.text span {
+    color: tomato;
+    font-weight: 600;
+}
+
+/* grid history */
+.gridBox {
+    flex: 1;
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+.gridBox::-webkit-scrollbar{
+    width: 0.5rem;
+}
+
+.gridBox::-webkit-scrollbar-thumb{
+    background-color: #fe674991;
+    border-radius: 8px;
+}
+.gridHistory {
+    display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-auto-rows: minmax(300px, auto);
+	gap: 1.5rem;
+	padding: 1.5rem;
+}
+.order{
+	display: flex;
+	flex-direction: column;
+	background-color: whitesmoke;
+	border-radius: 15px;
+	/* height: 90%; */
+	box-shadow: 13px 13px 14px -6px rgba(0,0,0,0.15);
+}
+.order:hover {
+    box-shadow: 13px 13px 14px -10px rgba(0,0,0,0.15);
+}

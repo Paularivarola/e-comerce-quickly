@@ -9,9 +9,11 @@ import History from '../components/History'
 import Favorites from '../components/Favorites'
 import NavLateral from '../components/NavLateral'
 import styles from '../styles/profile.module.css'
+import styles3 from '../styles/products.module.css'
 import { Toaster } from 'react-hot-toast'
 import { connect } from 'react-redux'
 import { useEffect, useState } from 'react'
+import { BsPersonLinesFill } from 'react-icons/bs'
 
 const Profile = (props) => {
   const [formConfirm, setFormConfirm] = useState({})
@@ -42,44 +44,55 @@ const Profile = (props) => {
   ]
 
   return (
-    <div style={{ display: 'flex', padding: '0 2vw' }}>
-      <NavLateral navItems={navItems} />
-      <div className={styles.containerRenderView}>
-        <div className={styles.renderView}>
-          {view === 'fav' ? (
-            <Favorites favorites={props.userData?.favouriteProductsId} setFormConfirm={setFormConfirm} />
-          ) : view === 'his' ? (
-            <History orders={props.userData?.ordersId} setFormConfirm={setFormConfirm} />
-          ) : (
-            <div className={styles2.containerData}>
-              <div className={styles2.containAllProfile}>
-                {view === 'personalData' || view === 'acc' ? (
-                  <PersonalData user={props.userData?.data} setCancelForm={setFormConfirm} />
-                ) : view === 'changePassword' ? (
-                  <ChangePassword user={props.userData?.data} setCancelForm={setFormConfirm} />
-                ) : view === 'adresses' ? (
-                  <Addresses user={props.userData?.data} setCancelForm={setFormConfirm} />
-                ) : view === 'payment' ? (
-                  <Payment user={props.userData?.data} setCancelForm={setFormConfirm} />
-                ) : (
-                  <Notifications user={props.userData?.data} setCancelForm={setFormConfirm} />
-                )}
-              </div>
-            </div>
-          )}
+    <div className={styles.mainProfile}>
+      <div className={styles3.categories}>
+        <div className={styles3.categoriesList}>
+          <BsPersonLinesFill style={{ color: '#fe6849', fontSize: '1.5em', marginRight: '5%' }} />
+          <p className={styles3.categoriesTitle}> Mi cuenta</p>
+        </div>
+        <div className={styles3.boxShop}>
+          <p className={styles3.welcome}>Hola {props.user && props.user.firstName}, que bueno verte por acá!</p>
         </div>
       </div>
-      <Toaster
-        containerStyle={{
-          top: 80,
-          left: 20,
-          bottom: 20,
-          right: 20,
-        }}
-        toastOptions={{
-          duration: 1500,
-        }}
-      />
+      <div className={styles.boxProfile}>
+        <NavLateral navItems={navItems} />
+        <div className={styles.containerRenderView}>
+          <div className={styles.renderView}>
+            {view === 'fav' ? (
+              <Favorites favorites={props.userData?.favouriteProductsId} setFormConfirm={setFormConfirm} />
+            ) : view === 'his' ? (
+              <History orders={props.userData?.ordersId} setFormConfirm={setFormConfirm} />
+            ) : (
+              <div className={styles2.containerData}>
+                <div className={styles2.containAllProfile}>
+                  {view === 'personalData' || view === 'acc' ? (
+                    <PersonalData user={props.userData?.data} setCancelForm={setFormConfirm} />
+                  ) : view === 'changePassword' ? (
+                    <ChangePassword user={props.userData?.data} setCancelForm={setFormConfirm} />
+                  ) : view === 'adresses' ? (
+                    <Addresses user={props.userData?.data} setCancelForm={setFormConfirm} />
+                  ) : view === 'payment' ? (
+                    <Payment user={props.userData?.data} setCancelForm={setFormConfirm} />
+                  ) : (
+                    <Notifications user={props.userData?.data} setCancelForm={setFormConfirm} />
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+        <Toaster
+          containerStyle={{
+            top: 80,
+            left: 20,
+            bottom: 20,
+            right: 20,
+          }}
+          toastOptions={{
+            duration: 1500,
+          }}
+        />
+      </div>
     </div>
   )
 }
@@ -87,6 +100,7 @@ const Profile = (props) => {
 const mapStateToProps = (state) => {
   return {
     userData: state.users.userData,
+    user: state.users.user,
   }
 }
 const mapDispachToProps = {}
