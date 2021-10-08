@@ -7,29 +7,26 @@ import Payment from './Payment'
 import Notifications from './Notifications'
 
 const Data = (props) => {
-  console.log(props)
-  const { user, subComp } = props
-  const [view, setView] = useState(<PersonalData user={user} />)
+  const { user, subComp,setFormConfirm } = props
+  const [cancelForm, setCancelForm] =useState({})
+  const [view, setView] = useState(<PersonalData user={user} setCancelForm={setCancelForm}/>)
+  setFormConfirm(cancelForm)
   useEffect(() => {
     if (subComp === 'personalData') {
-      setView(<PersonalData user={user} />)
+      setView(<PersonalData user={user} setCancelForm={setCancelForm}/>)
     } else if (subComp === 'changePassword') {
-      setView(<ChangePassword />)
+      setView(<ChangePassword user={user} setCancelForm={setCancelForm}/>)
     } else if (subComp === 'adresses') {
-      setView(<Addresses />)
+      setView(<Addresses user={user} setCancelForm={setCancelForm}/>)
     } else if (subComp === 'payment') {
-      setView(<Payment />)
+      setView(<Payment user={user} setCancelForm={setCancelForm}/>)
     } else {
-      setView(<Notifications />)
+      setView(<Notifications user={user} />)
     }
   }, [subComp])
 
   return (
     <div className={styles.containerData}>
-      {/* <div className={styles.containerProfile}>
-        <div className={styles.imageProfile} style={{ backgroundImage: 'url("/assets/profile.png")' }}></div>
-        <h1>NOMBRE DE LA PERSONA</h1>
-      </div> */}
       <div className={styles.containAllProfile}>{view}</div>
     </div>
   )
