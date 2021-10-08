@@ -3,6 +3,9 @@ import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import styles from '../styles/personalData.module.css'
 import userActions from '../redux/actions/userActions'
+import IconButton from '@mui/material/IconButton'
+import InputAdornment from '@mui/material/InputAdornment'
+import { BsPencilSquare, BsCheckSquare, BsXSquare } from 'react-icons/bs'
 import { connect } from 'react-redux'
 
 const PersonalData = ({ user, updateUser }) => {
@@ -49,6 +52,25 @@ const PersonalData = ({ user, updateUser }) => {
     updateUser({ action: 'updateData', userData })
   }
 
+  const icons = (
+    <InputAdornment position='end'>
+      {!update ? (
+        <IconButton aria-label='toggle password visibility' onClick={() => setUpdate(true)} edge='end'>
+          <BsPencilSquare />
+        </IconButton>
+      ) : (
+        <>
+          <IconButton aria-label='toggle password visibility' onClick={() => setUpdate(false)} edge='end'>
+            <BsCheckSquare />
+          </IconButton>
+          <IconButton aria-label='toggle password visibility' onClick={() => setUpdate(false)} edge='end'>
+            <BsXSquare />
+          </IconButton>
+        </>
+      )}
+    </InputAdornment>
+  )
+
   return (
     <div className={styles.containPersonalData}>
       <label htmlFor='imgUpdate'>
@@ -69,60 +91,58 @@ const PersonalData = ({ user, updateUser }) => {
       </label>
       <input id='imgUpdate' type='file' onChange={submitFile} style={{ display: 'none' }} />
       <div className={styles.containForm}>
-        {update ? (
-          <>
-            <Box
-              component='form'
-              sx={{
-                '& > :not(style)': { m: 1, width: '25vh' },
-              }}
-              noValidate
-              autoComplete='off'
-            >
-              <TextField
-                type='text'
-                name='firstName'
-                defaultValue={user?.firstName}
-                label='Nombre'
-                variant='outlined'
-                onChange={inputHandler}
-                sx={{
-                  '& > :not(style)': { width: '25vw' },
-                }}
-              />
-              <TextField
-                type='text'
-                name='lastName'
-                defaultValue={user?.lastName}
-                label='Apellido'
-                variant='outlined'
-                onChange={inputHandler}
-                sx={{
-                  '& > :not(style)': { width: '25vw' },
-                }}
-              />
-              <TextField
-                type='email'
-                disabled
-                name='email'
-                defaultValue={user?.email}
-                label='Email'
-                variant='outlined'
-                onChange={inputHandler}
-                sx={{
-                  '& > :not(style)': { width: '25vw' },
-                }}
-              />
-            </Box>
-            <button onClick={() => validatorFront()}>enviar</button>
-          </>
-        ) : (
-          <div className={styles.containTitle}>
-            <h2>{user?.firstName}</h2>
-            <h2>{user?.lastName}</h2>
-            <h2>{user?.email}</h2>
-          </div>
-        )}
+        <Box
+          component='form'
+          sx={{
+            '& .MuiTextField-root': { m: 1, width: '25ch' },
+          }}
+          noValidate
+          autoComplete='off'
+        >
+          <TextField
+            type='text'
+            disabled={!update}
+            name='firstName'
+            value={userData?.firstName}
+            label={'Nombre'}
+            variant='outlined'
+            onChange={inputHandler}
+            InputProps={{
+              endAdornment: icons,
+            }}
+            sx={{
+              '& > :not(style)': { width: '25vw' },
+            }}
+          />
+          <TextField
+            disabled={!update}
+            type='text'
+            name='lastName'
+            value={userData?.lastName}
+            label={'Apellido'}
+            variant='outlined'
+            onChange={inputHandler}
+            InputProps={{
+              endAdornment: icons,
+            }}
+            sx={{
+              '& > :not(style)': { width: '25vw' },
+            }}
+          />
+          <TextField
+            type='email'
+            disabled
+            name='email'
+            value={user?.email}
+            label='Email'
+            variant='outlined'
+            onChange={inputHandler}
+            sx={{
+              '& > :not(style)': { width: '25vw' },
+            }}
+          />
+        </Box>
+        <button onClick={() => validatorFront()}>guardar cambios</button>
       </div>
       <div className={styles.containImageEdit}>
         <div
