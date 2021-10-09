@@ -1,0 +1,250 @@
+div.containAll{
+	display: flex;
+	width: 100%;
+	height: 140vh;
+	padding: 1rem;
+}
+
+div.containForm, div.containFormSend{
+	border: 1px solid black;
+	display: flex;
+	width: 50%;
+	height: 100%;
+	padding: 0.5rem;
+	flex-direction: column;
+}
+
+div.containButtonsDelivery{
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	border-bottom: 1px solid black;
+	width: 100%;
+	height: 10vh;
+}
+
+div.containFormDelivery{
+	display: flex;
+	height: 50vh;
+	width: 100%;
+	flex-direction: column;
+	background-color: rgba(255, 255, 255, 0.881);
+}
+
+div.tittleSelect{
+	color: white;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	justify-content: center;
+	background-image: url("https://i0.wp.com/image.tmdb.org/t/p/original/jjiJ1f5B973rgSEUhk72CwyWMsJ.jpg");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+
+div.tittleSelect h1{
+	background-color: rgba(0, 0, 0, 0.418);
+	padding: 15px;
+	border-radius: 10px;
+}
+
+h3.titleLogIn{
+	width: 100%;
+	padding-right: 1rem;
+	text-align: end;
+}
+
+div.containFormDeliveryHeader{
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 0.5rem;
+	
+}
+
+div.FormDeliveryHeader{
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	height: 10vh;
+	border-top: 1px solid black;
+	margin-top: 5px;
+	border-radius: 3px;
+}
+
+div.FormDeliveryBody{
+	width: 100%;
+	height: 20vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;	
+}
+
+div.FormDeliveryHeader input, div.FormDeliveryBody input, div.FormAddressHeader input, div.FormAddressBody input{
+	height: 80%;
+	width: 50%;
+	border: none;
+	margin: 2px;
+	text-align: center;
+	justify-content: center;
+	border-bottom: 1px solid black;
+	background-color: transparent !important;
+	outline: none;
+}
+
+div.FormDeliveryBody input{
+	width: 100%;
+}
+
+div.containFormAddress{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
+	height: 20vh;
+}
+
+div.FormAddressBody{
+	height: 50%;
+}
+div.FormAddressHeader{
+	width: 70%;
+}
+div.FormAddressHeader input{
+	width: 80%;
+}
+div.FormAddressBody{
+	width: 100%;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	padding: 0.3rem;
+}
+
+div.FormAddressBody select, div.FormAddressBody input{
+	width: 50%;
+	margin: 7px;
+}
+div.FormAddressBody select{
+	height: 7vh;
+}
+
+div.containAddressCard{
+	height: 30vh;
+}
+
+div.containList{
+	border: 1px solid black;
+	height: 70%;
+	border-radius: 10px;
+}
+
+div.containAddressCard{
+	display: flex;
+	width: 100%;
+}
+
+div.containCard{
+	border: 1px solid black;
+	margin-right: 5px;
+	width: 20vw;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+}
+
+div.containSend{
+	display: flex;
+	align-items: center;
+	margin-top: 15px;
+	padding: 0.1rem;
+	height: 30vh;
+	width: 100%;
+}
+
+div.containInfoSend{
+	width: 70%;
+	height: 100%;
+	border: 1px solid black;
+	border-radius: 10px;
+}
+
+div.containButtonSend{
+	width: 30%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+div.containButtonSend button{
+	width: 5rem;
+	height: 30%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	cursor: pointer;
+}
+
+div.containInfoName{
+	padding: 0.1rem;
+	height: 10vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+div.containInfoName h3{
+	margin-right: 15px;	
+}
+
+input.inputConfirmEmail{
+	width: 50%;
+	height: 5vh;
+	padding: 5px;
+	text-align: center;
+	border-radius: 7px;
+	outline: none;
+}
+
+div.containInfoinput{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+div.contiainInputsHeader{
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
+
+div.containMapWithdraw{
+	height: 40vh;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: burlywood;
+}
+div.containMapWithdraw h1{
+	height: 40vh;
+	text-align: center;
+	align-items: center;
+}
+
+div.containCardSend{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 40vh;
+}

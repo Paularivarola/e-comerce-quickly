@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import { ImCancelCircle } from 'react-icons/im'
 import { Toaster } from 'react-hot-toast'
 import { BsTrash } from 'react-icons/bs'
+// import styles from '../styles/checkOut.module.css'
 import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
 

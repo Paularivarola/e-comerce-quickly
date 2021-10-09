@@ -1,11 +1,11 @@
 import './App.css'
-// import "./styles/stylesCris.css"
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import Home from './pages/Home'
 import Contact from './pages/Contact'
 import Products from './pages/Products'
 import NotFound from './pages/NotFound'
 import Profile from './pages/Profile'
+import CheackOut from './pages/CheckOut'
 import AdminPanel from './components/Admin/AdminPanel'
 import Card from './components/CARD'
 
@@ -65,6 +65,7 @@ const App = (props) => {
         <Route path='/products' component={Products} />
         <Route path='/profile/:page' component={Profile} />
         <Route path='/notfound' component={NotFound} />
+        <Route exact path='/checkout' component={CheackOut} />
         <Route path='/admin/dashboard' render={() => <AdminPanel view={'Escritorio'} />} />
         <Route exact path='/admin/clientes' render={() => <AdminPanel view={'Clientes'} />} />
         <Route exact path='/admin/pedidos' render={() => <AdminPanel view={'Pedidos'} />} />
