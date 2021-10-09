@@ -17,10 +17,10 @@
   background-color: white;
   border-radius: 10px;
   display: flex;
-  flex-direction: column;
   padding: 0 2rem;
   padding: 2rem;
   position: relative;
+  gap: 2rem;
 }
 
 .exit {
@@ -32,28 +32,29 @@
   cursor: pointer;
 }
 
-.product {
-  width: 100%;
-  flex: 1;
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-}
-
 .cardInfo {
-  width: 35%;
+  width: 50%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
-.cardPicture {
-  width: 40%;
+.div{
+  height: 70%;
+}
+
+.picture {
+  width: 100%;
+  height: 80%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-bottom: 1rem;
 }
 
 .cardPrice {
-  width: 25%;
+  width: 50%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -62,9 +63,26 @@
 }
 
 .choices {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.column{
+  width: 50%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 2rem;
+}
+
+.no_column{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   gap: 2rem;
 }
 
@@ -95,8 +113,7 @@
   background-color: #ffb900;
 }
 
-.title {
-  color: #fe6849;
+.text {
   text-align: justify;
 }
 
