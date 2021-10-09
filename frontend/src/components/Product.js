@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import productActions from '../redux/actions/productActions'
 import { ImCancelCircle } from 'react-icons/im'
 import { useEffect, useState } from 'react'
+import Rating from '@mui/material/Rating';
+import Stack from '@mui/material/Stack';
 
 const Product = ({ product, setMod, ...props }) => {
   // useEffect(() => {
@@ -81,6 +83,10 @@ const Product = ({ product, setMod, ...props }) => {
           <div className={styles.cardInfo}>
             <div className={styles.title}>
               <h1>{product.name}</h1>
+              <Stack className={styles.calification} spacing={1}>
+                <Rating className={styles.rating} style={{ backgroundColor: 'yelow' }} name="half-rating" defaultValue={2.5} precision={0.5} />
+                {/* :<Rating name="half-rating-read" defaultValue={2.5} precision={0.5} readOnly /> */}
+              </Stack>
             </div>
 
             <div className={styles.title}>
