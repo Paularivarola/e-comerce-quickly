@@ -166,9 +166,10 @@
 }
 .inputsFormName {
     display: flex;
+    margin-top: 20%;
     justify-content: center;
     align-items: center;
-    /* flex-direction: column; */
+    flex-direction: column;
 }
 .contact {
     display: flex;
