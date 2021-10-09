@@ -1,48 +1,204 @@
-.boxDiv{
-    width: 45%;
-    height: 85%;
-    background-color:  #fe6849;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 3rem;
-}
-
-.mainSign{
+.mainSign {
     width: 100%;
-    height: 100vh;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-bottom: 5%;
+}
+.boxButton {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 5% 10%;
+    width: 70%;
+    align-self: center;
+    margin-bottom: -10%;
+}
+.activeButton {
+    width: 10rem;
+    padding: 1rem;
+    text-align: center;
+    background-color: #fe6849;
+    font-weight: 600;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 10px 10px 8px -2px rgba(0,0,0,0.12)
+}
+.activeButton:hover, .button:hover {
+    box-shadow: 10px 10px 8px -2px rgba(0,0,0,0.09);
+    cursor: pointer
+}
+.button:hover {
+    color: tomato
+}
+.boxButtons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1%;
+    width: 55%;
+    height: 50%;
+}
+.button {
+    width: 10rem;
+    padding: 1rem;
+    text-align: center;
+    background-color: whitesmoke;
+    color: slategray;
+    font-weight:600;
+    border-radius: 10px;
+    align-self: flex-start;
+    justify-self: flex-start;
+    box-shadow: 10px 10px 8px -2px rgba(0,0,0,0.12)
+}
+.imgLogin {
+    width: 50%;
+}
+.memeLogin {
+    width: 25%;
+}
+.h1 {
+    font-size: 1.8rem;
+    color: tomato;
+    padding-bottom: 1%;
+    text-align: center;
+}
+.p {
+    text-align: center;
+    margin-top: 2%;
+    color:slategray;
+    font-weight: 400;
+}
+.btnGoogle {
+    border-radius: 25px;
+}
+.boxlogin {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    height: 50%;
+    width: 100%;
+    padding-top: 5%;
+    padding-bottom: 2%;
+}
+.boxGoogle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.boxGoogle span {
+    color: tomato;
+    text-transform: capitalize;
+}
+.option {
+    margin-top: 5%;
+    display: flex;
+    width: 100%;
+    align-self: center;
+    justify-content: center;
+}
+.line {
+    width: 100%;
+    border-width: 0;
+    height: 2px;
+    background-color: rgb(212, 212, 212);
+    align-self: center;
+    margin: 0 5%;
+}
+.boxForm {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.inputsForm {
+    padding: 4%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.inputsForm input:focus {
+    border-color: tomato;
+}
+.boxDiv{
+    width: 40%;
+    height: 70vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: black;
+    /* padding: 0 3rem; */
+    /* background-color: whitesmoke; */
+    /* margin-left: 5%; */
+    margin-top: 2%;
+    border-left: solid 1px rgb(214, 214, 214);
 }
-
-.boxButton{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.activeButton{
-    width: 10rem;
+.submitButton{
+    /* margin: 2rem 0; */
+    width: 7rem;
     padding: 0.75rem;
     text-align: center;
-    background-color: #ffb900;
+    background-color: tomato;
     font-weight: 600;
-}
-
-.button{
-    width: 10rem;
-    padding: 0.75rem;
-    text-align: center;
-    background-color: black;
+    border-radius: 10px;
     color: white;
-    font-weight:600;
+    box-shadow: 10px 10px 8px -2px rgba(0,0,0,0.12)
+}
+.submitButton:hover{
+    color: tomato;
+    background-color: whitesmoke;
+    box-shadow: 10px 10px 8px -2px rgba(0,0,0,0.09);
+    cursor: pointer
+}
+.inputsForm2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.inputsFormName {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* flex-direction: column; */
+}
+.contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    margin-left: 2%;
+    margin-bottom: 3%;
+    margin-top: 2%;
+}
+.inputsFormColum {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+.boxFile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 2% 0;
+    margin-bottom: 5%;
 }
 
-.nameContent, .contactContent{
+
+
+
+/* .nameContent, .contactContent{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -56,37 +212,13 @@
     padding-left: 1rem;
 }
 
-.contact{
-    width: 100%;
-    height: 2rem;
-    padding-left: 1rem;
-}
-
 .boxForm{
     width: 100%;
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-}
-
-.h1{
-    margin: 2rem 0;
-}
-
-.submitButton{
-    margin: 2rem 0;
-    width: 7rem;
-    padding: 0.75rem;
-    text-align: center;
-    background-color: #ffb900;
-    font-weight: 600;
-}
-
-.submitButton:hover, .button:hover{
-    color: white;
-    text-decoration: underline;
-}
+} */
 
 @media screen and (max-width:1024px) {
     .boxDiv{

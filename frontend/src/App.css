@@ -32,4 +32,10 @@ html * {
   align-items: center;
   padding: 2%;
 }
+input#file{
+  width: 100%;
+  height: 2rem;
+  background-color: tomato;
+  color: tomato;
+}
 
