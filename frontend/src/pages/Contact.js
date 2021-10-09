@@ -3,17 +3,17 @@ import styles from '../styles/contact.module.css'
 const Contact = () => {
   return (
     <div>
-      <div class={styles.containerContact}>
-        <div class={styles.containerImage}>
+      <div className={styles.containerContact}>
+        <div className={styles.containerImage}>
           <div
-            class={styles.deliveryImage}
+            className={styles.deliveryImage}
             style={{
               backgroundImage: `url('/assets/sobre.png')`,
             }}
           ></div>
         </div>
-        <div class={styles.form}>
-          <h1 class={styles.titleContact}>Contacto</h1>
+        <div className={styles.form}>
+          <h1 className={styles.titleContact}>Contacto</h1>
           <input type='text' placeholder='nombre' />
           <input type='text' placeholder='email' />
           <input type='text' placeholder='apellido' />

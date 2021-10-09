@@ -164,7 +164,6 @@ const userControllers = {
              html: htmlConfirm,
           }
           transport.sendEmail(options, (error, info) => {
-            console.log("envio de mail")
              if (error) {
                 throw Error()
              } else {

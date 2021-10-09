@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react'
 import io from 'socket.io-client'
 import { connect } from 'react-redux'
 import socketActions from './redux/actions/socketActions'
+import BuyConfirmation from './components/BuyConfirmation'
 
 const App = (props) => {
   const [socket, setSocket] = useState(null)
@@ -62,6 +63,7 @@ const App = (props) => {
         <Route path='/products' component={Products} />
         <Route path='/profile/:page' component={Profile} />
         <Route path='/notfound' component={NotFound} />
+        <Route path='/compra' component={BuyConfirmation} />
         <Route path='/admin/dashboard' render={() => <AdminPanel view={'Escritorio'} />} />
         <Route exact path='/admin/clientes' render={() => <AdminPanel view={'Clientes'} />} />
         <Route exact path='/admin/pedidos' render={() => <AdminPanel view={'Pedidos'} />} />
