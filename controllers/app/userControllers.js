@@ -14,7 +14,7 @@ const calculateOrderAmount = (items) => {
 const transport = require('../../config/transport')
 
 const userControllers = {
-  signUp: async (req, res) => {
+  signUp: async (req, res, next) => {
     const { firstName, lastName, password, email, google, src } = req.body
     const pw = bcrypt.hashSync(password)
     try {
@@ -53,6 +53,7 @@ const userControllers = {
         userData: newUser,
         token,
       })
+      return next()
     } catch (error) {
       console.log(error)
       error.message.includes('Google')
@@ -206,7 +207,6 @@ const userControllers = {
   sendEmail: async (req, res) => {
     const { firstName, email } = req.body
     console.log(req.body.email)
-    console.log(req.body.info)
     const htmlConfirm = `
     <table style="max-width: 700px; padding: 10px; margin:0 auto; border-collapse: collapse;">
     <div style="width: 100%;margin:20px 0; text-align: center;">
@@ -242,13 +242,11 @@ const userControllers = {
         subject: 'esto es una prueba',
         html: htmlConfirm,
       }
-      transport.sendEmail(options, (error, info) => {
-        console.log('envio de mail')
-        if (error) {
-          throw Error()
-        } else {
-          res.json({ success: true })
+      transport.sendMail(options, (err, info) => {
+        if (err) {
+          return res.json({ success: false, response: err })
         }
+        return res.json({ success: true, response: info })
       })
     } catch (error) {
       res.json({ success: false })
