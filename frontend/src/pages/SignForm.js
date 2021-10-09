@@ -4,6 +4,8 @@ import { useState } from 'react'
 import { GoogleLogin } from 'react-google-login'
 import userActions from '../redux/actions/userActions'
 import { useEffect } from 'react'
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
 const SignForm = (props) => {
   const [user, setUser] = useState({
@@ -85,11 +87,31 @@ const SignForm = (props) => {
     }
   }
 
-
+  
 
   return (
     <main className={styles.mainSign}>
-      <div className={styles.boxDiv}>
+      <div className={styles.boxButtons}>
+          <div className={styles.boxlogin}>
+            <h1 className={styles.h1}>{!shift ? 'Crear una cuenta' : 'Ingresar con tus datos'}</h1>
+            <div className={styles.boxGoogle}>
+              <GoogleLogin
+                    className={styles.btnGoogle}
+                    clientId='700780098168-b35ln15khokfkbats4tm4sl7cbcv3bup.apps.googleusercontent.com'
+                    buttonText='con Google Account'
+                    onSuccess={responseGoogle}
+                    onFailure={responseGoogle}
+                    cookiePolicy={'single_host_origin'}
+                  />
+            </div>
+            <p className={styles.p}>o ingresa tus datos en el formulario</p>
+            {/* <div className={styles.option}>
+              <hr className={styles.line}></hr>
+              <p>o</p>
+              <hr className={styles.line}></hr>
+            </div> */}
+          </div>
+        <img className={styles.memeLogin} src='https://i.postimg.cc/rFQ6QKxZ/memelogin.png' alt='manLog' />
         <div className={styles.boxButton}>
           <p className={!shift ? styles.activeButton : styles.button} onClick={() => setShift(false)}>
             Ingresá
@@ -98,39 +120,157 @@ const SignForm = (props) => {
             Registrate
           </p>
         </div>
-        <h1 className={styles.h1}>{!shift ? 'Crea una cuenta' : 'Ingresa con tus datos'}</h1>
-        {!shift ? (
-          <form className={styles.boxForm}>
-            <input className={styles.contact} type='text' name='email' placeholder='Ingresa tu email...' onChange={inputHandler} defaultValue={user.email} />
-            <input className={styles.contact} type='password' name='password' placeholder='Ingresa tu contraseña...' onChange={inputHandler} defaultValue={user.password} />
-          </form>
-        ) : (
-          <form className={styles.boxForm}>
-            <div className={styles.nameContent}>
-              <input className={styles.name} type='text' name='firstName' placeholder='Ingresa tu nombre...' onChange={inputHandler} defaultValue={user.firstName} />
-              <input className={styles.name} type='text' name='lastName' placeholder='Ingresa tu apellido...' onChange={inputHandler} defaultValue={user.lastName} />
-            </div>
-            <div className={styles.contactContent}>
-              <input className={styles.contact} type='text' name='email' placeholder='Ingresa tu email...' onChange={inputHandler} defaultValue={user.email} />
-              <input className={styles.contact} type='password' name='password' placeholder='Crea una contraseña...' onChange={inputHandler} defaultValue={user.password} />
-              <input className={styles.contact} type='password' name='repPass' placeholder='Repite la contraseña...' onChange={inputHandler} defaultValue={user.repPass} />
-              <input className={styles.contact} type='file' name='src' placeholder='Agregá una foto de perfil' onChange={inputHandler} defaultValue={user.src} />
-            </div>
-          </form>
-        )}
-        <span className={styles.submitButton} onClick={submit}>
-          Enviar!
-        </span>
-        <GoogleLogin
-          clientId='700780098168-b35ln15khokfkbats4tm4sl7cbcv3bup.apps.googleusercontent.com'
-          buttonText='or use Google acaunt'
-          onSuccess={responseGoogle}
-          onFailure={responseGoogle}
-          cookiePolicy={'single_host_origin'}
-        />
-      </div>
-
-
+        {/* <img className={styles.imgLogin} src='https://i.postimg.cc/MX2PHY8p/Collab.png' alt='manLog' /> */}
+        </div>
+        <div className={styles.boxDiv}>
+          <div className={styles.boxForm}>
+            {!shift ? (
+              <Box
+                component="form"
+                sx={{
+                  '& .MuiTextField-root': { m: 2, width: '25ch' },
+                }}
+                noValidate
+                autoComplete="off"
+              >
+                <div className={styles.inputsForm}>
+                  <TextField
+                    required
+                    id="outlined-required"
+                    label="Email"
+                    type="email"
+                    name='email'
+                    defaultValue={user.email}
+                    onChange={inputHandler}
+                    color="warning"
+                    size="small"
+                    fullWidth 
+                    // error
+                    // helperText="Incorrect entry."
+                  />
+                  <TextField
+                    required
+                    id="outlined-password-input"
+                    label="Contraseña"
+                    type="password"
+                    autoComplete="current-password"
+                    name='password'
+                    onChange={inputHandler}
+                    defaultValue={user.password}
+                    color="warning"
+                    size="small"
+                    fullWidth 
+                    // error
+                    // helperText="Incorrect entry."
+                  />
+                </div>
+              </Box>
+            ) : (
+              <Box
+                component="form"
+                sx={{
+                  '& .MuiTextField-root': { m: 1.5, width: '25ch' },
+                }}
+                noValidate
+                autoComplete="off"
+              >
+                <div className={styles.inputsForm2}>
+                  <div className={styles.inputsFormName}>
+                    <TextField
+                      required
+                      id="outlined-required"
+                      label="Nombre"
+                      type="text"
+                      name='firstName'
+                      onChange={inputHandler}
+                      defaultValue={user.firstName}
+                      color="warning"
+                      size="small"
+                      fullWidth 
+                      // error
+                    // helperText="Incorrect entry."
+                    />
+                    <TextField
+                      required
+                      id="outlined-required"
+                      label="Apellido"
+                      type="text"
+                      name='lastName'
+                      onChange={inputHandler}
+                      defaultValue={user.lastName}
+                      color="warning"
+                      size="small"
+                      fullWidth 
+                      // error
+                      // helperText="Incorrect entry."
+                    />
+                  </div>
+                  <div className={styles.inputsFormColum}>
+                    <TextField
+                      required
+                      id="outlined-required"
+                      label="Email"
+                      type="email"
+                      name='email'
+                      onChange={inputHandler}
+                      defaultValue={user.email}
+                      color="warning"
+                      size="small"
+                      fullWidth 
+                      // error
+                      // helperText="Incorrect entry."
+                    />
+                    <TextField
+                      required
+                      id="outlined-password-input"
+                      label="Contraseña"
+                      type="password"
+                      name='password'
+                      onChange={inputHandler}
+                      defaultValue={user.password}
+                      color="warning"
+                      size="small"
+                      fullWidth 
+                      // error
+                      // helperText="Incorrect entry."
+                    />
+                    <TextField
+                      required
+                      id="outlined-password-input"
+                      label="Repite contraseña"
+                      type="password"
+                      name='repPass'
+                      onChange={inputHandler}
+                      defaultValue={user.repPass}
+                      color="warning"
+                      size="small"
+                      fullWidth 
+                      // error
+                      // helperText="Incorrect entry."
+                    />
+                  </div>
+                  <div className={styles.boxFile}>
+                    <input className={styles.contact} type='file' name='src' placeholder='Agregá una foto de perfil' onChange={inputHandler} defaultValue={user.src} />
+                  </div>
+                </div>
+              </Box>
+              // <form className={styles.boxForm}>
+              //   <div className={styles.nameContent}>
+              //     <input className={styles.name} type='text' name='firstName' placeholder='Ingresa tu nombre...' onChange={inputHandler} defaultValue={user.firstName} />
+              //     <input className={styles.name} type='text' name='lastName' placeholder='Ingresa tu apellido...' onChange={inputHandler} defaultValue={user.lastName} />
+              //   </div>
+              //   <div className={styles.contactContent}>
+              //     <input className={styles.contact} type='text' name='email' placeholder='Ingresa tu email...' onChange={inputHandler} defaultValue={user.email} />
+              //     <input className={styles.contact} type='password' name='password' placeholder='Crea una contraseña...' onChange={inputHandler} defaultValue={user.password} />
+              //     <input className={styles.contact} type='password' name='repPass' placeholder='Repite la contraseña...' onChange={inputHandler} defaultValue={user.repPass} />
+              //   </div>
+              // </form>
+            )}
+              <span className={styles.submitButton} onClick={submit}>
+                Enviar!
+              </span>
+          </div>
+        </div>
     </main>
   )
 }
