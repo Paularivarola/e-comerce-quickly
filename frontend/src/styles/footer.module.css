@@ -2,9 +2,9 @@
 
 .containerFooter {
   display: flex;
+  justify-content: space-between;
+  padding: 2vh 6vw;
   align-items: center;
-  padding: 2vw;
-
 }
 
 .logo {
@@ -12,15 +12,19 @@
 }
 
 .iconsFooter {
-  width: 2vw;
+  width: 2.3vw;
  padding: 0.5vw;
 }
 
 .parrafo {
   display: flex;
-  justify-content: space-evenly;
+
   width: 100%;
 }
+.navegation {
+display: flex;
+flex-direction: column;
+} 
 
 .boxIcons {
   padding: 1vw;
@@ -29,45 +33,47 @@
 
 .map {
   width: 25vw;
+} 
+
+
+
+
+@media only screen and (max-width: 425px) {
+.information {
+  display: none;
+}
+.logo {
+  width: 35vw;
+}
+.iconsFooter {
+  width: 8vw;
+ padding: 0.5vw;
 }
 
+}
 
-/* @media screen and (max-width: 480px) {
-  .containerFooter {
-    flex-direction: column;
-  }
-  .logo {
-    width: 50vw;
-  }
-  .containerParrafo {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-  .parrafo {
+@media only screen and (max-width: 576px) {
+
+
+
+}
+
+@media only screen and (max-width: 768px) {
+  .information {
     display: none;
   }
-} */
+  .logo {
+    width: 20vw;
+  }
+  .iconsFooter {
+    width: 3vw;
+   padding: 0.5vw;
+  }
 
 
-
-@media only screen and (min-width: 425px) {
 }
 
-@media only screen and (min-width: 576px) {
-}
+@media only screen and (max-width: 991px) {
 
-@media only screen and (min-width: 768px) {
-}
-
-@media only screen and (min-width: 991px) {
-}
-@media only screen and (min-width: 1024px) {
-}
-
-@media only screen and (min-width: 1440px) {
-}
-
-@media only screen and (min-width: 2560px) {
 }
 

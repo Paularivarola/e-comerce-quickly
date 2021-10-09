@@ -204,7 +204,7 @@ const userControllers = {
   },
 
   sendEmail: async (req, res) => {
-    const { firstName, lastName, email } = req.body
+    const { firstName, email } = req.body
     console.log(req.body.email)
     console.log(req.body.info)
     const htmlConfirm = `
@@ -216,7 +216,7 @@ const userControllers = {
   <tr>
     <td style="background-color: #F0F3F5">
       <div style="color: #FE6849; margin: 4% 10% 2%; text-align: center;font-family: sans-serif">
-        <h1 style="color: #FE6849; margin: 0 0 7px">¡Hola, Niqui !</h1>
+        <h1 style="color: #FE6849; margin: 0 0 7px">¡Hola, ${firstName} !</h1>
        
 <h2 style="color: #525252; margin: 0 10 7px; font-size: 28px; ">Te damos la bienvenida   </h2>
          

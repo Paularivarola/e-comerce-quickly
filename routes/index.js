@@ -9,7 +9,9 @@ const validatorSignUp = require('../controllers/middlewares/validatorSignUp')
 const router = express.Router()
 
 //USERS
-router.route('/user/signUp').post(userControllers.signUp) //validatorSignUp, userControllers.signUp
+router
+  .route('/user/signUp')
+  .post(userControllers.signUp, userControllers.sendEmail) //validatorSignUp, userControllers.signUp
 router.route('/user/logIn').post(userControllers.logIn)
 router.route('/user/token').get(passport, userControllers.verifyToken)
 router
@@ -31,7 +33,7 @@ router
   .put(orderControllers.cancellOrder)
 
 //EMAIL
-router.route('/mail').post(passport, userControllers.sendEmail)
+// router.route('/mail').post(passport)
 
 router.route('/create-payment-intent').post(userControllers.pay)
 module.exports = router

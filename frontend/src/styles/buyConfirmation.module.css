@@ -1,0 +1,72 @@
+
+
+.containerConfirmation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 80vh;
+    padding: 5vh 6vw;
+    text-align: center;
+}
+
+.containerConfirmation h1 {
+    color: #FE6849;
+}
+
+.containerConfirmation p {
+    text-align: center;
+    color: #525252;
+}
+
+.containerConfirmation button {
+    margin: 2vw;
+    cursor: pointer;
+}
+
+.Imagencompra {
+    width: 30vw;
+    justify-content: center;
+}
+
+
+
+
+
+@media only screen and (max-width: 425px) {
+    .Imagencompra {
+        width: 70%;
+        justify-content: center;
+    }
+  
+}
+
+@media only screen and (max-width: 576px) {
+        .Imagencompra {
+        width: 60vw;
+        justify-content: center;
+    }
+    .containerConfirmation button {
+        border-radius: 10vw;
+     }
+ 
+
+}
+
+@media only screen and (max-width: 768px) {
+    .Imagencompra {
+        width: 70%;
+        justify-content: center;
+    }
+    .containerConfirmation button {
+        border-radius: 10vw;
+     }
+ 
+}
+
+@media only screen and (max-width: 991px) {
+    .Imagencompra {
+        width: 60%;
+        justify-content: center;
+    }
+}
