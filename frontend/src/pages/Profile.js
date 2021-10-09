@@ -32,7 +32,7 @@ const Profile = (props) => {
     { comp: 'fav', name: 'Favoritos' },
     { comp: 'his', name: 'Mis Pedidos' },
     {
-      comp: 'acc',
+      comp: 'data',
       name: 'Mi cuenta',
       desplegable: [
         { comp: 'data', name: 'Datos Personales' },
@@ -48,11 +48,15 @@ const Profile = (props) => {
     <div className={styles.mainProfile}>
       <div className={styles3.categories}>
         <div className={styles3.categoriesList}>
-          <BsPersonLinesFill style={{ color: '#fe6849', fontSize: '1.5em', marginRight: '5%' }} />
+          <BsPersonLinesFill
+            style={{ color: '#fe6849', fontSize: '1.5em', marginRight: '5%' }}
+          />
           <p className={styles3.categoriesTitle}> Mi cuenta</p>
         </div>
         <div className={styles3.boxShop}>
-          <p className={styles3.welcome}>Hola {props.user && props.user.firstName}, que bueno verte por acá!</p>
+          <p className={styles3.welcome}>
+            Hola {props.user && props.user.firstName}, que bueno verte por acá!
+          </p>
         </div>
       </div>
       <div className={styles.boxProfile}>
@@ -62,22 +66,43 @@ const Profile = (props) => {
             {!props.userData ? (
               <Preloader />
             ) : view === 'fav' ? (
-              <Favorites favorites={props.userData?.favouriteProductsId} setFormConfirm={setFormConfirm} />
+              <Favorites
+                favorites={props.userData?.favouriteProductsId}
+                setFormConfirm={setFormConfirm}
+              />
             ) : view === 'his' ? (
-              <History orders={props.userData?.ordersId} setFormConfirm={setFormConfirm} />
+              <History
+                orders={props.userData?.ordersId}
+                setFormConfirm={setFormConfirm}
+              />
             ) : (
               <div className={styles2.containerData}>
                 <div className={styles2.containAllProfile}>
                   {view === 'data' ? (
-                    <PersonalData user={props.userData?.data} setCancelForm={setFormConfirm} />
+                    <PersonalData
+                      user={props.userData?.data}
+                      setCancelForm={setFormConfirm}
+                    />
                   ) : view === 'password' ? (
-                    <ChangePassword user={props.userData?.data} setCancelForm={setFormConfirm} />
+                    <ChangePassword
+                      user={props.userData?.data}
+                      setCancelForm={setFormConfirm}
+                    />
                   ) : view === 'adresses' ? (
-                    <Addresses user={props.userData?.data} setCancelForm={setFormConfirm} />
+                    <Addresses
+                      user={props.userData?.data}
+                      setCancelForm={setFormConfirm}
+                    />
                   ) : view === 'payment' ? (
-                    <Payment user={props.userData?.data} setCancelForm={setFormConfirm} />
+                    <Payment
+                      user={props.userData?.data}
+                      setCancelForm={setFormConfirm}
+                    />
                   ) : (
-                    <Notifications user={props.userData?.data} setCancelForm={setFormConfirm} />
+                    <Notifications
+                      user={props.userData?.data}
+                      setCancelForm={setFormConfirm}
+                    />
                   )}
                 </div>
               </div>

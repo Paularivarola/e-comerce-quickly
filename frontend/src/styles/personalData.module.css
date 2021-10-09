@@ -51,16 +51,16 @@ div.containFormModal {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
 }
 
-/* form {
+form {
   display: flex;
   flex-direction: column;
   width: 60%;
-} */
+}
 
 form div {
   width: 100%;

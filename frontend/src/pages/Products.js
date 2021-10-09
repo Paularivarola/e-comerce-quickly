@@ -20,26 +20,24 @@ const Products = (props) => {
     if (e.target.dataset.modal === 'closeModal') setMod(false)
   }
 
-  useEffect(() => {
-    if (mod) {
-      document.getElementsByTagName('body')[0].style.overflow = 'hidden'
-      document.getElementsByTagName('body')[0].style.height = '100vh'
-    } else {
-      document.getElementsByTagName('body')[0].style = ''
-    }
-  }, [mod])
-
   return (
     <div className={styles.mainProducts}>
       <div className={styles.categories}>
         <div className={styles.categoriesList}>
-          <BiCategory style={{ color: '#fe6849', fontSize: '1.5em', marginRight: '5%' }} />
+          <BiCategory
+            style={{ color: '#fe6849', fontSize: '1.5em', marginRight: '5%' }}
+          />
           <p className={styles.categoriesTitle}> Categorias</p>
         </div>
         <div className={styles.boxShop}>
-          <p className={styles.welcome}>Hola {props.user && props.user.firstName}! ¿Qué vas a comer hoy?</p>
+          <p className={styles.welcome}>
+            Hola {props.user && props.user.firstName}! ¿Qué vas a comer hoy?
+          </p>
           <button className={styles.carritoBtn}>
-            <MdShoppingCart style={{ color: 'white', fontSize: '1.8em', marginRight: '5%' }} /> Carrito
+            <MdShoppingCart
+              style={{ color: 'white', fontSize: '1.8em', marginRight: '5%' }}
+            />{' '}
+            Carrito
           </button>
         </div>
       </div>
@@ -47,41 +45,61 @@ const Products = (props) => {
         <div className={styles.listBox}>
           <button className={styles.categoryBtn}>
             <p>Categorias</p>
-            <BsFillCaretRightFill style={{ color: '#fe6849', fontSize: '1.8em' }} />
+            <BsFillCaretRightFill
+              style={{ color: '#fe6849', fontSize: '1.8em' }}
+            />
           </button>
           <button className={styles.categoryBtn}>
             <p>Categorias</p>
-            <BsFillCaretRightFill style={{ color: '#fe6849', fontSize: '1.8em' }} />
+            <BsFillCaretRightFill
+              style={{ color: '#fe6849', fontSize: '1.8em' }}
+            />
           </button>
           <button className={styles.categoryBtn}>
             <p>Categorias</p>
-            <BsFillCaretRightFill style={{ color: '#fe6849', fontSize: '1.8em' }} />
+            <BsFillCaretRightFill
+              style={{ color: '#fe6849', fontSize: '1.8em' }}
+            />
           </button>
           <button className={styles.categoryBtn}>
             <p>Categorias</p>
-            <BsFillCaretRightFill style={{ color: '#fe6849', fontSize: '1.8em' }} />
+            <BsFillCaretRightFill
+              style={{ color: '#fe6849', fontSize: '1.8em' }}
+            />
           </button>
           <button className={styles.categoryBtn}>
             <p>Categorias</p>
-            <BsFillCaretRightFill style={{ color: '#fe6849', fontSize: '1.8em' }} />
+            <BsFillCaretRightFill
+              style={{ color: '#fe6849', fontSize: '1.8em' }}
+            />
           </button>
           <button className={styles.categoryBtn}>
             <p>Categorias</p>
-            <BsFillCaretRightFill style={{ color: '#fe6849', fontSize: '1.8em' }} />
+            <BsFillCaretRightFill
+              style={{ color: '#fe6849', fontSize: '1.8em' }}
+            />
           </button>
           <button className={styles.categoryBtn}>
             <p>Categorias</p>
-            <BsFillCaretRightFill style={{ color: '#fe6849', fontSize: '1.8em' }} />
+            <BsFillCaretRightFill
+              style={{ color: '#fe6849', fontSize: '1.8em' }}
+            />
           </button>
           <button className={styles.categoryBtn}>
             <p>Categorias</p>
-            <BsFillCaretRightFill style={{ color: '#fe6849', fontSize: '1.8em' }} />
+            <BsFillCaretRightFill
+              style={{ color: '#fe6849', fontSize: '1.8em' }}
+            />
           </button>
         </div>
         <div className={styles.gridBox}>
           <div className={styles2.products}>
             {products.map((prod, index) => (
-              <ProductCard product={prod} key={'product' + index} setModal={setModal} />
+              <ProductCard
+                product={prod}
+                key={'product' + index}
+                setModal={setModal}
+              />
             ))}
             {mod && <Product product={product} setMod={setMod} />}
           </div>
@@ -104,7 +122,8 @@ let products = [
     img: '/assets/pizzas.jpeg',
     name: 'nombre producto',
     category: 'categoria',
-    description: 'Acá va a ir toda la descripción del producto que quieran comprar la gentessss',
+    description:
+      'Acá va a ir toda la descripción del producto que quieran comprar la gentessss',
     price: 100,
     ingredients: 'jamon, tomate, muzzarella',
     stock: 5,
@@ -113,7 +132,8 @@ let products = [
     img: '/assets/pizzas.jpeg',
     name: 'nombre producto',
     category: 'categoria',
-    description: 'Acá va a ir toda la descripción del producto que quieran comprar la gentessss',
+    description:
+      'Acá va a ir toda la descripción del producto que quieran comprar la gentessss',
     price: 100,
     ingredients: 'jamon, tomate, muzzarella',
     stock: 5,
@@ -122,7 +142,8 @@ let products = [
     img: '/assets/pizzas.jpeg',
     name: 'nombre producto',
     category: 'categoria',
-    description: 'Acá va a ir toda la descripción del producto que quieran comprar la gentessss',
+    description:
+      'Acá va a ir toda la descripción del producto que quieran comprar la gentessss',
     price: 100,
     ingredients: 'jamon, tomate, muzzarella',
     stock: 5,
@@ -131,7 +152,8 @@ let products = [
     img: '/assets/pizzas.jpeg',
     name: 'nombre producto',
     category: 'categoria',
-    description: 'Acá va a ir toda la descripción del producto que quieran comprar la gentessss',
+    description:
+      'Acá va a ir toda la descripción del producto que quieran comprar la gentessss',
     price: 100,
     ingredients: 'jamon, tomate, muzzarella',
     stock: 5,
@@ -140,11 +162,19 @@ let products = [
     img: '/assets/pizzas.jpeg',
     name: 'nombre producto',
     category: 'categoria',
-    description: 'Acá va a ir toda la descripción del producto que quieran comprar la gentessss',
+    description:
+      'Acá va a ir toda la descripción del producto que quieran comprar la gentessss',
     price: 100,
     ingredients: 'jamon, tomate, muzzarella',
     stock: 5,
   },
 ]
 
-products = [...products, ...products, ...products, ...products, ...products, ...products]
+products = [
+  ...products,
+  ...products,
+  ...products,
+  ...products,
+  ...products,
+  ...products,
+]
