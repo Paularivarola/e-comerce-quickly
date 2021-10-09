@@ -9,14 +9,8 @@ const NavLateral = (props) => {
     <nav className={styles.adminNav}>
       <div className={styles.item}>
         {navItems?.map((item, index) => (
-          <div className={styles.boxItem}>
-            <NavItems
-              key={item.comp}
-              item={item}
-              index={index}
-              setSubComp={setSubComp}
-              selectComponent={selectComponent}
-            />
+          <div key={item.comp} className={styles.boxItem}>
+            <NavItems item={item} index={index} setSubComp={setSubComp} selectComponent={selectComponent} />
           </div>
         ))}
       </div>

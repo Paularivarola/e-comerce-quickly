@@ -1,3 +1,4 @@
+div.containerAdresses,
 div.containPersonalData {
   display: flex;
   align-items: center;
@@ -7,6 +8,13 @@ div.containPersonalData {
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.267);
 }
+
+div.containerAdresses {
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
 div.containImage,
 div.ImageEdit {
   background-position: center;
@@ -20,6 +28,8 @@ div.containImage {
   width: 7rem;
   border-radius: 100%;
 }
+
+div.containFormAddress,
 div.containForm {
   display: flex;
   width: 70%;
@@ -28,6 +38,24 @@ div.containForm {
   justify-content: center;
   flex-direction: column;
 }
+div.containFormAddress {
+  height: 70%;
+  background-color: #fff;
+  border-radius: 30px;
+}
+
+div.containFormModal {
+  background-color: rgba(0, 0, 0, 0.727);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -58,4 +86,24 @@ div.containTitle {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+}
+.exit {
+  position: absolute;
+  top: 18%;
+  right: 18%;
+  font-size: 1.5rem;
+  color: rgb(61, 61, 61);
+  cursor: pointer;
+  z-index: 10;
+}
+.addressCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50vw;
+  padding: 20px;
+  margin: 10px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 2px 2px 2px black;
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import userActions from '../redux/actions/userActions'
+import Cards from './Cards'
 
 const Payment = () => {
   const [createCard, setCreateCard] = useState({
@@ -10,7 +11,12 @@ const Payment = () => {
     DNI: '',
     cardNumber: '',
   })
-  return <div>Payment</div>
+  return (
+    <div>
+      Payment
+      <Cards />
+    </div>
+  )
 }
 const mapDispatchToProps = {
   updateUser: userActions.updateUser,

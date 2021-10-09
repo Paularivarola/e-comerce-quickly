@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Preloader from '../components/Preloader'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import styles from '../styles/personalData.module.css'
@@ -55,15 +56,15 @@ const PersonalData = ({ user, updateUser }) => {
   const icons = (
     <InputAdornment position='end'>
       {!update ? (
-        <IconButton aria-label='toggle password visibility' onClick={() => setUpdate(true)} edge='end'>
+        <IconButton onClick={() => setUpdate(true)} edge='end'>
           <BsPencilSquare />
         </IconButton>
       ) : (
         <>
-          <IconButton aria-label='toggle password visibility' onClick={() => setUpdate(false)} edge='end'>
+          <IconButton onClick={() => setUpdate(false)} edge='end'>
             <BsCheckSquare />
           </IconButton>
-          <IconButton aria-label='toggle password visibility' onClick={() => setUpdate(false)} edge='end'>
+          <IconButton onClick={() => setUpdate(false)} edge='end'>
             <BsXSquare />
           </IconButton>
         </>
@@ -91,57 +92,61 @@ const PersonalData = ({ user, updateUser }) => {
       </label>
       <input id='imgUpdate' type='file' onChange={submitFile} style={{ display: 'none' }} />
       <div className={styles.containForm}>
-        <Box
-          component='form'
-          sx={{
-            '& .MuiTextField-root': { m: 1, width: '25ch' },
-          }}
-          noValidate
-          autoComplete='off'
-        >
-          <TextField
-            type='text'
-            disabled={!update}
-            name='firstName'
-            value={userData?.firstName}
-            label={'Nombre'}
-            variant='outlined'
-            onChange={inputHandler}
-            InputProps={{
-              endAdornment: icons,
-            }}
+        {!user ? (
+          <Preloader />
+        ) : (
+          <Box
+            component='form'
             sx={{
-              '& > :not(style)': { width: '25vw' },
+              '& .MuiTextField-root': { m: 1, width: '25ch' },
             }}
-          />
-          <TextField
-            disabled={!update}
-            type='text'
-            name='lastName'
-            value={userData?.lastName}
-            label={'Apellido'}
-            variant='outlined'
-            onChange={inputHandler}
-            InputProps={{
-              endAdornment: icons,
-            }}
-            sx={{
-              '& > :not(style)': { width: '25vw' },
-            }}
-          />
-          <TextField
-            type='email'
-            disabled
-            name='email'
-            value={user?.email}
-            label='Email'
-            variant='outlined'
-            onChange={inputHandler}
-            sx={{
-              '& > :not(style)': { width: '25vw' },
-            }}
-          />
-        </Box>
+            noValidate
+            autoComplete='off'
+          >
+            <TextField
+              type='text'
+              disabled={!update}
+              name='firstName'
+              defaultValue={userData?.firstName}
+              label={'Nombre'}
+              variant='outlined'
+              onChange={inputHandler}
+              InputProps={{
+                endAdornment: icons,
+              }}
+              sx={{
+                '& > :not(style)': { width: '25vw' },
+              }}
+            />
+            <TextField
+              disabled={!update}
+              type='text'
+              name='lastName'
+              defaultValue={userData?.lastName}
+              label={'Apellido'}
+              variant='outlined'
+              onChange={inputHandler}
+              InputProps={{
+                endAdornment: icons,
+              }}
+              sx={{
+                '& > :not(style)': { width: '25vw' },
+              }}
+            />
+            <TextField
+              type='email'
+              disabled
+              name='email'
+              defaultValue={user?.email}
+              label='Email'
+              variant='outlined'
+              onChange={inputHandler}
+              sx={{
+                '& > :not(style)': { width: '25vw' },
+              }}
+            />
+          </Box>
+        )}
         <button onClick={() => validatorFront()}>guardar cambios</button>
       </div>
       <div className={styles.containImageEdit}>

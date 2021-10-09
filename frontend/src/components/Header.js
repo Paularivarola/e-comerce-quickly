@@ -21,6 +21,13 @@ const Header = (props) => {
     if (e.target.id !== 'userMenu') setUserMenu(false)
     if (props.user && e.target.id !== 'userMenu') setUserMenu(false)
   }
+  let img = props.user
+    ? props.user.data.google || props.user.data.admin.flag
+      ? props.user.src
+      : props.user.src !== 'assets/user.png'
+      ? 'http://localhost:4000/' + props.user.data.src
+      : '/assets/user.png'
+    : '/assets/user.png'
 
   return (
     <header>
@@ -47,22 +54,14 @@ const Header = (props) => {
           <div className={styles.userData} onClick={() => setUserMenu(!userMenu)}>
             {props.user && (
               <h2 id='userName' className={styles.userName}>
-                {props.user.firstName}
+                {props.user.data.firstName}
               </h2>
             )}
             <div
               id='userMenu'
               className={styles.user}
               style={{
-                backgroundImage: `url("${
-                  props.user
-                    ? props.user.google || props.user.admin.flag
-                      ? props.user.src
-                      : props.user.src !== 'assets/user.png'
-                      ? 'http://localhost:4000/' + props.user.src
-                      : '/assets/user.png'
-                    : '/assets/user.png'
-                }")`,
+                backgroundImage: `url("${img}")`,
               }}
               alt='logo'
             ></div>
@@ -87,7 +86,7 @@ const Header = (props) => {
                     <NavLink className={styles.textRoute} to='/profile/his'>
                       Mis Pedidos
                     </NavLink>
-                    <NavLink className={styles.textRoute} to='/profile/acc'>
+                    <NavLink className={styles.textRoute} to='/profile/data'>
                       Mi Cuenta
                     </NavLink>
                     <NavLink className={styles.textRoute} onClick={() => props.logOut()} to='/'>
@@ -105,7 +104,7 @@ const Header = (props) => {
 }
 const mapStateToProps = (state) => {
   return {
-    user: state.users.user,
+    user: state.users.userData,
     socket: state.users.socket,
   }
 }

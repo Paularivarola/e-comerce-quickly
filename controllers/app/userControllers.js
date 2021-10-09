@@ -84,7 +84,17 @@ const userControllers = {
   },
   updateUser: async (req, res) => {
     const { _id } = req.user
-    const { action, userData, productId, newPaymentCard, paymentCardId, newAddress, addressId } = req.body
+    const {
+      action,
+      userData,
+      productId,
+      newPaymentCard,
+      paymentCardId,
+      newAddress,
+      addressId,
+      password,
+      currentPassword,
+    } = req.body
     let src
     if (req.files) {
       const { fileImg } = req.files
@@ -105,6 +115,8 @@ const userControllers = {
     let operation =
       action === 'updateData'
         ? { $set: { 'data.firstName': userData.firstName, 'data.lastName': userData.lastName } }
+        : action === 'updatePass'
+        ? { $set: { 'data.password': password } }
         : action === 'addFav'
         ? { $push: { favs: productId } }
         : action === 'deleteFav'
@@ -120,9 +132,10 @@ const userControllers = {
         : { $set: { 'data.src': src, __v: req.user.__v + 1 } }
 
     let options = { new: true }
-    // return console.log(operation)
     try {
       if (!operation) throw new Error()
+      if (action === 'updatePass' && !bcrypt.compareSync(currentPassword, req.user.data.password))
+        throw new Error('Contraseña incorrecta')
       let user = await User.findOneAndUpdate({ _id }, operation, options)
       res.json({
         success: true,
@@ -166,7 +179,7 @@ const userControllers = {
     const { items } = req.body
     // Create a PaymentIntent with the order amount and currency
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: calculateOrderAmount(items),
+      amount: 1400,
       currency: 'usd',
     })
     res.json({

@@ -114,12 +114,25 @@ const userActions = {
       }
     }
   },
-  updateUser: ({ action, userData, fileImg, productId, newPaymentCard, paymentCardId, newAddress, addressId }) => {
+  updateUser: ({
+    action,
+    userData,
+    fileImg,
+    currentPassword,
+    password,
+    productId,
+    newPaymentCard,
+    paymentCardId,
+    newAddress,
+    addressId,
+  }) => {
     return async (dispatch) => {
       let token = localStorage.getItem('token')
       let body = fileImg || {
         action,
         userData,
+        currentPassword,
+        password,
         productId,
         newPaymentCard,
         paymentCardId,

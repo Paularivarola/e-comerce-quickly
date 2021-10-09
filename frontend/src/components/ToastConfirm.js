@@ -1,8 +1,8 @@
 import React from 'react'
 import toast from 'react-hot-toast'
 
-const ToastConfirm = () => {
-  return toast.custom((t) => (
+const toastConfirm = (acceptFunction) => {
+  toast.custom((t) => (
     <div
       className={`${t.visible ? 'animate-enter' : 'animate-leave'} containAlerts`}
       style={{
@@ -19,14 +19,14 @@ const ToastConfirm = () => {
       </div>
       <div className='containButtonsAlerts'>
         <button
-          onClick={() => cleanInputs(name)}
-          style={{ backgroundColor: 'red', color: 'white', padding: '10px', margin: '5px' }}
+          onClick={() => acceptFunction()}
+          style={{ backgroundColor: 'red', color: 'white', padding: '10px', margin: '5px', cursor: 'pointer' }}
         >
           Si
         </button>
         <button
           onClick={() => toast.dismiss(t.id)}
-          style={{ backgroundColor: 'red', color: 'white', padding: '10px', margin: '5px' }}
+          style={{ backgroundColor: 'red', color: 'white', padding: '10px', margin: '5px', cursor: 'pointer' }}
         >
           No
         </button>
@@ -35,4 +35,4 @@ const ToastConfirm = () => {
   ))
 }
 
-export default ToastConfirm
+export default toastConfirm

@@ -14,6 +14,7 @@ const addressSchema = new mongoose.Schema({
   alias: { type: String, required: true },
   street: { type: String, required: true },
   number: { type: String, required: true },
+  apartment: { type: String },
   neighborhood: { type: String, required: true },
 })
 

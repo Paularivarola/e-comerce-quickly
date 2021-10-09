@@ -8,6 +8,7 @@ import Notifications from '../components/Notifications'
 import History from '../components/History'
 import Favorites from '../components/Favorites'
 import NavLateral from '../components/NavLateral'
+import Preloader from '../components/Preloader'
 import styles from '../styles/profile.module.css'
 import styles3 from '../styles/products.module.css'
 import { Toaster } from 'react-hot-toast'
@@ -34,8 +35,8 @@ const Profile = (props) => {
       comp: 'acc',
       name: 'Mi cuenta',
       desplegable: [
-        { comp: 'personalData', name: 'Datos Personales' },
-        { comp: 'changePassword', name: 'Cambiar Contraseña' },
+        { comp: 'data', name: 'Datos Personales' },
+        { comp: 'password', name: 'Cambiar Contraseña' },
         { comp: 'adresses', name: 'Direcciones' },
         { comp: 'payment', name: 'Métodos de Pago' },
         { comp: 'notif', name: 'Notificaciones' },
@@ -58,16 +59,18 @@ const Profile = (props) => {
         <NavLateral navItems={navItems} />
         <div className={styles.containerRenderView}>
           <div className={styles.renderView}>
-            {view === 'fav' ? (
+            {!props.userData ? (
+              <Preloader />
+            ) : view === 'fav' ? (
               <Favorites favorites={props.userData?.favouriteProductsId} setFormConfirm={setFormConfirm} />
             ) : view === 'his' ? (
               <History orders={props.userData?.ordersId} setFormConfirm={setFormConfirm} />
             ) : (
               <div className={styles2.containerData}>
                 <div className={styles2.containAllProfile}>
-                  {view === 'personalData' || view === 'acc' ? (
+                  {view === 'data' ? (
                     <PersonalData user={props.userData?.data} setCancelForm={setFormConfirm} />
-                  ) : view === 'changePassword' ? (
+                  ) : view === 'password' ? (
                     <ChangePassword user={props.userData?.data} setCancelForm={setFormConfirm} />
                   ) : view === 'adresses' ? (
                     <Addresses user={props.userData?.data} setCancelForm={setFormConfirm} />
