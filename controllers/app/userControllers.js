@@ -18,16 +18,21 @@ const userControllers = {
     const { firstName, lastName, password, email, google, src } = req.body
     const pw = bcrypt.hashSync(password)
     try {
-      if (await User.findOne({ 'data.email': email })) throw new Error('Ya estás registrado')
+      if (await User.findOne({ 'data.email': email }))
+        throw new Error('Ya estás registrado')
       let newUser = new User({
         data: { firstName, lastName, password: pw, email, google },
       })
       let picture
       if (req.files) {
         const { fileImg } = req.files
-        picture = `${newUser._id}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`
+        picture = `${newUser._id}.${
+          fileImg.name.split('.')[fileImg.name.split('.').length - 1]
+        }`
         fileImg.mv(
-          `${__dirname}/../../assets/${newUser._id}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`,
+          `${__dirname}/../../assets/${newUser._id}.${
+            fileImg.name.split('.')[fileImg.name.split('.').length - 1]
+          }`,
           (err) => {
             if (err) return console.log(err)
           }
@@ -59,7 +64,8 @@ const userControllers = {
     const { email, password, google } = req.body
     try {
       let user = await User.findOne({ 'data.email': email })
-      if (!user) throw new Error('No encotramos una cuenta asociada a ese email')
+      if (!user)
+        throw new Error('No encotramos una cuenta asociada a ese email')
       if (user.data.google && !google) {
         throw new Error('Debes iniciar sesión con Google')
       }
@@ -98,7 +104,9 @@ const userControllers = {
     let src
     if (req.files) {
       const { fileImg } = req.files
-      src = `${_id}v${req.user.__v + 1}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`
+      src = `${_id}v${req.user.__v + 1}.${
+        fileImg.name.split('.')[fileImg.name.split('.').length - 1]
+      }`
       fileImg.mv(
         `${__dirname}/../../assets/${_id}v${req.user.__v + 1}.${
           fileImg.name.split('.')[fileImg.name.split('.').length - 1]
@@ -114,7 +122,12 @@ const userControllers = {
 
     let operation =
       action === 'updateData'
-        ? { $set: { 'data.firstName': userData.firstName, 'data.lastName': userData.lastName } }
+        ? {
+            $set: {
+              'data.firstName': userData.firstName,
+              'data.lastName': userData.lastName,
+            },
+          }
         : action === 'updatePass'
         ? { $set: { 'data.password': password } }
         : action === 'addFav'
@@ -124,7 +137,7 @@ const userControllers = {
         : action === 'addPaymentCard'
         ? { $push: { paymentCards: newPaymentCard } }
         : action === 'deletePaymentCard'
-        ? { $pull: { paymentCards: { _id: paymentCardId } } }
+        ? { $pull: { paymentCards: { id: paymentCardId } } }
         : action === 'addAddress'
         ? { $push: { addresses: newAddress } }
         : action === 'deleteAddress'
@@ -134,7 +147,10 @@ const userControllers = {
     let options = { new: true }
     try {
       if (!operation) throw new Error()
-      if (action === 'updatePass' && !bcrypt.compareSync(currentPassword, req.user.data.password))
+      if (
+        action === 'updatePass' &&
+        !bcrypt.compareSync(currentPassword, req.user.data.password)
+      )
         throw new Error('Contraseña incorrecta')
       let user = await User.findOneAndUpdate({ _id }, operation, options)
       res.json({

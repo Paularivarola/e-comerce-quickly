@@ -8,7 +8,6 @@ import Profile from './pages/Profile'
 import CheackOut from './pages/CheckOut'
 import AdminPanel from './components/Admin/AdminPanel'
 import Card from './components/CARD'
-
 import SignForm from './pages/SignForm'
 import Header from './components/Header'
 import Footer from './components/Footer'

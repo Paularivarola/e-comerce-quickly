@@ -4,9 +4,15 @@
 
 import React, { useEffect, useState } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
-import { CardElement, Elements, useElements, useStripe } from '@stripe/react-stripe-js'
+import {
+  CardElement,
+  Elements,
+  useElements,
+  useStripe,
+} from '@stripe/react-stripe-js'
+import { connect } from 'react-redux'
+import userActions from '../redux/actions/userActions'
 import styles from '../styles/rafacard.module.css'
-import axios from 'axios'
 
 const CARD_OPTIONS = {
   iconStyle: 'solid',
@@ -38,7 +44,16 @@ const CardField = ({ onChange }) => (
   </div>
 )
 
-const Field = ({ label, id, type, placeholder, required, autoComplete, value, onChange }) => (
+const Field = ({
+  label,
+  id,
+  type,
+  placeholder,
+  required,
+  autoComplete,
+  value,
+  onChange,
+}) => (
   <div className={styles.FormRow}>
     <label htmlFor={id} className={styles.FormRowLabel}>
       {label}
@@ -83,22 +98,27 @@ const ErrorMessage = ({ children }) => (
 )
 
 const ResetButton = ({ onClick }) => (
-  <button type='button' className={styles.ResetButton} onClick={onClick}>
+  <button
+    className={[styles.SubmitButton, { height: '5vh' }]}
+    onClick={onClick}
+  >
     <svg width='32px' height='32px' viewBox='0 0 32 32'>
       <path
         fill='#FFF'
         d='M15,7.05492878 C10.5000495,7.55237307 7,11.3674463 7,16 C7,20.9705627 11.0294373,25 16,25 C20.9705627,25 25,20.9705627 25,16 C25,15.3627484 24.4834055,14.8461538 23.8461538,14.8461538 C23.2089022,14.8461538 22.6923077,15.3627484 22.6923077,16 C22.6923077,19.6960595 19.6960595,22.6923077 16,22.6923077 C12.3039405,22.6923077 9.30769231,19.6960595 9.30769231,16 C9.30769231,12.3039405 12.3039405,9.30769231 16,9.30769231 L16,12.0841673 C16,12.1800431 16.0275652,12.2738974 16.0794108,12.354546 C16.2287368,12.5868311 16.5380938,12.6540826 16.7703788,12.5047565 L22.3457501,8.92058924 L22.3457501,8.92058924 C22.4060014,8.88185624 22.4572275,8.83063012 22.4959605,8.7703788 C22.6452866,8.53809377 22.5780351,8.22873685 22.3457501,8.07941076 L22.3457501,8.07941076 L16.7703788,4.49524351 C16.6897301,4.44339794 16.5958758,4.41583275 16.5,4.41583275 C16.2238576,4.41583275 16,4.63969037 16,4.91583275 L16,7 L15,7 L15,7.05492878 Z M16,32 C7.163444,32 0,24.836556 0,16 C0,7.163444 7.163444,0 16,0 C24.836556,0 32,7.163444 32,16 C32,24.836556 24.836556,32 16,32 Z'
       />
     </svg>
+    RESET
   </button>
 )
 
-const CheckoutForm = ({ setPaymentMethod, paymentMethod }) => {
+const CheckoutForm = ({ updateUser }) => {
   const stripe = useStripe()
   const elements = useElements()
   const [error, setError] = useState(null)
   const [cardComplete, setCardComplete] = useState(false)
   const [processing, setProcessing] = useState(false)
+  const [paymentMethod, setPaymentMethod] = useState(null)
   const [billingDetails, setBillingDetails] = useState({
     email: '',
     phone: '',
@@ -135,6 +155,10 @@ const CheckoutForm = ({ setPaymentMethod, paymentMethod }) => {
       setError(payload.error)
     } else {
       setPaymentMethod(payload.paymentMethod)
+      updateUser({
+        action: 'addPaymentCard',
+        newPaymentCard: payload.paymentMethod,
+      })
     }
   }
 
@@ -148,15 +172,15 @@ const CheckoutForm = ({ setPaymentMethod, paymentMethod }) => {
       name: '',
     })
   }
-  console.log(paymentMethod)
 
   return paymentMethod ? (
     <div className={styles.Result}>
-      <div className={styles.ResultTitle} role='alert'>
+      {/* <div className={styles.ResultTitle} role='alert'>
         Payment successful
-      </div>
+      </div> */}
       <div className={styles.ResultMessage}>
-        Thanks for trying Stripe Elements. No money was charged, but we generated a PaymentMethod: {paymentMethod.id}
+        Thanks for trying Stripe Elements. No money was charged, but we
+        generated a PaymentMethod: {paymentMethod.id}
       </div>
       <ResetButton onClick={reset} />
     </div>
@@ -210,7 +234,7 @@ const CheckoutForm = ({ setPaymentMethod, paymentMethod }) => {
       </fieldset>
       {error && <ErrorMessage>{error.message}</ErrorMessage>}
       <SubmitButton processing={processing} error={error} disabled={!stripe}>
-        Pay $25
+        Agregar método de pago
       </SubmitButton>
     </form>
   )
@@ -230,84 +254,17 @@ const stripePromise = loadStripe(
   'pk_test_51JiHmiD8MtlvyDMXOy1Xz9IRz7S6hXvSX3YorvlFJSNbByoEHqgmIhvVuOuYgA3PiOR9hxBM0QzQcf6OlJs4VYgI00pB5OSjXZ'
 )
 
-const Card = () => {
-  const [paymentMethod, setPaymentMethod] = useState(null)
+const Card = ({ updateUser }) => {
   return (
     <div className={styles.AppWrapper}>
       <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
-        <CheckoutForm setPaymentMethod={setPaymentMethod} paymentMethod={paymentMethod} />
-      </Elements>
-      <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
-        <CheckoutForm2 paymentMethod={paymentMethod} />
+        <CheckoutForm updateUser={updateUser} />
       </Elements>
     </div>
   )
 }
-
-export default Card
-
-const CheckoutForm2 = ({ paymentMethod }) => {
-  const [succeeded, setSucceeded] = useState(false)
-  const [error, setError] = useState(null)
-  const [processing, setProcessing] = useState('')
-  const [disabled, setDisabled] = useState(false)
-  const [clientSecret, setClientSecret] = useState('')
-  const stripe = useStripe()
-  const elements = useElements()
-
-  useEffect(() => {
-    // Create PaymentIntent as soon as the page loads
-    createPayment()
-  }, [])
-
-  const createPayment = async () => {
-    let res = await axios.post('http://localhost:4000/api/create-payment-intent', { items: [{ id: 'xl-tshirt' }] })
-    console.log(res.data)
-    setClientSecret(res.data.clientSecret)
-  }
-
-  const handleChange = async (event) => {
-    // Listen for changes in the CardElement
-    // and display any errors as the customer types their card details
-    setDisabled(event.empty)
-    setError(event.error ? event.error.message : '')
-  }
-
-  const handleSubmit = async (ev) => {
-    ev.preventDefault()
-    setProcessing(true)
-
-    const payload = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: paymentMethod.id,
-    })
-    // console.log(elements.getElement(CardElement))
-    if (payload.error) {
-      setError(`Payment failed ${payload.error.message}`)
-      setProcessing(false)
-    } else {
-      setError(null)
-      setProcessing(false)
-      setSucceeded(true)
-    }
-  }
-
-  return (
-    <form id='payment-form' onSubmit={handleSubmit}>
-      <CardElement id='card-element' options={CARD_OPTIONS} onChange={handleChange} />
-      <button disabled={processing || disabled || succeeded} id='submit'>
-        <span id='button-text'>{processing ? <div className='spinner' id='spinner'></div> : 'Pay now'}</span>
-      </button>
-      {/* Show any error that happens when processing the payment */}
-      {error && (
-        <div className='card-error' role='alert'>
-          {error}
-        </div>
-      )}
-      {/* Show a success message upon completion */}
-      <p className={succeeded ? 'result-message' : 'result-message hidden'}>
-        Payment succeeded, see the result in your
-        <a href={`https://dashboard.stripe.com/test/payments`}> Stripe dashboard.</a> Refresh the page to pay again.
-      </p>
-    </form>
-  )
+const mapDispatchToProps = {
+  updateUser: userActions.updateUser,
 }
+
+export default connect(null, mapDispatchToProps)(Card)

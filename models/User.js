@@ -18,14 +18,6 @@ const addressSchema = new mongoose.Schema({
   neighborhood: { type: String, required: true },
 })
 
-const paymentCardsSchema = new mongoose.Schema({
-  cardNumber: { type: Number, required: true },
-  cardExpDate: { type: String, required: true },
-  cardName: { type: String, required: true },
-  CVC: { type: Number, required: true },
-  DNI: { type: String, required: true },
-})
-
 const productSchema = new mongoose.Schema({
   productId: { type: mongoose.Types.ObjectId, ref: 'product' },
   quantity: Number,
@@ -37,7 +29,7 @@ const userSchema = new mongoose.Schema({
   addresses: [{ type: addressSchema, ref: 'address' }],
   cart: [productSchema],
   favouriteProductsId: [{ type: mongoose.Types.ObjectId, ref: 'product' }],
-  paymentCards: [{ type: paymentCardsSchema, ref: 'payment_cards' }],
+  paymentCards: Array,
 })
 
 module.exports = mongoose.model('user', userSchema)

@@ -12,7 +12,10 @@ const productControllers = {
   },
   manageCart: async (req, res) => {
     const { product, action } = req.body
-    let searchOption = action === 'changeQuantity' ? { 'cart.productId': product.productId } : { _id }
+    let searchOption =
+      action === 'changeQuantity'
+        ? { 'cart.productId': product.productId }
+        : { _id }
     let operation =
       action === 'add'
         ? { $push: { cart: product } }
@@ -24,7 +27,16 @@ const productControllers = {
     let options = { new: true }
     try {
       let user = await User.findOneAndUpdate(searchOption, operation, options)
-      res.json({ success: true, userData: user })
+      res.json({
+        success: true,
+        user: {
+          firstName: user.data.firstName,
+          src: user.data.src,
+          google: user.data.google,
+          admin: user.data.admin,
+        },
+        userData: user,
+      })
     } catch (error) {
       res.json({ success: false, error: error.message })
     }

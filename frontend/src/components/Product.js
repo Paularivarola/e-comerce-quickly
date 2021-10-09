@@ -32,7 +32,7 @@ const Product = ({ product, setMod, ...props }) => {
       if (totalAmount < product.stock) {
         setTotalAmount(totalAmount + 1)
       } else {
-        alert("ha llegado al límite de este producto")
+        alert('ha llegado al límite de este producto')
       }
     } else {
       if (totalAmount > 1) setTotalAmount(totalAmount - 1)
@@ -90,11 +90,17 @@ const Product = ({ product, setMod, ...props }) => {
 
             <div className={styles.order}>
               <div className={styles.amount}>
-                <p className={styles.amountButton} onClick={() => amount('res')}>
+                <p
+                  className={styles.amountButton}
+                  onClick={() => amount('res')}
+                >
                   -
                 </p>
                 <p>{totalAmount}</p>
-                <p className={styles.amountButton} onClick={() => amount('sum')}>
+                <p
+                  className={styles.amountButton}
+                  onClick={() => amount('sum')}
+                >
                   +
                 </p>
               </div>
@@ -113,11 +119,23 @@ const Product = ({ product, setMod, ...props }) => {
                   <h3 className={styles.h3}>Tamaño papas</h3>
                   {sizeFries.map((size, index) => (
                     <div key={index}>
-                      <input type='radio' name='extras' value={size.size} id={size.size} onClick={() => addFries(size.size)} defaultChecked={size.cost === 0 && 'checked'} />
+                      <input
+                        type='radio'
+                        name='extras'
+                        value={size.size}
+                        id={size.size}
+                        onClick={() => addFries(size.size)}
+                        defaultChecked={size.cost === 0 && 'checked'}
+                      />
 
                       <label className={styles.input} htmlFor={size.size}>
                         {size.size}
-                        {size.cost !== 0 && <span className={styles.span}> (USD {size.cost})</span>}
+                        {size.cost !== 0 && (
+                          <span className={styles.span}>
+                            {' '}
+                            (USD {size.cost})
+                          </span>
+                        )}
                       </label>
                     </div>
                   ))}
@@ -127,10 +145,17 @@ const Product = ({ product, setMod, ...props }) => {
                 <h3 className={styles.h3}>Extras</h3>
                 {extrasChoices.map((extra, index) => (
                   <div key={index}>
-                    <input type='checkbox' name='extras' value={extra.type} id={extra.type} onClick={() => addExtras(extra.type)} />
+                    <input
+                      type='checkbox'
+                      name='extras'
+                      value={extra.type}
+                      id={extra.type}
+                      onClick={() => addExtras(extra.type)}
+                    />
 
                     <label className={styles.input} htmlFor={extra.type}>
-                      {extra.type} <span className={styles.span}>(USD {extra.cost})</span>
+                      {extra.type}{' '}
+                      <span className={styles.span}>(USD {extra.cost})</span>
                     </label>
                   </div>
                 ))}
@@ -148,6 +173,7 @@ const Product = ({ product, setMod, ...props }) => {
 }
 const mapDispachToProps = {
   getProd: productActions.getProducts,
+  manageCart: productActions.manageCart,
 }
 
 export default connect(null, mapDispachToProps)(Product)

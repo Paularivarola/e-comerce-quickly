@@ -44,9 +44,6 @@ const Header = (props) => {
             <NavLink className={styles.textRoute} to='/'>
               Promos
             </NavLink>
-            <NavLink className={styles.textRoute} to='/'>
-              Pedidos
-            </NavLink>
             <NavLink className={styles.textRoute} activeClassName={styles.active} to='/contact'>
               Contacto
             </NavLink>
