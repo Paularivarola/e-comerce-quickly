@@ -128,7 +128,7 @@ const SignForm = (props) => {
               <Box
                 component="form"
                 sx={{
-                  '& .MuiTextField-root': { m: 2, width: '25ch' },
+                  '& .MuiTextField-root': { m: 2, width: '40ch' },
                 }}
                 noValidate
                 autoComplete="off"
@@ -144,7 +144,6 @@ const SignForm = (props) => {
                     onChange={inputHandler}
                     color="warning"
                     size="small"
-                    fullWidth 
                     // error
                     // helperText="Incorrect entry."
                   />
@@ -159,7 +158,6 @@ const SignForm = (props) => {
                     defaultValue={user.password}
                     color="warning"
                     size="small"
-                    fullWidth 
                     // error
                     // helperText="Incorrect entry."
                   />
@@ -169,7 +167,7 @@ const SignForm = (props) => {
               <Box
                 component="form"
                 sx={{
-                  '& .MuiTextField-root': { m: 1.5, width: '25ch' },
+                  '& .MuiTextField-root': { m: 1.5, width: '30ch' },
                 }}
                 noValidate
                 autoComplete="off"
@@ -250,21 +248,15 @@ const SignForm = (props) => {
                     />
                   </div>
                   <div className={styles.boxFile}>
-                    <input className={styles.contact} type='file' name='src' placeholder='Agregá una foto de perfil' onChange={inputHandler} defaultValue={user.src} />
+                    <label htmlFor='Foto'>
+                      <span className={styles.submitButton}>
+                        {user?.src? 'Foto cargada' : 'Cargar foto de perfil'}
+                      </span>
+                    </label>
+                    <input id='Foto' style={{display: 'none'}} type='file' name='src' placeholder='Agregá una foto de perfil' onChange={inputHandler} defaultValue={user.src} />
                   </div>
                 </div>
               </Box>
-              // <form className={styles.boxForm}>
-              //   <div className={styles.nameContent}>
-              //     <input className={styles.name} type='text' name='firstName' placeholder='Ingresa tu nombre...' onChange={inputHandler} defaultValue={user.firstName} />
-              //     <input className={styles.name} type='text' name='lastName' placeholder='Ingresa tu apellido...' onChange={inputHandler} defaultValue={user.lastName} />
-              //   </div>
-              //   <div className={styles.contactContent}>
-              //     <input className={styles.contact} type='text' name='email' placeholder='Ingresa tu email...' onChange={inputHandler} defaultValue={user.email} />
-              //     <input className={styles.contact} type='password' name='password' placeholder='Crea una contraseña...' onChange={inputHandler} defaultValue={user.password} />
-              //     <input className={styles.contact} type='password' name='repPass' placeholder='Repite la contraseña...' onChange={inputHandler} defaultValue={user.repPass} />
-              //   </div>
-              // </form>
             )}
               <span className={styles.submitButton} onClick={submit}>
                 Enviar!
