@@ -33,6 +33,7 @@
 }
 .text {
     color: slategray;
+	font-weight: 400;
 }
 .text span {
     color: tomato;
