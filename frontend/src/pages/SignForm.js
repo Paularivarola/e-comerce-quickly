@@ -128,7 +128,7 @@ const SignForm = (props) => {
               <Box
                 component="form"
                 sx={{
-                  '& .MuiTextField-root': { m: 2, width: '40ch' },
+                  '& .MuiTextField-root': { m: 2, width: '30ch' },
                 }}
                 noValidate
                 autoComplete="off"
@@ -249,7 +249,7 @@ const SignForm = (props) => {
                   </div>
                   <div className={styles.boxFile}>
                     <label htmlFor='Foto'>
-                      <span className={styles.submitButton}>
+                      <span className={styles.submitPhoto}>
                         {user?.src? 'Foto cargada' : 'Cargar foto de perfil'}
                       </span>
                     </label>
