@@ -12,6 +12,7 @@ const adminProductControllers = {
       img,
       extras,
       papas,
+      score,
     } = req.body
     // const { key } = req.user.data.admin
     try {
@@ -25,6 +26,7 @@ const adminProductControllers = {
         price,
         ingredients,
         stock,
+        score: score || Math.random() * 2 + 3,
         extras: extras || false,
         papas: papas || false,
       })

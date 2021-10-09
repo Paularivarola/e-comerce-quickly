@@ -163,7 +163,6 @@ const userActions = {
             Authorization: 'Bearer ' + token,
           },
         })
-        console.log(res.data)
         return dispatch({
           type: 'LOG_IN',
           payload: { ...res.data, token, keep: true },

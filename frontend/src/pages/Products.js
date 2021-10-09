@@ -8,13 +8,28 @@ import { BsFillCaretRightFill } from 'react-icons/bs'
 import Product from '../components/Product'
 import { useEffect, useState } from 'react'
 import productActions from '../redux/actions/productActions'
+import NavLateral from '../components/NavLateral'
 
 const Products = (props) => {
   const [mod, setMod] = useState(false)
   const [product, setProduct] = useState(null)
+  const [products, setProducts] = useState([])
+
   useEffect(() => {
     props.getProducts()
+    props.history.push('/products/all')
   }, [])
+  useEffect(() => {
+    setProducts(
+      props.products.filter((prod) => {
+        let path =
+          window.location.pathname.split('/')[
+            window.location.pathname.split('/').length - 1
+          ]
+        return path === 'all' || path === prod.category
+      })
+    )
+  }, [window.location.pathname, props.products])
 
   const setModal = (bool, product) => {
     setMod(bool)
@@ -24,6 +39,16 @@ const Products = (props) => {
   window.onclick = (e) => {
     if (e.target.dataset.modal === 'closeModal') setMod(false)
   }
+
+  const navItems = [
+    { page: 'products', comp: 'all', name: 'todos' },
+    ...props.products
+      .map((prod) => Object.values(prod)[3])
+      .filter((cat, index, array) => index === array.indexOf(cat))
+      .map((cat) => {
+        return { page: 'products', comp: cat, name: cat }
+      }),
+  ]
 
   return (
     <div className={styles.mainProducts}>
@@ -41,65 +66,16 @@ const Products = (props) => {
           <button className={styles.carritoBtn}>
             <MdShoppingCart
               style={{ color: 'white', fontSize: '1.8em', marginRight: '5%' }}
-            />{' '}
+            />
             Carrito
           </button>
         </div>
       </div>
       <div className={styles.productsGrid}>
-        <div className={styles.listBox}>
-          <button className={styles.categoryBtn}>
-            <p>Categorias</p>
-            <BsFillCaretRightFill
-              style={{ color: '#fe6849', fontSize: '1.8em' }}
-            />
-          </button>
-          <button className={styles.categoryBtn}>
-            <p>Categorias</p>
-            <BsFillCaretRightFill
-              style={{ color: '#fe6849', fontSize: '1.8em' }}
-            />
-          </button>
-          <button className={styles.categoryBtn}>
-            <p>Categorias</p>
-            <BsFillCaretRightFill
-              style={{ color: '#fe6849', fontSize: '1.8em' }}
-            />
-          </button>
-          <button className={styles.categoryBtn}>
-            <p>Categorias</p>
-            <BsFillCaretRightFill
-              style={{ color: '#fe6849', fontSize: '1.8em' }}
-            />
-          </button>
-          <button className={styles.categoryBtn}>
-            <p>Categorias</p>
-            <BsFillCaretRightFill
-              style={{ color: '#fe6849', fontSize: '1.8em' }}
-            />
-          </button>
-          <button className={styles.categoryBtn}>
-            <p>Categorias</p>
-            <BsFillCaretRightFill
-              style={{ color: '#fe6849', fontSize: '1.8em' }}
-            />
-          </button>
-          <button className={styles.categoryBtn}>
-            <p>Categorias</p>
-            <BsFillCaretRightFill
-              style={{ color: '#fe6849', fontSize: '1.8em' }}
-            />
-          </button>
-          <button className={styles.categoryBtn}>
-            <p>Categorias</p>
-            <BsFillCaretRightFill
-              style={{ color: '#fe6849', fontSize: '1.8em' }}
-            />
-          </button>
-        </div>
+        <NavLateral navItems={navItems} />
         <div className={styles.gridBox}>
           <div className={styles2.products}>
-            {props.products.map((prod, index) => (
+            {products.map((prod, index) => (
               <ProductCard
                 product={prod}
                 key={'product' + index}

@@ -39,7 +39,11 @@ const CARD_OPTIONS = {
 }
 
 const CardField = ({ onChange }) => (
-  <div style={{ padding: '2vh' }}>
+  <div
+    style={{
+      padding: '2vh',
+    }}
+  >
     <CardElement options={CARD_OPTIONS} onChange={onChange} />
   </div>
 )

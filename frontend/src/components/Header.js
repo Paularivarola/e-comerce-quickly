@@ -132,8 +132,10 @@ const Header = (props) => {
                     </NavLink>
                     <NavLink
                       className={styles.textRoute}
-                      onClick={() => props.logOut()}
-                      onClick={() => setUserMenu(false)}
+                      onClick={() => {
+                        props.logOut()
+                        setUserMenu(false)
+                      }}
                       to='/'
                     >
                       Salir

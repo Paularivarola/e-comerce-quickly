@@ -90,7 +90,7 @@ const ProductCard = ({ product, setModal, user, userData, favHandler }) => {
                 style={{ backgroundColor: 'yelow' }}
                 name='half-rating'
                 defaultValue={product.score}
-                precision={0.5}
+                precision={0.1}
               />
             )}
           </Stack>
