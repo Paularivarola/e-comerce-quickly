@@ -6,9 +6,11 @@ import Addresses from "../components/Addresses"
 const CheackOut = ({userData}) => {
 	const [delivery, setDelivery] = useState("")
 	const [viewAddress, setViewAddress] = useState("")
-
+	const [viewCard, setViewCard] = useState("")
 	const changeDelivery = (delivery) => {
 		setDelivery(delivery)
+		setViewAddress("")
+		setViewCard("")
 	}
 	const [user, setUser] =useState({
 		firstName: userData?.data.firstName || "",
@@ -93,39 +95,40 @@ const CheackOut = ({userData}) => {
 							</div>	
 						</div> 
 	
+
 	const changeViewAddress = (action) => {
 		setViewAddress(action)
 	}
-	
-	const emailRef = useRef()
-	const sendForm = () => {
-		if(emailRef.current?.value !== user.email) return alert("tenes el mail mal pa")
-		let verificationAddress = Object.values(addAddress).some(add => add === "")
-		let verificationUser = Object.values(user).some(user => user === "")
-		if(verificationUser || verificationAddress) return alert("Tenes que completar todos los campos paaaa")
-		
+	const changeViewCard = (action) => {
+		setViewCard(action)
 	}
-	console.log(emailRef.current?.value)
-	return(
-		<div className={styles.containAll}>
-			<div className={styles.containForm}>
-				<div className={styles.containButtonsDelivery}>
-					<button onClick={() =>changeDelivery("withdraw")}>Retirar</button>
-					<button onClick={() =>changeDelivery("send")}>Envio</button>
+	const card = <div>
+					<input type="text" placeholder="tarjeta"/>
+					<input type="text" placeholder="code"/>
 				</div>
-				<div className={styles.containFormDelivery}>
-				{!userData && <h3 className={styles.titleLogIn} >si tenes cuenta, ingresa</h3>}
-					{delivery !== "" && formProfile}
-					{delivery === "withdraw" 
-					? 
-					<h1 >estamos en retirar</h1>
-					: 
-					delivery === "send" 
-					? 
-					<div>
-						{userData 
-						? 
-						<div>
+
+
+	const cardViewPage =<div>
+							<div className={styles.containButtonsDelivery}>
+								<button onClick={() => changeViewCard("add")}>Agregar Tarjeta</button>
+								<button onClick={() => changeViewCard("get")}>Mi Billetera</button>		
+							</div>
+							{viewCard === "" 
+							? 
+							<div className={styles.tittleSelect}>
+								<h1>Selecciona un metodo para el pago</h1>	
+							</div>
+							:
+							viewCard === "add" 
+								? card 
+								:<div className={styles.containAddressCard}>
+									{array.map(map => <Addresses map={map} key={map.id}/>)} 
+								</div>
+							}
+						</div>
+
+
+	const viewCardPage = <div>
 							<div className={styles.containButtonsDelivery}>
 								<button onClick={() => changeViewAddress("add")}>Agregar Direccion</button>
 								<button onClick={() => changeViewAddress("get")}>Mis Direcciones</button>	
@@ -140,14 +143,67 @@ const CheackOut = ({userData}) => {
 								? formAddress 
 								:<div className={styles.containAddressCard}>
 									{array.map(map => <Addresses map={map} key={map.id}/>)} 
-								 </div>
+								</div>
 							}
-							<div>
+							{cardViewPage}
+					</div>
 
-							</div>
-						</div>		
+
+
+	const emailRef = useRef()
+	const sendForm = () => {
+		if(emailRef.current?.value !== user.email) return alert("tenes el mail mal pa")
+		let verificationAddress = Object.values(addAddress).some(add => add === "")
+		let verificationUser = Object.values(user).some(user => user === "")
+		if(delivery === "send"){
+			if(verificationUser || verificationAddress) return alert("Tenes que completar todos los campos paaaa")
+		}else{
+			if(verificationUser) return alert("tenes que completar los campos chupappipi")
+		}
+		alert(" todo bien padre ")
+		
+	}
+	return(
+		<div className={styles.containAll}>
+			<div className={styles.containForm}>
+				<div className={styles.containButtonsDelivery}>
+					<button onClick={() =>changeDelivery("withdraw")}>Retirar</button>
+					<button onClick={() =>changeDelivery("send")}>Envio</button>
+				</div>
+				<div className={styles.containFormDelivery}>
+				{!userData && <h3 className={styles.titleLogIn} >si tenes cuenta, ingresa</h3>}
+					{delivery !== "" && formProfile}
+					{delivery === "withdraw" 
+					? 
+					<>
+						<div className={styles.containMapWithdraw}>
+							<h1>aca va el mapa perri</h1>
+						</div>
+						{userData ? 
+						cardViewPage
+						:
+						<div className={styles.containCardSend}>
+							<h2>Ingrese su tarjeta</h2>
+							{card}
+						</div>	
+						}
+					</>	
+					: 
+					delivery === "send" 
+					? 
+					<div>
+						{userData 
+						? 
+						viewCardPage		
 						: 
-						<h1>no tenes cuenta perri</h1>}
+						<>
+							{formAddress}
+							<div className={styles.containCardSend}>
+								<h2>Ingrese su tarjeta</h2>
+								{card}
+							</div>	
+						</>
+						}
 					</div>
 					: 
 					<div  className={styles.tittleSelect}>

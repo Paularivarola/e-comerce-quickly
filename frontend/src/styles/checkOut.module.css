@@ -1,7 +1,7 @@
 div.containAll{
 	display: flex;
 	width: 100%;
-	height: 110vh;
+	height: 140vh;
 	padding: 1rem;
 }
 
@@ -225,4 +225,26 @@ div.contiainInputsHeader{
 	display: flex;
 	align-items: center;
 	width: 100%;
+}
+
+div.containMapWithdraw{
+	height: 40vh;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: burlywood;
+}
+div.containMapWithdraw h1{
+	height: 40vh;
+	text-align: center;
+	align-items: center;
+}
+
+div.containCardSend{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 40vh;
 }
