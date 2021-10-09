@@ -119,3 +119,7 @@
 .span {
   font-weight: 600;
 }
+
+.calification svg {
+  color: rgb(248, 202, 48);
+}

@@ -1,14 +1,42 @@
 .main{
     width: 100%;
-    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    position: relative;
 }
 
 .img{
-    position:absolute;
     height: 80vh;
+}
+
+.div{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.h1{
+    color: #fe6849;
+}
+
+.p{
+    font-size: 1.25rem;
+}
+
+.button{
+    color: black;
+    text-decoration: none;
+    align-self: flex-end;
+    margin-top: 3rem;
+    padding: 0.5rem;
+    font-weight: 600;
+    background-color: #fe6849;
+    border-radius: 5px;
+}
+
+.button:hover{
+    color: white;
+    text-decoration: underline;
+    cursor: pointer;
 }
