@@ -94,7 +94,6 @@ const userControllers = {
     const {
       action,
       userData,
-      productId,
       newPaymentCard,
       paymentCardId,
       newAddress,
@@ -131,10 +130,6 @@ const userControllers = {
           }
         : action === 'updatePass'
         ? { $set: { 'data.password': password } }
-        : action === 'addFav'
-        ? { $push: { favs: productId } }
-        : action === 'deleteFav'
-        ? { $pull: { favs: productId } }
         : action === 'addPaymentCard'
         ? { $push: { paymentCards: newPaymentCard } }
         : action === 'deletePaymentCard'

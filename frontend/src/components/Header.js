@@ -9,7 +9,8 @@ import socketActions from '../redux/actions/socketActions'
 const Header = (props) => {
   const [userMenu, setUserMenu] = useState(false)
   useEffect(() => {
-    localStorage.getItem('socket') && props.setSocketLS(localStorage.getItem('socket'))
+    localStorage.getItem('socket') &&
+      props.setSocketLS(localStorage.getItem('socket'))
     localStorage.getItem('token') && props.verifyToken()
 
     // eslint-disable-next-line
@@ -35,20 +36,43 @@ const Header = (props) => {
         <nav className={styles.containerNavegation}>
           <img className={styles.logo} src='/assets/logoLDC.png' alt='logo' />
           <div className={styles.navegation}>
-            <NavLink className={styles.textRoute} exact activeClassName={styles.active} to='/'>
+            <NavLink
+              className={styles.textRoute}
+              exact
+              activeClassName={styles.active}
+              to='/'
+              onClick={() => setUserMenu(false)}
+            >
               Home
             </NavLink>
-            <NavLink className={styles.textRoute} activeClassName={styles.active} to='/products'>
+            <NavLink
+              className={styles.textRoute}
+              activeClassName={styles.active}
+              to='/products'
+              onClick={() => setUserMenu(false)}
+            >
               Menu
             </NavLink>
-            <NavLink className={styles.textRoute} to='/'>
+            <NavLink
+              className={styles.textRoute}
+              to='/'
+              onClick={() => setUserMenu(false)}
+            >
               Promos
             </NavLink>
-            <NavLink className={styles.textRoute} activeClassName={styles.active} to='/contact'>
+            <NavLink
+              className={styles.textRoute}
+              activeClassName={styles.active}
+              to='/contact'
+              onClick={() => setUserMenu(false)}
+            >
               Contacto
             </NavLink>
           </div>
-          <div className={styles.userData} onClick={() => setUserMenu(!userMenu)}>
+          <div
+            className={styles.userData}
+            onClick={() => setUserMenu(!userMenu)}
+          >
             {props.user && (
               <h2 id='userName' className={styles.userName}>
                 {props.user.data.firstName}
@@ -68,25 +92,50 @@ const Header = (props) => {
               <div className={styles.userMenu}>
                 {!props.user ? (
                   <>
-                    <NavLink className={styles.textRoute} to='/sign-forms/signin'>
+                    <NavLink
+                      className={styles.textRoute}
+                      to='/sign-forms/signin'
+                      onClick={() => setUserMenu(false)}
+                    >
                       Ingresar
                     </NavLink>
-                    <NavLink className={styles.textRoute} to='/sign-forms/signup'>
+                    <NavLink
+                      onClick={() => setUserMenu(false)}
+                      className={styles.textRoute}
+                      to='/sign-forms/signup'
+                    >
                       Registrarse
                     </NavLink>
                   </>
                 ) : (
                   <>
-                    <NavLink className={styles.textRoute} to='/profile/fav'>
+                    <NavLink
+                      className={styles.textRoute}
+                      to='/profile/fav'
+                      onClick={() => setUserMenu(false)}
+                    >
                       Favoritos
                     </NavLink>
-                    <NavLink className={styles.textRoute} to='/profile/his'>
+                    <NavLink
+                      className={styles.textRoute}
+                      to='/profile/his'
+                      onClick={() => setUserMenu(false)}
+                    >
                       Mis Pedidos
                     </NavLink>
-                    <NavLink className={styles.textRoute} to='/profile/data'>
+                    <NavLink
+                      className={styles.textRoute}
+                      to='/profile/data'
+                      onClick={() => setUserMenu(false)}
+                    >
                       Mi Cuenta
                     </NavLink>
-                    <NavLink className={styles.textRoute} onClick={() => props.logOut()} to='/'>
+                    <NavLink
+                      className={styles.textRoute}
+                      onClick={() => props.logOut()}
+                      onClick={() => setUserMenu(false)}
+                      to='/'
+                    >
                       Salir
                     </NavLink>
                   </>

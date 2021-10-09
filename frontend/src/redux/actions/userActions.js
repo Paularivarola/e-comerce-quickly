@@ -114,13 +114,32 @@ const userActions = {
       }
     }
   },
+  favHandler: (body) => {
+    return async (dispatch) => {
+      let token = localStorage.getItem('token')
+      try {
+        let response = await axios.put(`${HOST}/api/products/favs`, body, {
+          headers: {
+            Authorization: 'Bearer ' + token,
+          },
+        })
+        if (!response?.data?.success) throw new Error('Algo salió mal')
+        dispatch({
+          type: 'GET_PRODUCTS',
+          payload: response.data.response,
+        })
+        return response?.data?.success
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  },
   updateUser: ({
     action,
     userData,
     fileImg,
     currentPassword,
     password,
-    productId,
     newPaymentCard,
     paymentCardId,
     newAddress,
@@ -133,7 +152,6 @@ const userActions = {
         userData,
         currentPassword,
         password,
-        productId,
         newPaymentCard,
         paymentCardId,
         newAddress,

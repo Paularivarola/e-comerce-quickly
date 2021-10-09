@@ -3,13 +3,12 @@ import { connect } from 'react-redux'
 import productActions from '../redux/actions/productActions'
 import { ImCancelCircle } from 'react-icons/im'
 import { useEffect, useState } from 'react'
-import Rating from '@mui/material/Rating';
-import Stack from '@mui/material/Stack';
+import Rating from '@mui/material/Rating'
+import Stack from '@mui/material/Stack'
+import Box from '@mui/material/Box'
+import TextField from '@mui/material/TextField'
 
-const Product = ({ product, setMod, ...props }) => {
-  // useEffect(() => {
-  //     props.getProd()
-  // }, [])
+const Product = ({ product, setMod, user, manageCart, ...props }) => {
   const sizeFries = [
     { size: 'Chicas', cost: 0 },
     { size: 'Medianas', cost: 10 },
@@ -23,6 +22,7 @@ const Product = ({ product, setMod, ...props }) => {
   ] //debería venir de props y estar siempre (aunque sea una gaseosa)
 
   const [fries, setFries] = useState('Chicas')
+  const [aclaraciones, setAclaraciones] = useState('')
   const [extras, setExtras] = useState([])
   const [extrasCost, setExtrasCost] = useState(0)
   const [totalAmount, setTotalAmount] = useState(1)
@@ -71,7 +71,15 @@ const Product = ({ product, setMod, ...props }) => {
   }, [unitaryPrice, totalAmount])
 
   const addToCart = () => {
-    console.log('agregar a mi orden!!!')
+    console.log({ papas: sizeFries.find((frie) => frie.size === fries) })
+    console.log(extras)
+    console.log(aclaraciones)
+    console.log(totalAmount)
+    console.log(unitaryPrice)
+    console.log(totalPrice)
+    // manageCart()
+    //alert toast
+    setMod(false)
   }
 
   return (
@@ -84,8 +92,22 @@ const Product = ({ product, setMod, ...props }) => {
             <div className={styles.title}>
               <h1>{product.name}</h1>
               <Stack className={styles.calification} spacing={1}>
-                <Rating className={styles.rating} style={{ backgroundColor: 'yelow' }} name="half-rating" defaultValue={2.5} precision={0.5} />
-                {/* :<Rating name="half-rating-read" defaultValue={2.5} precision={0.5} readOnly /> */}
+                {user ? (
+                  <Rating
+                    className={styles.rating}
+                    style={{ backgroundColor: 'yelow' }}
+                    name='half-rating'
+                    defaultValue={product.score}
+                    precision={0.5}
+                  />
+                ) : (
+                  <Rating
+                    name='half-rating-read'
+                    defaultValue={product.score}
+                    precision={0.5}
+                    readOnly
+                  />
+                )}
               </Stack>
             </div>
 
@@ -120,7 +142,7 @@ const Product = ({ product, setMod, ...props }) => {
 
           <div className={styles.cardPrice}>
             <div className={styles.choices}>
-              {sizeFries.length !== 0 && (
+              {product.papas && (
                 <div>
                   <h3 className={styles.h3}>Tamaño papas</h3>
                   {sizeFries.map((size, index) => (
@@ -148,28 +170,56 @@ const Product = ({ product, setMod, ...props }) => {
                 </div>
               )}
               <div>
-                <h3 className={styles.h3}>Extras</h3>
-                {extrasChoices.map((extra, index) => (
-                  <div key={index}>
-                    <input
-                      type='checkbox'
-                      name='extras'
-                      value={extra.type}
-                      id={extra.type}
-                      onClick={() => addExtras(extra.type)}
-                    />
+                {product.extras && (
+                  <>
+                    <h3 className={styles.h3}>Extras</h3>
+                    {extrasChoices.map((extra, index) => (
+                      <div key={index}>
+                        <input
+                          type='checkbox'
+                          name='extras'
+                          value={extra.type}
+                          id={extra.type}
+                          onClick={() => addExtras(extra.type)}
+                        />
 
-                    <label className={styles.input} htmlFor={extra.type}>
-                      {extra.type}{' '}
-                      <span className={styles.span}>(USD {extra.cost})</span>
-                    </label>
-                  </div>
-                ))}
+                        <label className={styles.input} htmlFor={extra.type}>
+                          {extra.type}{' '}
+                          <span className={styles.span}>
+                            (USD {extra.cost})
+                          </span>
+                        </label>
+                      </div>
+                    ))}
+                  </>
+                )}
               </div>
+              <Box
+                component='form'
+                sx={{
+                  '& .MuiTextField-root': {
+                    m: 1,
+                    width: '25ch',
+                    minHeight: '15ch',
+                  },
+                }}
+                noValidate
+                autoComplete='off'
+              >
+                <TextField
+                  id='outlined-multiline-flexible'
+                  label='Aclaraciones'
+                  multiline
+                  maxRows={4}
+                  rows={4}
+                  value={aclaraciones}
+                  onChange={(e) => setAclaraciones(e.target.value)}
+                />
+              </Box>
             </div>
             <div>
-              <h4>Unidad: USD {unitaryPrice}</h4>
-              <h2>Total: USD {totalPrice}</h2>
+              <h4>Unidad: $ {unitaryPrice}</h4>
+              <h2>Total: $ {totalPrice}</h2>
             </div>
           </div>
         </div>
@@ -177,9 +227,15 @@ const Product = ({ product, setMod, ...props }) => {
     </main>
   )
 }
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.users.user,
+  }
+}
 const mapDispachToProps = {
   getProd: productActions.getProducts,
   manageCart: productActions.manageCart,
 }
 
-export default connect(null, mapDispachToProps)(Product)
+export default connect(mapStateToProps, mapDispachToProps)(Product)

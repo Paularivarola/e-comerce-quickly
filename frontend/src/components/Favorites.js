@@ -5,8 +5,11 @@ import styles3 from '../styles/profile.module.css'
 import ProductCard from './ProductCard'
 import Product from './Product'
 import { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
+import productActions from '../redux/actions/productActions'
+import userActions from '../redux/actions/userActions'
 
-const Favorites = ({ favorites, user }) => {
+const Favorites = ({ userData, products }) => {
   const [mod, setMod] = useState(false)
   const [product, setProduct] = useState(null)
 
@@ -29,8 +32,10 @@ const Favorites = ({ favorites, user }) => {
   return (
     <div className={styles.gridBox}>
       <div className={styles3.boxFav}>
-          <p className={styles3.fovouritesTitle}>¡Estos son tus platos favoritos!</p>
-          <img src='https://i.postimg.cc/B6TqCZmN/compufav.png' alt='imgFav' />
+        <p className={styles3.fovouritesTitle}>
+          ¡Estos son tus platos favoritos!
+        </p>
+        <img src='https://i.postimg.cc/B6TqCZmN/compufav.png' alt='imgFav' />
       </div>
 
       {/* ----- este div de abajo va en un condicional (cuando no haya platos favoritos seleccionados) ------ */}
@@ -47,63 +52,30 @@ const Favorites = ({ favorites, user }) => {
         {mod && <Product product={product} setMod={setMod} />} */}
 
         {/* ----- este solo lo puse para probar cuando haya cards de favoritos ------ */}
-        {products.map((prod, index) => (
-              <ProductCard product={prod} key={'product' + index} setModal={setModal} />
-            ))}
-            {mod && <Product product={product} setMod={setMod} />}
+        {products
+          .filter((prod) => prod.favs.includes(userData._id))
+          .map((prod, index) => (
+            <ProductCard
+              product={prod}
+              key={'product' + index}
+              setModal={setModal}
+            />
+          ))}
+        {mod && <Product product={product} setMod={setMod} />}
       </div>
     </div>
   )
 }
 
-export default Favorites
+const mapStateToProps = (state) => {
+  return {
+    userData: state.users.userData,
+    products: state.products.products,
+  }
+}
+const mapDispatchToProps = {
+  getProducts: productActions.getProducts,
+  updateUser: userActions.updateUser,
+}
 
-let products = [
-  {
-    img: '/assets/pizzas.jpeg',
-    name: 'nombre producto',
-    category: 'categoria',
-    description: 'Acá va a ir toda la descripción del producto que quieran comprar la gentessss',
-    price: 100,
-    ingredients: 'jamon, tomate, muzzarella',
-    stock: 5,
-  },
-  {
-    img: '/assets/pizzas.jpeg',
-    name: 'nombre producto',
-    category: 'categoria',
-    description: 'Acá va a ir toda la descripción del producto que quieran comprar la gentessss',
-    price: 100,
-    ingredients: 'jamon, tomate, muzzarella',
-    stock: 5,
-  },
-  {
-    img: '/assets/pizzas.jpeg',
-    name: 'nombre producto',
-    category: 'categoria',
-    description: 'Acá va a ir toda la descripción del producto que quieran comprar la gentessss',
-    price: 100,
-    ingredients: 'jamon, tomate, muzzarella',
-    stock: 5,
-  },
-  {
-    img: '/assets/pizzas.jpeg',
-    name: 'nombre producto',
-    category: 'categoria',
-    description: 'Acá va a ir toda la descripción del producto que quieran comprar la gentessss',
-    price: 100,
-    ingredients: 'jamon, tomate, muzzarella',
-    stock: 5,
-  },
-  {
-    img: '/assets/pizzas.jpeg',
-    name: 'nombre producto',
-    category: 'categoria',
-    description: 'Acá va a ir toda la descripción del producto que quieran comprar la gentessss',
-    price: 100,
-    ingredients: 'jamon, tomate, muzzarella',
-    stock: 5,
-  },
-]
-
-products = [...products, ...products,]
+export default connect(mapStateToProps, mapDispatchToProps)(Favorites)

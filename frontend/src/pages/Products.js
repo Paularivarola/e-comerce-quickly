@@ -7,15 +7,20 @@ import { connect } from 'react-redux'
 import { BsFillCaretRightFill } from 'react-icons/bs'
 import Product from '../components/Product'
 import { useEffect, useState } from 'react'
+import productActions from '../redux/actions/productActions'
 
 const Products = (props) => {
   const [mod, setMod] = useState(false)
   const [product, setProduct] = useState(null)
+  useEffect(() => {
+    props.getProducts()
+  }, [])
 
   const setModal = (bool, product) => {
     setMod(bool)
     setProduct(product)
   }
+
   window.onclick = (e) => {
     if (e.target.dataset.modal === 'closeModal') setMod(false)
   }
@@ -94,7 +99,7 @@ const Products = (props) => {
         </div>
         <div className={styles.gridBox}>
           <div className={styles2.products}>
-            {products.map((prod, index) => (
+            {props.products.map((prod, index) => (
               <ProductCard
                 product={prod}
                 key={'product' + index}
@@ -112,69 +117,11 @@ const Products = (props) => {
 const mapStateToProps = (state) => {
   return {
     user: state.users.user,
+    products: state.products.products,
   }
 }
+const mapDispatchToProps = {
+  getProducts: productActions.getProducts,
+}
 
-export default connect(mapStateToProps)(Products)
-
-let products = [
-  {
-    img: '/assets/pizzas.jpeg',
-    name: 'nombre producto',
-    category: 'categoria',
-    description:
-      'Acá va a ir toda la descripción del producto que quieran comprar la gentessss',
-    price: 100,
-    ingredients: 'jamon, tomate, muzzarella',
-    stock: 5,
-  },
-  {
-    img: '/assets/pizzas.jpeg',
-    name: 'nombre producto',
-    category: 'categoria',
-    description:
-      'Acá va a ir toda la descripción del producto que quieran comprar la gentessss',
-    price: 100,
-    ingredients: 'jamon, tomate, muzzarella',
-    stock: 5,
-  },
-  {
-    img: '/assets/pizzas.jpeg',
-    name: 'nombre producto',
-    category: 'categoria',
-    description:
-      'Acá va a ir toda la descripción del producto que quieran comprar la gentessss',
-    price: 100,
-    ingredients: 'jamon, tomate, muzzarella',
-    stock: 5,
-  },
-  {
-    img: '/assets/pizzas.jpeg',
-    name: 'nombre producto',
-    category: 'categoria',
-    description:
-      'Acá va a ir toda la descripción del producto que quieran comprar la gentessss',
-    price: 100,
-    ingredients: 'jamon, tomate, muzzarella',
-    stock: 5,
-  },
-  {
-    img: '/assets/pizzas.jpeg',
-    name: 'nombre producto',
-    category: 'categoria',
-    description:
-      'Acá va a ir toda la descripción del producto que quieran comprar la gentessss',
-    price: 100,
-    ingredients: 'jamon, tomate, muzzarella',
-    stock: 5,
-  },
-]
-
-products = [
-  ...products,
-  ...products,
-  ...products,
-  ...products,
-  ...products,
-  ...products,
-]
+export default connect(mapStateToProps, mapDispatchToProps)(Products)

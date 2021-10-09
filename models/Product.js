@@ -11,6 +11,7 @@ const productSchema = new mongoose.Schema({
   papas: Boolean,
   score: { type: Number, defalut: 4.6 },
   stock: { type: Number, required: true },
+  favs: [{ type: mongoose.Types.ObjectId, ref: 'user' }],
 })
 
 const Product = mongoose.model('product', productSchema)

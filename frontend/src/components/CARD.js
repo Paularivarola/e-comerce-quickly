@@ -60,6 +60,12 @@ const Field = ({
     </label>
     <input
       className={styles.FormRowInput}
+      style={{
+        backgroundColor: 'transparent',
+        appearance: 'none',
+        outline: 'none',
+        borderStyle: 'none',
+      }}
       id={id}
       type={type}
       placeholder={placeholder}

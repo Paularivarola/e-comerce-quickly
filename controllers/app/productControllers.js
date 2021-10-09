@@ -10,6 +10,25 @@ const productControllers = {
       res.json({ success: false, error: error.message })
     }
   },
+  favHandler: async (req, res) => {
+    const { action, _id } = req.body
+    // return console.log(req.body)
+    let operation =
+      action === 'addFav'
+        ? { $push: { favs: req.user._id } }
+        : action === 'deleteFav'
+        ? { $pull: { favs: req.user._id } }
+        : null
+
+    try {
+      await Product.findOneAndUpdate({ _id }, operation, { new: true })
+      let products = await Product.find()
+      res.json({ success: true, response: products })
+    } catch (error) {
+      console.log(error)
+      res.json({ succes: false, error: error.message })
+    }
+  },
   manageCart: async (req, res) => {
     const { product, action } = req.body
     let searchOption =

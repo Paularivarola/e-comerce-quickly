@@ -28,7 +28,6 @@ const userSchema = new mongoose.Schema({
   ordersId: [{ type: mongoose.Types.ObjectId, ref: 'order' }],
   addresses: [{ type: addressSchema, ref: 'address' }],
   cart: [productSchema],
-  favouriteProductsId: [{ type: mongoose.Types.ObjectId, ref: 'product' }],
   paymentCards: Array,
 })
 
