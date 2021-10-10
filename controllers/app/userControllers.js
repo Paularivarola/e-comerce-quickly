@@ -224,7 +224,9 @@ const userControllers = {
 module.exports = userControllers
 
 const html = (firstName, action) => {
-  let html =
+  console.log('hola')
+  console.log(action)
+  let mail =
     action === 'sign'
       ? `
       <table style="max-width: 700px; padding: 10px; margin:0 auto; border-collapse: collapse;">
@@ -264,7 +266,7 @@ const html = (firstName, action) => {
      <td style="background-color: #F0F3F5">
        <div style="color: #34495e; margin: 4% 10% 2%; text-align: justify;font-family: sans-serif">
          
-         <h2 style="color: #525252; text-align:center; font-size: 30px;">¡Gracias, Niqui! </h2>
+         <h2 style="color: #525252; text-align:center; font-size: 30px;">¡Gracias, ${firstName}! </h2>
          <h1 style="color: #FE6849; margin: 0 0 7px; text-align:center">Tu pedido ha sido confirmado!</h1>
        
      <div style="width: 100%;margin:20px 0; text-align: center;">
@@ -328,7 +330,7 @@ const html = (firstName, action) => {
        <div style="color: #FE6849; margin: 4% 10% 2%; text-align: center;font-family: sans-serif">
          <h1 style="color: #FE6849; margin: 0 0 7px">Tu pedido fue cancelado</h1>
         
-     <h2 style="color: #525252; margin: 0 10 7px; font-size: 19px; ">Lamentamos mucho lo ocurrido, (Nombre). Estamos trabajando para que no vuelva a ocurrir.   </h2>
+     <h2 style="color: #525252; margin: 0 10 7px; font-size: 19px; ">Lamentamos mucho lo ocurrido, ${firstName}. Estamos trabajando para que no vuelva a ocurrir.   </h2>
           
                    <br>
          
@@ -350,5 +352,5 @@ const html = (firstName, action) => {
      </tr>
      </table>`
       : null
-  return html
+  return mail
 }

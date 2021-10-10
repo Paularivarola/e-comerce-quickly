@@ -4,7 +4,7 @@ import styles2 from '../styles/productCard.module.css'
 import { BiCategory } from 'react-icons/bi'
 import { MdShoppingCart } from 'react-icons/md'
 import { connect } from 'react-redux'
-import { BsFillCaretRightFill } from 'react-icons/bs'
+import Preloader from '../components/Preloader'
 import Product from '../components/Product'
 import { useEffect, useState } from 'react'
 import productActions from '../redux/actions/productActions'
@@ -74,16 +74,20 @@ const Products = (props) => {
       <div className={styles.productsGrid}>
         <NavLateral navItems={navItems} />
         <div className={styles.gridBox}>
-          <div className={styles2.products}>
-            {products.map((prod, index) => (
-              <ProductCard
-                product={prod}
-                key={'product' + index}
-                setModal={setModal}
-              />
-            ))}
-            {mod && <Product product={product} setMod={setMod} />}
-          </div>
+          {products.length === 0 ? (
+            <Preloader />
+          ) : (
+            <div className={styles2.products}>
+              {products.map((prod, index) => (
+                <ProductCard
+                  product={prod}
+                  key={'product' + index}
+                  setModal={setModal}
+                />
+              ))}
+              {mod && <Product product={product} setMod={setMod} />}
+            </div>
+          )}
         </div>
       </div>
     </div>

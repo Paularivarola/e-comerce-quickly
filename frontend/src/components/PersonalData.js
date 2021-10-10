@@ -9,13 +9,52 @@ import InputAdornment from '@mui/material/InputAdornment'
 import { BsPencilSquare, BsCheckSquare, BsXSquare } from 'react-icons/bs'
 import { connect } from 'react-redux'
 
+const MyTextField = ({ name, inputHandler }) => {
+  const [update, setUpdate] = useState(false)
+  const icons = (
+    <InputAdornment position='end'>
+      {!update ? (
+        <IconButton onClick={() => setUpdate(true)} edge='end'>
+          <BsPencilSquare />
+        </IconButton>
+      ) : (
+        <>
+          <IconButton onClick={() => setUpdate(false)} edge='end'>
+            <BsCheckSquare />
+          </IconButton>
+          <IconButton onClick={() => setUpdate(false)} edge='end'>
+            <BsXSquare />
+          </IconButton>
+        </>
+      )}
+    </InputAdornment>
+  )
+
+  return (
+    <TextField
+      type='text'
+      disabled={!update}
+      name='firstName'
+      defaultValue={name}
+      label={'Nombre'}
+      variant='outlined'
+      onChange={inputHandler}
+      InputProps={{
+        endAdornment: icons,
+      }}
+      sx={{
+        '& > :not(style)': { width: '25vw' },
+      }}
+    />
+  )
+}
+
 const PersonalData = ({ user, updateUser }) => {
   const initialState = {
     firstName: user?.firstName,
     lastName: user?.lastName,
   }
   const [userData, setUserData] = useState()
-  const [update, setUpdate] = useState(false)
 
   useEffect(() => {
     setUserData({
@@ -43,34 +82,15 @@ const PersonalData = ({ user, updateUser }) => {
       return value !== initialValues[index]
     })
 
-    if (!valid) {
-      return setUpdate(false)
-    }
+    // if (!valid) {
+    //   return setUpdate(false)
+    // }
     // if(user.firstName && user.lastName && user.email && user.email.includes('@') && user.password && user.repPass && user.password === user.repPass){
     //   aca sale la funcion linda
     // }
     console.log('esta todo bien')
     updateUser({ action: 'updateData', userData })
   }
-
-  const icons = (
-    <InputAdornment position='end'>
-      {!update ? (
-        <IconButton onClick={() => setUpdate(true)} edge='end'>
-          <BsPencilSquare />
-        </IconButton>
-      ) : (
-        <>
-          <IconButton onClick={() => setUpdate(false)} edge='end'>
-            <BsCheckSquare />
-          </IconButton>
-          <IconButton onClick={() => setUpdate(false)} edge='end'>
-            <BsXSquare />
-          </IconButton>
-        </>
-      )}
-    </InputAdornment>
-  )
 
   return (
     <div className={styles.containPersonalData}>
@@ -90,7 +110,12 @@ const PersonalData = ({ user, updateUser }) => {
           }}
         ></div>
       </label>
-      <input id='imgUpdate' type='file' onChange={submitFile} style={{ display: 'none' }} />
+      <input
+        id='imgUpdate'
+        type='file'
+        onChange={submitFile}
+        style={{ display: 'none' }}
+      />
       <div className={styles.containForm}>
         {!user ? (
           <Preloader />
@@ -103,36 +128,15 @@ const PersonalData = ({ user, updateUser }) => {
             noValidate
             autoComplete='off'
           >
-            <TextField
-              type='text'
-              disabled={!update}
-              name='firstName'
-              defaultValue={userData?.firstName}
-              label={'Nombre'}
-              variant='outlined'
-              onChange={inputHandler}
-              InputProps={{
-                endAdornment: icons,
-              }}
-              sx={{
-                '& > :not(style)': { width: '25vw' },
-              }}
+            <MyTextField
+              name={userData?.firstName}
+              inputHandler={inputHandler}
             />
-            <TextField
-              disabled={!update}
-              type='text'
-              name='lastName'
-              defaultValue={userData?.lastName}
-              label={'Apellido'}
-              variant='outlined'
-              onChange={inputHandler}
-              InputProps={{
-                endAdornment: icons,
-              }}
-              sx={{
-                '& > :not(style)': { width: '25vw' },
-              }}
+            <MyTextField
+              name={userData?.lastName}
+              inputHandler={inputHandler}
             />
+
             <TextField
               type='email'
               disabled
@@ -153,7 +157,7 @@ const PersonalData = ({ user, updateUser }) => {
         <div
           className={styles.ImageEdit}
           style={{ backgroundImage: 'url("/assets/edit.png")' }}
-          onClick={() => setUpdate(!update)}
+          // onClick={() => setUpdate(!update)}
         ></div>
       </div>
     </div>
