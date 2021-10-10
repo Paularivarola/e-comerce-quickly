@@ -49,6 +49,13 @@ const userReducer = (state = initialState, action) => {
         ...state,
         socket,
       }
+    case 'HANDLE_CART':
+      localStorage.setItem('cart', JSON.stringify(action.payload.cart))
+      return {
+        ...state,
+        userData: action.payload,
+        cart: action.payload.cart,
+      }
     case 'LOG_OUT':
       localStorage.removeItem('token')
       localStorage.removeItem('socket')

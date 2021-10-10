@@ -7,8 +7,9 @@ import Rating from '@mui/material/Rating'
 import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
+import userActions from '../redux/actions/userActions'
 
-const Product = ({ product, setMod, user, manageCart, ...props }) => {
+const Product = ({ product, setMod, user, userData, manageCart, ...props }) => {
   const friesSizes = [
     { size: 'Chicas', cost: 0 },
     { size: 'Medianas', cost: 10 },
@@ -98,7 +99,7 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
 
   const addToCart = () => {
     console.log(cartItem)
-    // manageCart()
+    manageCart({ cartItem, action: 'add', _id: userData?._id })
     //alert toast
     setMod(false)
   }
@@ -281,11 +282,11 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
 const mapStateToProps = (state) => {
   return {
     user: state.users.user,
+    userData: state.users.userData,
   }
 }
 const mapDispatchToProps = {
-  getProd: productActions.getProducts,
-  manageCart: productActions.manageCart,
+  manageCart: userActions.manageCart,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Product)
