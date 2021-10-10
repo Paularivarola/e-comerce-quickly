@@ -21,6 +21,13 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
     { type: 'Gaseosa 500cc', cost: 35 },
   ] //debería venir de props y estar siempre (aunque sea una gaseosa)
 
+  const drinksChoices = [
+    { type: 'Sin bebida', cost: 0 },
+    { type: 'Coca Cola (500cc)', cost: 100 },
+    { type: 'Sprite (500cc)', cost: 100 },
+    { type: 'Fanta (500cc)', cost: 100 },
+  ]
+
   const [fries, setFries] = useState('Chicas')
   const [aclaraciones, setAclaraciones] = useState('')
   const [extras, setExtras] = useState([])
