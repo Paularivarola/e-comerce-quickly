@@ -18,16 +18,19 @@ const addressSchema = new mongoose.Schema({
   neighborhood: { type: String, required: true },
 })
 
-const productSchema = new mongoose.Schema({
+const cartItemSchema = new mongoose.Schema({
   productId: { type: mongoose.Types.ObjectId, ref: 'product' },
   quantity: Number,
+  fries: Object,
+  extras: Array,
+  drinks: Array,
 })
 
 const userSchema = new mongoose.Schema({
   data: { type: userDataSchema, ref: 'data' },
   ordersId: [{ type: mongoose.Types.ObjectId, ref: 'order' }],
   addresses: [{ type: addressSchema, ref: 'address' }],
-  cart: [productSchema],
+  cart: [cartItemSchema],
   paymentCards: Array,
 })
 

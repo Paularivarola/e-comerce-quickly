@@ -22,10 +22,10 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
     { type: 'Gaseosa 500cc', cost: 35 },
   ]
   const drinksChoices = [
-    {type: "Sin bebida", cost: 0},
-    {type: "Coca Cola (500cc)" , cost: 100},
-    {type: "Sprite (500cc)", cost: 100},
-    {type: "Fanta (500cc)", cost: 100}
+    { type: 'Sin bebida', cost: 0 },
+    { type: 'Coca Cola (500cc)', cost: 100 },
+    { type: 'Sprite (500cc)', cost: 100 },
+    { type: 'Fanta (500cc)', cost: 100 },
   ]
 
   const [fries, setFries] = useState('Chicas')
@@ -38,6 +38,7 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
   const [totalPrice, setTotalPrice] = useState(product.price)
 
   const amount = (operation) => {
+    console.log(product.stock)
     if (operation === 'sum') {
       if (totalAmount < product.stock) {
         setTotalAmount(totalAmount + 1)
@@ -123,24 +124,21 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
           </div>
 
           <div className={styles.div}>
-            <div style={{backgroundImage:`url('${product.img}')`}} className={styles.picture}/>
+            <div
+              style={{ backgroundImage: `url('${product.img}')` }}
+              className={styles.picture}
+            />
             <h3 className={styles.h3}>Descripcion:</h3>
             <p className={styles.text}>{product.description}</p>
           </div>
 
           <div className={styles.order}>
             <div className={styles.amount}>
-              <p
-                className={styles.amountButton}
-                onClick={() => amount('res')}
-              >
+              <p className={styles.amountButton} onClick={() => amount('res')}>
                 -
               </p>
               <p>{totalAmount}</p>
-              <p
-                className={styles.amountButton}
-                onClick={() => amount('sum')}
-              >
+              <p className={styles.amountButton} onClick={() => amount('sum')}>
                 +
               </p>
             </div>
@@ -150,88 +148,87 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
           </div>
         </div>
 
-
         <div className={styles.cardPrice}>
           <div className={styles.choices}>
-            {product.papas && product.extras && <div className={styles.column}>
-              {product.papas && (
-                <div>
-                  <h3 className={styles.h3}>Tamaño papas</h3>
-                  {sizeFries.map((size, index) => (
-                    <div key={index}>
-                      <input
-                        type='radio'
-                        name='extras'
-                        value={size.size}
-                        id={size.size}
-                        onClick={() => addFries(size.size)}
-                        defaultChecked={size.cost === 0 && 'checked'}
-                      />
+            {product.papas && product.extras && (
+              <div className={styles.column}>
+                {product.papas && (
+                  <div>
+                    <h3 className={styles.h3}>Tamaño papas</h3>
+                    {sizeFries.map((size, index) => (
+                      <div key={index}>
+                        <input
+                          type='radio'
+                          name='extras'
+                          value={size.size}
+                          id={size.size}
+                          onClick={() => setFries(size.size)}
+                          defaultChecked={size.cost === 0 && 'checked'}
+                        />
 
-                      <label className={styles.input} htmlFor={size.size}>
-                        {size.size}
-                        {size.cost !== 0 && (
-                          <span className={styles.span}>
-                            {' '}
-                            ${size.cost}
-                          </span>
-                        )}
-                      </label>
-                    </div>
-                  ))}
-                </div>
-              )}
-            {product.extras && (
+                        <label className={styles.input} htmlFor={size.size}>
+                          {size.size}
+                          {size.cost !== 0 && (
+                            <span className={styles.span}> ${size.cost}</span>
+                          )}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {product.extras && (
+                  <div>
+                    <h3 className={styles.h3}>Extras</h3>
+                    {extrasChoices.map((extra, index) => (
+                      <div key={index}>
+                        <input
+                          type='checkbox'
+                          name='extras'
+                          value={extra.type}
+                          id={extra.type}
+                          onClick={() => addExtras(extra.type)}
+                        />
+
+                        <label className={styles.input} htmlFor={extra.type}>
+                          {extra.type}{' '}
+                          <span className={styles.span}>${extra.cost}</span>
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+            <div
+              className={
+                product.papas && product.extras
+                  ? styles.column
+                  : styles.no_column
+              }
+            >
               <div>
-                <h3 className={styles.h3}>Extras</h3>
-                {extrasChoices.map((extra, index) => (
+                <h3 className={styles.h3}>Gaseosa</h3>
+                {drinksChoices.map((option, index) => (
                   <div key={index}>
                     <input
-                      type='checkbox'
+                      type='radio'
                       name='extras'
-                      value={extra.type}
-                      id={extra.type}
-                      onClick={() => addExtras(extra.type)}
+                      value={option.type}
+                      id={option.type}
+                      onClick={() => addDrink(option.type)}
+                      defaultChecked={option.cost === 0 && 'checked'}
                     />
 
-                    <label className={styles.input} htmlFor={extra.type}>
-                      {extra.type}{' '}
-                      <span className={styles.span}>
-                        ${extra.cost}
-                      </span>
+                    <label className={styles.input} htmlFor={option.type}>
+                      {option.type}
+                      {option.cost !== 0 && (
+                        <span className={styles.span}> ${option.cost}</span>
+                      )}
                     </label>
                   </div>
                 ))}
               </div>
-            )}
-            </div>}
-            <div className={(product.papas && product.extras) ? styles.column : styles.no_column}>
-            <div>
-              <h3 className={styles.h3}>Gaseosa</h3>
-              {drinksChoices.map((option, index) => (
-                <div key={index}>
-                  <input
-                    type='radio'
-                    name='extras'
-                    value={option.type}
-                    id={option.type}
-                    onClick={() => addDrink(option.type)}
-                    defaultChecked={option.cost === 0 && 'checked'}
-                  />
-
-                  <label className={styles.input} htmlFor={option.type}>
-                    {option.type}
-                    {option.cost !== 0 && (
-                      <span className={styles.span}>
-                        {' '}
-                        ${option.cost}
-                      </span>
-                    )}
-                  </label>
-                </div>
-              ))}
-            </div>
-            <Box
+              <Box
                 component='form'
                 sx={{
                   '& .MuiTextField-root': {
@@ -242,7 +239,7 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
                 }}
                 noValidate
                 autoComplete='off'
-            >
+              >
                 <TextField
                   id='outlined-multiline-flexible'
                   label='Aclaraciones'
@@ -252,7 +249,7 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
                   value={aclaraciones}
                   onChange={(e) => setAclaraciones(e.target.value)}
                 />
-            </Box>
+              </Box>
             </div>
           </div>
           <div>
