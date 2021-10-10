@@ -68,7 +68,7 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
   }, [unitaryPrice, totalAmount])
 
   const addToCart = () => {
-    console.log({ papas: sizeFries.find((frie) => frie.size === fries) })
+    console.log(sizeFries.find((frie) => frie.size === fries))
     console.log(extras)
     console.log(aclaraciones)
     console.log(totalAmount)
