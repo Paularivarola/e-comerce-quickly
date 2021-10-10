@@ -33,24 +33,31 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
     fries: friesSizes[0],
     extras: [],
     drink: drinkChoices[0],
-    unitaryPrice: 0,
+    unitaryPrice: product.price,
     totalAmount: 1,
-    totalPrice: product._id,
+    totalPrice: product.price,
   }
   const [cartItem, setCartItem] = useState(initialCartItem)
 
   const amount = (operation) => {
-    console.log(product.stock)
-    const { totalAmount } = cartItem
+    const { totalAmount, unitaryPrice } = cartItem
     if (operation === 'sum') {
       if (totalAmount < product.stock) {
-        setCartItem({ ...cartItem, totalAmount: totalAmount + 1 })
+        setCartItem({
+          ...cartItem,
+          totalAmount: totalAmount + 1,
+          totalPrice: unitaryPrice * (totalAmount + 1),
+        })
       } else {
         alert('ha llegado al límite de este producto')
       }
     } else {
       if (totalAmount > 1)
-        setCartItem({ ...cartItem, totalAmount: totalAmount - 1 })
+        setCartItem({
+          ...cartItem,
+          totalAmount: totalAmount - 1,
+          totalPrice: unitaryPrice * (totalAmount - 1),
+        })
     }
   }
 
@@ -73,15 +80,21 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
   //   setExtrasCost(amount)
   // }, [extras])
 
-  // useEffect(() => {
-  //   let friesCost = friesSizes.find((size) => size.size === fries).cost
-  //   let drinkCost = drinkChoices.find((option) => option.type === drink).cost
-  //   setUnitaryPrice(product.price + friesCost + extrasCost + drinkCost)
-  // }, [friesSizes, extrasCost, drink])
-
-  // useEffect(() => {
-  //   setTotalPrice(unitaryPrice * totalAmount)
-  // }, [unitaryPrice, totalAmount])
+  useEffect(() => {
+    const { fries, extras, drink, totalAmount } = cartItem
+    let extrasCost = extras.reduce((acc, extra) => acc + extra.cost, 0)
+    setCartItem({
+      ...cartItem,
+      unitaryPrice:
+        product.price +
+        fries.cost +
+        extrasCost +
+        (product.multipleDrinks ? drink.cost : 0),
+      totalPrice: product.multipleDrinks
+        ? (product.price + fries.cost + extrasCost + drink.cost) * totalAmount
+        : (product.price + fries.cost + extrasCost) * totalAmount + drink.cost,
+    })
+  }, [cartItem.fries, cartItem.extras, cartItem.drink])
 
   const addToCart = () => {
     console.log(cartItem)
@@ -159,7 +172,6 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
                           onClick={() =>
                             setCartItem({ ...cartItem, fries: size })
                           }
-                          defaultChecked={size.cost === 0 && 'checked'}
                         />
 
                         <label className={styles.input} htmlFor={size.size}>

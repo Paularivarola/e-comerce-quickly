@@ -20,10 +20,12 @@ const addressSchema = new mongoose.Schema({
 
 const cartItemSchema = new mongoose.Schema({
   productId: { type: mongoose.Types.ObjectId, ref: 'product' },
-  quantity: Number,
   fries: Object,
   extras: Array,
-  drinks: Array,
+  drink: Object,
+  unitaryPrice: Number,
+  totalAmount: Number,
+  totalPrice: Number,
 })
 
 const userSchema = new mongoose.Schema({
