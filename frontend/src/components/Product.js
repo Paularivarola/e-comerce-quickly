@@ -30,6 +30,7 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
   const [totalPrice, setTotalPrice] = useState(product.price)
 
   const amount = (operation) => {
+    console.log(product.stock)
     if (operation === 'sum') {
       if (totalAmount < product.stock) {
         setTotalAmount(totalAmount + 1)
@@ -39,10 +40,6 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
     } else {
       if (totalAmount > 1) setTotalAmount(totalAmount - 1)
     }
-  }
-
-  const addFries = (fries) => {
-    setFries(fries)
   }
 
   const addExtras = (extra) => {
@@ -152,7 +149,7 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
                         name='extras'
                         value={size.size}
                         id={size.size}
-                        onClick={() => addFries(size.size)}
+                        onClick={() => setFries(size.size)}
                         defaultChecked={size.cost === 0 && 'checked'}
                       />
 

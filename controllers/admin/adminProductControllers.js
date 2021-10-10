@@ -14,10 +14,10 @@ const adminProductControllers = {
       papas,
       score,
     } = req.body
-    // const { key } = req.user.data.admin
+    const { key } = req.user.data.admin
     try {
-      // const match = key && bcrypt.compareSync(process.env.SECRETORKEY, key)
-      // if (!match) throw new Error('key error')
+      const match = key && bcrypt.compareSync(process.env.SECRETORKEY, key)
+      if (!match) throw new Error('key error')
       let newProduct = new Product({
         img,
         name,
