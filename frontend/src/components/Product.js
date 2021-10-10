@@ -1,13 +1,11 @@
 import styles from '../styles/product.module.css'
-import { connect } from 'react-redux'
 import productActions from '../redux/actions/productActions'
 import { ImCancelCircle } from 'react-icons/im'
-import { useEffect, useState } from 'react'
+import React , { useEffect, useState } from 'react'
 import Rating from '@mui/material/Rating'
 import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
-import { urlencoded } from 'express'
 
 const Product = ({ product, setMod, user, manageCart, ...props }) => {
   const sizeFries = [
@@ -48,10 +46,9 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
     } else {
       if (totalAmount > 1) setTotalAmount(totalAmount - 1)
     }
-  }
-  const addDrink = (drink) => {
-    setDrink(drink)
-  }
+
+   
+
 
   const addExtras = (extra) => {
     if (!extras.includes(extra)) {
@@ -210,7 +207,7 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
                       name='extras'
                       value={option.type}
                       id={option.type}
-                      onClick={() => addDrink(option.type)}
+                      onClick={() =>  setDrink(option.type)}
                       defaultChecked={option.cost === 0 && 'checked'}
                     />
 
@@ -262,9 +259,9 @@ const mapStateToProps = (state) => {
     user: state.users.user,
   }
 }
-const mapDispachToProps = {
+const mapDispatchToProps = {
   getProd: productActions.getProducts,
   manageCart: productActions.manageCart,
 }
 
-export default connect(mapStateToProps, mapDispachToProps)(Product)
+export default (mapStateToProps, mapDispatchToProps)(Product)
