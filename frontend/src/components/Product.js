@@ -9,7 +9,16 @@ import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import userActions from '../redux/actions/userActions'
 
-const Product = ({ product, setMod, user, userData, manageCart, ...props }) => {
+const Product = ({
+  product,
+  setMod,
+  user,
+  manageCart,
+  edit,
+  editCartItem,
+  userData,
+  ...props
+}) => {
   const friesSizes = [
     { size: 'Chicas', cost: 0 },
     { size: 'Medianas', cost: 10 },
@@ -38,7 +47,9 @@ const Product = ({ product, setMod, user, userData, manageCart, ...props }) => {
     totalAmount: 1,
     totalPrice: product.price,
   }
-  const [cartItem, setCartItem] = useState(initialCartItem)
+  const [cartItem, setCartItem] = useState(
+    edit ? editCartItem : initialCartItem
+  )
 
   const amount = (operation) => {
     const { totalAmount, unitaryPrice } = cartItem
@@ -99,7 +110,11 @@ const Product = ({ product, setMod, user, userData, manageCart, ...props }) => {
 
   const addToCart = () => {
     console.log(cartItem)
-    manageCart({ cartItem, action: 'add', _id: userData?._id })
+    manageCart({
+      cartItem,
+      action: edit ? 'editCartItem' : 'add',
+      _id: userData?._id,
+    })
     //alert toast
     setMod(false)
   }
@@ -173,6 +188,9 @@ const Product = ({ product, setMod, user, userData, manageCart, ...props }) => {
                           onClick={() =>
                             setCartItem({ ...cartItem, fries: size })
                           }
+                          defaultChecked={
+                            size.cost === cartItem.fries.cost && 'checked'
+                          }
                         />
 
                         <label className={styles.input} htmlFor={size.size}>
@@ -196,6 +214,11 @@ const Product = ({ product, setMod, user, userData, manageCart, ...props }) => {
                           value={extra.type}
                           id={extra.type}
                           onClick={() => addExtras(extra)}
+                          defaultChecked={
+                            cartItem.extras.find(
+                              (option) => option.type === extra.type
+                            ) && 'checked'
+                          }
                         />
 
                         <label className={styles.input} htmlFor={extra.type}>
@@ -227,7 +250,9 @@ const Product = ({ product, setMod, user, userData, manageCart, ...props }) => {
                       onClick={() =>
                         setCartItem({ ...cartItem, drink: option })
                       }
-                      defaultChecked={option.cost === 0 && 'checked'}
+                      defaultChecked={
+                        option.cost === cartItem.drink.cost && 'checked'
+                      }
                     />
 
                     <label className={styles.input} htmlFor={option.type}>
