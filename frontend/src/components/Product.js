@@ -2,85 +2,88 @@ import styles from '../styles/product.module.css'
 import { connect } from 'react-redux'
 import productActions from '../redux/actions/productActions'
 import { ImCancelCircle } from 'react-icons/im'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Rating from '@mui/material/Rating'
 import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 
 const Product = ({ product, setMod, user, manageCart, ...props }) => {
-  const sizeFries = [
+  const friesSizes = [
     { size: 'Chicas', cost: 0 },
     { size: 'Medianas', cost: 10 },
     { size: 'Grandes', cost: 20 },
-  ] //debería venir de props y si no existe debe ser []
+  ]
   const extrasChoices = [
     { type: 'Carne', cost: 20 },
     { type: 'Queso', cost: 10 },
     { type: 'Cebolla', cost: 5 },
     { type: 'Gaseosa 500cc', cost: 35 },
-  ] //debería venir de props y estar siempre (aunque sea una gaseosa)
-
-  const drinksChoices = [
+  ]
+  const drinkChoices = [
     { type: 'Sin bebida', cost: 0 },
     { type: 'Coca Cola (500cc)', cost: 100 },
     { type: 'Sprite (500cc)', cost: 100 },
     { type: 'Fanta (500cc)', cost: 100 },
   ]
-  const [fries, setFries] = useState('Chicas')
-  const [drink, setDrink] = useState('Sin bebida')
-  const [aclaraciones, setAclaraciones] = useState('')
-  const [extras, setExtras] = useState([])
-  const [extrasCost, setExtrasCost] = useState(0)
-  const [totalAmount, setTotalAmount] = useState(1)
-  const [unitaryPrice, setUnitaryPrice] = useState(product.price)
-  const [totalPrice, setTotalPrice] = useState(product.price)
+
+  const initialCartItem = {
+    productId: product._id,
+    clarifications: '',
+    fries: friesSizes[0],
+    extras: [],
+    drink: drinkChoices[0],
+    unitaryPrice: 0,
+    totalAmount: 1,
+    totalPrice: product._id,
+  }
+  const [cartItem, setCartItem] = useState(initialCartItem)
 
   const amount = (operation) => {
     console.log(product.stock)
+    const { totalAmount } = cartItem
     if (operation === 'sum') {
       if (totalAmount < product.stock) {
-        setTotalAmount(totalAmount + 1)
+        setCartItem({ ...cartItem, totalAmount: totalAmount + 1 })
       } else {
         alert('ha llegado al límite de este producto')
       }
     } else {
-      if (totalAmount > 1) setTotalAmount(totalAmount - 1)
+      if (totalAmount > 1)
+        setCartItem({ ...cartItem, totalAmount: totalAmount - 1 })
     }
   }
   const addExtras = (extra) => {
-    if (!extras.includes(extra)) {
-      setExtras([...extras, extra])
+    if (!Object.values(cartItem.extras).includes(extra.type)) {
+      setCartItem({ ...cartItem, extras: [...cartItem.extras, extra] })
     } else {
-      setExtras(extras.filter((e) => e !== extra))
+      setCartItem({
+        ...cartItem,
+        extras: cartItem.extras.filter((e) => e.type !== extra.type),
+      })
     }
   }
 
-  useEffect(() => {
-    let amount = 0
-    extrasChoices.forEach((extra) => {
-      if (extras.includes(extra.type)) amount = amount + extra.cost
-    })
-    setExtrasCost(amount)
-  }, [extras])
+  // useEffect(() => {
+  //   let amount = 0
+  //   extrasChoices.forEach((extra) => {
+  //     if (extras.includes(extra.type)) amount = amount + extra.cost
+  //   })
+  //   setExtrasCost(amount)
+  // }, [extras])
 
-  useEffect(() => {
-    let friesCost = sizeFries.find((size) => size.size === fries).cost
-    let drinkCost = drinksChoices.find((option) => option.type === drink).cost
-    setUnitaryPrice(product.price + friesCost + extrasCost + drinkCost)
-  }, [sizeFries, extrasCost, drink])
+  // useEffect(() => {
+  //   let friesCost = friesSizes.find((size) => size.size === fries).cost
+  //   let drinkCost = drinkChoices.find((option) => option.type === drink).cost
+  //   setUnitaryPrice(product.price + friesCost + extrasCost + drinkCost)
+  // }, [friesSizes, extrasCost, drink])
 
-  useEffect(() => {
-    setTotalPrice(unitaryPrice * totalAmount)
-  }, [unitaryPrice, totalAmount])
+  // useEffect(() => {
+  //   setTotalPrice(unitaryPrice * totalAmount)
+  // }, [unitaryPrice, totalAmount])
 
   const addToCart = () => {
-    console.log({ papas: sizeFries.find((frie) => frie.size === fries) })
-    console.log(extras)
-    console.log(aclaraciones)
-    console.log(totalAmount)
-    console.log(unitaryPrice)
-    console.log(totalPrice)
+    console.log(cartItem)
     // manageCart()
     //alert toast
     setMod(false)
@@ -127,7 +130,7 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
               <p className={styles.amountButton} onClick={() => amount('res')}>
                 -
               </p>
-              <p>{totalAmount}</p>
+              <p>{cartItem.totalAmount}</p>
               <p className={styles.amountButton} onClick={() => amount('sum')}>
                 +
               </p>
@@ -140,19 +143,21 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
 
         <div className={styles.cardPrice}>
           <div className={styles.choices}>
-            {product.papas && product.extras && (
+            {product.fries && product.extras && (
               <div className={styles.column}>
-                {product.papas && (
+                {product.fries && (
                   <div>
                     <h3 className={styles.h3}>Tamaño papas</h3>
-                    {sizeFries.map((size, index) => (
+                    {friesSizes.map((size, index) => (
                       <div key={index}>
                         <input
                           type='radio'
                           name='extras'
                           value={size.size}
                           id={size.size}
-                          onClick={() => setFries(size.size)}
+                          onClick={() =>
+                            setCartItem({ ...cartItem, fries: size })
+                          }
                           defaultChecked={size.cost === 0 && 'checked'}
                         />
 
@@ -176,7 +181,7 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
                           name='extras'
                           value={extra.type}
                           id={extra.type}
-                          onClick={() => addExtras(extra.type)}
+                          onClick={() => addExtras(extra)}
                         />
 
                         <label className={styles.input} htmlFor={extra.type}>
@@ -191,21 +196,23 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
             )}
             <div
               className={
-                product.papas && product.extras
+                product.fries && product.extras
                   ? styles.column
                   : styles.no_column
               }
             >
               <div>
                 <h3 className={styles.h3}>Gaseosa</h3>
-                {drinksChoices.map((option, index) => (
+                {drinkChoices.map((option, index) => (
                   <div key={index}>
                     <input
                       type='radio'
-                      name='extras'
+                      name='drinks'
                       value={option.type}
                       id={option.type}
-                      onClick={() => setDrink(option.type)}
+                      onClick={() =>
+                        setCartItem({ ...cartItem, drink: option })
+                      }
                       defaultChecked={option.cost === 0 && 'checked'}
                     />
 
@@ -234,17 +241,23 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
                   id='outlined-multiline-flexible'
                   label='Aclaraciones'
                   multiline
+                  name='clarifications'
                   maxRows={4}
                   rows={4}
-                  value={aclaraciones}
-                  onChange={(e) => setAclaraciones(e.target.value)}
+                  value={cartItem.clarifications}
+                  onChange={(e) =>
+                    setCartItem({
+                      ...cartItem,
+                      clarifications: e.target.value,
+                    })
+                  }
                 />
               </Box>
             </div>
           </div>
           <div>
-            <h4>Unidad: $ {unitaryPrice}</h4>
-            <h2>Total: $ {totalPrice}</h2>
+            <h4>Unidad: $ {cartItem.unitaryPrice}</h4>
+            <h2>Total: $ {cartItem.totalPrice}</h2>
           </div>
         </div>
       </div>
