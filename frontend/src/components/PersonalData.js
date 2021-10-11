@@ -105,15 +105,13 @@ const PersonalData = ({ user, updateUser }) => {
                   ? user.google || user.admin.flag
                     ? user.src
                     : user.src !== 'assets/user.png'
-                    ? 'http://localhost:4000/' + user.src
+                    ? 'https://quickly-food.herokuapp.com/' + user.src
                     : '/assets/user.png'
                   : '/assets/user.png'
               }")`,
             }}
           ></div>
-          <span className={styles.submitPhoto}>
-            Cambiar foto
-          </span>
+          <span className={styles.submitPhoto}>Cambiar foto</span>
         </label>
         <input id='imgUpdate' type='file' onChange={submitFile} style={{ display: 'none' }} />
         <div className={styles.containForm}>
@@ -128,8 +126,8 @@ const PersonalData = ({ user, updateUser }) => {
               noValidate
               autoComplete='off'
             >
-              <MyTextField name={user?.firstName} inputHandler={inputHandler}/>
-              <MyTextField name={user?.lastName} inputHandler={inputHandler}/>
+              <MyTextField name={user?.firstName} inputHandler={inputHandler} />
+              <MyTextField name={user?.lastName} inputHandler={inputHandler} />
               <TextField
                 type='email'
                 disabled
@@ -156,7 +154,7 @@ const PersonalData = ({ user, updateUser }) => {
           ></div>
         </div> */}
       </div>
-      </div>
+    </div>
   )
 }
 
