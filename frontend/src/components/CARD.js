@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 import userActions from '../redux/actions/userActions'
 import styles from '../styles/rafacard.module.css'
 import axios from 'axios'
-const HOST = 'http://localhost:4000'
+const HOST = 'https://quickly-food.herokuapp.com'
 
 const CARD_OPTIONS = {
   iconStyle: 'solid',
