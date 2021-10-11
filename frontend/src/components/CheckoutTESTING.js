@@ -3,7 +3,7 @@ import { loadStripe } from '@stripe/stripe-js'
 import { CardElement, Elements, useElements, useStripe } from '@stripe/react-stripe-js'
 import { connect } from 'react-redux'
 import axios from 'axios'
-
+const HOST = 'https://quickly-food.herokuapp.com'
 const CARD_OPTIONS = {
   iconStyle: 'solid',
   style: {
@@ -70,7 +70,7 @@ const CheckoutForm2 = ({ paymentMethod, customer }) => {
   const createPayment = async () => {
     const cart = JSON.parse(localStorage.getItem('cart'))
     console.log('hola')
-    let res = await axios.post('http://localhost:4000/api/create-payment-intent', { cart, customer })
+    let res = await axios.post(`${HOST}/api/create-payment-intent`, { cart, customer })
     console.log(res.data)
     setpaymentIntent(res.data.paymentIntent.id)
   }
@@ -84,7 +84,7 @@ const CheckoutForm2 = ({ paymentMethod, customer }) => {
     ev.preventDefault()
     setProcessing(true)
 
-    const payload = await axios.post('http://localhost:4000/api/confirm-payment-intent', {
+    const payload = await axios.post(`${HOST}/api/confirm-payment-intent`, {
       paymentIntent,
       payment_method: paymentMethod.id,
       customer,
