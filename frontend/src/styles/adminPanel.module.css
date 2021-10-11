@@ -29,8 +29,8 @@ section.header{
     color: #222;
 }
 
-section.header i{
-    font-size: 27px;
+section.header svg{
+    font-size: 35px;
     color: #cc533a;
     cursor: pointer;
     transition: all 300ms;
@@ -45,8 +45,9 @@ section.header i:hover{
     align-items: center;
 }
 
-.userSection i{
+.userSection svg{
     margin-right: 1em;
+    font-size: 27px !important;
 }
 
 .profilePic{

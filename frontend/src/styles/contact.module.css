@@ -27,7 +27,8 @@
   margin-bottom: 20vh;
 } */
 
-.form input,textarea {
+.form input,
+.form textarea {
   background-color: #eaeaea;
   border-radius: 1vw;
   border: none;

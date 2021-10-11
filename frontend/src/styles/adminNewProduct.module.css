@@ -1,34 +1,138 @@
 .newProductContainer{
-    padding: 5vh 3vw;
+    padding: 0 3vw;
     width: 100%;
     min-height: 79vh;
     background-color: whitesmoke;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 
-.imagePreview{
-    width: 30%;
-    height: 50vh;
-    border: 1px solid #444;
-    margin-right: 1em;
+.newProductContainer svg{
+    font-size: 25px;
+    margin-right: 5px;
+}
+
+.newProductContainer button{
+    background-color: #FE6849;
+}
+
+.newProductContainer button:hover{
+    background-color: #fa7c63;
 }
 
 .newProductContainer form{
-    width: 70%;
+    width: 100%;
+}
+
+.formContainer{
+    width: 98%;
+    display: flex;
+}
+
+.imageContainer{
+    width: 45%;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
-.newProductContainer form .pairInput{
-    width: 100%;
+.imagePreview{
+    width: 95%;
+    height: 50vh;
+    border: 1px solid #444;
+    margin-right: 1em;
+    margin-bottom: 5vh;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.inputContainer{
+    width: 70%;
     display: flex;
-    justify-content: space-around;
-    gap: 30px
 }
 
-.newProductContainer form .pairInput input{
-    width: 70;
-   
+.inputContainer div{
+    margin-right: .5em;
+}
+
+.inputContainer div>div{
+    margin-bottom: .3em;
+}
+
+
+.newProductContainer form input,
+.textarea>div div{
+    background-color: white !important;
+} 
+.ingredientContainer>div div{
+    background-color: white !important;
+}
+
+.newProductContainer form .imageContainer input{
+    background-color: transparent !important;
+}
+
+.newProductContainer>button{
+    align-self: flex-end;
+}
+.ingredientContainer{
+    height: 45vh;
+    overflow-y: scroll;
+    padding: 1vh .5em;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button button{
+    margin-bottom: 3vh;
+}
+
+.button{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ingredientContainer button{
+    margin-bottom: 4vh;
+}
+
+.uploadButton{
+    background-color: #FE6849;
+    color: white;
+    padding: 6px 16px;
+    border-radius: 4px;
+    letter-spacing: 0.02857em;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.875em;
+    box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.uploadButton:hover{
+    box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
+    background-color: #fa7c63;
+}
+
+.newProductContainer>div>span span{
+    background-color: #FE6849;
+}
+
+.newProductContainer>div>span{
+    background-color: #f5beb3;
+}
+
+
+
+.newProductContainer>div p{
+    text-align: center;
 }

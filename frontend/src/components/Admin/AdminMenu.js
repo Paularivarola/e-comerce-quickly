@@ -56,7 +56,7 @@ const AdminMenu = (props) => {
                             id="panel1bh-header"
                         >
                             <Typography sx={{ width: '100%', flexShrink: 0 }}>
-                                <span className={view === 'Clientes' ? `${styles.navItemActive}` : `${styles.navItem}`}>
+                                <span className={styles.navItem}>
                                     <MdPerson />
                                     Clientes
                                 </span>
@@ -71,11 +71,13 @@ const AdminMenu = (props) => {
                                         Ver Todos
                                     </span>
                                 </Link>
-                                <span onClick={() => {
-                                    setView('Crear Usuario')
-                                }} className={view === 'Crear Usuario' ? `${styles.navItemActive}` : `${styles.navItem}`}>
-                                    Crear Usuario
-                                </span>
+                                <Link to='/admin/clientes/nuevo'>
+                                    <span onClick={() => {
+                                        setView('Nuevo Usuario')
+                                    }} className={view === 'Nuevo Usuario' ? `${styles.navItemActive}` : `${styles.navItem}`}>
+                                        Crear Usuario
+                                    </span>
+                                </Link>
                             </Typography>
                         </AccordionDetails>
                     </Accordion>
@@ -89,7 +91,7 @@ const AdminMenu = (props) => {
                             id="panel1bh-header"
                         >
                             <Typography sx={{ width: '100%', flexShrink: 0 }}>
-                                <span className={view === 'Pedidos' ? `${styles.navItemActive}` : `${styles.navItem}`}>
+                                <span className={styles.navItem}>
                                     <MdFileCopy />
                                     Pedidos
                                 </span>
@@ -122,7 +124,7 @@ const AdminMenu = (props) => {
                             id="panel1bh-header"
                         >
                             <Typography sx={{ width: '100%', flexShrink: 0 }}>
-                                <span className={view === 'Productos' ? `${styles.navItemActive}` : `${styles.navItem}`}>
+                                <span className={styles.navItem}>
                                     <MdFastfood />
                                     Productos
                                 </span>
@@ -130,6 +132,13 @@ const AdminMenu = (props) => {
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>
+                                <Link to='/admin/productos/nuevo'>
+                                    <span onClick={() => {
+                                        setView('Nuevo Producto')
+                                    }} className={view === 'Nuevo Producto' ? `${styles.navItemActive}` : `${styles.navItem}`}>
+                                        Nuevo
+                                    </span>
+                                </Link>
                                 <Link to='/admin/productos'>
                                     <span onClick={() => {
                                         setView('Productos')
@@ -137,11 +146,11 @@ const AdminMenu = (props) => {
                                         Ver Todos
                                     </span>
                                 </Link>
-                                <span onClick={() => {
+                                {/* <span onClick={() => {
                                     setView('Reviews')
                                 }} className={view === 'Reviews' ? `${styles.navItemActive}` : `${styles.navItem}`}>
                                     Reviews
-                                </span>
+                                </span> */}
                             </Typography>
                         </AccordionDetails>
                     </Accordion>

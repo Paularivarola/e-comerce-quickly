@@ -2,6 +2,9 @@
   min-height: 800px;
   background-color: whitesmoke;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  display: flex;
+  flex-direction: column;
+
 }
 
 .tableHeader {
@@ -44,16 +47,82 @@ table.customersTable th {
 }
 
 .profilePic {
-  width: 40px;
-  height: 40px;
+  width: 75px;
+  height: 75px;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  cursor: pointer;
-  margin: 3px 10px;
-  border-radius: 100%;
+  margin: 3px auto;
+  box-shadow: 1px 1px 2px #fe674969;
 }
 
-.buttonsSection button:first-child {
+.buttonsSection{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 106px;
+}
+
+.buttonsSection button:first-child{
+  margin-bottom: .5em;
+}
+
+.buttonsSection svg{
+  font-size: 25px;
   margin-right: 5px;
+}
+
+.filterContainer{
+  width: 95%;
+  height: 10vh;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 3vh;
+}
+
+.filterContainer>div{
+  margin-right: 3vw;
+}
+
+.filterContainer input,
+.filterContainer select{
+  background-color: white;
+}
+
+.filterContainer>div:first-child{
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.filterContainer label{
+  margin-right: .5em;
+  font-size: 18px;
+}
+
+.filterContainer input,
+.filterContainer select{
+  padding: .5em ;
+  border-radius: 5px;
+  outline: none;
+  border: 2px solid #ccc;
+  transition: all 300ms;
+}
+
+.filterContainer input:focus{
+  border: 2px solid rgb(25, 118, 210);
+}
+
+
+
+.filterContainer select{
+  width: 15vw;
+}
+
+.results{
+  margin-top: 3vh;
+  padding-left: 3vw;
+  margin-bottom: -2vh;
 }

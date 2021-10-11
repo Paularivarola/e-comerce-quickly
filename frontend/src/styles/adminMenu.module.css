@@ -1,7 +1,7 @@
 .mainContainer {
   height: 100vh;
   width: 18%;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  box-: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   position: sticky;
   top: 0;
   background-color: whitesmoke;
@@ -32,10 +32,8 @@
 span.navItem,
 span.navItemActive {
   font-size: 20px;
-  /* padding: .3em 0; */
   padding-left: 1vw;
   color: #444;
-  /* color: #3c4b64; */
   display: flex;
   align-items: center;
   cursor: pointer;

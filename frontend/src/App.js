@@ -36,6 +36,7 @@ const App = (props) => {
         }
       })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socket])
 
   if (props.socket && localStorage.getItem('socket')) {
@@ -68,33 +69,14 @@ const App = (props) => {
         <Route path='/cart' component={Cart} />
         <Route path='/profile/:page' component={Profile} />
         <Route path='/notfound' component={NotFound} />
-        <Route path='/cart' component={Cart} />
-        <Route exact path='/checkout' component={CheackOut} />
-        <Route path='/compra' component={BuyConfirmation} />
-        <Route
-          path='/admin/dashboard'
-          render={() => <AdminPanel view={'Escritorio'} />}
-        />
-        <Route
-          exact
-          path='/admin/clientes'
-          render={() => <AdminPanel view={'Clientes'} />}
-        />
-        <Route
-          exact
-          path='/admin/pedidos'
-          render={() => <AdminPanel view={'Pedidos'} />}
-        />
-        <Route
-          exact
-          path='/admin/productos'
-          render={() => <AdminPanel view={'Productos'} />}
-        />
-        <Route
-          exact
-          path='/admin/productos/nuevo'
-          render={() => <AdminPanel view={'Nuevo Producto'} />}
-        />
+        <Route path='/admin/dashboard' render={() => <AdminPanel view={'Escritorio'} />} />
+        <Route exact path='/admin/clientes' render={() => <AdminPanel view={'Clientes'} />} />
+        <Route exact path='/admin/clientes/nuevo' render={() => <AdminPanel view={'Nuevo Usuario'} />} />
+        <Route exact path='/admin/pedidos' render={() => <AdminPanel view={'Pedidos'} />} />
+        <Route exact path='/admin/productos' render={() => <AdminPanel view={'Productos'} />} />
+        <Route exact path='/admin/productos/nuevo' render={() => <AdminPanel view={'Nuevo Producto'} />} />
+        <Route path='/admin/productos/editar/:id' render={() => <AdminPanel view={'Editar Producto'} />} />
+        <Route path='/admin/cliente/:id' render={() => <AdminPanel view={'Información de Cliente'} />} />
         <Redirect to='/notfound' />
       </Switch>
       {!window.location.pathname.includes('/admin') && <Footer />}
