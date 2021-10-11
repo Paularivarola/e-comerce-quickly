@@ -10,37 +10,79 @@ const router = express.Router()
 // PRODUCTS
 router
   .route('/producto/:id')
-  .put(passport.authenticate('jwt', { session: false }), adminProductControllers.updateProduct)
-  .delete(passport.authenticate('jwt', { session: false }), adminProductControllers.deleteProduct)
+  .put(
+    passport.authenticate('jwt', { session: false }),
+    adminProductControllers.updateProduct
+  )
+  .delete(
+    passport.authenticate('jwt', { session: false }),
+    adminProductControllers.deleteProduct
+  )
 
-router.route('/productos').post(passport.authenticate('jwt', { session: false }), adminProductControllers.createProduct)
+router
+  .route('/productos')
+  .post(
+    passport.authenticate('jwt', { session: false }),
+    adminProductControllers.createProduct
+  )
 
 //USERS
 router
   .route('/user/:id')
-  .put(passport.authenticate('jwt', { session: false }), adminUserControllers.updateUser)
-  .delete(passport.authenticate('jwt', { session: false }), adminUserControllers.deleteUser)
+  .put(
+    passport.authenticate('jwt', { session: false }),
+    adminUserControllers.updateUser
+  )
+  .delete(
+    passport.authenticate('jwt', { session: false }),
+    adminUserControllers.deleteUser
+  )
 
 router
   .route('/users')
   .post(adminUserControllers.createAdminUser)
-  .get(passport.authenticate('jwt', { session: false }), adminUserControllers.getUsers)
+  .get(
+    passport.authenticate('jwt', { session: false }),
+    adminUserControllers.getUsers
+  )
 // .put(passport.authenticate('jwt', { session: false }), adminUserControllers.resetUsers)
 
 //ORDERS
 router
   .route('/order/:id')
-  .put(passport.authenticate('jwt', { session: false }), adminOrderControllers.updateOrder)
-  .delete(passport.authenticate('jwt', { session: false }), adminOrderControllers.deleteOrder)
+  .put(
+    passport.authenticate('jwt', { session: false }),
+    adminOrderControllers.updateOrder
+  )
+  .delete(
+    passport.authenticate('jwt', { session: false }),
+    adminOrderControllers.deleteOrder
+  )
 
-router.route('/orders').get(passport.authenticate('jwt', { session: false }), adminOrderControllers.getOrders)
+router
+  .route('/orders')
+  .get(
+    passport.authenticate('jwt', { session: false }),
+    adminOrderControllers.getOrders
+  )
 
 //REVIEWS
 router
   .route('/review/:id')
-  .put(passport.authenticate('jwt', { session: false }), adminReviewControllers.updateReview)
-  .delete(passport.authenticate('jwt', { session: false }), adminReviewControllers.deleteReview)
+  .put(
+    passport.authenticate('jwt', { session: false }),
+    adminReviewControllers.updateReview
+  )
+  .delete(
+    passport.authenticate('jwt', { session: false }),
+    adminReviewControllers.deleteReview
+  )
 
-router.route('/reviews').get(passport.authenticate('jwt', { session: false }), adminReviewControllers.getReviews)
+router
+  .route('/reviews')
+  .get(
+    passport.authenticate('jwt', { session: false }),
+    adminReviewControllers.getReviews
+  )
 
 module.exports = router

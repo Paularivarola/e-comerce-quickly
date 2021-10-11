@@ -11,25 +11,53 @@ import styles from '../styles/profile.module.css'
 const NavItems = (props) => {
   const { item, index } = props
   const [expanded, setExpanded] = useState(Boolean(item.desplegable))
+  let path =
+    window.location.pathname.split('/')[
+      window.location.pathname.split('/').length - 1
+    ]
   return (
     <Accordion expanded={expanded}>
-      <AccordionSummary aria-controls={`panel${index}bh-content`} id={`panel${index}bh-header`}>
+      <AccordionSummary
+        aria-controls={`panel${index}bh-content`}
+        id={`panel${index}bh-header`}
+      >
         <div className={styles.boxItem}>
-          <NavLink to={`/profile/${item.comp}`}>
+          <NavLink
+            exact
+            to={`/${item.page}/${item.comp}`}
+            className={
+              (path === item.comp ||
+                item?.desplegable?.some((i) => i.comp === path)) &&
+              styles.active
+            }
+          >
             {item.name}
-            <BsFillCaretRightFill className={styles.icon} style={{ color: '#fe6849', fontSize: '1em' }} />
+            <BsFillCaretRightFill
+              className={styles.icon}
+              style={{ color: '#fe6849', fontSize: '1em' }}
+            />
           </NavLink>
         </div>
       </AccordionSummary>
       {item.desplegable && (
         <AccordionDetails>
           {item.desplegable.map((desp) => (
-            <div key={desp.comp} className={styles.boxAcordeon}>
-              <FiArrowRightCircle
+            <div key={desp.comp}>
+              {/* <FiArrowRightCircle
                 className={styles.icon}
-                style={{ color: '#fe6849', fontSize: '1.8em', marginRight: '5%' }}
-              />
-              <NavLink to={`/profile/${desp.comp}`}>{desp.name}</NavLink>
+                style={{
+                  color: '#fe6849',
+                  fontSize: '1.8em',
+                  marginRight: '5%',
+                }}
+              /> */}
+              <NavLink
+                exact
+                to={`/${item.page}/${desp.comp}`}
+                className={path === desp.comp && styles.active}
+              >
+                {desp.name}
+              </NavLink>
             </div>
           ))}
         </AccordionDetails>

@@ -29,9 +29,10 @@ const Profile = (props) => {
   }, [props.match.params])
 
   const navItems = [
-    { comp: 'fav', name: 'Favoritos' },
-    { comp: 'his', name: 'Mis Pedidos' },
+    { page: 'profile', comp: 'fav', name: 'Favoritos' },
+    { page: 'profile', comp: 'his', name: 'Mis Pedidos' },
     {
+      page: 'profile',
       comp: 'data',
       name: 'Mi cuenta',
       desplegable: [

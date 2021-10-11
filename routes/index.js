@@ -24,6 +24,7 @@ router
   .route('/products')
   .get(productControllers.getProducts)
   .put(productControllers.manageCart)
+router.route('/products/favs').put(passport, productControllers.favHandler)
 // .put(passport, productControllers.manageCart)
 
 //ORDERS

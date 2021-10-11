@@ -39,7 +39,11 @@ const CARD_OPTIONS = {
 }
 
 const CardField = ({ onChange }) => (
-  <div style={{ padding: '2vh' }}>
+  <div
+    style={{
+      padding: '2vh',
+    }}
+  >
     <CardElement options={CARD_OPTIONS} onChange={onChange} />
   </div>
 )
@@ -60,6 +64,12 @@ const Field = ({
     </label>
     <input
       className={styles.FormRowInput}
+      style={{
+        backgroundColor: 'transparent',
+        appearance: 'none',
+        outline: 'none',
+        borderStyle: 'none',
+      }}
       id={id}
       type={type}
       placeholder={placeholder}

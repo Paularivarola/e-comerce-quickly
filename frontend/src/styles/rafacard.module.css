@@ -2,14 +2,14 @@
   box-sizing: border-box;
 }
 
-/* input,
+input.card,
 button {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   outline: none;
   border-style: none;
-} */
+}
 
 html {
   /* background-color: #6772e5; */
@@ -73,9 +73,7 @@ body {
   border-radius: 4px;
   width: 80%;
 }
-.Daleee {
-  height: 4vh;
-}
+
 .FormRow {
   display: -ms-flexbox;
   display: flex;
