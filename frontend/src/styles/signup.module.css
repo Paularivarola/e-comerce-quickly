@@ -189,6 +189,7 @@
     margin-left: 2%;
     margin-bottom: 3%;
     margin-top: 2%;
+  
 }
 .inputsFormColum {
     display: flex;
@@ -207,79 +208,128 @@
 }
 
 
-
-
-/* .nameContent, .contactContent{
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 1rem;
-}
-
-.name{
-    width: 47%;
-    height: 2rem;
-    padding-left: 1rem;
-}
-
-.boxForm{
-    width: 100%;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-} */
-
-@media screen and (max-width:1024px) {
-    .boxDiv{
-        padding: 2rem;
-    }
-
-    .boxForm{
-        gap: 0.75rem;
-    }
-
-    .button, .activeButton{
-        padding: 0.5rem;
-    }
-
-    .h1{
-        margin: 0.75rem 0;
-        text-align: center;
-    }
-
-    .name, .contact{
-        height: 1.75rem;
-    }
-
-    .submitButton{
-        padding: 0.5rem;
-        margin: 1.25rem 0;
-    }
-}
-@media screen and (max-width:768px) {
-    .nameContent{
-        gap: 0.75rem;
-    }
-
-    .name{
-        width: 100%;
-    }
-
-    .boxDiv{
-        width: 55%;
-        height: 92%;
-    }
-}
-@media screen and (max-width:425px) {
-    .boxDiv{
+@media only screen and (max-width: 425px) {
+    .mainSign {
         width: 100%;
         height: 100%;
+        flex-wrap: wrap;
+        padding-bottom: 5%;
     }
 
-    .h1{
-        margin: 0.7rem 0;
+    .boxButtons {
+        margin-top: 1%;
+        width: 100%;
+        height: 50%;
+    }
+
+    .boxForm {
+        width: 100%;
+        height: 50%;
+    }
+
+    .inputsForm {
+            padding: 4%;
+            padding-top: 1rem;
+    }
+
+
+    .boxDiv{
+        width: 100%;
+        height: 50%;
+        margin-top: 2%;
+
+    }
+
+    .boxButtons {
+        margin-top: 1%;
+        width: 55%;
+        height: 50%;
+        margin: 0.5rem;
+    }
+    .button {
+        width: 10rem;
+        padding: 1rem;
+        margin: 0.5rem;
+    }
+
+}
+
+@media only screen and (max-width: 576px) {
+    .mainSign {
+        width: 100%;
+        height: 100%;
+        flex-wrap: wrap;
+        padding-bottom: 5%;
+    }
+
+    .boxButtons {
+        margin-top: 1%;
+        width: 100%;
+        height: 50%;
+    }
+
+    .boxForm {
+        width: 100%;
+        height: 50%;
+    }
+
+    .inputsForm {
+            padding: 4%;
+            display: flex;
+            padding-top: 1rem;
+    }
+
+
+    .boxDiv{
+        width: 100%;
+        height: 60%;
+        margin-top: 2%;
+        border-left: solid 1px rgb(214, 214, 214);
+    }
+
+    .boxButtons {
+        margin: 0.5rem;
+    }
+    .button {
+        margin: 0.5rem;
     }
 }
-@media screen and (max-width:375px) {}
+
+@media only screen and (max-width: 768px) {
+    .mainSign {
+        width: 100%;
+        height: 100%;
+        flex-wrap: wrap;
+        padding-bottom: 5%;
+    }
+
+    .boxButtons {
+        margin-top: 1%;
+        width: 100%;
+        height: 50%;
+    }
+
+    .boxForm {
+        width: 100%;
+        height: 50%;
+    }
+
+    .inputsForm {
+            padding: 4%;
+            display: flex;
+            padding-top: 2.5rem;
+    }
+
+
+    .boxDiv{
+        width: 100%;
+        height: 60%;
+        margin-top: 2%;
+        border-left: solid 1px rgb(214, 214, 214);
+    }
+
+    
+}
+@media only screen and (max-width: 991px) {
+
+}
