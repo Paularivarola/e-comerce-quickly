@@ -69,6 +69,9 @@ const App = (props) => {
         <Route path='/cart' component={Cart} />
         <Route path='/profile/:page' component={Profile} />
         <Route path='/notfound' component={NotFound} />
+        <Route path='/cart' component={Cart} />
+        <Route exact path='/checkout' component={CheackOut} />
+        <Route path='/compra' component={BuyConfirmation} />
         <Route path='/admin/dashboard' render={() => <AdminPanel view={'Escritorio'} />} />
         <Route exact path='/admin/clientes' render={() => <AdminPanel view={'Clientes'} />} />
         <Route exact path='/admin/clientes/nuevo' render={() => <AdminPanel view={'Nuevo Usuario'} />} />
