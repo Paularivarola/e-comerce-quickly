@@ -15,6 +15,7 @@ div.containCard{
 }
 div.containCard h4{
 	color: slategrey;
+	text-align: center;
 }
 div.imageIcon, div.imageTost{
 	background-position: center;
