@@ -97,7 +97,7 @@ div.containTitle {
   justify-content: space-between;
   align-items: center;
   width: 50vw;
-  padding: 20px;
+  padding: 10px;
   margin: 10px;
   background-color: rgb(248, 248, 248);
   border-radius: 10px;
@@ -209,4 +209,7 @@ div.containTitle {
 
 .activeCard, .activeAddress {
   box-shadow: 2px 2px 2px #fe6849;
+}
+.addressAlias, .addressName {
+  display: block;
 }

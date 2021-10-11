@@ -159,14 +159,14 @@ const CheckoutForm = ({ updateUser, userData }) => {
       card: elements.getElement(CardElement),
       billing_details: billingDetails,
     })
-
+    console.log('hola')
     const response = await axios.post(
       'http://localhost:4000/api/attach-payment-method',
       { id: payload.paymentMethod.id, customer: userData?.data?.customerId }
     )
     const { paymentMethodAttached } = response.data
     setProcessing(false)
-
+    
     if (payload.error) {
       setError(payload.error)
     } else {

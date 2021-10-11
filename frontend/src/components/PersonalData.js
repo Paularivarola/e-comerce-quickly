@@ -93,25 +93,6 @@ const PersonalData = ({ user, updateUser }) => {
     updateUser({ action: 'updateData', userData })
   }
 
-  const icons = (
-    <InputAdornment position='end'>
-      {!update ? (
-        <IconButton onClick={() => setUpdate(true)} edge='end'>
-          <BsPencilSquare style={{marginLeft: '5%' }}/>
-        </IconButton>
-      ) : (
-        <>
-          <IconButton onClick={() => setUpdate(false)} edge='end'>
-            <BsCheckSquare />
-          </IconButton>
-          <IconButton onClick={() => setUpdate(false)} edge='end'>
-            <BsXSquare />
-          </IconButton>
-        </>
-      )}
-    </InputAdornment>
-  )
-
   return (
     <div className={styles.mainPersonalData}>
       <div className={styles.formBox}>
@@ -147,37 +128,8 @@ const PersonalData = ({ user, updateUser }) => {
               noValidate
               autoComplete='off'
             >
-              <TextField
-                type='text'
-                disabled={!update}
-                name='firstName'
-                defaultValue={userData?.firstName}
-                label={'Nombre'}
-                variant='outlined'
-                onChange={inputHandler}
-                InputProps={{
-                  endAdornment: icons,
-                }}
-                fullWidth
-                // sx={{
-                //   '& > :not(style)': { width: '25vw' },
-                // }}
-              />
-              <TextField
-                disabled={!update}
-                type='text'
-                name='lastName'
-                defaultValue={userData?.lastName}
-                label={'Apellido'}
-                variant='outlined'
-                onChange={inputHandler}
-                InputProps={{
-                  endAdornment: icons,
-                }}
-                // sx={{
-                //   '& > :not(style)': { width: '25vw' },
-                // }}
-              />
+              <MyTextField name={user?.firstName} inputHandler={inputHandler}/>
+              <MyTextField name={user?.lastName} inputHandler={inputHandler}/>
               <TextField
                 type='email'
                 disabled

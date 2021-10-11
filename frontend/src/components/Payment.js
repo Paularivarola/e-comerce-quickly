@@ -25,14 +25,14 @@ const Payment = ({ userData, updateUser, setActive, active }) => {
   return (
     <div className={styles.mainPayment}>
       <div className={styles.boxCard}>
-        {userData?.paymentCards?.map((payment) => (
+        {userData?.paymentCards?.map((payment, index) => (
           <PaymentCard
             updateUser={updateUser}
             card={payment.card}
             id={payment.id}
             key={payment.id}
             index={index}
-            active={active.card === index}
+            active={active?.card === index}
             setActive={setActive}
           />
         ))}

@@ -51,7 +51,10 @@ const MyInput = ({ input, newAddress, setNewAddress }) => {
 const Address = ({ updateUser, address, active, setActive, index }) => {
   return (
     <div className={active ? styles.active : styles.addressCard}>
-      <span>Address alias {address?.alias}</span>
+      <div>
+        <span className={styles.addressAlias}>{address?.alias.toUpperCase()}</span>
+        <span className={styles.addressName}>{address.street + ', ' + address.number + ' - ' + address.apartment}</span>
+      </div>
       {setActive && !active && (
         <span onClick={() => setActive({ ...active, address: index })} style={{ cursor: 'pointer' }}>
           Seleccionar
@@ -106,7 +109,7 @@ const Addresses = ({ updateUser, userData, active, setActive }) => {
             address={address}
             updateUser={updateUser}
             index={index}
-            active={index === active.address}
+            active={index === active?.address}
             setActive={setActive}
           />
         ))
