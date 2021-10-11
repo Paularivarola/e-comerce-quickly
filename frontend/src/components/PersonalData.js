@@ -16,15 +16,15 @@ const MyTextField = ({ name, inputHandler }) => {
     <InputAdornment position='end'>
       {!update ? (
         <IconButton onClick={() => setUpdate(true)} edge='end'>
-          <BsPencilSquare />
+          <BsPencilSquare style={{size:'1.5em', color: 'tomato'}}/>
         </IconButton>
       ) : (
         <>
           <IconButton onClick={() => setUpdate(false)} edge='end'>
-            <BsCheckSquare />
+            <BsCheckSquare style={{ size:'1.5em', color: 'tomato'}}/>
           </IconButton>
           <IconButton onClick={() => setUpdate(false)} edge='end'>
-            <BsXSquare />
+            <BsXSquare style={{size:'1.5em', color: 'tomato'}}/>
           </IconButton>
         </>
       )}
@@ -138,9 +138,9 @@ const PersonalData = ({ user, updateUser }) => {
                 label='Email'
                 variant='outlined'
                 onChange={inputHandler}
-                // sx={{
-                //   '& > :not(style)': { width: '25vw' },
-                // }}
+                sx={{
+                  '& > :not(style)': { width: '25vw' },
+                }}
               />
             </Box>
           )}

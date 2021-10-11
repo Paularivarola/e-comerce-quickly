@@ -44,7 +44,7 @@ const Testimonios = () => {
                 arrows
                 autoPlaySpeed={3000}
                 centerMode={false}
-                className=""
+                className="carouselTestimony"
                 containerClass="container-with-dots"
                 dotListClass=""
                 draggable

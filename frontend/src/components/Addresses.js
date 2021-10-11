@@ -97,23 +97,27 @@ const Addresses = ({ updateUser, userData, active, setActive }) => {
   }
 
   return (
-    <div className={styles.mainPersonalData}>
+    <div className={styles.mainAddress}>
+        <img className={styles.world} src="https://i.postimg.cc/L5DpZzqw/globoterraqueo.png" alt='world'/>        
+        {/* <button onClick={() => setModal(!modal)}>Agregar</button> */}
       {!userData ? (
         <div className={styles.containFormAddress}>
           <h1>No tenes ninguna direccion todavia</h1>
         </div>
       ) : (
-        userData.addresses.map((address, index) => (
-          <Address
-            key={address._id}
-            address={address}
-            updateUser={updateUser}
-            index={index}
-            active={index === active?.address}
-            setActive={setActive}
-          />
-        ))
-      )}
+        <div className={styles.addressesContainer}>
+            {userData.addresses.map((address, index) => (
+              <Address
+                key={address._id}
+                address={address}
+                updateUser={updateUser}
+                index={index}
+                active={index === active?.address}
+                setActive={setActive}
+              />
+            ))}
+        </div>
+          )}
       {modal && (
         <div className={styles.containFormModal} data-modal='addressModal'>
           <div className={styles.containFormAddress}>
@@ -143,10 +147,6 @@ const Addresses = ({ updateUser, userData, active, setActive }) => {
           </div>
         </div>
       )}
-      <div className={styles.boxAdressbtn}>
-        <img className={styles.world} src="https://i.postimg.cc/L5DpZzqw/globoterraqueo.png" alt='world'/>        
-        <button onClick={() => setModal(!modal)}>Agregar</button>
-      </div>
       <Toaster
         containerStyle={{
           top: 80,

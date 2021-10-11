@@ -38,7 +38,7 @@ const PromosCarousel = () => {
         arrows
         autoPlaySpeed={3000}
         centerMode={false}
-        className=''
+        className='promosCarousel'
         containerClass='container-with-dots'
         dotListClass=''
         draggable

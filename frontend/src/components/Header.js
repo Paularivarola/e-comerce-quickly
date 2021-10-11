@@ -34,7 +34,7 @@ const Header = (props) => {
     <header>
       <div className={styles.boxNavigation}>
         <nav className={styles.containerNavegation}>
-          <img className={styles.logo} src='/assets/logoLDC.png' alt='logo' />
+          <img className={styles.logo} src='/assets/quicklyLogo.png' alt='logo' />
           <div className={styles.navegation}>
             <NavLink
               className={styles.textRoute}
