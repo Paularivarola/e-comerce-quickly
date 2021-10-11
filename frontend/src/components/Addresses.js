@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import styles from '../styles/personalData.module.css'
@@ -6,16 +6,10 @@ import userActions from '../redux/actions/userActions'
 import toastConfirm from './ToastConfirm'
 import { connect } from 'react-redux'
 import { ImCancelCircle } from 'react-icons/im'
-import { Toaster } from 'react-hot-toast'
 import { BsTrash } from 'react-icons/bs'
-// import styles from '../styles/checkOut.module.css'
-import CardTost from "./CardTost"
-import IconButton from '@mui/material/IconButton'
-import InputAdornment from '@mui/material/InputAdornment'
+import CardTost from './CardTost'
 
 const MyInput = ({ input, newAddress, setNewAddress }) => {
-  const [passProtected, setPassProtected] = useState(true)
-
   const inputHandler = (e) => {
     setNewAddress({
       ...newAddress,
@@ -75,23 +69,18 @@ const Addresses = ({ updateUser, userData, active, setActive, modal, setModal })
     apartment: '',
     neighborhood: '',
   }
-<<<<<<< HEAD
-
-=======
   const [cardTost, setCardTost] = useState({
-    time: "",
-    icon: "",
-    text: "",
-    view: false
+    time: '',
+    icon: '',
+    text: '',
+    view: false,
   })
 
-  const [modal, setModal] = useState(false)
->>>>>>> origin/cristian
   const [newAddress, setNewAddress] = useState(initialState)
   const submitHandler = () => {
     let validate = Object.values(newAddress).some((prop) => prop === '')
     if (validate) {
-      return setCardTost({time: 1500, icon: "error", text: "Complete todos los campos", view: true,})
+      return setCardTost({ time: 1500, icon: 'error', text: 'Complete todos los campos', view: true })
     }
     updateUser({ action: 'addAddress', newAddress })
     setModal(!modal)
@@ -103,25 +92,26 @@ const Addresses = ({ updateUser, userData, active, setActive, modal, setModal })
   }
 
   return (
-    <div className={styles.mainPersonalData}>
-      {cardTost.view && 
-        <CardTost properties={cardTost} setCardTost={setCardTost}/>
-      }
+    <div className={styles.mainAddress}>
+      {cardTost.view && <CardTost properties={cardTost} setCardTost={setCardTost} />}
+      <img className={styles.world} src='https://i.postimg.cc/L5DpZzqw/globoterraqueo.png' alt='world' />
       {!userData ? (
         <div className={styles.containFormAddress}>
           <h1>No tenes ninguna direccion todavia</h1>
         </div>
       ) : (
-        userData.addresses.map((address, index) => (
-          <Address
-            key={address._id}
-            address={address}
-            updateUser={updateUser}
-            index={index}
-            active={index === active?.address}
-            setActive={setActive}
-          />
-        ))
+        <div className={styles.addressesContainer}>
+          {userData.addresses.map((address, index) => (
+            <Address
+              key={address._id}
+              address={address}
+              updateUser={updateUser}
+              index={index}
+              active={index === active?.address}
+              setActive={setActive}
+            />
+          ))}
+        </div>
       )}
       {modal && (
         <div className={styles.containFormModal} data-modal='addressModal'>
@@ -143,21 +133,6 @@ const Addresses = ({ updateUser, userData, active, setActive, modal, setModal })
           </div>
         </div>
       )}
-      <div className={styles.boxAdressbtn}>
-        <img className={styles.world} src='https://i.postimg.cc/L5DpZzqw/globoterraqueo.png' alt='world' />
-        {/* <button onClick={() => setModal(!modal)}>Agregar</button> */}
-      </div>
-      <Toaster
-        containerStyle={{
-          top: 80,
-          left: 20,
-          bottom: 20,
-          right: 20,
-        }}
-        toastOptions={{
-          duration: 1500,
-        }}
-      />
     </div>
   )
 }

@@ -96,7 +96,7 @@ div.containTitle {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 50vw;
+  width: 70%;
   padding: 10px;
   margin: 10px;
   background-color: rgb(248, 248, 248);
@@ -107,7 +107,13 @@ div.containTitle {
 .addressCard span {
   color: slategray;
 }
-
+.addressBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
 .containForm form {
   display: flex;
   justify-content: center;
@@ -124,12 +130,22 @@ div.containTitle {
   width: 100%;
   height: 100%;
 }
-.mainPersonalData {
+.mainPersonalData, .mainAddress {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   min-height: 40vh;
+}
+.mainAddress {
+  justify-content: space-between;
+  padding: 0 5%;
+}
+.addressesContainer {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  align-self: flex-start;
 }
 .submitPhoto {
   color: tomato;
@@ -177,10 +193,14 @@ div.containTitle {
   width: 100%;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  align-self: flex-start;
+  /* flex-direction: column; */
+}
+.boxAdressbtn button {
+  padding: 1.5% 2.5%;
 }
 .world {
-  width: 25%;
+  width: 30%;
 }
 .boxCard {
   width: 40%;

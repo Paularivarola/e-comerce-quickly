@@ -176,8 +176,25 @@ input#file {
 form div {
   display: flex;
   justify-content: flex-end;
-  align-items: center;
+  /* align-items: center; */
 }
+
+.carouselTestimony, .promosCarousel {
+  width: 100%;
+}
+.carouselTestimony button, .promosCarousel button {
+  background: tomato;
+  padding: 0%;
+}
+.carouselTestimony button:hover, .promosCarousel button:hover {
+  color: tomato;
+  opacity: 20%;
+}
+.carouselTestimony li {
+  width: 400px;
+}
+
+
 .spinner,
 .spinner:before,
 .spinner:after {

@@ -190,72 +190,89 @@ const CheackOut = ({ userData }) => {
   }
 
   return (
-    <div className={styles.containAll}>
-      <div className={styles.containForm}>
-        <div className={styles.containButtonsDelivery}>
-          <button onClick={() => changeDelivery('withdraw')}>Retirar</button>
-          <button onClick={() => changeDelivery('send')}>Envio</button>
-        </div>
-        <div className={styles.containFormDelivery}>
-          {!userData && <h3 className={styles.titleLogIn}>si tenes cuenta, ingresa</h3>}
-          {delivery !== '' && formProfile}
-          {delivery === 'withdraw' ? (
-            <>
-              <div className={styles.containMapWithdraw}>
-                <h1>aca va el mapa perri</h1>
-              </div>
-              {userData ? (
-                cardViewPage
-              ) : (
-                <div className={styles.containCardSend}>
-                  <h2>Ingrese su tarjeta</h2>
-                  {card}
-                </div>
-              )}
-            </>
-          ) : delivery === 'send' ? (
-            <div>
-              {userData ? (
-                viewCardPage
-              ) : (
-                <>
-                  {formAddress}
-                  <div className={styles.containCardSend}>
-                    <h2>Ingrese su tarjeta</h2>
-                    {card}
-                  </div>
-                </>
-              )}
+    <div className={styles.mainCheckout}>
+      <div className={styles.instructions}>
+        <div className={styles.buttonsContainer}>
+          <img src='https://i.postimg.cc/bJZP2yMp/moto.png' alt='delivery' />
+          <div className={styles.boxButtons}>
+            <p>¿Cómo despachamos tu pedido?</p>
+            <div className={styles.buttonsBox}>
+              <button onClick={() => changeDelivery('withdraw')}>Retirar</button>
+              <button onClick={() => changeDelivery('send')}>Delivery</button>
             </div>
-          ) : (
-            <div className={styles.tittleSelect}>
-              <h1>Ingrese por favor como retirar</h1>
-            </div>
-          )}
-        </div>
-        <div></div>
-        <div></div>
-      </div>
-      <div className={styles.containFormSend}>
-        <div className={styles.containList}></div>
-        <div className={styles.containSend}>
-          <div className={styles.containInfoSend}>
-            <div className={styles.containInfoName}>
-              <h3>Nombre: {user.firstName}</h3>
-              <h3>Apellido: {user.lastName}</h3>
-            </div>
-            <div className={styles.containInfoinput}>
-              <h3>Confirme su email</h3>
-              <input type='text' placeholder='Email' name='email' ref={emailRef} className={styles.inputConfirmEmail} />
-            </div>
-          </div>
-          <div className={styles.containButtonSend}>
-            <span>{pay ? <Card2 index={active.card} /> : <button onClick={() => sendForm()}>Confirmar</button>}</span>
           </div>
         </div>
       </div>
       {cardTost.view && <CardTost properties={cardTost} setCardTost={setCardTost} />}
     </div>
+    // <div className={styles.containAll}>
+    //   <div className={styles.containForm}>
+    //     <div className={styles.containButtonsDelivery}>
+    //       <p>¿Cómo despachamos tu envio?</p>
+    //       <div className={styles.buttonsBox}>
+    //         <button onClick={() => changeDelivery('withdraw')}>Retirar</button>
+    //         <button onClick={() => changeDelivery('send')}>Delivery</button>
+    //       </div>
+    //     </div>
+    //     <div className={styles.containFormDelivery}>
+    //       {!userData && <h3 className={styles.titleLogIn}>si tenes cuenta, ingresa</h3>}
+    //       {delivery !== '' && formProfile}
+    //       {delivery === 'withdraw' ? (
+    //         <>
+    //           <div className={styles.containMapWithdraw}>
+    //             <h1>aca va el mapa perri</h1>
+    //           </div>
+    //           {userData ? (
+    //             cardViewPage
+    //           ) : (
+    //             <div className={styles.containCardSend}>
+    //               <h2>Ingrese su tarjeta</h2>
+    //               {card}
+    //             </div>
+    //           )}
+    //         </>
+    //       ) : delivery === 'send' ? (
+    //         <div>
+    //           {userData ? (
+    //             viewCardPage
+    //           ) : (
+    //             <>
+    //               {formAddress}
+    //               <div className={styles.containCardSend}>
+    //                 <h2>Ingrese su tarjeta</h2>
+    //                 {card}
+    //               </div>
+    //             </>
+    //           )}
+    //         </div>
+    //       ) : (
+    //         <div className={styles.tittleSelect}>
+    //           <h1>Ingrese por favor como retirar</h1>
+    //         </div>
+    //       )}
+    //     </div>
+    //   </div>
+    //   <div className={styles.containFormSend}>
+    //     <div className={styles.containList}>
+    //       lista de pedido
+    //     </div>
+    //     <div className={styles.containSend}>
+    //       <div className={styles.containInfoSend}>
+    //         <div className={styles.containInfoName}>
+    //           <h3>Nombre: {user.firstName}</h3>
+    //           <h3>Apellido: {user.lastName}</h3>
+    //         </div>
+    //         <div className={styles.containInfoinput}>
+    //           <h3>Confirme su email</h3>
+    //           <input type='text' placeholder='Email' name='email' ref={emailRef} className={styles.inputConfirmEmail} />
+    //         </div>
+    //       </div>
+    //       <div className={styles.containButtonSend}>
+    //         <span>{pay ? <Card2 index={active.card} /> : <button onClick={() => sendForm()}>Confirmar</button>}</span>
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>
   )
 }
 
