@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import CardTost from "../components/CardTost"
 import styles from '../styles/signup.module.css'
 import { useState } from 'react'
 import { GoogleLogin } from 'react-google-login'
@@ -19,7 +20,6 @@ const SignForm = (props) => {
     google: false,
   })
   const [shift, setShift] = useState(props.match.params.susi === 'signup')
-
   useEffect(() => {
     setShift(props.match.params.susi === 'signup')
   }, [props.match.params])
@@ -48,24 +48,37 @@ const SignForm = (props) => {
     })
   }
 
+
+  const [cardTost, setCardTost] = useState({
+    time: "",
+    icon: "",
+    text: "",
+    view: false
+  })
   const validatorFront = () => {
     if (!shift) {
       if (!user.email && !user.password) {
-        alert('Todos las campos son obligatorios')
+        setCardTost({
+          time: 1500,
+          icon: "error",
+          text: "Complete todos los campos",
+          view: true,
+        })
+        return 
       } else {
-        !user.email.includes('@') && alert('El email no es válido')
-        !user.email && alert('Ingresá tu email')
-        !user.password && alert('Ingresá tu contraseña')
+        !user.email.includes('@') && setCardTost({time: 1500, icon: "error",text: "El mail no es valido",view: true,})
+        !user.email && setCardTost({time: 1500, icon: "error",text: "Ingresa tu mail",view: true,})
+        !user.password && setCardTost({time: 1500, icon: "error",text: "Ingresa tu contraseña",view: true,})
       }
       return Boolean(user.email && user.email.includes('@') && user.password)
     } else {
       if (Object.keys(user).every((property) => !user[property])) {
-        alert('Todos las campos son obligatorios')
+        setCardTost({time: 1500, icon: "error",text: "Complete todos los campos",view: true,})
       } else {
-        !user.firstName && alert('Ingresá tu nombre')
-        !user.lastName && alert('Ingresá tu apellido')
-        !user.repPass && alert('Valide su contraseña')
-        user.password !== user.repPass && alert('Las contraseñas no coiciden')
+        !user.firstName && setCardTost({time: 1500, icon: "error",text: "Ingresa tu Nombre",view: true,})
+        !user.lastName && setCardTost({time: 1500, icon: "error",text: "Ingresa tu Apellido",view: true,})
+        !user.repPass && setCardTost({time: 1500, icon: "error",text: "Valide su contraseña",view: true,})
+        user.password !== user.repPass && setCardTost({time: 1500, icon: "error",text: "La contraseña no coinciden",view: true,})
       }
       return Boolean(
         user.firstName &&
@@ -78,6 +91,7 @@ const SignForm = (props) => {
       )
     }
   }
+
 
   const submit = (e) => {
     e.preventDefault()
@@ -95,10 +109,13 @@ const SignForm = (props) => {
     } else {
       props.logUser(user, props)
     }
-  }
+  } 
 
   return (
     <main className={styles.mainSign}>
+       {cardTost.view && 
+         <CardTost properties={cardTost} setCardTost={setCardTost}/>
+       }
       <div className={styles.boxButtons}>
         <div className={styles.boxlogin}>
           <h1 className={styles.h1}>{!shift ? 'Crear una cuenta' : 'Ingresar con tus datos'}</h1>

@@ -1,9 +1,10 @@
 import styles from '../styles/checkOut.module.css'
 import { connect } from 'react-redux'
 import { useEffect, useRef, useState } from 'react'
-import Addresses from '../components/Addresses'
 import Card2 from '../components/CheckoutTESTING'
 import Payment from '../components/Payment'
+import Addresses from '../components/Addresses'
+import CardTost from '../components/CardTost'
 
 const CheackOut = ({ userData }) => {
   const [delivery, setDelivery] = useState('')
@@ -164,6 +165,13 @@ const CheackOut = ({ userData }) => {
     </div>
   )
 
+  const [cardTost, setCardTost] = useState({
+    time: '',
+    icon: '',
+    text: '',
+    view: false,
+  })
+
   const emailRef = useRef()
   const sendForm = () => {
     if (emailRef.current?.value !== user.email) return alert('tenes el mail mal pa')
@@ -171,15 +179,16 @@ const CheackOut = ({ userData }) => {
       let verificationAddress = Object.values(addAddress).some((add) => add === '')
       let verificationUser = Object.values(user).some((user) => user === '')
       if (delivery === 'send') {
-        if (verificationUser || verificationAddress) return alert('Tenes que completar todos los campos paaaa')
+        if (verificationUser || verificationAddress)
+          return setCardTost({ time: 1500, icon: 'error', text: 'Complete todos los campos', view: true })
       } else {
-        if (verificationUser) return alert('tenes que completar los campos chupappipi')
+        if (verificationUser) return setCardTost({ time: 1500, icon: 'error', text: 'Complete todos los campos', view: true })
       }
     }
-    alert(' todo bien padre ')
+    setCardTost({ time: 1500, icon: 'success', text: 'Enviado, todo ok', view: true })
     setPay(true)
   }
-  console.log(emailRef.current?.value)
+
   return (
     <div className={styles.containAll}>
       <div className={styles.containForm}>

@@ -16,9 +16,17 @@ import { connect } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { BsPersonLinesFill } from 'react-icons/bs'
 
+
 const Profile = (props) => {
   const [formConfirm, setFormConfirm] = useState({})
   const [view, setView] = useState(props.match.params.page)
+  const [cardTost, setCardTost] = useState({
+    time: "",
+    icon: "",
+    text: "",
+    view: false
+  })
+
 
   useEffect(() => {
     let verification = Object.values(formConfirm).some((input) => input !== '')
