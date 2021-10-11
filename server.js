@@ -32,7 +32,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const PORT = process.env.PORT
-const HOST = process.env.HOST
+const HOST = process.env.HOST || '0.0.0.0'
 
 //Server listening
 const server = app.listen(PORT, HOST, () => console.log(`Server listening on port ${PORT} (${HOST})`))
