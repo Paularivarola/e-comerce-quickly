@@ -19,7 +19,6 @@ const Header = (props) => {
   // console.log(props.socket?.id)
 
   window.onclick = (e) => {
-    console.log(e.target.dataset.usermenu !== 'true')
     if (e.target.dataset.usermenu !== 'true') setUserMenu(false)
     if (props.user && e.target.dataset.usermenu !== 'true') setUserMenu(false)
   }
@@ -35,8 +34,8 @@ const Header = (props) => {
   const MyNavLink = ({ path, page }) => (
     <NavLink
       onClick={() => setUserMenu(false)}
+      exact={path === '/'}
       className={styles.textRoute}
-      exact
       activeClassName={styles.activeHamburguesa}
       to={path}
       onClick={onclick ? onclick : () => setUserMenu(false)}
@@ -81,7 +80,7 @@ const Header = (props) => {
         </nav>
       </div>
       {userMenu && (
-        <div className={styles.userMenuContainer}>
+        <div className={props.user ? styles.userMenuContainerLogged : styles.userMenuContainer}>
           <div className={styles.userMenu}>
             {!props.user ? (
               <>
@@ -109,8 +108,7 @@ const Header = (props) => {
                 <MyNavLink page={'Mi Cuenta'} path={'/profile/data'} />
                 <Link
                   className={styles.textRoute}
-                  page={'Salir'}
-                  path={'/'}
+                  to='/'
                   onClick={() => {
                     props.logOut()
                     setUserMenu(false)

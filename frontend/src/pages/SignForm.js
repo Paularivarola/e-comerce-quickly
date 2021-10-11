@@ -44,8 +44,7 @@ const SignForm = (props) => {
   const inputHandler = (e) => {
     setUser({
       ...user,
-      [e.target.name]:
-        e.target.name === 'src' ? e.target.files[0] : e.target.value,
+      [e.target.name]: e.target.name === 'src' ? e.target.files[0] : e.target.value,
     })
   }
 
@@ -83,7 +82,7 @@ const SignForm = (props) => {
   const submit = (e) => {
     e.preventDefault()
     if (!validatorFront()) return false
-    const { firstName, lastName, email, password, google, src } = user
+    const { firstName, lastName, email, password, google, src, repPass } = user
     const fd = new FormData()
     fd.append('email', email)
     fd.append('password', password)
@@ -102,9 +101,7 @@ const SignForm = (props) => {
     <main className={styles.mainSign}>
       <div className={styles.boxButtons}>
         <div className={styles.boxlogin}>
-          <h1 className={styles.h1}>
-            {!shift ? 'Crear una cuenta' : 'Ingresar con tus datos'}
-          </h1>
+          <h1 className={styles.h1}>{!shift ? 'Crear una cuenta' : 'Ingresar con tus datos'}</h1>
           <div className={styles.boxGoogle}>
             <GoogleLogin
               className={styles.btnGoogle}
@@ -122,22 +119,12 @@ const SignForm = (props) => {
               <hr className={styles.line}></hr>
             </div> */}
         </div>
-        <img
-          className={styles.memeLogin}
-          src='https://i.postimg.cc/rFQ6QKxZ/memelogin.png'
-          alt='manLog'
-        />
+        <img className={styles.memeLogin} src='https://i.postimg.cc/rFQ6QKxZ/memelogin.png' alt='manLog' />
         <div className={styles.boxButton}>
-          <p
-            className={!shift ? styles.activeButton : styles.button}
-            onClick={() => setShift(false)}
-          >
+          <p className={!shift ? styles.activeButton : styles.button} onClick={() => setShift(false)}>
             Ingresá
           </p>
-          <p
-            className={shift ? styles.activeButton : styles.button}
-            onClick={() => setShift(true)}
-          >
+          <p className={shift ? styles.activeButton : styles.button} onClick={() => setShift(true)}>
             Registrate
           </p>
         </div>
@@ -202,7 +189,6 @@ const SignForm = (props) => {
                     type='text'
                     name='firstName'
                     onChange={inputHandler}
-                    defaultValue={user.firstName}
                     color='warning'
                     size='small'
                     fullWidth
@@ -216,7 +202,6 @@ const SignForm = (props) => {
                     type='text'
                     name='lastName'
                     onChange={inputHandler}
-                    defaultValue={user.lastName}
                     color='warning'
                     size='small'
                     fullWidth
@@ -232,7 +217,6 @@ const SignForm = (props) => {
                     type='email'
                     name='email'
                     onChange={inputHandler}
-                    defaultValue={user.email}
                     color='warning'
                     size='small'
                     fullWidth
@@ -246,7 +230,6 @@ const SignForm = (props) => {
                     type='password'
                     name='password'
                     onChange={inputHandler}
-                    defaultValue={user.password}
                     color='warning'
                     size='small'
                     fullWidth
@@ -260,7 +243,6 @@ const SignForm = (props) => {
                     type='password'
                     name='repPass'
                     onChange={inputHandler}
-                    defaultValue={user.repPass}
                     color='warning'
                     size='small'
                     fullWidth
@@ -270,9 +252,7 @@ const SignForm = (props) => {
                 </div>
                 <div className={styles.boxFile}>
                   <label htmlFor='Foto'>
-                    <span className={styles.submitPhoto}>
-                      {user?.src ? 'Foto cargada' : 'Cargar foto de perfil'}
-                    </span>
+                    <span className={styles.submitPhoto}>{user?.src ? 'Foto cargada' : 'Cargar foto de perfil'}</span>
                   </label>
                   <input
                     id='Foto'
@@ -281,7 +261,6 @@ const SignForm = (props) => {
                     name='src'
                     placeholder='Agregá una foto de perfil'
                     onChange={inputHandler}
-                    defaultValue={user.src}
                   />
                 </div>
               </div>

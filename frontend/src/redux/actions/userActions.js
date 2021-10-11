@@ -8,6 +8,7 @@ const userActions = {
     return async (dispatch) => {
       try {
         let res = await axios.post(`${HOST}/api/user/signUp`, user)
+        console.log(res)
         if (res.data.success) {
           const { user, userData, token } = res.data
           let keep = false
@@ -150,17 +151,7 @@ const userActions = {
       }
     }
   },
-  updateUser: ({
-    action,
-    userData,
-    fileImg,
-    currentPassword,
-    password,
-    newPaymentCard,
-    paymentCardId,
-    newAddress,
-    addressId,
-  }) => {
+  updateUser: ({ action, userData, fileImg, currentPassword, password, newPaymentCard, paymentCardId, newAddress, addressId }) => {
     return async (dispatch) => {
       let token = localStorage.getItem('token')
       let body = fileImg || {

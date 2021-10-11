@@ -9,29 +9,18 @@ const validatorSignUp = require('../controllers/middlewares/validatorSignUp')
 const router = express.Router()
 
 //USERS
-router
-  .route('/user/signUp')
-  .post(userControllers.signUp, userControllers.sendEmail) //validatorSignUp, userControllers.signUp
+router.route('/user/signUp').post(validatorSignUp, userControllers.signUp, userControllers.sendEmail) //validatorSignUp, userControllers.signUp
 router.route('/user/logIn').post(userControllers.logIn)
 router.route('/user/token').get(passport, userControllers.verifyToken)
-router
-  .route('/user')
-  .put(passport, userControllers.updateUser)
-  .delete(passport, userControllers.deleteUser)
+router.route('/user').put(passport, userControllers.updateUser).delete(passport, userControllers.deleteUser)
 
 // PRODUCTS
-router
-  .route('/products')
-  .get(productControllers.getProducts)
-  .put(productControllers.manageCart)
+router.route('/products').get(productControllers.getProducts).put(productControllers.manageCart)
 router.route('/products/favs').put(passport, productControllers.favHandler)
 // .put(passport, productControllers.manageCart)
 
 //ORDERS
-router
-  .route('/orders')
-  .post(orderControllers.createOrder)
-  .put(orderControllers.cancellOrder)
+router.route('/orders').post(orderControllers.createOrder).put(orderControllers.cancellOrder)
 
 //EMAIL
 // router.route('/mail').post(passport)

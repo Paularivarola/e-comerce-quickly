@@ -36,11 +36,8 @@ const validator = (req, res, next) => {
       'string.base': 'The password must be of type text',
       'string.min': 'Password must contain at least 8 characters',
     }),
-    repPass: joi.string().trim().min(8).required().messages({
-      'string.empty': 'The field cant be empty',
-      'string.base': 'The password must be of type text',
-      'string.min': 'Password must contain at least 8 characters',
-    }),
+    google: joi.boolean(),
+    fileImg: joi.string(),
   })
   const validation = schema.validate(req.body, { abortEarly: false })
   if (!validation.error) {

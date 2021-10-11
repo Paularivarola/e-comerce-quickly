@@ -27,19 +27,23 @@
   justify-content: space-around;
   cursor: pointer;
 }
-
+.userMenuContainerLogged,
 .userMenuContainer {
   display: flex;
   align-items: center;
   justify-content: center;
   position: absolute;
   z-index: 10;
-  top: 19vh;
+  top: 13vh;
   right: 3vw;
-  width: 16rem;
+  width: 18rem;
   height: 15vh;
   padding: 3.5vw;
   margin-right: 2.3rem;
+}
+
+.userMenuContainerLogged {
+  top: 18vh;
 }
 
 .userMenu {
@@ -111,8 +115,15 @@
   .userData {
     display: none;
   }
-  .userMenuContainer {
+  .userMenuContainer,
+  .userMenuContainerLogged {
     top: 27vh;
+    right: 0;
+    width: 100vw;
+    margin: 0;
+  }
+  .userMenuContainer {
+    top: 21vh;
   }
 
   .menuHamburguesa {
