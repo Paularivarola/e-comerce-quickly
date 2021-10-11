@@ -38,7 +38,7 @@ const Profile = (props) => {
       desplegable: [
         { comp: 'data', name: 'Datos Personales' },
         { comp: 'password', name: 'Cambiar Contraseña' },
-        { comp: 'adresses', name: 'Direcciones' },
+        { comp: 'addresses', name: 'Direcciones' },
         { comp: 'payment', name: 'Métodos de Pago' },
         { comp: 'notif', name: 'Notificaciones' },
       ],
@@ -55,9 +55,12 @@ const Profile = (props) => {
         </div>
         <div className={styles3.boxShop}>
           <p className={styles3.welcome}>Hola {props.user && props.user.firstName}, que bueno verte por acá!</p>
-          <button onClick={() => (props.history.location.pathname === '/profile/payment' ? setCardModal(true) : setModal(!modal))}>
-            Agregar {props.history.location.pathname === '/profile/payment' ? 'tarjeta' : 'dirección'}
-          </button>
+          {props.history.location.pathname === '/profile/payment' ||
+            (props.history.location.pathname === '/profile/addresses' && (
+              <button onClick={() => (props.history.location.pathname === '/profile/payment' ? setCardModal(true) : setModal(!modal))}>
+                Agregar {props.history.location.pathname === '/profile/payment' ? 'tarjeta' : 'dirección'}
+              </button>
+            ))}
         </div>
       </div>
       <div className={styles.boxProfile}>
