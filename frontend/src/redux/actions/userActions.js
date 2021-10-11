@@ -119,15 +119,20 @@ const userActions = {
     return async (dispatch) => {
       console.log(body)
       let token = localStorage.getItem('token')
-      try {
-        let response = await axios.put(`${HOST}/api/products`, body)
-        if (!response?.data?.success) throw new Error('Algo salió mal')
-        return dispatch({
-          type: 'HANDLE_CART',
-          payload: response.data.userData,
-        })
-      } catch (error) {
-        console.log(error)
+      if (!token) {
+        let cart = JSON.parse(localStorage.getItem('cart'))
+        localStorage.setItem('cart', cart ? JSON.stringify([...cart, body.cartItem]) : JSON.stringify([body.cartItem]))
+      } else {
+        try {
+          let response = await axios.put(`${HOST}/api/products`, body)
+          if (!response?.data?.success) throw new Error('Algo salió mal')
+          return dispatch({
+            type: 'HANDLE_CART',
+            payload: response.data.userData,
+          })
+        } catch (error) {
+          console.log(error)
+        }
       }
     }
   },

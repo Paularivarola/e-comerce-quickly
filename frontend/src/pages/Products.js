@@ -17,15 +17,12 @@ const Products = (props) => {
 
   useEffect(() => {
     props.getProducts()
-    props.history.push('/products/all')
+    props.history.location.pathname === '/products' && props.history.push('/products/all')
   }, [])
   useEffect(() => {
     setProducts(
       props.products.filter((prod) => {
-        let path =
-          window.location.pathname.split('/')[
-            window.location.pathname.split('/').length - 1
-          ]
+        let path = window.location.pathname.split('/')[window.location.pathname.split('/').length - 1]
         return path === 'all' || path === prod.category
       })
     )
@@ -54,22 +51,13 @@ const Products = (props) => {
     <div className={styles.mainProducts}>
       <div className={styles.categories}>
         <div className={styles.categoriesList}>
-          <BiCategory
-            style={{ color: '#fe6849', fontSize: '1.5em', marginRight: '5%' }}
-          />
+          <BiCategory style={{ color: '#fe6849', fontSize: '1.5em', marginRight: '5%' }} />
           <p className={styles.categoriesTitle}> Categorias</p>
         </div>
         <div className={styles.boxShop}>
-          <p className={styles.welcome}>
-            Hola {props.user && props.user.firstName}! ¿Qué vas a comer hoy?
-          </p>
-          <button
-            className={styles.carritoBtn}
-            onClick={() => props.history.push('/cart')}
-          >
-            <MdShoppingCart
-              style={{ color: 'white', fontSize: '1.8em', marginRight: '5%' }}
-            />
+          <p className={styles.welcome}>Hola {props.user && props.user.firstName}! ¿Qué vas a comer hoy?</p>
+          <button className={styles.carritoBtn} onClick={() => props.history.push('/cart')}>
+            <MdShoppingCart style={{ color: 'white', fontSize: '1.8em', marginRight: '5%' }} />
             Carrito
           </button>
         </div>
@@ -82,11 +70,7 @@ const Products = (props) => {
           ) : (
             <div className={styles2.products}>
               {products.map((prod, index) => (
-                <ProductCard
-                  product={prod}
-                  key={'product' + index}
-                  setModal={setModal}
-                />
+                <ProductCard product={prod} key={'product' + index} setModal={setModal} />
               ))}
               {mod && <Product product={product} setMod={setMod} />}
             </div>

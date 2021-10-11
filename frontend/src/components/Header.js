@@ -62,12 +62,12 @@ const Header = (props) => {
           </div>
           <div className={styles.userData} onClick={() => setUserMenu(!userMenu)}>
             {props.user && (
-              <h2 data-userMenu={true} id='userName' className={styles.userName}>
+              <h2 data-usermenu={true} id='userName' className={styles.userName}>
                 {props.user.data.firstName}
               </h2>
             )}
             <div
-              data-userMenu={true}
+              data-usermenu={true}
               className={styles.user}
               style={{
                 backgroundImage: `url("${img}")`,
@@ -87,7 +87,7 @@ const Header = (props) => {
                 {
                   <span className={styles.salvador}>
                     <MyNavLink page={'Home'} path={'/'} />
-                    <MyNavLink page={'Menu'} path={'/products'} />
+                    <MyNavLink page={'Menu'} path={'/products/all'} />
                     <MyNavLink page={'Contacto'} path={'/contact'} />
                   </span>
                 }
@@ -99,7 +99,7 @@ const Header = (props) => {
                 {
                   <span className={styles.salvador}>
                     <MyNavLink page={'Home'} path={'/'} />
-                    <MyNavLink page={'Menu'} path={'/products'} />
+                    <MyNavLink page={'Menu'} path={'/products/all'} />
                     <MyNavLink page={'Contacto'} path={'/contact'} />
                   </span>
                 }
