@@ -22,10 +22,9 @@ const CardTost = ({properties, setCardTost}) => {
 				text: "",
 				view: false,
 			})
-		}, time)
+		}, time || 1500)
 	}
 	
-
 	useEffect(() => {
 		if(typeTost === "success"){
 			setImageTost("https://i.postimg.cc/4dr1ZcmV/papasfritas1.jpg")
