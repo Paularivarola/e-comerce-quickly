@@ -16,17 +16,15 @@ import { connect } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { BsPersonLinesFill } from 'react-icons/bs'
 
-
 const Profile = (props) => {
   const [formConfirm, setFormConfirm] = useState({})
   const [view, setView] = useState(props.match.params.page)
   const [cardTost, setCardTost] = useState({
-    time: "",
-    icon: "",
-    text: "",
-    view: false
+    time: '',
+    icon: '',
+    text: '',
+    view: false,
   })
-
 
   useEffect(() => {
     let verification = Object.values(formConfirm).some((input) => input !== '')
@@ -88,7 +86,7 @@ const Profile = (props) => {
                     <PersonalData user={props.userData?.data} setCancelForm={setFormConfirm} />
                   ) : view === 'password' ? (
                     <ChangePassword user={props.userData?.data} setCancelForm={setFormConfirm} />
-                  ) : view === 'adresses' ? (
+                  ) : view === 'addresses' ? (
                     <Addresses user={props.userData?.data} setCancelForm={setFormConfirm} modal={modal} setModal={setModal} />
                   ) : view === 'payment' ? (
                     <Payment user={props.userData?.data} setCancelForm={setFormConfirm} cardModal={cardModal} setCardModal={setCardModal} />
