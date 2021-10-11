@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <>
       <Hero />
-      <CardTost/>
+      {/* <CardTost/> */}
       <PromosCarousel />
       <AppStore />
       <Testimonios />
