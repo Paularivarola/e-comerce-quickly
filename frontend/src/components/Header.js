@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react'
 import styles from '../styles/header.module.css'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import userActions from '../redux/actions/userActions'
 import { useState } from 'react'
 import socketActions from '../redux/actions/socketActions'
+import { RiMenuFoldLine } from 'react-icons/ri'
 
 const Header = (props) => {
   const [userMenu, setUserMenu] = useState(false)
   useEffect(() => {
-    localStorage.getItem('socket') &&
-      props.setSocketLS(localStorage.getItem('socket'))
+    localStorage.getItem('socket') && props.setSocketLS(localStorage.getItem('socket'))
     localStorage.getItem('token') && props.verifyToken()
 
     // eslint-disable-next-line
@@ -19,16 +19,31 @@ const Header = (props) => {
   // console.log(props.socket?.id)
 
   window.onclick = (e) => {
-    if (e.target.id !== 'userMenu') setUserMenu(false)
-    if (props.user && e.target.id !== 'userMenu') setUserMenu(false)
+    console.log(e.target.dataset.usermenu !== 'true')
+    if (e.target.dataset.usermenu !== 'true') setUserMenu(false)
+    if (props.user && e.target.dataset.usermenu !== 'true') setUserMenu(false)
   }
+
   let img = props.user
     ? props.user.data.google || props.user.data.admin.flag
-      ? props.user.src
-      : props.user.src !== 'assets/user.png'
+      ? props.user.data.src
+      : props.user.data.src !== 'assets/user.png'
       ? 'http://localhost:4000/' + props.user.data.src
       : '/assets/user.png'
     : '/assets/user.png'
+
+  const MyNavLink = ({ path, page }) => (
+    <NavLink
+      onClick={() => setUserMenu(false)}
+      className={styles.textRoute}
+      exact
+      activeClassName={styles.activeHamburguesa}
+      to={path}
+      onClick={onclick ? onclick : () => setUserMenu(false)}
+    >
+      {page}
+    </NavLink>
+  )
 
   return (
     <header>
@@ -36,50 +51,24 @@ const Header = (props) => {
         <nav className={styles.containerNavegation}>
           <img className={styles.logo} src='/assets/logoLDC.png' alt='logo' />
           <div className={styles.navegation}>
-            <NavLink
-              className={styles.textRoute}
-              exact
-              activeClassName={styles.active}
-              to='/'
-              onClick={() => setUserMenu(false)}
-            >
+            <NavLink className={styles.textRoute} exact activeClassName={styles.active} to='/' onClick={() => setUserMenu(false)}>
               Home
             </NavLink>
-            <NavLink
-              className={styles.textRoute}
-              activeClassName={styles.active}
-              to='/products'
-              onClick={() => setUserMenu(false)}
-            >
+            <NavLink className={styles.textRoute} activeClassName={styles.active} to='/products' onClick={() => setUserMenu(false)}>
               Menu
             </NavLink>
-            <NavLink
-              className={styles.textRoute}
-              to='/'
-              onClick={() => setUserMenu(false)}
-            >
-              Promos
-            </NavLink>
-            <NavLink
-              className={styles.textRoute}
-              activeClassName={styles.active}
-              to='/contact'
-              onClick={() => setUserMenu(false)}
-            >
+            <NavLink className={styles.textRoute} activeClassName={styles.active} to='/contact' onClick={() => setUserMenu(false)}>
               Contacto
             </NavLink>
           </div>
-          <div
-            className={styles.userData}
-            onClick={() => setUserMenu(!userMenu)}
-          >
+          <div className={styles.userData} onClick={() => setUserMenu(!userMenu)}>
             {props.user && (
-              <h2 id='userName' className={styles.userName}>
+              <h2 data-userMenu={true} id='userName' className={styles.userName}>
                 {props.user.data.firstName}
               </h2>
             )}
             <div
-              id='userMenu'
+              data-userMenu={true}
               className={styles.user}
               style={{
                 backgroundImage: `url("${img}")`,
@@ -87,66 +76,53 @@ const Header = (props) => {
               alt='logo'
             ></div>
           </div>
-          {userMenu && (
-            <div className={styles.userMenuContainer}>
-              <div className={styles.userMenu}>
-                {!props.user ? (
-                  <>
-                    <NavLink
-                      className={styles.textRoute}
-                      to='/sign-forms/signin'
-                      onClick={() => setUserMenu(false)}
-                    >
-                      Ingresar
-                    </NavLink>
-                    <NavLink
-                      onClick={() => setUserMenu(false)}
-                      className={styles.textRoute}
-                      to='/sign-forms/signup'
-                    >
-                      Registrarse
-                    </NavLink>
-                  </>
-                ) : (
-                  <>
-                    <NavLink
-                      className={styles.textRoute}
-                      to='/profile/fav'
-                      onClick={() => setUserMenu(false)}
-                    >
-                      Favoritos
-                    </NavLink>
-                    <NavLink
-                      className={styles.textRoute}
-                      to='/profile/his'
-                      onClick={() => setUserMenu(false)}
-                    >
-                      Mis Pedidos
-                    </NavLink>
-                    <NavLink
-                      className={styles.textRoute}
-                      to='/profile/data'
-                      onClick={() => setUserMenu(false)}
-                    >
-                      Mi Cuenta
-                    </NavLink>
-                    <NavLink
-                      className={styles.textRoute}
-                      onClick={() => {
-                        props.logOut()
-                        setUserMenu(false)
-                      }}
-                      to='/'
-                    >
-                      Salir
-                    </NavLink>
-                  </>
-                )}
-              </div>
-            </div>
-          )}
+
+          <RiMenuFoldLine data-usermenu={true} onClick={() => setUserMenu(!userMenu)} className={styles.menuHamburguesa} />
         </nav>
       </div>
+      {userMenu && (
+        <div className={styles.userMenuContainer}>
+          <div className={styles.userMenu}>
+            {!props.user ? (
+              <>
+                {
+                  <span className={styles.salvador}>
+                    <MyNavLink page={'Home'} path={'/'} />
+                    <MyNavLink page={'Menu'} path={'/products'} />
+                    <MyNavLink page={'Contacto'} path={'/contact'} />
+                  </span>
+                }
+                <MyNavLink page={'Ingresar'} path={'/sign-forms/signin'} />
+                <MyNavLink page={'Registrarse'} path={'/sign-forms/signup'} />
+              </>
+            ) : (
+              <>
+                {
+                  <span className={styles.salvador}>
+                    <MyNavLink page={'Home'} path={'/'} />
+                    <MyNavLink page={'Menu'} path={'/products'} />
+                    <MyNavLink page={'Contacto'} path={'/contact'} />
+                  </span>
+                }
+                <MyNavLink page={'Favoritos'} path={'/profile/fav'} />
+                <MyNavLink page={'Mis Pedidos'} path={'/profile/his'} />
+                <MyNavLink page={'Mi Cuenta'} path={'/profile/data'} />
+                <Link
+                  className={styles.textRoute}
+                  page={'Salir'}
+                  path={'/'}
+                  onClick={() => {
+                    props.logOut()
+                    setUserMenu(false)
+                  }}
+                >
+                  Salir
+                </Link>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </header>
   )
 }

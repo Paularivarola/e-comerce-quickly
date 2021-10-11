@@ -7,7 +7,7 @@
 }
 
 .logo {
-  width: 10vw;
+  width: 10rem;
 }
 
 .user {
@@ -34,11 +34,10 @@
   justify-content: center;
   position: absolute;
   z-index: 10;
-  top: 15vh;
+  top: 19vh;
   right: 3vw;
-  width: 18vw;
+  width: 16rem;
   height: 15vh;
-  /* background-color: #fe6849; */
   padding: 3.5vw;
   margin-right: 2.3rem;
 }
@@ -61,10 +60,11 @@
 
 .containerNavegation {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   height: 15vh;
   border-bottom: 1px solid #e0e0e0;
+  padding: 0 5vw;
   width: 100%;
   align-self: center;
   color: slategray;
@@ -94,4 +94,36 @@
 .userName {
   font-size: 1rem;
   color: slategrey;
+}
+.menuHamburguesa {
+  display: none;
+}
+
+.salvador {
+  display: none;
+}
+.activeHamburguesa {
+  color: #fe6849 !important;
+}
+
+@media only screen and (max-width: 768px) {
+  .navegation,
+  .userData {
+    display: none;
+  }
+  .userMenuContainer {
+    top: 27vh;
+  }
+
+  .menuHamburguesa {
+    display: flex;
+    flex-direction: column;
+    font-size: 2.5rem;
+    color: #fe6849;
+  }
+
+  .salvador {
+    display: flex;
+    flex-direction: column;
+  }
 }

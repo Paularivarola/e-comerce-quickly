@@ -1,19 +1,16 @@
-import styles from "../styles/cart.module.css";
-import styles2 from "../styles/products.module.css";
-import { FiEdit } from "react-icons/fi";
-import { MdShoppingCart } from "react-icons/md";
-import { RiDeleteBin7Fill } from "react-icons/ri";
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import userActions from "../redux/actions/userActions";
-import toastConfirm from "../components/ToastConfirm";
-import { Toaster } from "react-hot-toast";
-import Product from "../components/Product";
+import styles from '../styles/cart.module.css'
+import styles2 from '../styles/products.module.css'
+import { FiEdit } from 'react-icons/fi'
+import { MdShoppingCart } from 'react-icons/md'
+import { RiDeleteBin7Fill } from 'react-icons/ri'
+import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import userActions from '../redux/actions/userActions'
+import toastConfirm from '../components/ToastConfirm'
+import { Toaster } from 'react-hot-toast'
+import Product from '../components/Product'
 
 const CartItem = ({ cartItem, manageCart, userData, setEdit, setCartItem }) => {
-  console.log(cartItem);
-
-  
   return (
     <>
       <div className={styles.cartItem}>
@@ -21,8 +18,7 @@ const CartItem = ({ cartItem, manageCart, userData, setEdit, setCartItem }) => {
           <div
             className={styles.productImg}
             style={{
-              backgroundImage:
-                'url("https://sevilla.abc.es/gurme/wp-content/uploads/sites/24/2013/04/pizza-margarita.jpg")',
+              backgroundImage: 'url("https://sevilla.abc.es/gurme/wp-content/uploads/sites/24/2013/04/pizza-margarita.jpg")',
             }}
           ></div>
           <div className={styles.productDetails}>
@@ -53,41 +49,32 @@ const CartItem = ({ cartItem, manageCart, userData, setEdit, setCartItem }) => {
           <span
             className={styles.span}
             onClick={() => {
-              setCartItem(cartItem);
-              setEdit(true);
+              setCartItem(cartItem)
+              setEdit(true)
             }}
           >
-            <FiEdit style={{ color: "#fe6849", fontSize: "1.5em" }} />
+            <FiEdit style={{ color: '#fe6849', fontSize: '1.5em' }} />
           </span>
-          <span
-            onClick={() =>
-              toastConfirm(() =>
-                manageCart({ action: "delete", cartItem, _id: userData._id })
-              )
-            }
-            className={styles.span}
-          >
-            <RiDeleteBin7Fill style={{ color: "#fe6849", fontSize: "1.5em" }} />
+          <span onClick={() => toastConfirm(() => manageCart({ action: 'delete', cartItem, _id: userData._id }))} className={styles.span}>
+            <RiDeleteBin7Fill style={{ color: '#fe6849', fontSize: '1.5em' }} />
           </span>
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
 const Cart = ({ manageCart, userData, ...props }) => {
-  const [edit, setEdit] = useState(false);
-  const [cartItem, setCartItem] = useState({});
-  const cart = JSON.parse(localStorage.getItem("cart"));
+  const [edit, setEdit] = useState(false)
+  const [cartItem, setCartItem] = useState({})
+  const cart = JSON.parse(localStorage.getItem('cart'))
 
   const amount = cart.reduce((acc, item) => acc + item.totalPrice, 0)
   return (
     <div className={styles.mainCart}>
       <div className={styles2.categories}>
         <div className={styles2.categoriesList}>
-          <MdShoppingCart
-            style={{ color: "#fe6849", fontSize: "1.5em", marginRight: "5%" }}
-          />
+          <MdShoppingCart style={{ color: '#fe6849', fontSize: '1.5em', marginRight: '5%' }} />
           <p className={styles2.categoriesTitle}> Mi carrito</p>
         </div>
         <div className={styles.boxData}>
@@ -96,16 +83,14 @@ const Cart = ({ manageCart, userData, ...props }) => {
               <span>Punto de entrega:</span> "direccion por defecto elegida"
             </p>
             <span className={styles.adressBtn}>
-              <FiEdit style={{ color: "#fe6849", fontSize: "1.5em" }} />
+              <FiEdit style={{ color: '#fe6849', fontSize: '1.5em' }} />
             </span>
           </div>
           <div className={styles.payBtn}>
             <p className={styles.totalPrice}>
               <span>Precio total:</span> $ {amount}
             </p>
-            <button onClick={() => props.history.push("/checkout")}>
-              Pagar
-            </button>
+            <button onClick={() => props.history.push('/checkout')}>Pagar</button>
           </div>
         </div>
       </div>
@@ -139,14 +124,7 @@ const Cart = ({ manageCart, userData, ...props }) => {
           </div>
         </div>
       </div>
-      {edit && (
-        <Product
-          product={cartItem.productId}
-          editCartItem={cartItem}
-          setMod={setEdit}
-          edit={edit}
-        />
-      )}
+      {edit && <Product product={cartItem.productId} editCartItem={cartItem} setMod={setEdit} edit={edit} />}
       <Toaster
         containerStyle={{
           top: 200,
@@ -159,17 +137,17 @@ const Cart = ({ manageCart, userData, ...props }) => {
         }}
       />
     </div>
-  );
-};
+  )
+}
 
 const mapStateToProps = (state) => {
   return {
     userData: state.users.userData,
-  };
-};
+  }
+}
 
 const mapDispatchToProps = {
   manageCart: userActions.manageCart,
-};
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(Cart)
