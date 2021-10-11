@@ -52,7 +52,8 @@
     display: flex;
     flex: 1
 }
-.categoryBox {
+/* categorias */
+.categoryBox { 
     width: 50%;
     background-color: whitesmoke;
     margin: 0.5rem;
@@ -140,4 +141,194 @@
 .bannerText {
     font-size: 1rem;
     font-weight: 400;
+}
+
+
+
+@media only screen and (max-width: 425px) {
+
+    .heroContainer {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        padding: 5%;
+    }
+    .categoryBox { 
+        width: 50%;
+        background-color: whitesmoke;
+        margin: 0.5rem;
+        border-radius: 20px;
+        padding: 0.5rem;
+        box-shadow: 13px 13px 14px -6px rgba(0,0,0,0.15);
+        transition: transform .3s;
+
+ 
+    }
+
+    .boxCall {
+        width: 100%;
+        padding: 2rem;
+    }
+    .categoriesBox {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .bannerBox, .mainText {
+        display: flex;
+        padding: 1% 3%;
+        flex-wrap: wrap;
+    }
+    .textBox {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 4%;
+    }
+    .line {
+        width: 10%;
+        border-width: 0;
+        height: 3px;
+        background-color: rgb(212, 212, 212);
+    }
+    .circle {
+        border: solid 3px rgb(212, 212, 212);
+        width: 5rem;
+        height: 5rem;
+        border-radius: 100px 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+
+}
+
+@media only screen and (max-width: 576px) {
+    .heroContainer {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        padding: 5%;
+    }
+    .categoryBox { 
+        width: 50%;
+        background-color: whitesmoke;
+        margin: 0.5rem;
+        border-radius: 20px;
+        padding: 0.5rem;
+        box-shadow: 13px 13px 14px -6px rgba(0,0,0,0.15);
+        transition: transform .3s;
+    }
+
+    .boxCall {
+        width: 100%;
+        padding: 2rem;
+    }
+    .categoriesBox {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .categoriesBox {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .bannerBox, .mainText {
+        display: flex;
+        padding: 1% 3%;
+        flex-wrap: wrap;
+    }
+    .textBox {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 4%;
+    }
+    .line {
+        width: 10%;
+        border-width: 0;
+        height: 3px;
+        background-color: rgb(212, 212, 212);
+    }
+    .circle {
+        border: solid 3px rgb(212, 212, 212);
+        width: 5rem;
+        height: 5rem;
+        border-radius: 100px 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+}
+
+@media only screen and (max-width: 768px) {
+    .heroContainer {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        padding: 5%;
+    }
+    .categoryBox { 
+        width: 50%;
+        background-color: whitesmoke;
+        margin: 0.5rem;
+        border-radius: 20px;
+        padding: 0.5rem;
+        box-shadow: 13px 13px 14px -6px rgba(0,0,0,0.15);
+        transition: transform .3s;
+ 
+    }
+    .boxCall {
+        width: 100%; 
+        padding: 2rem;
+    }
+    .categoriesBox {
+        width: 100%;
+        display: flex;
+    }
+    .categoriesBox {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .bannerBox, .mainText {
+        display: flex;
+        padding: 1% 3%;
+        flex-wrap: wrap;
+    }
+    .textBox {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 4%;
+    }
+    .line {
+        width: 10%;
+        border-width: 0;
+        height: 3px;
+        background-color: rgb(212, 212, 212);
+    }
+    .circle {
+        border: solid 3px rgb(212, 212, 212);
+        width: 5rem;
+        height: 5rem;
+        border-radius: 100px 100px;
+    }
+
+}
+
+@media only screen and (max-width: 991px) {
+
+
 }

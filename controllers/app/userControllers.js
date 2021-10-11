@@ -11,8 +11,7 @@ const userControllers = {
     const { firstName, lastName, password, email, google, src } = req.body
     const pw = bcrypt.hashSync(password)
     try {
-      if (await User.findOne({ 'data.email': email }))
-        throw new Error('Ya estás registrado')
+      if (await User.findOne({ 'data.email': email })) throw new Error('Ya estás registrado')
       let customerId = await stripe.customers.create({
         description: firstName + ' ' + lastName,
       })
@@ -23,17 +22,10 @@ const userControllers = {
       let picture
       if (req.files) {
         const { fileImg } = req.files
-        picture = `${newUser._id}.${
-          fileImg.name.split('.')[fileImg.name.split('.').length - 1]
-        }`
-        fileImg.mv(
-          `${__dirname}/../../assets/${newUser._id}.${
-            fileImg.name.split('.')[fileImg.name.split('.').length - 1]
-          }`,
-          (err) => {
-            if (err) return console.log(err)
-          }
-        )
+        picture = `${newUser._id}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`
+        fileImg.mv(`${__dirname}/../../assets/${newUser._id}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`, (err) => {
+          if (err) return console.log(err)
+        })
       } else {
         picture = src ? src : 'assets/user.png'
       }
@@ -62,8 +54,7 @@ const userControllers = {
     const { email, password, google } = req.body
     try {
       let user = await User.findOne({ 'data.email': email })
-      if (!user)
-        throw new Error('No encotramos una cuenta asociada a ese email')
+      if (!user) throw new Error('No encotramos una cuenta asociada a ese email')
       if (user.data.google && !google) {
         throw new Error('Debes iniciar sesión con Google')
       }
@@ -88,26 +79,13 @@ const userControllers = {
   },
   updateUser: async (req, res) => {
     const { _id } = req.user
-    const {
-      action,
-      userData,
-      newPaymentCard,
-      paymentCardId,
-      newAddress,
-      addressId,
-      password,
-      currentPassword,
-    } = req.body
+    const { action, userData, newPaymentCard, paymentCardId, newAddress, addressId, password, currentPassword } = req.body
     let src
     if (req.files) {
       const { fileImg } = req.files
-      src = `${_id}v${req.user.__v + 1}.${
-        fileImg.name.split('.')[fileImg.name.split('.').length - 1]
-      }`
+      src = `${_id}v${req.user.__v + 1}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`
       fileImg.mv(
-        `${__dirname}/../../assets/${_id}v${req.user.__v + 1}.${
-          fileImg.name.split('.')[fileImg.name.split('.').length - 1]
-        }`,
+        `${__dirname}/../../assets/${_id}v${req.user.__v + 1}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`,
         (err) => {
           if (err) {
             res.json({ success: false, error: err.message })
@@ -140,11 +118,7 @@ const userControllers = {
     let options = { new: true }
     try {
       if (!operation) throw new Error()
-      if (
-        action === 'updatePass' &&
-        !bcrypt.compareSync(currentPassword, req.user.data.password)
-      )
-        throw new Error('Contraseña incorrecta')
+      if (action === 'updatePass' && !bcrypt.compareSync(currentPassword, req.user.data.password)) throw new Error('Contraseña incorrecta')
       let user = await User.findOneAndUpdate({ _id }, operation, options)
       res.json({
         success: true,
@@ -253,22 +227,17 @@ const html = (firstName, action) => {
       <div style="width: 100%;margin:20px 0; text-align: center;">
           <img style="width: 40%"  src="https://i.postimg.cc/W3FQgY9z/logo-Nuevo-png.png" />
       </div>
-  
     <tr>
       <td style="background-color: #F0F3F5">
         <div style="color: #FE6849; margin: 4% 10% 2%; text-align: center;font-family: sans-serif">
           <h1 style="color: #FE6849; margin: 0 0 7px">¡Hola, ${firstName} !</h1>
-         
-  <h2 style="color: #525252; margin: 0 10 7px; font-size: 28px; ">Te damos la bienvenida   </h2>
-           
+  <h2 style="color: #525252; margin: 0 10 7px; font-size: 28px; ">Te damos la bienvenida</h2>
                     <br>
-           
           </p>
           <h2 style="color: #FE6849;">Disfrutá tu comida favorita desde la comodidad de tu casa.</h2>
           <div style="width: 100%;margin:20px 0; text-align: center;">
-            <img style="width: 80%; border-radius: 10%"  src="https://i.postimg.cc/SRZ97j2y/4676729.jpg" />
+            <img style="width: 80%; border-radius: 10%"  src="https://i.postimg.cc/D0Yf3trX/5241348-adobespark.png" />
       </div>
-  
           <div style="width: 100%;margin:20px 0; display: inline-block;text-align: center; background-color: #FE6849;">
             <a style="text-decoration: none; color: white;" href=""><p style="color: #fff; font-size: 14px; text-align: center;">© Copyright 2021 | miComida.</p></a>	
           </div>
@@ -281,7 +250,6 @@ const html = (firstName, action) => {
      <div style="width: 100%;margin:20px 0; text-align: center;">
          <img style="width: 40%"  src="https://i.postimg.cc/W3FQgY9z/logo-Nuevo-png.png" />
      </div>
-     
      <tr>
      <td style="background-color: #F0F3F5">
        <div style="color: #34495e; margin: 4% 10% 2%; text-align: justify;font-family: sans-serif">
@@ -296,43 +264,41 @@ const html = (firstName, action) => {
                    <br>
          </p>
          <h2 style="color: #525252;">Detalle del pedido:</h2>
-           
-           
          <table style="width: 100%; background-color: rgba(0, 0, 0, .1);">
            <thead style="background-color: #FE6849; color: #fff;">
-     <tr>
+    <tr>
      <th>producto</th>
-     <th>cantidad</th>
-     <th>precio</th>
-     </tr>
+       <th>cantidad</th>
+       <th>precio</th>
+    </tr>
      </thead>
      <tbody>
-     <tr>
-     <td>producto</td>
-     <td style="text-align: center">1</td>
-     <td style="text-align: center">$100</td>
-     </tr>
+       <tr>
+         <td>producto</td>
+         <td style="text-align: center">1</td>
+         <td style="text-align: center">$100</td>
+       </tr>
      </tbody>
      <tfoot>
-     <tr>
-     <td>Metodo de pago</td>
-     <td style="text-align: center"></td>
-     <td style="text-align: center">-</td>
-     </tr>
-     <tr>
-     <td>Total</td>
-     <td style="text-align: center"></td>
-     <td style="text-align: center">-</td>
-     </tr>
+      <tr>
+       <td>Metodo de pago</td>
+       <td style="text-align: center"></td>
+       <td style="text-align: center">-</td>
+      </tr>
+      <tr>
+       <td>Total</td>
+       <td style="text-align: center"></td>
+       <td style="text-align: center">-</td>
+      </tr>
      </tfoot>
      
      </table>
-           <h2 style="color: #525252;">Dirección de facturación</h2>
-                         <ul style="font-size: 15px;  margin: 10px 0">
-                           <li style="color: #000;">Pedido a nombre:</li>
-                           <li style="color: #000;">Dirección:</li>
-                           <li style="color: #000;">Numero de contacto:</li>
-         </ul>
+        <h2 style="color: #525252;">Dirección de facturación</h2>
+              <ul style="font-size: 15px;  margin: 10px 0">
+              <li style="color: #000;">Pedido a nombre:</li>
+              <li style="color: #000;">Dirección:</li>
+              <li style="color: #000;">Numero de contacto:</li>
+        </ul>
          <div style="width: 100%;margin:20px 0; display: inline-block;text-align: center; background-color: #FE6849;">
            <a style="text-decoration: none; color: white;" href=""><p style="color: #fff; font-size: 14px; text-align: center;">© Copyright 2021 | miComida</p></a>    
          </div>
@@ -350,10 +316,8 @@ const html = (firstName, action) => {
        <div style="color: #FE6849; margin: 4% 10% 2%; text-align: center;font-family: sans-serif">
          <h1 style="color: #FE6849; margin: 0 0 7px">Tu pedido fue cancelado</h1>
         
-     <h2 style="color: #525252; margin: 0 10 7px; font-size: 19px; ">Lamentamos mucho lo ocurrido, ${firstName}. Estamos trabajando para que no vuelva a ocurrir.   </h2>
-          
+     <h2 style="color: #525252; margin: 0 10 7px; font-size: 19px; ">Lamentamos mucho lo ocurrido, ${firstName}. Estamos trabajando para que no vuelva a ocurrir.</h2>
                    <br>
-         
            <h2 style="color: #525252; margin: 0 10 7px; font-size: 19px; ">Queremos contarte que ya estamos gestionando la devolución de tu pedido y te enviaremos un correo más adelante con todos los detalles.   </h2>
                        <div style="width: 100%;margin:20px 0; text-align: center;">
            <img style="width: 50%; border-radius: 100%"  src="https://i.postimg.cc/c4SQm5D4/imagen-persona-adobespark.png" />
