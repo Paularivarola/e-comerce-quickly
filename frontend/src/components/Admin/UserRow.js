@@ -1,18 +1,31 @@
 import styles from '../../styles/customer.module.css'
-import { MdEdit, MdDelete, MdPersonAdd } from "react-icons/md";
+import { MdDelete, MdInfoOutline } from "react-icons/md";
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import { connect } from 'react-redux';
 import adminUsersActions from '../../redux/actions/admin/adminUserActions';
 import Swal from 'sweetalert2'
+import { message } from './Message';
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+
 
 const UserRow = (props) => {
-    let { firstName, lastName, email, _id } = props.user.data
+    const [details, setDetails] = useState(false)
+    let { firstName, lastName, email } = props.user.data
+    const { _id } = props.user
     firstName = firstName[0].toUpperCase() + firstName.slice(1).toLowerCase()
     lastName = lastName[0].toUpperCase() + lastName.slice(1).toLowerCase()
     const fullName = firstName + " " + lastName
+    let img = props.user
+        ? props.user.data.google || props.user.data.admin.flag
+            ? props.user.src
+            : props.user.src !== 'assets/user.png'
+                ? 'http://localhost:4000/' + props.user.data.src
+                : '/assets/user.png'
+        : '/assets/user.png'
 
-    const verification = () => {
+    const verification = (id) => {
         Swal.fire({
             title: '¿Desea borrar al usuario?',
             icon: 'question',
@@ -21,35 +34,37 @@ const UserRow = (props) => {
             cancelButtonColor: '#d33',
             confirmButtonText: 'Sí',
             cancelButtonText: 'No'
-        }).then((result) => {
+        }).then(async (result) => {
             if (result.isConfirmed) {
-                props.deleteUser(_id)
+                try {
+                    let response = await props.deleteUser(id)
+                    if (response.success) {
+                        message('success', 'Usuario eliminado exitosamente.')
+                    }
+                } catch (error) {
+                    message('error', 'Surgió un problema. Intente más tarde.')
+                }
             }
         })
     }
-
     return (
-        <tr>
-            <td>
-                <div className={styles.profilePic} style={{
-                    backgroundImage: `url("${props.user
-                        ? props.user.google
-                            ? props.user.data.src
-                            : props.user.data.src !== '/assets/user.png'
-                                ? 'http://localhost:4000/' + props.user.data.src
-                                : '/assets/user.png'
-                        : '/assets/user.png'
-                        }")`
-                }}></div>
-            </td>
-            <td>{fullName}</td>
-            <td>{email}</td>
-            <td>{!props.user.ordersId.length ? 'Sin Pedidos' : 'Calcular'}</td>
-            <td className={styles.buttonsSection}>
-                <Button variant="contained" color="info" size="small"><MdEdit />Editar</Button>
-                <Button onClick={verification} variant="outlined" color="error" size="small"><MdDelete />Borrar</Button>
-            </td>
-        </tr>
+        <>
+            <tr>
+                <td>
+                    <div className={styles.profilePic} style={{
+                        backgroundImage: `url("${img}")`
+                    }}></div>
+                </td>
+                <td>{fullName}</td>
+                <td>{email}</td>
+                <td>{!props.user.ordersId.length ? 'Sin Pedidos' : 'Calcular'}</td>
+                <td className={styles.buttonsSection}>
+                    <Link to={`/admin/cliente/${_id}`}><Button variant="contained" color="info" size="small" onClick={() => props.setChosen(props.user)}><MdInfoOutline />Más Info</Button></Link>
+                    <Button onClick={() => verification(_id)} variant="outlined" color="error" size="small"><MdDelete />Borrar</Button>
+                </td>
+            </tr>
+            {/* {details && <CustomerDetails setDetails={setDetails} user={props.user.data} />} */}
+        </>
     )
 }
 const mapDispatchToProps = {

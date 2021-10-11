@@ -30,17 +30,15 @@
 }
 
 span.navItem,
-span.navItemActive {
-  font-size: 20px;
-  /* padding: .3em 0; */
-  padding-left: 1vw;
-  color: #444;
-  /* color: #3c4b64; */
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  transition: all 300ms;
-  border-left: 5px solid transparent;
+span.navItemActive{
+    font-size: 20px;
+    padding-left: 1vw;
+    color: #444;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 300ms;
+    border-left: 5px solid transparent;
 }
 span.navItemActive {
   border-left: 5px solid #fe6849;

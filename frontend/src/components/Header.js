@@ -13,7 +13,7 @@ const Header = (props) => {
     localStorage.getItem('socket') && props.setSocketLS(localStorage.getItem('socket'))
     localStorage.getItem('token') && props.verifyToken()
 
-    // eslint-disable-next-line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // console.log(props.socket?.id)
@@ -27,8 +27,8 @@ const Header = (props) => {
     ? props.user.data.google || props.user.data.admin.flag
       ? props.user.data.src
       : props.user.data.src !== 'assets/user.png'
-      ? 'http://localhost:4000/' + props.user.data.src
-      : '/assets/user.png'
+        ? 'http://localhost:4000/' + props.user.data.src
+        : '/assets/user.png'
     : '/assets/user.png'
 
   const MyNavLink = ({ path, page }) => (

@@ -2,13 +2,14 @@ const adminProductReducer = (state = {
     products: [],
 }, action) => {
     switch (action.type) {
-        // case "GET_PRODUCTS":
-        //     return {
-        //         products: action.payload,
-        //     };
+        case "GET_PRODUCTS":
+            console.log(action.payload)
+            return {
+                products: action.payload,
+            };
         case "ADD_PRODUCT":
             return {
-                products: state.products.push(action.payload)
+                products: [...state.products, action.payload]
             }
         case "DELETE_PRODUCT":
             return {

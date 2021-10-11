@@ -1,24 +1,61 @@
 import styles from '../../styles/customer.module.css'
-import { MdEdit, MdDelete } from "react-icons/md";
 import * as React from 'react';
-import Button from '@mui/material/Button';
+import { useState, useRef } from 'react'
+import { connect } from 'react-redux';
+import ProductList from './ProductList';
+import NoResults from './NoResults';
 
-const Products = () => {
+const Products = (props) => {
     window.scrollTo(0, 0)
+    const allProducts = props.products
+    const [filtered, setFiltered] = useState(props.products)
+    let catList = []
+    const inputName = useRef()
+    const inputCategory = useRef()
+
+    props.products.map(product => {
+        if (!catList.includes(product.category)) {
+            return catList.push(product.category)
+        }
+        return true
+    })
+
+    const handleChange = (e) => {
+        setFiltered(allProducts.filter(product => product.name.toLowerCase().includes(inputName.current.value.toLowerCase()) && product.category.includes(inputCategory.current.value)))
+    }
+
     return (
         <section className={styles.customerContainer}>
             <div className={styles.infoTable}>
                 <div className={styles.tableHeader}>
                     <h2>Productos</h2>
-                    <Button variant="contained" color="info" size="medium" onClick={() => alert('hola')}><MdEdit />Agregar</Button>
-
                 </div>
                 <hr />
+                <div className={styles.filterContainer}>
+                    <div style={{ width: '100%' }}>Filtrar por:</div>
+                    <div>
+                        <label htmlFor='nameSearch'>Nombre</label>
+                        <input ref={inputName} name='name' id="nameSearch" label="Nombre" variant="outlined" onChange={handleChange} />
+                    </div>
+                    <div>
+                        <label htmlFor='categorySearch'>Categoría</label>
+                        <select
+                            id="categorySearch"
+                            onChange={handleChange}
+                            name='category'
+                            ref={inputCategory}
+                        >
+                            <option value=''>Todas las categorías</option>
+                            {catList.map(category => <option value={category} key={category}>{category}</option>)}
+                        </select>
+                    </div>
+                </div>
+                <span className={styles.results}>{`Mostrando ${filtered.length} productos de ${allProducts.length}`}</span>
                 <div className={styles.tableContainer}>
                     <table className={styles.customersTable}>
                         <thead>
                             <tr>
-                                <th></th>
+                                <th>Imagen</th>
                                 <th>Nombre Producto</th>
                                 <th>Categoría</th>
                                 <th>Precio</th>
@@ -27,28 +64,23 @@ const Products = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <div className={styles.profilePic} style={{ backgroundImage: "url('https://www.tsensor.online/wp-content/uploads/2020/04/avatar-icon-png-105-images-in-collection-page-3-avatarpng-512_512.png')" }}></div>
-                                </td>
-                                <td>Daniel Sepúlveda</td>
-                                <td>dsadsa</td>
-                                <td>d.sepulveda.perez@gmail.com</td>
-                                <td>25</td>
-                                <td className={styles.buttonsSection}>
-                                    <Button variant="contained" color="info" size="small"><MdEdit />Editar</Button>
-                                    <Button variant="outlined" color="error" size="small"><MdDelete />Borrar</Button>
-                                </td>
-                            </tr>
+                            {filtered.map(product => <ProductList product={product} key={product._id} setView={props.setView} />)}
                         </tbody>
                         <tfoot>
 
                         </tfoot>
                     </table>
                 </div>
+                {!filtered.length && <NoResults />}
             </div>
-        </section>
+        </section >
     )
 }
 
-export default Products
+const mapStateToProps = state => {
+    return {
+        products: state.adminProducts.products,
+    }
+}
+
+export default connect(mapStateToProps)(Products)

@@ -1,0 +1,120 @@
+.detailsContainer{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    z-index: 5;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    overflow-y: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainContainer{
+    width: 80%;
+    height: 90%;
+    background-color: whitesmoke;
+    border-radius: 2em;
+    padding: 3vh 3vw;
+    display: flex;
+    flex-direction: column;
+}
+.mainContainer a{
+    align-self: flex-end;
+}
+
+.mainContainer svg{
+    font-size: 2em;
+    align-self: flex-end;
+    color: #fe6849;
+    cursor: pointer;
+    transition: all 300ms;
+}
+
+.mainContainer svg:hover{
+    color: #fa7c63;
+}
+
+.dataContainer{
+    display: flex;
+}
+.userImage{
+    width: 30%;
+    height: 60vh;
+    /* border: 1px solid black; */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-right: 3vw;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.dataContainer h3 span{
+    font-weight: normal;
+}
+
+.information{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.information h3{
+    margin-bottom: 1.5vh;
+}
+
+.information h2{
+    /* margin-top: 4vh; */
+    margin-bottom: 3vh;
+    text-decoration: underline;
+}
+
+span.warning{
+    border: 1px solid black;
+    padding: 2vh 3vw;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+span.warning svg{
+    margin-right: 5px;
+}
+
+.addressesContainer{
+    width: 100%;
+    overflow-x: scroll;
+    padding: .5em;
+}
+
+.addressBox{
+    width: 30%;
+    height: 25vh;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    text-align: center;
+
+}
+
+.addressBox h3{
+    margin-bottom: 0;
+}
+
+.addressBox p{
+    margin-bottom: 1.2vh;
+}
+
+.favouritesContainer,
+.ordersContainer{
+    width: 100%;
+    height: 65vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow-y: scroll;
+    padding: 1vh 1vw;
+}

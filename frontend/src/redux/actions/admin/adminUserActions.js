@@ -70,6 +70,16 @@ const adminUsersActions = {
             }
         };
     },
+    countVisit: () => {
+        return async (dispatch) => {
+            await axios.post('http://localhost:4000/api/admin/general')
+        }
+    },
+    getUser: (id) => {
+        return async (dispatch) => {
+            dispatch({ type: "GET_USER", payload: id })
+        }
+    }
     // getReviews: () => {
     //     return async (dispatch) => {
     //         let response = await axios.get(

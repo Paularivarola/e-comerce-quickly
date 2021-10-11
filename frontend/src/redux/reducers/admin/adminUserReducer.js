@@ -1,6 +1,7 @@
 const adminUserReducer = (state = {
     users: [],
-    reviews: []
+    reviews: [],
+    user: [{}]
 }, action) => {
     switch (action.type) {
         case "GET_USERS":
@@ -26,6 +27,11 @@ const adminUserReducer = (state = {
                 users: state.users.map(user =>
                     user._id === action.payload._id ? action.payload : user
                 )
+            }
+        case "GET_USER":
+            return {
+                ...state,
+                user: state.users.filter(user => user._id === action.payload)
             }
         // case "GET_REVIEWS":
         //     return {
