@@ -254,6 +254,7 @@ const CheackOut = ({ userData }) => {
           </div>
         </div>
       </div>
+      {cardTost.view && <CardTost properties={cardTost} setCardTost={setCardTost} />}
     </div>
   )
 }

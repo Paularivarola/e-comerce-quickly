@@ -9,6 +9,7 @@ import { ImCancelCircle } from 'react-icons/im'
 import { Toaster } from 'react-hot-toast'
 import { BsTrash } from 'react-icons/bs'
 // import styles from '../styles/checkOut.module.css'
+import CardTost from "./CardTost"
 import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
 
@@ -74,12 +75,23 @@ const Addresses = ({ updateUser, userData, active, setActive, modal, setModal })
     apartment: '',
     neighborhood: '',
   }
+<<<<<<< HEAD
 
+=======
+  const [cardTost, setCardTost] = useState({
+    time: "",
+    icon: "",
+    text: "",
+    view: false
+  })
+
+  const [modal, setModal] = useState(false)
+>>>>>>> origin/cristian
   const [newAddress, setNewAddress] = useState(initialState)
   const submitHandler = () => {
     let validate = Object.values(newAddress).some((prop) => prop === '')
     if (validate) {
-      return alert('Todos las campos son obligatorios')
+      return setCardTost({time: 1500, icon: "error", text: "Complete todos los campos", view: true,})
     }
     updateUser({ action: 'addAddress', newAddress })
     setModal(!modal)
@@ -92,6 +104,9 @@ const Addresses = ({ updateUser, userData, active, setActive, modal, setModal })
 
   return (
     <div className={styles.mainPersonalData}>
+      {cardTost.view && 
+        <CardTost properties={cardTost} setCardTost={setCardTost}/>
+      }
       {!userData ? (
         <div className={styles.containFormAddress}>
           <h1>No tenes ninguna direccion todavia</h1>

@@ -6,6 +6,7 @@ import Rating from '@mui/material/Rating'
 import Stack from '@mui/material/Stack'
 import { connect } from 'react-redux'
 import userActions from '../redux/actions/userActions'
+import CardTost from "./CardTost"
 
 const ProductCard = ({ product, setModal, user, userData, favHandler }) => {
   const [stopper, setStopper] = useState(true)
@@ -15,20 +16,24 @@ const ProductCard = ({ product, setModal, user, userData, favHandler }) => {
     // eslint-disable-next-line
   }, [userData])
 
+  const [cardTost, setCardTost] = useState({
+    time: "",
+    icon: "",
+    text: "",
+    view: false
+  })
+
   const favClickHandler = async (action, _id) => {
     if (!stopper) {
       return false
     }
     if (!user) {
-      // toast.error('You must be logged in to like the products', {
-      //   position: 'top-right',
-      //   autoClose: 3000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: false,
-      //   draggable: true,
-      //   progress: undefined,
-      // })
+      setCardTost({
+        time: 1500,
+        icon: "error",
+        text: "Inicia Sesión para agregar a fav",
+        view: true,
+       })
       return false
     }
     setStopper(false)
@@ -46,6 +51,10 @@ const ProductCard = ({ product, setModal, user, userData, favHandler }) => {
   }
   return (
     <div className={styles.product}>
+      {cardTost.view && 
+        <CardTost properties={cardTost} setCardTost={setCardTost}/>
+      }
+
       <div className={styles.productBox}>
         <div
           className={styles.productImg}

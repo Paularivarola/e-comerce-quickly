@@ -1,4 +1,4 @@
-div.containCard{
+div.cardContain{
 	width: 20rem;
 	height: 4rem;
 	display: flex;
@@ -13,7 +13,7 @@ div.containCard{
 	-webkit-box-shadow: 4px 4px 15px 0px rgba(0,0,0,0.75);
 	-moz-box-shadow: 4px 4px 15px 0px rgba(0,0,0,0.75);
 }
-div.containCard h4{
+div.cardContain h4{
 	color: slategrey;
 	text-align: center;
 }
@@ -24,4 +24,69 @@ div.imageIcon, div.imageTost{
 	height: 3.5rem;
 	width: 3.5rem;
 	border-radius: 15px;
+}
+
+/* TOST ACEPTAR */
+
+div.containCard{
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	border: 5px solid #fe6849;
+	border-radius: 15px;
+	width: 16rem;
+	height: 14rem;
+	top: 150px;
+	right: 90px;
+	padding: 5px;
+	background-color: rgba(255, 255, 255, 0.774);
+	box-shadow: 4px 4px 15px 0px rgba(0,0,0,0.75);
+	-webkit-box-shadow: 4px 4px 15px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 4px 4px 15px 0px rgba(0,0,0,0.75);
+}
+
+div.imageBack{
+	background-image: url("https://1.bp.blogspot.com/-djSTSKMq5l4/UvKxjl5Z__I/AAAAAAAAAGY/-OYz-sNRqUs/s1600/arrozkawaii.png");
+	height: 100%;
+	width: 35%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+div.containImage{
+	width: 100%;
+	height: 30%;
+	display: flex;
+	justify-content: end;
+}
+
+div.containText{
+	height: 50%;
+	text-align: center;
+}
+
+div.containButtons{
+	height: 20%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0.8rem;
+}
+
+div.containButtons button{
+	height: 100%;
+	margin: 5px;
+	width: 20%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: 1s all;
+}
+
+div.containButtons button:hover{
+	transition: 1s all;
+	background-color: white;
+	border: 1px solid #fe6849;
+	color: #fe6849;
 }

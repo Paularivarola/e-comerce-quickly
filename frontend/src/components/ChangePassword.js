@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import { BsEyeSlash, BsEye } from 'react-icons/bs'
 import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
+import CardTost from "./CardTost"
 const bcrypt = require('bcryptjs')
 
 const MyInput = ({ input, updatePassword, setUpdatePassword }) => {
@@ -45,6 +46,14 @@ const MyInput = ({ input, updatePassword, setUpdatePassword }) => {
 }
 
 const ChangePassword = ({ updateUser, userData }) => {
+    
+  const [cardTost, setCardTost] = useState({
+    time: "",
+    icon: "",
+    text: "",
+    view: false
+  })
+
   const inputs = [
     { name: 'currentPassword', label: 'Contraseña actual' },
     { name: 'newPassword', label: 'Nueva contraseña' },
@@ -60,16 +69,16 @@ const ChangePassword = ({ updateUser, userData }) => {
     const { currentPassword, newPassword, validateNewPassword } = updatePassword
     let validate = Object.values(updatePassword).some((prop) => prop === '')
     if (validate) {
-      return alert('Todos las campos son obligatorios')
+      return setCardTost({time: 1500, icon: "error", text: "Complete todos los campos", view: true,})
     }
     if (newPassword !== validateNewPassword) {
-      return alert('Las contraseñas no concuerdan')
+      return setCardTost({time: 1500, icon: "error", text: 'Las contraseñas no concuerdan', view: true,})
     }
     if (!bcrypt.compareSync(currentPassword, userData?.data?.password)) {
-      return alert('Contraseña incorrecta')
+      return setCardTost({time: 1500, icon: "error", text: 'Contraseñas incorrecta', view: true,})
     }
     if (!bcrypt.compareSync(newPassword, userData?.data?.password)) {
-      return alert('En serio?')
+      return setCardTost({time: 1500, icon: "error", text: 'No se que poner aca', view: true,})
     }
 
     let password = bcrypt.hashSync(newPassword)
@@ -79,6 +88,9 @@ const ChangePassword = ({ updateUser, userData }) => {
   }
   return (
     <div className={styles.mainPersonalData}>
+      {cardTost.view && 
+        <CardTost properties={cardTost} setCardTost={setCardTost}/>
+      }
       <div className={styles.formBox2}>
         <img className={styles.key} src="https://i.postimg.cc/7PgfXd8M/key.png" alt='key'/>
         <div className={styles2.containerPassword}>
