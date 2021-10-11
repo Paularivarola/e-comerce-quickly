@@ -8,6 +8,7 @@ const userDataSchema = new mongoose.Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
   src: { type: String },
+  customerId: String,
 })
 
 const addressSchema = new mongoose.Schema({
@@ -20,6 +21,7 @@ const addressSchema = new mongoose.Schema({
 
 const cartItemSchema = new mongoose.Schema({
   productId: { type: mongoose.Types.ObjectId, ref: 'product' },
+  clarifications: String,
   fries: Object,
   extras: Array,
   drink: Object,

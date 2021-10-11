@@ -1,17 +1,10 @@
 const User = require('../../models/User')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const transport = require('../../config/transport')
 const stripe = require('stripe')(
   'sk_test_51JiHmiD8MtlvyDMX4r6FFdMzuJU3h60v7z60iYIo1n2u4b5PeWUzzigyKCiPpMkoHXIJ4u0SWDvjsQ3BTXPz0wpn00mAvDx3wa'
 )
-
-const calculateOrderAmount = (items) => {
-  // Replace this constant with a calculation of the order's amount
-  // Calculate the order total on the server to prevent
-  // people from directly manipulating the amount on the client
-  return 1400
-}
-const transport = require('../../config/transport')
 
 const userControllers = {
   signUp: async (req, res, next) => {
@@ -20,8 +13,12 @@ const userControllers = {
     try {
       if (await User.findOne({ 'data.email': email }))
         throw new Error('Ya estás registrado')
+      let customerId = await stripe.customers.create({
+        description: firstName + ' ' + lastName,
+      })
+      customerId = customerId.id
       let newUser = new User({
-        data: { firstName, lastName, password: pw, email, google },
+        data: { firstName, lastName, password: pw, email, google, customerId },
       })
       let picture
       if (req.files) {
@@ -187,21 +184,46 @@ const userControllers = {
       token: req.body.token,
     })
   },
-  pay: async (req, res) => {
-    const { items } = req.body
-    // Create a PaymentIntent with the order amount and currency
+  attach: async (req, res) => {
+    const { id, customer } = req.body
+    try {
+      const paymentMethodAttached = await stripe.paymentMethods.attach(id, {
+        customer,
+      })
+      res.json({ success: true, paymentMethodAttached })
+    } catch (error) {
+      console.log(error)
+      return res.json({ success: false, error: error.message })
+    }
+  },
+  paymentIntent: async (req, res) => {
+    const { cart, customer } = req.body
+    const amount = cart.reduce((acc, item) => acc + item.totalPrice, 0) * 100
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: 1400,
-      currency: 'usd',
+      amount,
+      customer,
+      currency: 'ars',
     })
     res.json({
-      clientSecret: paymentIntent.client_secret,
+      paymentIntent: paymentIntent,
     })
+  },
+  confirmPayment: async (req, res) => {
+    const { payment_method, customer, paymentIntent } = req.body
+    try {
+      let confirmation = await stripe.paymentIntents.confirm(paymentIntent, {
+        payment_method,
+      })
+      res.json({ success: true, confirmation })
+    } catch (error) {
+      console.log(error.message)
+      return res.json({ success: false, error: error.message })
+    }
   },
 
   sendEmail: async (req, res) => {
     const { firstName, email, action } = req.body
-    console.log(req.body.email)
+
     try {
       let options = {
         from: 'miComida <micomidaweb@gmail.com>', //de
@@ -224,8 +246,6 @@ const userControllers = {
 module.exports = userControllers
 
 const html = (firstName, action) => {
-  console.log('hola')
-  console.log(action)
   let mail =
     action === 'sign'
       ? `

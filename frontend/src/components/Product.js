@@ -73,8 +73,9 @@ const Product = ({
     }
   }
 
-  const addExtras = (extra) => {
-    if (!Object.values(cartItem.extras).includes(extra.type)) {
+  const addExtras = (extra, e) => {
+    console.log(e.target.checked)
+    if (e.target.checked) {
       setCartItem({ ...cartItem, extras: [...cartItem.extras, extra] })
     } else {
       setCartItem({
@@ -83,14 +84,6 @@ const Product = ({
       })
     }
   }
-
-  // useEffect(() => {
-  //   let amount = 0
-  //   extrasChoices.forEach((extra) => {
-  //     if (extras.includes(extra.type)) amount = amount + extra.cost
-  //   })
-  //   setExtrasCost(amount)
-  // }, [extras])
 
   useEffect(() => {
     const { fries, extras, drink, totalAmount } = cartItem
@@ -166,7 +159,7 @@ const Product = ({
               </p>
             </div>
             <p className={styles.addToCart} onClick={addToCart}>
-              Agregar a mi orden
+              {edit ? 'Editar orden' : 'Agregar a mi orden'}
             </p>
           </div>
         </div>
@@ -213,7 +206,7 @@ const Product = ({
                           name='extras'
                           value={extra.type}
                           id={extra.type}
-                          onClick={() => addExtras(extra)}
+                          onClick={(e) => addExtras(extra, e)}
                           defaultChecked={
                             cartItem.extras.find(
                               (option) => option.type === extra.type
@@ -251,7 +244,7 @@ const Product = ({
                         setCartItem({ ...cartItem, drink: option })
                       }
                       defaultChecked={
-                        option.cost === cartItem.drink.cost && 'checked'
+                        option.type === cartItem.drink.type && 'checked'
                       }
                     />
 
@@ -283,7 +276,7 @@ const Product = ({
                   name='clarifications'
                   maxRows={4}
                   rows={4}
-                  value={cartItem.clarifications}
+                  defaultValue={cartItem.clarifications}
                   onChange={(e) =>
                     setCartItem({
                       ...cartItem,

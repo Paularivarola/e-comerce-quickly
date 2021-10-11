@@ -46,22 +46,21 @@ const MyInput = ({ input, newAddress, setNewAddress }) => {
   )
 }
 
-const Address = ({ updateUser, address }) => {
+const Address = ({ updateUser, address, active, setActive, index }) => {
   return (
-    <div className={styles.addressCard}>
+    <div className={active ? styles.active : styles.addressCard}>
       <span>Address alias {address?.alias}</span>
-      <BsTrash
-        onClick={() =>
-          toastConfirm(() =>
-            updateUser({ action: 'deleteAddress', addressId: address._id })
-          )
-        }
-      />
+      {setActive && !active && (
+        <span onClick={() => setActive({ ...active, address: index })} style={{ cursor: 'pointer' }}>
+          Seleccionar
+        </span>
+      )}
+      <BsTrash onClick={() => toastConfirm(() => updateUser({ action: 'deleteAddress', addressId: address._id }))} />
     </div>
   )
 }
 
-const Addresses = ({ updateUser, userData }) => {
+const Addresses = ({ updateUser, userData, active, setActive }) => {
   const inputs = [
     { name: 'alias', label: 'Alias' },
     { name: 'street', label: 'Calle' },
@@ -99,11 +98,14 @@ const Addresses = ({ updateUser, userData }) => {
           <h1>No tenes ninguna direccion todavia</h1>
         </div>
       ) : (
-        userData.addresses.map((address) => (
+        userData.addresses.map((address, index) => (
           <Address
             key={address._id}
             address={address}
             updateUser={updateUser}
+            index={index}
+            active={index === active.address}
+            setActive={setActive}
           />
         ))
       )}
@@ -118,17 +120,9 @@ const Addresses = ({ updateUser, userData }) => {
               noValidate
               autoComplete='off'
             >
-              <ImCancelCircle
-                className={styles.exit}
-                onClick={() => setModal(false)}
-              />
+              <ImCancelCircle className={styles.exit} onClick={() => setModal(false)} />
               {inputs.map((input) => (
-                <MyInput
-                  input={input}
-                  key={input.label}
-                  setNewAddress={setNewAddress}
-                  newAddress={newAddress}
-                />
+                <MyInput input={input} key={input.label} setNewAddress={setNewAddress} newAddress={newAddress} />
               ))}
             </Box>
             <button onClick={submitHandler}>enviar</button>

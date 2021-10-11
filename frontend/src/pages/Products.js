@@ -63,7 +63,10 @@ const Products = (props) => {
           <p className={styles.welcome}>
             Hola {props.user && props.user.firstName}! ¿Qué vas a comer hoy?
           </p>
-          <button className={styles.carritoBtn}>
+          <button
+            className={styles.carritoBtn}
+            onClick={() => props.history.push('/cart')}
+          >
             <MdShoppingCart
               style={{ color: 'white', fontSize: '1.8em', marginRight: '5%' }}
             />

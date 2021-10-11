@@ -95,6 +95,7 @@ div.containTitle {
   cursor: pointer;
   z-index: 10;
 }
+.active,
 .addressCard {
   display: flex;
   justify-content: space-between;
@@ -105,4 +106,8 @@ div.containTitle {
   background-color: #fff;
   border-radius: 20px;
   box-shadow: 2px 2px 2px black;
+}
+
+.active {
+  box-shadow: 2px 2px 2px #fe6849;
 }

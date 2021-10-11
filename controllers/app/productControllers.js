@@ -37,18 +37,23 @@ const productControllers = {
       action === 'add'
         ? { $push: { cart: cartItem } }
         : action === 'delete'
-        ? { $pull: { 'cart._id': cartItem._id } }
+        ? { $pull: { cart: { _id: cartItem._id } } }
         : action === 'editCartItem'
         ? { $set: { 'cart.$': cartItem } }
         : { $set: { cart: [] } }
     let options = { new: true }
     try {
-      let user = await User.findOneAndUpdate(searchOption, operation, options)
+      let user = await User.findOneAndUpdate(
+        searchOption,
+        operation,
+        options
+      ).populate({ path: 'cart.productId', model: 'product' })
       res.json({
         success: true,
         userData: user,
       })
     } catch (error) {
+      console.log(error)
       res.json({ success: false, error: error.message })
     }
   },

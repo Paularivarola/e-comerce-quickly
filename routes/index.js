@@ -36,5 +36,7 @@ router
 //EMAIL
 // router.route('/mail').post(passport)
 
-router.route('/create-payment-intent').post(userControllers.pay)
+router.route('/create-payment-intent').post(userControllers.paymentIntent)
+router.route('/attach-payment-method').post(userControllers.attach)
+router.route('/confirm-payment-intent').post(userControllers.confirmPayment)
 module.exports = router
