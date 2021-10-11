@@ -35,11 +35,12 @@
     background-size: cover;
 }
 .descriptionTestimony {
-    width: 50%;
+    width: 100%;
 }
 .nameTestimony {
     text-align: center;
     font-weight: 700;
+    margin-top: 5vh;
 }
 .descriptionTestimony {
     text-align: center;

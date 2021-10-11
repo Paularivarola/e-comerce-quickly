@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-
-// import Cards from './Cards'
 import Card from './CARD'
 import styles from '../styles/personalData.module.css'
 import { BsTrash } from 'react-icons/bs'
@@ -8,28 +6,22 @@ import userActions from '../redux/actions/userActions'
 import { connect } from 'react-redux'
 import toastConfirm from './ToastConfirm'
 
-const PaymentCard = ({ updateUser, card, id }) => {
+const PaymentCard = ({ updateUser, card, id, setActive, active, index }) => {
   return (
-    <div className={styles.paymentCard}>
-      {card? 
-        <>
-        <span>
-          Tarjeta {card?.brand.toUpperCase()} ...{card?.last4}
+    <div className={active ? styles.activeCard : styles.paymentCard}>
+      <span>
+        Tarjeta {card?.brand.toUpperCase()} ...{card?.last4}
+      </span>
+      {setActive && !active && (
+        <span onClick={() => setActive({ ...active, card: index })} style={{ cursor: 'pointer' }}>
+          Seleccionar
         </span>
-        <BsTrash
-          onClick={() =>
-          toastConfirm(() =>
-            updateUser({ action: 'deletePaymentCard', paymentCardId: id })
-          )
-        }
-        />
-      </>
-      : <span>Para poder realizar una compra debe agregar al menos un método de pago</span>
-    }
+      )}
+      <BsTrash onClick={() => toastConfirm(() => updateUser({ action: 'deletePaymentCard', paymentCardId: id }))} />
     </div>
   )
 }
-const Payment = ({ userData, updateUser }) => {
+const Payment = ({ userData, updateUser, setActive, active }) => {
   return (
     <div className={styles.mainPayment}>
       <div className={styles.boxCard}>
@@ -39,6 +31,9 @@ const Payment = ({ userData, updateUser }) => {
             card={payment.card}
             id={payment.id}
             key={payment.id}
+            index={index}
+            active={active.card === index}
+            setActive={setActive}
           />
         ))}
       </div>

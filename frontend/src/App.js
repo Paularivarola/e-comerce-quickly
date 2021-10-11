@@ -17,6 +17,7 @@ import { connect } from 'react-redux'
 import socketActions from './redux/actions/socketActions'
 import BuyConfirmation from './components/BuyConfirmation'
 import Cart from './pages/Cart'
+import Card2 from './components/CheckoutTESTING'
 
 const App = (props) => {
   const [socket, setSocket] = useState(null)
@@ -61,12 +62,13 @@ const App = (props) => {
       <Switch>
         <Route exact path='/' component={Home} />
         <Route path='/contact' component={Contact} />
-        <Route path='/card' component={Card} />
+        <Route path='/card' component={Card2} />
         <Route path='/sign-forms/:susi' component={SignForm} />
         <Route path='/products' component={Products} />
         <Route path='/cart' component={Cart} />
         <Route path='/profile/:page' component={Profile} />
         <Route path='/notfound' component={NotFound} />
+        <Route path='/cart' component={Cart} />
         <Route exact path='/checkout' component={CheackOut} />
         <Route path='/compra' component={BuyConfirmation} />
         <Route

@@ -30,33 +30,30 @@ const productControllers = {
     }
   },
   manageCart: async (req, res) => {
-    const { product, action } = req.body
+    const { cartItem, action, _id } = req.body
     let searchOption =
-      action === 'changeQuantity'
-        ? { 'cart.productId': product.productId }
-        : { _id }
+      action === 'editCartItem' ? { 'cart._id': cartItem._id } : { _id }
     let operation =
       action === 'add'
-        ? { $push: { cart: product } }
+        ? { $push: { cart: cartItem } }
         : action === 'delete'
-        ? { $pull: { cart: product } }
-        : action === 'setCart'
-        ? { $set: { cart: product } }
-        : { $set: { 'cart.$.quantity': product.quantity } }
+        ? { $pull: { cart: { _id: cartItem._id } } }
+        : action === 'editCartItem'
+        ? { $set: { 'cart.$': cartItem } }
+        : { $set: { cart: [] } }
     let options = { new: true }
     try {
-      let user = await User.findOneAndUpdate(searchOption, operation, options)
+      let user = await User.findOneAndUpdate(
+        searchOption,
+        operation,
+        options
+      ).populate({ path: 'cart.productId', model: 'product' })
       res.json({
         success: true,
-        user: {
-          firstName: user.data.firstName,
-          src: user.data.src,
-          google: user.data.google,
-          admin: user.data.admin,
-        },
         userData: user,
       })
     } catch (error) {
+      console.log(error)
       res.json({ success: false, error: error.message })
     }
   },

@@ -114,6 +114,22 @@ const userActions = {
       }
     }
   },
+  manageCart: (body) => {
+    return async (dispatch) => {
+      console.log(body)
+      let token = localStorage.getItem('token')
+      try {
+        let response = await axios.put(`${HOST}/api/products`, body)
+        if (!response?.data?.success) throw new Error('Algo salió mal')
+        return dispatch({
+          type: 'HANDLE_CART',
+          payload: response.data.userData,
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  },
   favHandler: (body) => {
     return async (dispatch) => {
       let token = localStorage.getItem('token')

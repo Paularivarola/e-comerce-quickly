@@ -5,12 +5,7 @@ const Contact = () => {
     <div>
       <div className={styles.containerContact}>
         <div className={styles.containerImage}>
-          <div
-            className={styles.deliveryImage}
-            style={{
-              backgroundImage: `url('/assets/sobre.png')`,
-            }}
-          ></div>
+          <img className={styles.deliveryImage} src='/assets/sobre.png' alt='delivery' />
         </div>
         <div className={styles.form}>
           <h1 className={styles.titleContact}>Contacto</h1>

@@ -1,35 +1,81 @@
-{
-  /* <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
-        <CheckoutForm2 paymentMethod={paymentMethod} />
-      </Elements> */
+import React, { useEffect, useState } from 'react'
+import { loadStripe } from '@stripe/stripe-js'
+import { CardElement, Elements, useElements, useStripe } from '@stripe/react-stripe-js'
+import { connect } from 'react-redux'
+import axios from 'axios'
+
+const CARD_OPTIONS = {
+  iconStyle: 'solid',
+  style: {
+    base: {
+      iconColor: '#c4f0ff',
+      color: '#fff',
+      fontWeight: 500,
+      fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
+      fontSize: '16px',
+      fontSmoothing: 'antialiased',
+      ':-webkit-autofill': {
+        color: '#fce883',
+      },
+      '::placeholder': {
+        color: '#87bbfd',
+      },
+    },
+    invalid: {
+      iconColor: '#ffc7ee',
+      color: '#ffc7ee',
+    },
+  },
 }
 
-const CheckoutForm2 = ({ paymentMethod }) => {
+const ELEMENTS_OPTIONS = {
+  fonts: [
+    {
+      cssSrc: 'https://fonts.googleapis.com/css?family=Roboto',
+    },
+  ],
+}
+
+const stripePromise = loadStripe(
+  'pk_test_51JiHmiD8MtlvyDMXOy1Xz9IRz7S6hXvSX3YorvlFJSNbByoEHqgmIhvVuOuYgA3PiOR9hxBM0QzQcf6OlJs4VYgI00pB5OSjXZ'
+)
+
+const Card2 = ({ userData, index }) => (
+  <>
+    {console.log(userData)}
+    <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
+      <CheckoutForm2 paymentMethod={userData?.paymentCards[index]} customer={userData?.data?.customerId} />
+    </Elements>
+  </>
+)
+const mapStateToProps = (state) => {
+  return { userData: state.users.userData }
+}
+
+export default connect(mapStateToProps)(Card2)
+
+const CheckoutForm2 = ({ paymentMethod, customer }) => {
   const [succeeded, setSucceeded] = useState(false)
   const [error, setError] = useState(null)
   const [processing, setProcessing] = useState('')
   const [disabled, setDisabled] = useState(false)
-  const [clientSecret, setClientSecret] = useState('')
+  const [paymentIntent, setpaymentIntent] = useState('')
   const stripe = useStripe()
-  const elements = useElements()
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    createPayment()
-  }, [])
+    customer && createPayment()
+  }, [customer])
 
   const createPayment = async () => {
-    let res = await axios.post(
-      'http://localhost:4000/api/create-payment-intent',
-      { items: [{ id: 'xl-tshirt' }] }
-    )
+    const cart = JSON.parse(localStorage.getItem('cart'))
+    console.log('hola')
+    let res = await axios.post('http://localhost:4000/api/create-payment-intent', { cart, customer })
     console.log(res.data)
-    setClientSecret(res.data.clientSecret)
+    setpaymentIntent(res.data.paymentIntent.id)
   }
 
   const handleChange = async (event) => {
-    // Listen for changes in the CardElement
-    // and display any errors as the customer types their card details
     setDisabled(event.empty)
     setError(event.error ? event.error.message : '')
   }
@@ -38,10 +84,12 @@ const CheckoutForm2 = ({ paymentMethod }) => {
     ev.preventDefault()
     setProcessing(true)
 
-    const payload = await stripe.confirmCardPayment(clientSecret, {
+    const payload = await axios.post('http://localhost:4000/api/confirm-payment-intent', {
+      paymentIntent,
       payment_method: paymentMethod.id,
+      customer,
     })
-    // console.log(elements.getElement(CardElement))
+
     if (payload.error) {
       setError(`Payment failed ${payload.error.message}`)
       setProcessing(false)
@@ -54,18 +102,14 @@ const CheckoutForm2 = ({ paymentMethod }) => {
 
   return (
     <form id='payment-form' onSubmit={handleSubmit}>
-      <CardElement
+      {/* <CardElement
         id='card-element'
         options={CARD_OPTIONS}
         onChange={handleChange}
-      />
+      /> */}
       <button disabled={processing || disabled || succeeded} id='submit'>
         <span id='button-text'>
-          {processing ? (
-            <div className='spinner' id='spinner'></div>
-          ) : (
-            'Pay now'
-          )}
+          {processing ? <div className='spinner' id='spinner'></div> : succeeded ? 'Gracias por tu compra' : 'Pagá ahora'}
         </span>
       </button>
       {/* Show any error that happens when processing the payment */}
@@ -74,15 +118,6 @@ const CheckoutForm2 = ({ paymentMethod }) => {
           {error}
         </div>
       )}
-      {/* Show a success message upon completion */}
-      <p className={succeeded ? 'result-message' : 'result-message hidden'}>
-        Payment succeeded, see the result in your
-        <a href={`https://dashboard.stripe.com/test/payments`}>
-          {' '}
-          Stripe dashboard.
-        </a>{' '}
-        Refresh the page to pay again.
-      </p>
     </form>
   )
 }

@@ -3,8 +3,60 @@ import styles2 from '../styles/products.module.css'
 import { FiEdit } from 'react-icons/fi'
 import { MdShoppingCart } from 'react-icons/md'
 import { RiDeleteBin7Fill } from 'react-icons/ri'
+import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import userActions from '../redux/actions/userActions'
+import toastConfirm from '../components/ToastConfirm'
+import { Toaster } from 'react-hot-toast'
+import Product from '../components/Product'
 
-const Cart = () => {
+const CartItem = ({ cartItem, manageCart, userData, setEdit, setCartItem }) => {
+  console.log(cartItem)
+  return (
+    <>
+      <div className={styles.cartItem}>
+        <div className={styles.product}>
+            <div className={styles.productImg} style={{ backgroundImage: 'url("https://sevilla.abc.es/gurme/wp-content/uploads/sites/24/2013/04/pizza-margarita.jpg")'}}></div>
+            <div className={styles.productDetails}>
+                <p className={styles.productName}>nombre del producto</p>
+                <p className={styles.unitaryPrice}>$ 0000</p>
+            </div>
+        </div>
+        <hr className={styles.line}></hr>
+        <div className={styles.quantity}>
+            <div className={styles.boxQuantity}>
+                <div className={styles.sign}><p>+</p></div>
+                <div className={styles.number}><p>20</p></div>
+                <div className={styles.sign}><p>-</p></div>
+            </div>
+        </div>
+        <hr className={styles.line}></hr>
+        <div className={styles.itemTotalPrice}>
+            <p className={styles.priceText}>$ 00000</p>
+        </div>
+        <hr className={styles.line}></hr>
+        <div className={styles.buttons}>
+            <span className={styles.span} onClick={() =>
+          toastConfirm(() =>
+            manageCart({ action: 'delete', cartItem, _id: userData._id })
+          )
+        }><FiEdit style={{ color: '#fe6849', fontSize: '1.5em'}}/></span>
+            <span onClick={() => {
+          setCartItem(cartItem)
+          setEdit(true)
+        }}className={styles.span}><RiDeleteBin7Fill style={{ color: '#fe6849', fontSize: '1.5em'}}/></span>
+        </div>
+        
+    </div>
+    </>
+  )
+}
+
+const Cart = ({ manageCart, userData, ...props }) => {
+
+  const [edit, setEdit] = useState(false)
+  const [cartItem, setCartItem] = useState({})
+  const cart = JSON.parse(localStorage.getItem('cart'))
 
     return (
     <div className={styles.mainCart}>
@@ -26,7 +78,7 @@ const Cart = () => {
                 </div>
                 <div className={styles.payBtn}>
                     <p className={styles.totalPrice}><span>Precio total:</span> $ 0000</p>
-                    <button>Pagar</button>
+                    <button onClick={() => props.history.push('/checkout')}>Pagar</button>
                 </div>
             </div>
         </div>
@@ -47,37 +99,52 @@ const Cart = () => {
             </div>
             <div className={styles.gridBox}>
                 <div className={styles.cartGrid}>
-                    <div className={styles.cartItem}>
-                        <div className={styles.product}>
-                            <div className={styles.productImg} style={{ backgroundImage: 'url("https://sevilla.abc.es/gurme/wp-content/uploads/sites/24/2013/04/pizza-margarita.jpg")'}}></div>
-                            <div className={styles.productDetails}>
-                                <p className={styles.productName}>nombre del producto</p>
-                                <p className={styles.unitaryPrice}>$ 0000</p>
-                            </div>
-                        </div>
-                        <hr className={styles.line}></hr>
-                        <div className={styles.quantity}>
-                            <div className={styles.boxQuantity}>
-                                <div className={styles.sign}><p>+</p></div>
-                                <div className={styles.number}><p>20</p></div>
-                                <div className={styles.sign}><p>-</p></div>
-                            </div>
-                        </div>
-                        <hr className={styles.line}></hr>
-                        <div className={styles.itemTotalPrice}>
-                            <p className={styles.priceText}>$ 00000</p>
-                        </div>
-                        <hr className={styles.line}></hr>
-                        <div className={styles.buttons}>
-                            <span className={styles.span}><FiEdit style={{ color: '#fe6849', fontSize: '1.5em'}}/></span>
-                            <span className={styles.span}><RiDeleteBin7Fill style={{ color: '#fe6849', fontSize: '1.5em'}}/></span>
-                        </div>
+                {cart?.map((cartItem) => (
+                        <CartItem
+                          key={cartItem._id}
+                          cartItem={cartItem}
+                          manageCart={manageCart}
+                          userData={userData}
+                          setEdit={setEdit}
+                          setCartItem={setCartItem}
+                        />
+                      ))}
                     </div>
                 </div>
             </div>
-        </div>
+            {edit && (
+                      <Product
+                        product={cartItem.productId}
+                        editCartItem={cartItem}
+                        setMod={setEdit}
+                        edit={edit}
+                      />
+                    )}
+                    <Toaster
+                      containerStyle={{
+                        top: 200,
+                        left: 20,
+                        bottom: 20,
+                        right: 20,
+                      }}
+                      toastOptions={{
+                        duration: 1500,
+                      }}
+                    />
     </div>
     )
 }
 
-export default Cart
+const mapStateToProps = (state) => {
+  return {
+    userData: state.users.userData,
+  }
+}
+
+const mapDispatchToProps = {
+  manageCart: userActions.manageCart,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart)
+
+

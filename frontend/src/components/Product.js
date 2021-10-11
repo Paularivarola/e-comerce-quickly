@@ -7,8 +7,18 @@ import Rating from '@mui/material/Rating'
 import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
+import userActions from '../redux/actions/userActions'
 
-const Product = ({ product, setMod, user, manageCart, ...props }) => {
+const Product = ({
+  product,
+  setMod,
+  user,
+  manageCart,
+  edit,
+  editCartItem,
+  userData,
+  ...props
+}) => {
   const friesSizes = [
     { size: 'Chicas', cost: 0 },
     { size: 'Medianas', cost: 10 },
@@ -37,7 +47,9 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
     totalAmount: 1,
     totalPrice: product.price,
   }
-  const [cartItem, setCartItem] = useState(initialCartItem)
+  const [cartItem, setCartItem] = useState(
+    edit ? editCartItem : initialCartItem
+  )
 
   const amount = (operation) => {
     const { totalAmount, unitaryPrice } = cartItem
@@ -61,8 +73,9 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
     }
   }
 
-  const addExtras = (extra) => {
-    if (!Object.values(cartItem.extras).includes(extra.type)) {
+  const addExtras = (extra, e) => {
+    console.log(e.target.checked)
+    if (e.target.checked) {
       setCartItem({ ...cartItem, extras: [...cartItem.extras, extra] })
     } else {
       setCartItem({
@@ -71,14 +84,6 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
       })
     }
   }
-
-  // useEffect(() => {
-  //   let amount = 0
-  //   extrasChoices.forEach((extra) => {
-  //     if (extras.includes(extra.type)) amount = amount + extra.cost
-  //   })
-  //   setExtrasCost(amount)
-  // }, [extras])
 
   useEffect(() => {
     const { fries, extras, drink, totalAmount } = cartItem
@@ -98,7 +103,11 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
 
   const addToCart = () => {
     console.log(cartItem)
-    // manageCart()
+    manageCart({
+      cartItem,
+      action: edit ? 'editCartItem' : 'add',
+      _id: userData?._id,
+    })
     //alert toast
     setMod(false)
   }
@@ -150,7 +159,7 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
               </p>
             </div>
             <p className={styles.addToCart} onClick={addToCart}>
-              Agregar a mi orden
+              {edit ? 'Editar orden' : 'Agregar a mi orden'}
             </p>
           </div>
         </div>
@@ -171,6 +180,9 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
                           id={size.size}
                           onClick={() =>
                             setCartItem({ ...cartItem, fries: size })
+                          }
+                          defaultChecked={
+                            size.cost === cartItem.fries.cost && 'checked'
                           }
                         />
 
@@ -194,7 +206,12 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
                           name='extras'
                           value={extra.type}
                           id={extra.type}
-                          onClick={() => addExtras(extra)}
+                          onClick={(e) => addExtras(extra, e)}
+                          defaultChecked={
+                            cartItem.extras.find(
+                              (option) => option.type === extra.type
+                            ) && 'checked'
+                          }
                         />
 
                         <label className={styles.input} htmlFor={extra.type}>
@@ -226,7 +243,9 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
                       onClick={() =>
                         setCartItem({ ...cartItem, drink: option })
                       }
-                      defaultChecked={option.cost === 0 && 'checked'}
+                      defaultChecked={
+                        option.type === cartItem.drink.type && 'checked'
+                      }
                     />
 
                     <label className={styles.input} htmlFor={option.type}>
@@ -257,7 +276,7 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
                   name='clarifications'
                   maxRows={4}
                   rows={4}
-                  value={cartItem.clarifications}
+                  defaultValue={cartItem.clarifications}
                   onChange={(e) =>
                     setCartItem({
                       ...cartItem,
@@ -281,11 +300,11 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
 const mapStateToProps = (state) => {
   return {
     user: state.users.user,
+    userData: state.users.userData,
   }
 }
 const mapDispatchToProps = {
-  getProd: productActions.getProducts,
-  manageCart: productActions.manageCart,
+  manageCart: userActions.manageCart,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Product)
