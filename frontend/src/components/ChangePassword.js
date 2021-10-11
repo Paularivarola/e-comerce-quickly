@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import styles from '../styles/personalData.module.css'
+import styles2 from '../styles/changePassword.module.css'
 import userActions from '../redux/actions/userActions'
 import { connect } from 'react-redux'
 import { BsEyeSlash, BsEye } from 'react-icons/bs'
@@ -77,26 +78,29 @@ const ChangePassword = ({ updateUser, userData }) => {
     setUpdatePassword(initialState)
   }
   return (
-    <div className={styles.containPersonalData}>
-      <div className={styles.containForm}>
-        <Box
-          component='form'
-          sx={{
-            '& .MuiTextField-root': { m: 1, width: '25ch' },
-          }}
-          noValidate
-          autoComplete='off'
-        >
-          {inputs.map((input) => (
-            <MyInput
-              input={input}
-              key={input.label}
-              setUpdatePassword={setUpdatePassword}
-              updatePassword={updatePassword}
-            />
-          ))}
-        </Box>
-        <button onClick={submitHandler}>enviar</button>
+    <div className={styles.mainPersonalData}>
+      <div className={styles.formBox2}>
+        <img className={styles.key} src="https://i.postimg.cc/7PgfXd8M/key.png" alt='key'/>
+        <div className={styles2.containerPassword}>
+          <Box
+            component='form'
+            sx={{
+              '& .MuiTextField-root': { m: 1, width: '25ch' },
+            }}
+            noValidate
+            autoComplete='off'
+          >
+            {inputs.map((input) => (
+              <MyInput
+                input={input}
+                key={input.label}
+                setUpdatePassword={setUpdatePassword}
+                updatePassword={updatePassword}
+              />
+            ))}
+          </Box>
+          <button className={styles.buttonBox} onClick={submitHandler}>enviar</button>
+        </div>
       </div>
     </div>
   )

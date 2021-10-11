@@ -10,24 +10,29 @@ import toastConfirm from './ToastConfirm'
 
 const PaymentCard = ({ updateUser, card, id }) => {
   return (
-    <div className={styles.addressCard}>
-      <span>
-        Tarjeta {card?.brand.toUpperCase()} ...{card?.last4}
-      </span>
-      <BsTrash
-        onClick={() =>
+    <div className={styles.paymentCard}>
+      {card? 
+        <>
+        <span>
+          Tarjeta {card?.brand.toUpperCase()} ...{card?.last4}
+        </span>
+        <BsTrash
+          onClick={() =>
           toastConfirm(() =>
             updateUser({ action: 'deletePaymentCard', paymentCardId: id })
           )
         }
-      />
+        />
+      </>
+      : <span>Para poder realizar una compra debe agregar al menos un método de pago</span>
+    }
     </div>
   )
 }
 const Payment = ({ userData, updateUser }) => {
   return (
-    <div>
-      <div style={{ marginBottom: '10%' }}>
+    <div className={styles.mainPayment}>
+      <div className={styles.boxCard}>
         {userData?.paymentCards?.map((payment) => (
           <PaymentCard
             updateUser={updateUser}

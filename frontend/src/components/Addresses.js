@@ -56,6 +56,7 @@ const Address = ({ updateUser, address }) => {
             updateUser({ action: 'deleteAddress', addressId: address._id })
           )
         }
+        style={{color:'tomato'}}
       />
     </div>
   )
@@ -93,7 +94,7 @@ const Addresses = ({ updateUser, userData }) => {
   }
 
   return (
-    <div className={styles.containerAdresses}>
+    <div className={styles.mainPersonalData}>
       {!userData ? (
         <div className={styles.containFormAddress}>
           <h1>No tenes ninguna direccion todavia</h1>
@@ -121,6 +122,7 @@ const Addresses = ({ updateUser, userData }) => {
               <ImCancelCircle
                 className={styles.exit}
                 onClick={() => setModal(false)}
+                style={{marginRight: '6%', color:'tomato'}}
               />
               {inputs.map((input) => (
                 <MyInput
@@ -128,6 +130,8 @@ const Addresses = ({ updateUser, userData }) => {
                   key={input.label}
                   setNewAddress={setNewAddress}
                   newAddress={newAddress}
+                  size="small"
+                  fullWidth
                 />
               ))}
             </Box>
@@ -135,7 +139,10 @@ const Addresses = ({ updateUser, userData }) => {
           </div>
         </div>
       )}
-      <button onClick={() => setModal(!modal)}>Agregar</button>
+      <div className={styles.boxAdressbtn}>
+        <img className={styles.world} src="https://i.postimg.cc/L5DpZzqw/globoterraqueo.png" alt='world'/>        
+        <button onClick={() => setModal(!modal)}>Agregar</button>
+      </div>
       <Toaster
         containerStyle={{
           top: 80,

@@ -16,6 +16,7 @@ import io from 'socket.io-client'
 import { connect } from 'react-redux'
 import socketActions from './redux/actions/socketActions'
 import BuyConfirmation from './components/BuyConfirmation'
+import Cart from './pages/Cart'
 
 const App = (props) => {
   const [socket, setSocket] = useState(null)
@@ -63,6 +64,7 @@ const App = (props) => {
         <Route path='/card' component={Card} />
         <Route path='/sign-forms/:susi' component={SignForm} />
         <Route path='/products' component={Products} />
+        <Route path='/cart' component={Cart} />
         <Route path='/profile/:page' component={Profile} />
         <Route path='/notfound' component={NotFound} />
         <Route exact path='/checkout' component={CheackOut} />

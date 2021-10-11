@@ -179,8 +179,7 @@ const CheckoutForm = ({ updateUser }) => {
         Payment successful
       </div> */}
       <div className={styles.ResultMessage}>
-        Thanks for trying Stripe Elements. No money was charged, but we
-        generated a PaymentMethod: {paymentMethod.id}
+        Método de pago generado: {paymentMethod.id}
       </div>
       <ResetButton onClick={reset} />
     </div>
@@ -234,7 +233,7 @@ const CheckoutForm = ({ updateUser }) => {
       </fieldset>
       {error && <ErrorMessage>{error.message}</ErrorMessage>}
       <SubmitButton processing={processing} error={error} disabled={!stripe}>
-        Agregar método de pago
+        Agregar
       </SubmitButton>
     </form>
   )
