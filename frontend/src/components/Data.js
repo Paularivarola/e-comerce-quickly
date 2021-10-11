@@ -7,22 +7,23 @@ import Payment from './Payment'
 import Notifications from './Notifications'
 
 const Data = (props) => {
-  const { user, subComp,setFormConfirm } = props
-  const [cancelForm, setCancelForm] =useState({})
-  const [view, setView] = useState(<PersonalData user={user} setCancelForm={setCancelForm}/>)
+  const { user, subComp, setFormConfirm } = props
+  const [cancelForm, setCancelForm] = useState({})
+  const [view, setView] = useState(<PersonalData user={user} setCancelForm={setCancelForm} />)
   setFormConfirm(cancelForm)
   useEffect(() => {
     if (subComp === 'personalData') {
-      setView(<PersonalData user={user} setCancelForm={setCancelForm}/>)
+      setView(<PersonalData user={user} setCancelForm={setCancelForm} />)
     } else if (subComp === 'changePassword') {
-      setView(<ChangePassword user={user} setCancelForm={setCancelForm}/>)
+      setView(<ChangePassword user={user} setCancelForm={setCancelForm} />)
     } else if (subComp === 'adresses') {
-      setView(<Addresses user={user} setCancelForm={setCancelForm}/>)
+      setView(<Addresses user={user} setCancelForm={setCancelForm} />)
     } else if (subComp === 'payment') {
-      setView(<Payment user={user} setCancelForm={setCancelForm}/>)
+      setView(<Payment user={user} setCancelForm={setCancelForm} />)
     } else {
       setView(<Notifications user={user} />)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [subComp])
 
   return (

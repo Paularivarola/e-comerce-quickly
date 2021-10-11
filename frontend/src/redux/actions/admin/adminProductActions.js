@@ -1,6 +1,18 @@
 import axios from 'axios'
 
 const adminProductActions = {
+    getProducts: () => {
+        return async (dispatch) => {
+            try {
+                const response = await axios.get('http://localhost:4000/api/products')
+                if (!response.data.success) throw new Error(response.data.error)
+                await dispatch({ type: 'GET_PRODUCTS', payload: response.data.response })
+                return { success: true, response: response.data.response }
+            } catch (e) {
+                return { success: false, response: null, error: e.message }
+            }
+        }
+    },
     createProduct: (product, props) => {
         let token = localStorage.getItem("token");
         return async (dispatch) => {
@@ -13,7 +25,7 @@ const adminProductActions = {
                     },
                 }
             );
-            console.log(response.data)
+            console.log(response.data.response)
             if (response.data.success) {
                 await dispatch({ type: "ADD_PRODUCT", payload: response.data.response });
                 return response.data;

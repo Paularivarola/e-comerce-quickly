@@ -1,15 +1,27 @@
 
 import { Pie } from 'react-chartjs-2'
-const Categories = () => {
+const Categories = (props) => {
+
+    let catList = []
+    let repeatedCat = []
+    let figures = []
+
+    props.products.map(product => {
+        if (!catList.includes(product.category)) {
+            catList.push(product.category)
+        }
+        return repeatedCat.push(product.category)
+    })
+
+    catList.map(category => {
+        return figures.push(repeatedCat.filter(cat => cat === category).length)
+    })
+
     const data = {
-        labels: [
-            'Hamburguesa',
-            'Pizza',
-            'Sopa'
-        ],
+        labels: catList,
         datasets: [{
             label: 'My First Dataset',
-            data: [5, 7, 4],
+            data: figures,
             backgroundColor: [
                 '#F88F01',
                 '#E27802',

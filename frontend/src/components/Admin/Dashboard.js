@@ -1,22 +1,20 @@
 import styles from '../../styles/dashboard.module.css'
 import styles2 from '../../styles/customer.module.css'
-import Visits from './Visits';
-
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { FaClipboardList, FaUserTie, FaCashRegister } from "react-icons/fa";
 import { MdShoppingCart } from 'react-icons/md'
-import Categories from './Categories';
-import DashboardCard from './DashboardCard';
-import ProductCard from './ProductCard';
 import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom'
+import Visits from './Visits';
+import Categories from './Categories';
+import ProductCard from './ProductCard';
+import DashboardCard from './DashboardCard';
 import OrdersHistory from './OrdersHistory';
-import { MdEdit, MdDelete, MdPersonAdd } from "react-icons/md";
-import { connect } from 'react-redux'
 
 const Dashboard = (props) => {
     window.scrollTo(0, 0)
     const todayOrders = props.orders.filter(order => order.date === Date.now())
-    console.log(props.orders)
+    console.log(props.user)
     // const todayIncome = 
     return (
         <section className={styles.dashboardContainer}>
@@ -131,7 +129,7 @@ const Dashboard = (props) => {
                         <h2>Productos por categoría</h2>
                     </div>
                     <hr />
-                    <Categories />
+                    <Categories products={props.products} />
                 </div>
                 <div className={styles.infoTable}>
                     <div className={styles.tableHeader}>
@@ -146,9 +144,10 @@ const Dashboard = (props) => {
 }
 const mapStateToProps = state => {
     return {
-        products: state.products.products,
+        products: state.adminProducts.products,
         orders: state.adminOrders.orders,
-        users: state.adminUsers.users
+        users: state.adminUsers.users,
+        user: state.users.userData
     }
 }
 export default connect(mapStateToProps)(Dashboard)

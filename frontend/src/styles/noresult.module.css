@@ -1,0 +1,14 @@
+.container{
+    width: 100%;
+    text-align: center;
+}
+
+.container p{
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.container p:first-child{
+    font-weight: bold;
+    font-size: 25px;
+}

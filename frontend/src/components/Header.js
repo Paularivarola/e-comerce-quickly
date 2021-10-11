@@ -12,7 +12,7 @@ const Header = (props) => {
     localStorage.getItem('socket') && props.setSocketLS(localStorage.getItem('socket'))
     localStorage.getItem('token') && props.verifyToken()
 
-    // eslint-disable-next-line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // console.log(props.socket?.id)
@@ -59,12 +59,12 @@ const Header = (props) => {
               className={styles.user}
               style={{
                 backgroundImage: `url("${props.user
-                    ? props.user.google || props.user.admin
-                      ? props.user.src
-                      : props.user.src !== 'assets/user.png'
-                        ? 'http://localhost:4000/' + props.user.src
-                        : '/assets/user.png'
-                    : '/assets/user.png'
+                  ? props.user.google || props.user.admin
+                    ? props.user.src
+                    : props.user.src !== 'assets/user.png'
+                      ? 'http://localhost:4000/' + props.user.src
+                      : '/assets/user.png'
+                  : '/assets/user.png'
                   }")`,
               }}
               alt='logo'
