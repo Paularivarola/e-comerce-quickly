@@ -44,20 +44,20 @@ const Profile = (props) => {
       ],
     },
   ]
-
+  const [modal, setModal] = useState(false)
+  const [cardModal, setCardModal] = useState(false)
   return (
     <div className={styles.mainProfile}>
       <div className={styles3.categories}>
         <div className={styles3.categoriesList}>
-          <BsPersonLinesFill
-            style={{ color: '#fe6849', fontSize: '1.5em', marginRight: '5%' }}
-          />
+          <BsPersonLinesFill style={{ color: '#fe6849', fontSize: '1.5em', marginRight: '5%' }} />
           <p className={styles3.categoriesTitle}> Mi cuenta</p>
         </div>
         <div className={styles3.boxShop}>
-          <p className={styles3.welcome}>
-            Hola {props.user && props.user.firstName}, que bueno verte por acá!
-          </p>
+          <p className={styles3.welcome}>Hola {props.user && props.user.firstName}, que bueno verte por acá!</p>
+          <button onClick={() => (props.history.location.pathname === '/profile/payment' ? setCardModal(true) : setModal(!modal))}>
+            Agregar {props.history.location.pathname === '/profile/payment' ? 'tarjeta' : 'dirección'}
+          </button>
         </div>
       </div>
       <div className={styles.boxProfile}>
@@ -67,43 +67,22 @@ const Profile = (props) => {
             {!props.userData ? (
               <Preloader />
             ) : view === 'fav' ? (
-              <Favorites
-                favorites={props.userData?.favouriteProductsId}
-                setFormConfirm={setFormConfirm}
-              />
+              <Favorites favorites={props.userData?.favouriteProductsId} setFormConfirm={setFormConfirm} />
             ) : view === 'his' ? (
-              <History
-                orders={props.userData?.ordersId}
-                setFormConfirm={setFormConfirm}
-              />
+              <History orders={props.userData?.ordersId} setFormConfirm={setFormConfirm} />
             ) : (
               <div className={styles2.containerData}>
                 <div className={styles2.containAllProfile}>
                   {view === 'data' ? (
-                    <PersonalData
-                      user={props.userData?.data}
-                      setCancelForm={setFormConfirm}
-                    />
+                    <PersonalData user={props.userData?.data} setCancelForm={setFormConfirm} />
                   ) : view === 'password' ? (
-                    <ChangePassword
-                      user={props.userData?.data}
-                      setCancelForm={setFormConfirm}
-                    />
+                    <ChangePassword user={props.userData?.data} setCancelForm={setFormConfirm} />
                   ) : view === 'adresses' ? (
-                    <Addresses
-                      user={props.userData?.data}
-                      setCancelForm={setFormConfirm}
-                    />
+                    <Addresses user={props.userData?.data} setCancelForm={setFormConfirm} modal={modal} setModal={setModal} />
                   ) : view === 'payment' ? (
-                    <Payment
-                      user={props.userData?.data}
-                      setCancelForm={setFormConfirm}
-                    />
+                    <Payment user={props.userData?.data} setCancelForm={setFormConfirm} cardModal={cardModal} setCardModal={setCardModal} />
                   ) : (
-                    <Notifications
-                      user={props.userData?.data}
-                      setCancelForm={setFormConfirm}
-                    />
+                    <Notifications user={props.userData?.data} setCancelForm={setFormConfirm} />
                   )}
                 </div>
               </div>

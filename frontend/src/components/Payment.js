@@ -21,7 +21,12 @@ const PaymentCard = ({ updateUser, card, id, setActive, active, index }) => {
     </div>
   )
 }
-const Payment = ({ userData, updateUser, setActive, active }) => {
+
+const Payment = ({ userData, updateUser, setActive, active, cardModal, setCardModal }) => {
+  window.onclick = (e) => {
+    if (e.target.dataset.modal === 'paymentModal') setCardModal(false)
+  }
+  console.log(cardModal)
   return (
     <div className={styles.mainPayment}>
       <div className={styles.boxCard}>
@@ -37,9 +42,13 @@ const Payment = ({ userData, updateUser, setActive, active }) => {
           />
         ))}
       </div>
-      <Card />
-      {/* Payment
-      <Cards /> */}
+      {cardModal && (
+        <div className={styles.containFormModal} data-modal='paymentModal'>
+          <div className={styles.containFormAddress}>
+            <Card setCardModal={setCardModal} />
+          </div>
+        </div>
+      )}
     </div>
   )
 }

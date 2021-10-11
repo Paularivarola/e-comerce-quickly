@@ -29,17 +29,8 @@ const MyInput = ({ input, newAddress, setNewAddress }) => {
       label={input.label}
       value={newAddress[input.name]}
       variant='outlined'
-      size="small"
+      size='small'
       fullWidth
-      // InputProps={{
-      //   endAdornment: (
-      //     <InputAdornment position='end' style={{ width: '2rem' }}>
-      //       <IconButton onClick={(e) => setPassProtected(!passProtected)} edge='end'>
-      //         {passProtected ? <BsEyeSlash /> : <BsEye />}
-      //       </IconButton>
-      //     </InputAdornment>
-      //   ),
-      // }}
       onChange={inputHandler}
       sx={{
         '& > :not(style)': { width: '25vw' },
@@ -60,12 +51,15 @@ const Address = ({ updateUser, address, active, setActive, index }) => {
           Seleccionar
         </span>
       )}
-      <BsTrash style={{color:'tomato'}} onClick={() => toastConfirm(() => updateUser({ action: 'deleteAddress', addressId: address._id }))} />
+      <BsTrash
+        style={{ color: 'tomato' }}
+        onClick={() => toastConfirm(() => updateUser({ action: 'deleteAddress', addressId: address._id }))}
+      />
     </div>
   )
 }
 
-const Addresses = ({ updateUser, userData, active, setActive }) => {
+const Addresses = ({ updateUser, userData, active, setActive, modal, setModal }) => {
   const inputs = [
     { name: 'alias', label: 'Alias' },
     { name: 'street', label: 'Calle' },
@@ -80,7 +74,7 @@ const Addresses = ({ updateUser, userData, active, setActive }) => {
     apartment: '',
     neighborhood: '',
   }
-  const [modal, setModal] = useState(false)
+
   const [newAddress, setNewAddress] = useState(initialState)
   const submitHandler = () => {
     let validate = Object.values(newAddress).some((prop) => prop === '')
@@ -125,18 +119,9 @@ const Addresses = ({ updateUser, userData, active, setActive }) => {
               noValidate
               autoComplete='off'
             >
-              <ImCancelCircle
-                className={styles.exit}
-                onClick={() => setModal(false)}
-                style={{marginRight: '6%', color:'tomato'}}
-              />
+              <ImCancelCircle className={styles.exit} onClick={() => setModal(false)} style={{ marginRight: '6%', color: 'tomato' }} />
               {inputs.map((input) => (
-                <MyInput
-                  input={input}
-                  key={input.label}
-                  setNewAddress={setNewAddress}
-                  newAddress={newAddress}
-                />
+                <MyInput input={input} key={input.label} setNewAddress={setNewAddress} newAddress={newAddress} />
               ))}
             </Box>
             <button onClick={submitHandler}>enviar</button>
@@ -144,8 +129,8 @@ const Addresses = ({ updateUser, userData, active, setActive }) => {
         </div>
       )}
       <div className={styles.boxAdressbtn}>
-        <img className={styles.world} src="https://i.postimg.cc/L5DpZzqw/globoterraqueo.png" alt='world'/>        
-        <button onClick={() => setModal(!modal)}>Agregar</button>
+        <img className={styles.world} src='https://i.postimg.cc/L5DpZzqw/globoterraqueo.png' alt='world' />
+        {/* <button onClick={() => setModal(!modal)}>Agregar</button> */}
       </div>
       <Toaster
         containerStyle={{

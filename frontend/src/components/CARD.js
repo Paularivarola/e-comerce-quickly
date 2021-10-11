@@ -2,7 +2,7 @@
 // Learn how to accept a payment using the official Stripe docs.
 // https://www.stripe.com/docs/payments/integration-builder
 
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
 import { CardElement, Elements, useElements, useStripe } from '@stripe/react-stripe-js'
 import { connect } from 'react-redux'
@@ -69,8 +69,13 @@ const Field = ({ label, id, type, placeholder, required, autoComplete, value, on
   </div>
 )
 
-const SubmitButton = ({ processing, error, children, disabled }) => (
-  <button className={[styles.SubmitButton, error ? styles.SubmitButtonError : '']} type='submit' disabled={processing || disabled}>
+const SubmitButton = ({ processing, error, children, disabled, onclick }) => (
+  <button
+    onClick={() => onclick(false)}
+    className={[styles.SubmitButton, error ? styles.SubmitButtonError : '']}
+    type='submit'
+    disabled={processing || disabled}
+  >
     {processing ? 'Processing...' : children}
   </button>
 )
@@ -103,7 +108,7 @@ const ResetButton = ({ onClick }) => (
   </button>
 )
 
-const CheckoutForm = ({ updateUser, userData }) => {
+const CheckoutForm = ({ updateUser, userData, setCardModal }) => {
   const stripe = useStripe()
   const elements = useElements()
   const [error, setError] = useState(null)
@@ -226,7 +231,7 @@ const CheckoutForm = ({ updateUser, userData }) => {
         />
       </fieldset>
       {error && <ErrorMessage>{error.message}</ErrorMessage>}
-      <SubmitButton processing={processing} error={error} disabled={!stripe}>
+      <SubmitButton processing={processing} error={error} disabled={!stripe} onclick={setCardModal}>
         Agregar
       </SubmitButton>
     </form>
@@ -247,11 +252,11 @@ const stripePromise = loadStripe(
   'pk_test_51JiHmiD8MtlvyDMXOy1Xz9IRz7S6hXvSX3YorvlFJSNbByoEHqgmIhvVuOuYgA3PiOR9hxBM0QzQcf6OlJs4VYgI00pB5OSjXZ'
 )
 
-const Card = ({ updateUser, userData }) => {
+const Card = ({ updateUser, userData, setCardModal }) => {
   return (
     <div className={styles.AppWrapper}>
       <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
-        <CheckoutForm updateUser={updateUser} userData={userData} />
+        <CheckoutForm updateUser={updateUser} userData={userData} setCardModal={setCardModal} />
       </Elements>
     </div>
   )
