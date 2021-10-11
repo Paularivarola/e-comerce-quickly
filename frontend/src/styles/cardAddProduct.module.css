@@ -1,0 +1,95 @@
+div.containAllCardProduct{
+	position: absolute;
+	top: 80px;
+	right: 80px;
+	background-color: white;
+	height: 4.3rem;
+	width: 20rem;
+	border-radius: 15px;
+	border: none !important;
+	display: flex;
+	justify-content: space-between;
+	box-shadow: 4px 4px 15px 0px rgba(0,0,0,0.75);
+	-webkit-box-shadow: 4px 4px 15px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 4px 4px 15px 0px rgba(0,0,0,0.75);
+}
+
+div.containImage{
+	background-image:  url("https://rockcontent.com/es/wp-content/uploads/sites/3/2019/02/o-que-e-produto-no-mix-de-marketing-1024x538.png");
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 2.5rem;
+	width: 4rem;
+	border-radius: 100px;
+	border: none;
+}
+
+div.containCard{
+	display: flex;
+	width: 90%;
+	height: 100%;
+	align-items: center;
+	padding: 10px;
+	border: 1px solid rgba(0, 0, 0, 0.171);
+	border-radius: 100px;
+}
+
+div.bordCard{
+	height: 4rem;
+	width: 4.5rem;
+	padding: 2px;
+	border: none;
+}
+
+div.containProduct{
+	margin-top: 2px;
+	height: 21px;
+	width: 21px;
+	background-image: url("https://i.postimg.cc/J4nh2sQx/ok.png");
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+div.containTitleProduct{
+	height: 100%;
+	width: 48%;
+
+}
+
+div.TitleProduct{
+	width: 100%;
+}
+
+div.containTitleProduct, div.TitleProduct{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}
+
+div.buttonCard{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+div.buttonCard h5{
+	background-color: #fe6849;
+	color: white;
+	width: 70%;
+	border-radius: 10px;
+}
+
+div.closeCard{
+	border-left: 1px solid #fe6849;
+	border-bottom: 1px solid #fe6849;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 10%;
+	height: 45%;
+	border-bottom-left-radius: 15px;
+}
+
