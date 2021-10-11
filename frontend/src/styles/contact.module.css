@@ -19,7 +19,6 @@
 .deliveryImage {
   background-position: center;
   background-size: cover;
-  height: 80vh;
   width: 40vw;
   margin-bottom: 15vh;
 }
@@ -70,7 +69,6 @@ button {
     align-items: center;
   }
   .deliveryImage {
-    height: 40vh;
     width: 38vw;
   }
   .titleContact {
@@ -98,7 +96,6 @@ button {
     align-items: center;
   }
   .deliveryImage {
-    height: 40vh;
     width: 40vw;
   }
   .titleContact {
@@ -123,7 +120,6 @@ button {
       align-items: center;
     }
     .deliveryImage {
-      height: 40vh;
       width: 40vw;
     }
     .titleContact {

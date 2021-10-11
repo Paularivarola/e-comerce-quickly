@@ -22,7 +22,7 @@ const AppStore = () => {
                     <img className={styles.picture} src='https://i.postimg.cc/Pr4wB2v7/qr.png' alt='qr'/>
                 </div>
             </div>
-            <img className={styles.picture} src='https://i.postimg.cc/sXsyd9hn/appphone.png' alt='phone'/>
+            <img className={styles.picturePhone} src='https://i.postimg.cc/sXsyd9hn/appphone.png' alt='phone'/>
         </div>
     )
 }
