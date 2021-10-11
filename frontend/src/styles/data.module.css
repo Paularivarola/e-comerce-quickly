@@ -4,6 +4,7 @@ div.containerData {
   height: 100%;
   width: 100%;
   align-items: center;
+  justify-content: center;
 }
 
 div.containerProfile button {
@@ -40,6 +41,7 @@ div.containAllProfile {
   width: 100%;
   height: 100%;
   padding: 0.2rem;
+  margin-top: 2%;
 }
 
 div.containerCardProfile,

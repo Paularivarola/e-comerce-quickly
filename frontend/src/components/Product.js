@@ -7,8 +7,18 @@ import Rating from '@mui/material/Rating'
 import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
+import userActions from '../redux/actions/userActions'
 
-const Product = ({ product, setMod, user, manageCart, ...props }) => {
+const Product = ({
+  product,
+  setMod,
+  user,
+  manageCart,
+  edit,
+  editCartItem,
+  userData,
+  ...props
+}) => {
   const friesSizes = [
     { size: 'Chicas', cost: 0 },
     { size: 'Medianas', cost: 10 },
@@ -33,29 +43,39 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
     fries: friesSizes[0],
     extras: [],
     drink: drinkChoices[0],
-    unitaryPrice: 0,
+    unitaryPrice: product.price,
     totalAmount: 1,
-    totalPrice: product._id,
+    totalPrice: product.price,
   }
-  const [cartItem, setCartItem] = useState(initialCartItem)
+  const [cartItem, setCartItem] = useState(
+    edit ? editCartItem : initialCartItem
+  )
 
   const amount = (operation) => {
-    console.log(product.stock)
-    const { totalAmount } = cartItem
+    const { totalAmount, unitaryPrice } = cartItem
     if (operation === 'sum') {
       if (totalAmount < product.stock) {
-        setCartItem({ ...cartItem, totalAmount: totalAmount + 1 })
+        setCartItem({
+          ...cartItem,
+          totalAmount: totalAmount + 1,
+          totalPrice: unitaryPrice * (totalAmount + 1),
+        })
       } else {
         alert('ha llegado al límite de este producto')
       }
     } else {
       if (totalAmount > 1)
-        setCartItem({ ...cartItem, totalAmount: totalAmount - 1 })
+        setCartItem({
+          ...cartItem,
+          totalAmount: totalAmount - 1,
+          totalPrice: unitaryPrice * (totalAmount - 1),
+        })
     }
   }
 
-  const addExtras = (extra) => {
-    if (!Object.values(cartItem.extras).includes(extra.type)) {
+  const addExtras = (extra, e) => {
+    console.log(e.target.checked)
+    if (e.target.checked) {
       setCartItem({ ...cartItem, extras: [...cartItem.extras, extra] })
     } else {
       setCartItem({
@@ -65,27 +85,29 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
     }
   }
 
-  // useEffect(() => {
-  //   let amount = 0
-  //   extrasChoices.forEach((extra) => {
-  //     if (extras.includes(extra.type)) amount = amount + extra.cost
-  //   })
-  //   setExtrasCost(amount)
-  // }, [extras])
-
-  // useEffect(() => {
-  //   let friesCost = friesSizes.find((size) => size.size === fries).cost
-  //   let drinkCost = drinkChoices.find((option) => option.type === drink).cost
-  //   setUnitaryPrice(product.price + friesCost + extrasCost + drinkCost)
-  // }, [friesSizes, extrasCost, drink])
-
-  // useEffect(() => {
-  //   setTotalPrice(unitaryPrice * totalAmount)
-  // }, [unitaryPrice, totalAmount])
+  useEffect(() => {
+    const { fries, extras, drink, totalAmount } = cartItem
+    let extrasCost = extras.reduce((acc, extra) => acc + extra.cost, 0)
+    setCartItem({
+      ...cartItem,
+      unitaryPrice:
+        product.price +
+        fries.cost +
+        extrasCost +
+        (product.multipleDrinks ? drink.cost : 0),
+      totalPrice: product.multipleDrinks
+        ? (product.price + fries.cost + extrasCost + drink.cost) * totalAmount
+        : (product.price + fries.cost + extrasCost) * totalAmount + drink.cost,
+    })
+  }, [cartItem.fries, cartItem.extras, cartItem.drink])
 
   const addToCart = () => {
     console.log(cartItem)
-    // manageCart()
+    manageCart({
+      cartItem,
+      action: edit ? 'editCartItem' : 'add',
+      _id: userData?._id,
+    })
     //alert toast
     setMod(false)
   }
@@ -137,7 +159,7 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
               </p>
             </div>
             <p className={styles.addToCart} onClick={addToCart}>
-              Agregar a mi orden
+              {edit ? 'Editar orden' : 'Agregar a mi orden'}
             </p>
           </div>
         </div>
@@ -159,7 +181,9 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
                           onClick={() =>
                             setCartItem({ ...cartItem, fries: size })
                           }
-                          defaultChecked={size.cost === 0 && 'checked'}
+                          defaultChecked={
+                            size.cost === cartItem.fries.cost && 'checked'
+                          }
                         />
 
                         <label className={styles.input} htmlFor={size.size}>
@@ -182,7 +206,12 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
                           name='extras'
                           value={extra.type}
                           id={extra.type}
-                          onClick={() => addExtras(extra)}
+                          onClick={(e) => addExtras(extra, e)}
+                          defaultChecked={
+                            cartItem.extras.find(
+                              (option) => option.type === extra.type
+                            ) && 'checked'
+                          }
                         />
 
                         <label className={styles.input} htmlFor={extra.type}>
@@ -214,7 +243,9 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
                       onClick={() =>
                         setCartItem({ ...cartItem, drink: option })
                       }
-                      defaultChecked={option.cost === 0 && 'checked'}
+                      defaultChecked={
+                        option.type === cartItem.drink.type && 'checked'
+                      }
                     />
 
                     <label className={styles.input} htmlFor={option.type}>
@@ -245,7 +276,7 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
                   name='clarifications'
                   maxRows={4}
                   rows={4}
-                  value={cartItem.clarifications}
+                  defaultValue={cartItem.clarifications}
                   onChange={(e) =>
                     setCartItem({
                       ...cartItem,
@@ -269,11 +300,11 @@ const Product = ({ product, setMod, user, manageCart, ...props }) => {
 const mapStateToProps = (state) => {
   return {
     user: state.users.user,
+    userData: state.users.userData,
   }
 }
 const mapDispatchToProps = {
-  getProd: productActions.getProducts,
-  manageCart: productActions.manageCart,
+  manageCart: userActions.manageCart,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Product)

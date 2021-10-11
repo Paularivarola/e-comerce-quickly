@@ -13,6 +13,7 @@ import {
 import { connect } from 'react-redux'
 import userActions from '../redux/actions/userActions'
 import styles from '../styles/rafacard.module.css'
+import axios from 'axios'
 
 const CARD_OPTIONS = {
   iconStyle: 'solid',
@@ -122,7 +123,7 @@ const ResetButton = ({ onClick }) => (
   </button>
 )
 
-const CheckoutForm = ({ updateUser }) => {
+const CheckoutForm = ({ updateUser, userData }) => {
   const stripe = useStripe()
   const elements = useElements()
   const [error, setError] = useState(null)
@@ -158,16 +159,21 @@ const CheckoutForm = ({ updateUser }) => {
       card: elements.getElement(CardElement),
       billing_details: billingDetails,
     })
-
+    console.log('hola')
+    const response = await axios.post(
+      'http://localhost:4000/api/attach-payment-method',
+      { id: payload.paymentMethod.id, customer: userData?.data?.customerId }
+    )
+    const { paymentMethodAttached } = response.data
     setProcessing(false)
-
+    
     if (payload.error) {
       setError(payload.error)
     } else {
-      setPaymentMethod(payload.paymentMethod)
+      setPaymentMethod(paymentMethodAttached)
       updateUser({
         action: 'addPaymentCard',
-        newPaymentCard: payload.paymentMethod,
+        newPaymentCard: paymentMethodAttached,
       })
     }
   }
@@ -189,8 +195,7 @@ const CheckoutForm = ({ updateUser }) => {
         Payment successful
       </div> */}
       <div className={styles.ResultMessage}>
-        Thanks for trying Stripe Elements. No money was charged, but we
-        generated a PaymentMethod: {paymentMethod.id}
+        Método de pago generado: {paymentMethod.id}
       </div>
       <ResetButton onClick={reset} />
     </div>
@@ -244,7 +249,7 @@ const CheckoutForm = ({ updateUser }) => {
       </fieldset>
       {error && <ErrorMessage>{error.message}</ErrorMessage>}
       <SubmitButton processing={processing} error={error} disabled={!stripe}>
-        Agregar método de pago
+        Agregar
       </SubmitButton>
     </form>
   )
@@ -264,17 +269,21 @@ const stripePromise = loadStripe(
   'pk_test_51JiHmiD8MtlvyDMXOy1Xz9IRz7S6hXvSX3YorvlFJSNbByoEHqgmIhvVuOuYgA3PiOR9hxBM0QzQcf6OlJs4VYgI00pB5OSjXZ'
 )
 
-const Card = ({ updateUser }) => {
+const Card = ({ updateUser, userData }) => {
   return (
     <div className={styles.AppWrapper}>
       <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
-        <CheckoutForm updateUser={updateUser} />
+        <CheckoutForm updateUser={updateUser} userData={userData} />
       </Elements>
     </div>
   )
+}
+
+const mapStateToProps = (state) => {
+  return { userData: state.users.userData }
 }
 const mapDispatchToProps = {
   updateUser: userActions.updateUser,
 }
 
-export default connect(null, mapDispatchToProps)(Card)
+export default connect(mapStateToProps, mapDispatchToProps)(Card)

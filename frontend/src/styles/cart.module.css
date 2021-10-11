@@ -1,0 +1,205 @@
+.mainCart {
+    padding: 2% 5%;
+}
+.boxAdress {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+.boxData {
+    flex: 1;
+    padding: 1%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.totalPrice {
+    width: 70%;
+}
+.adress {
+    color: slategray;
+    font-weight: 400;
+    margin-right: 2%;
+}
+.adress span {
+    color: tomato;
+    font-weight: 500;
+}
+.adressBtn {
+    padding: 1%;
+    cursor: pointer;
+}
+.payBtn {
+    display: flex;
+    width: 40%;
+    justify-content: space-between;
+    align-items: center;
+}
+.payBtn button {
+    padding:3% 5%;
+}
+.totalPrice {
+    color: slategray;
+    font-weight: 400;
+}
+.totalPrice span {
+    font-weight: 500;
+    color: tomato;
+}
+.boxItems {
+    border: solid 1px rgb(212, 212, 212);
+    /* padding: 1.5rem; */
+    margin-top: 1%;
+    min-height: 50vh;
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 10px 10px 23px -5px rgba(0,0,0,0.28)
+}
+.cartGrid {
+    display: grid;
+	grid-template-columns: repeat(1, 1fr);
+	grid-auto-rows: minmax(140px, auto);
+	gap: 1.5rem;
+	padding: 1.5rem;
+    /* background-color: yellow; */
+}
+.cartHeader {
+    display: flex;
+    justify-content: space-between;
+    padding:1rem 2.5rem;
+    background-color: rgb(248, 248, 248);
+    border-bottom: solid 1px rgb(216, 216, 216);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.headerTitle {
+    text-align: center;
+    width: 100%;
+    color: tomato;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.gridBox {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    border-radius: 10px;
+}
+.gridBox::-webkit-scrollbar{
+    width: 0.5rem;
+}
+
+.gridBox::-webkit-scrollbar-thumb{
+    background-color: #fe674991;
+    border-radius: 8px;
+}
+.cartItem {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(245, 245, 245);
+    /* height: 40%; */
+    padding: 1%;
+    border-radius: 10px;
+    border: solid 1px rgb(221, 221, 221);
+    box-shadow: 10px 10px 23px -5px rgba(0,0,0,0.19)
+
+}
+.product {
+    display: flex;
+    width: 30%;
+    justify-content: flex-start;
+    align-items: center;
+    /* background-color: blueviolet; */
+}
+.productImg {
+    width: 35%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 10px;
+}
+.productDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: brown; */
+    flex: 1;
+    height: 100%;
+}
+.quantity {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: chartreuse; */
+    width: 20%;
+}
+.itemTotalPrice {
+    /* background-color: palegreen; */
+    width: 20%;
+}
+.buttons {
+    /* background-color: peru; */
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.productName {
+    color: slategray;
+    text-align: center;
+}
+.unitaryPrice {
+    font-weight: 400;
+    color: slategrey;
+}
+.line {
+    width: 1px;
+    border-width: 0;
+    height: 75%;
+    background-color: rgb(212, 212, 212);
+    align-self: center;
+}
+.boxQuantity {
+    background-color: tomato;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 60%;
+    height: 40%;
+    border: solid 1px rgb(216, 216, 216);
+    /* padding: 8%; */
+}
+.sign, .number {
+    background-color: tomato;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    height: 100%;
+    cursor: pointer;
+}
+.sign p {
+    color: white;
+}
+.number {
+    background-color: white;
+}
+.number p {
+    color: slategrey;
+}
+.itemTotalPrice {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.priceText {
+    color: slategrey;
+}
+.span {
+    padding: 5%;
+    cursor: pointer;
+}

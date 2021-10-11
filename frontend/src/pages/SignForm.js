@@ -106,7 +106,7 @@ const SignForm = (props) => {
       fd.append('lastName', lastName)
       fd.append('google', google)
       fd.append(google ? 'src' : 'fileImg', src)
-      props.createUser(fd, props)
+      props.createUser(fd, props).then((res) => console.log(res))
     } else {
       props.logUser(user, props)
     }
