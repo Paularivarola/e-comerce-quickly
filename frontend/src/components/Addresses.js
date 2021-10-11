@@ -29,6 +29,8 @@ const MyInput = ({ input, newAddress, setNewAddress }) => {
       label={input.label}
       value={newAddress[input.name]}
       variant='outlined'
+      size="small"
+      fullWidth
       // InputProps={{
       //   endAdornment: (
       //     <InputAdornment position='end' style={{ width: '2rem' }}>
@@ -46,22 +48,24 @@ const MyInput = ({ input, newAddress, setNewAddress }) => {
   )
 }
 
-const Address = ({ updateUser, address }) => {
+const Address = ({ updateUser, address, active, setActive, index }) => {
   return (
-    <div className={styles.addressCard}>
-      <span>Address alias {address?.alias}</span>
-      <BsTrash
-        onClick={() =>
-          toastConfirm(() =>
-            updateUser({ action: 'deleteAddress', addressId: address._id })
-          )
-        }
-      />
+    <div className={active ? styles.active : styles.addressCard}>
+      <div>
+        <span className={styles.addressAlias}>{address?.alias.toUpperCase()}</span>
+        <span className={styles.addressName}>{address.street + ', ' + address.number + ' - ' + address.apartment}</span>
+      </div>
+      {setActive && !active && (
+        <span onClick={() => setActive({ ...active, address: index })} style={{ cursor: 'pointer' }}>
+          Seleccionar
+        </span>
+      )}
+      <BsTrash style={{color:'tomato'}} onClick={() => toastConfirm(() => updateUser({ action: 'deleteAddress', addressId: address._id }))} />
     </div>
   )
 }
 
-const Addresses = ({ updateUser, userData }) => {
+const Addresses = ({ updateUser, userData, active, setActive }) => {
   const inputs = [
     { name: 'alias', label: 'Alias' },
     { name: 'street', label: 'Calle' },
@@ -93,17 +97,20 @@ const Addresses = ({ updateUser, userData }) => {
   }
 
   return (
-    <div className={styles.containerAdresses}>
+    <div className={styles.mainPersonalData}>
       {!userData ? (
         <div className={styles.containFormAddress}>
           <h1>No tenes ninguna direccion todavia</h1>
         </div>
       ) : (
-        userData.addresses.map((address) => (
+        userData.addresses.map((address, index) => (
           <Address
             key={address._id}
             address={address}
             updateUser={updateUser}
+            index={index}
+            active={index === active?.address}
+            setActive={setActive}
           />
         ))
       )}
@@ -121,6 +128,7 @@ const Addresses = ({ updateUser, userData }) => {
               <ImCancelCircle
                 className={styles.exit}
                 onClick={() => setModal(false)}
+                style={{marginRight: '6%', color:'tomato'}}
               />
               {inputs.map((input) => (
                 <MyInput
@@ -135,7 +143,10 @@ const Addresses = ({ updateUser, userData }) => {
           </div>
         </div>
       )}
-      <button onClick={() => setModal(!modal)}>Agregar</button>
+      <div className={styles.boxAdressbtn}>
+        <img className={styles.world} src="https://i.postimg.cc/L5DpZzqw/globoterraqueo.png" alt='world'/>        
+        <button onClick={() => setModal(!modal)}>Agregar</button>
+      </div>
       <Toaster
         containerStyle={{
           top: 80,

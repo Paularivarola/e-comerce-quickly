@@ -8,6 +8,7 @@ import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
 import { BsPencilSquare, BsCheckSquare, BsXSquare } from 'react-icons/bs'
 import { connect } from 'react-redux'
+import { style } from '@mui/system'
 
 const MyTextField = ({ name, inputHandler }) => {
   const [update, setUpdate] = useState(false)
@@ -93,74 +94,69 @@ const PersonalData = ({ user, updateUser }) => {
   }
 
   return (
-    <div className={styles.containPersonalData}>
-      <label htmlFor='imgUpdate'>
-        <div
-          className={styles.containImage}
-          style={{
-            backgroundImage: `url("${
-              user
-                ? user.google || user.admin.flag
-                  ? user.src
-                  : user.src !== 'assets/user.png'
-                  ? 'http://localhost:4000/' + user.src
+    <div className={styles.mainPersonalData}>
+      <div className={styles.formBox}>
+        <label htmlFor='imgUpdate'>
+          <div
+            className={styles.containImage}
+            style={{
+              backgroundImage: `url("${
+                user
+                  ? user.google || user.admin.flag
+                    ? user.src
+                    : user.src !== 'assets/user.png'
+                    ? 'http://localhost:4000/' + user.src
+                    : '/assets/user.png'
                   : '/assets/user.png'
-                : '/assets/user.png'
-            }")`,
-          }}
-        ></div>
-      </label>
-      <input
-        id='imgUpdate'
-        type='file'
-        onChange={submitFile}
-        style={{ display: 'none' }}
-      />
-      <div className={styles.containForm}>
-        {!user ? (
-          <Preloader />
-        ) : (
-          <Box
-            component='form'
-            sx={{
-              '& .MuiTextField-root': { m: 1, width: '25ch' },
+              }")`,
             }}
-            noValidate
-            autoComplete='off'
-          >
-            <MyTextField
-              name={userData?.firstName}
-              inputHandler={inputHandler}
-            />
-            <MyTextField
-              name={userData?.lastName}
-              inputHandler={inputHandler}
-            />
-
-            <TextField
-              type='email'
-              disabled
-              name='email'
-              defaultValue={user?.email}
-              label='Email'
-              variant='outlined'
-              onChange={inputHandler}
+          ></div>
+          <span className={styles.submitPhoto}>
+            Cambiar foto
+          </span>
+        </label>
+        <input id='imgUpdate' type='file' onChange={submitFile} style={{ display: 'none' }} />
+        <div className={styles.containForm}>
+          {!user ? (
+            <Preloader />
+          ) : (
+            <Box
+              component='form'
               sx={{
-                '& > :not(style)': { width: '25vw' },
+                '& .MuiTextField-root': { m: 1, width: '30ch' },
               }}
-            />
-          </Box>
-        )}
-        <button onClick={() => validatorFront()}>guardar cambios</button>
+              noValidate
+              autoComplete='off'
+            >
+              <MyTextField name={user?.firstName} inputHandler={inputHandler}/>
+              <MyTextField name={user?.lastName} inputHandler={inputHandler}/>
+              <TextField
+                type='email'
+                disabled
+                name='email'
+                defaultValue={user?.email}
+                label='Email'
+                variant='outlined'
+                onChange={inputHandler}
+                // sx={{
+                //   '& > :not(style)': { width: '25vw' },
+                // }}
+              />
+            </Box>
+          )}
+          <div className={styles.buttonBox}>
+            <button onClick={() => validatorFront()}>guardar cambios</button>
+          </div>
+        </div>
+        {/* <div className={styles.containImageEdit}>
+          <div
+            className={styles.ImageEdit}
+            style={{ backgroundImage: 'url("/assets/edit.png")' }}
+            onClick={() => setUpdate(!update)}
+          ></div>
+        </div> */}
       </div>
-      <div className={styles.containImageEdit}>
-        <div
-          className={styles.ImageEdit}
-          style={{ backgroundImage: 'url("/assets/edit.png")' }}
-          // onClick={() => setUpdate(!update)}
-        ></div>
       </div>
-    </div>
   )
 }
 

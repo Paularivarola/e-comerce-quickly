@@ -1,0 +1,26 @@
+div.containCard{
+	width: 20rem;
+	height: 4rem;
+	display: flex;
+	position: absolute;
+	align-items: center;
+	justify-content: space-around;	
+	background-color: white;
+	top: 20px;	
+	right: 80px;
+	border-radius: 15px;
+	box-shadow: 4px 4px 15px 0px rgba(0,0,0,0.75);
+	-webkit-box-shadow: 4px 4px 15px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 4px 4px 15px 0px rgba(0,0,0,0.75);
+}
+div.containCard h4{
+	color: slategrey;
+}
+div.imageIcon, div.imageTost{
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 3.5rem;
+	width: 3.5rem;
+	border-radius: 15px;
+}
