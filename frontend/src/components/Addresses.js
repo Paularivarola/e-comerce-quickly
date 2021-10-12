@@ -96,9 +96,9 @@ const Addresses = ({ updateUser, userData, active, setActive, modal, setModal })
     <div className={styles.mainAddress}>
       {cardTost.view && <CardTost properties={cardTost} setCardTost={setCardTost} />}
       <img className={styles.world} src='https://i.postimg.cc/L5DpZzqw/globoterraqueo.png' alt='world' />
-      {!userData ? (
+      {!userData?.addresses?.length ? (
         <div className={styles.containFormAddress}>
-          <h1>No tenes ninguna direccion todavia</h1>
+          <h1 className={styles.message}>No tenes ninguna direccion todavia</h1>
         </div>
       ) : (
         <div className={styles.addressesContainer}>

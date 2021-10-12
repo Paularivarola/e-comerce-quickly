@@ -30,13 +30,13 @@ const CartItem = ({ cartItem, manageCart, userData, setEdit, setCartItem }) => {
         <div className={styles.quantity}>
           <div className={styles.boxQuantity}>
             <div className={styles.sign}>
-              <p>+</p>
+              <p>-</p>
             </div>
             <div className={styles.number}>
               <p>{cartItem?.totalAmount}</p>
             </div>
             <div className={styles.sign}>
-              <p>-</p>
+              <p>+</p>
             </div>
           </div>
         </div>
@@ -90,7 +90,7 @@ const Cart = ({ manageCart, userData, ...props }) => {
             <p className={styles.totalPrice}>
               <span>Precio total:</span> $ {amount}
             </p>
-            <button onClick={() => props.history.push('/checkout')}>Pagar</button>
+            <button onClick={() => props.history.push('/checkout/order')}>Pagar</button>
           </div>
         </div>
       </div>

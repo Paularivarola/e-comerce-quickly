@@ -1,17 +1,30 @@
 import styles from '../styles/checkOut.module.css'
+import styles2 from '../styles/profile.module.css'
+import styles3 from '../styles/products.module.css'
+import styles4 from '../styles/data.module.css'
 import { connect } from 'react-redux'
 import { useEffect, useRef, useState } from 'react'
 import Card2 from '../components/CheckoutTESTING'
-import Payment from '../components/Payment'
-import Addresses from '../components/Addresses'
 import CardTost from '../components/CardTost'
+import { BsFillBagCheckFill } from 'react-icons/bs'
+import { IoMdAddCircle } from 'react-icons/io'
+import Addresses from '../components/Addresses'
+import Payment from '../components/Payment'
+import NavLateral from '../components/NavLateral'
+import Order from '../components/Order'
+import Preloader from '../components/Preloader'
 
-const CheackOut = ({ userData }) => {
+
+
+const CheackOut = (props) => {
+
+  let userData = props.userData
   const [delivery, setDelivery] = useState('')
   const [pay, setPay] = useState(false)
   const [viewAddress, setViewAddress] = useState('')
   const [viewCard, setViewCard] = useState('')
   const [active, setActive] = useState({ card: 0, address: 0 })
+  const [view, setView] = useState(props.match.params.page)
   const changeDelivery = (delivery) => {
     setDelivery(delivery)
     setViewAddress('')
@@ -36,26 +49,7 @@ const CheackOut = ({ userData }) => {
     })
   }, [userData])
 
-  const array = [
-    {
-      name: 'juan',
-      calle: 'roberto',
-      numero: 'tuvieja',
-      id: 1,
-    },
-    {
-      name: 'juan',
-      calle: 'roberto',
-      numero: 'tuvieja',
-      id: 2,
-    },
-    {
-      name: 'juan',
-      calle: 'roberto',
-      numero: 'tuvieja',
-      id: 3,
-    },
-  ]
+
   const neighborhoodArray = ['Lomas de Zamora', 'Palermo', 'Bandfield', 'Temperley', 'Lanús', 'Glew', 'Monte Grande']
   const inputHandler = (e) => {
     setUser({
@@ -189,22 +183,67 @@ const CheackOut = ({ userData }) => {
     setPay(true)
   }
 
+
+useEffect(() => {
+    setView(props.match.params.page)
+  }, [props.match.params])
+
+  const navItems = [
+    { page: 'checkout', comp: 'order', name: 'Mi pedido' },
+    {
+      page: 'checkout',
+      comp: 'addresses',
+      name: 'Punto de entrega',
+    },
+    {
+      page: 'checkout',
+      comp: 'payment',
+      name: 'Metodo de pago',
+    },
+  ]
+
+  const [modal, setModal] = useState(false)
+  const [cardModal, setCardModal] = useState(false)
+  
   return (
     <div className={styles.mainCheckout}>
-      <div className={styles.instructions}>
-        <div className={styles.buttonsContainer}>
-          <img src='https://i.postimg.cc/bJZP2yMp/moto.png' alt='delivery' />
-          <div className={styles.boxButtons}>
-            <p>¿Cómo despachamos tu pedido?</p>
-            <div className={styles.buttonsBox}>
-              <button onClick={() => changeDelivery('withdraw')}>Retirar</button>
-              <button onClick={() => changeDelivery('send')}>Delivery</button>
+      {cardTost.view && <CardTost properties={cardTost} setCardTost={setCardTost} />}
+      <div className={styles3.categories}>
+        <div className={styles3.categoriesList}>
+          <BsFillBagCheckFill style={{ color: '#fe6849', fontSize: '1.5em', marginRight: '5%' }} />
+          <p className={styles3.categoriesTitle}> CheckOut</p>
+        </div>
+        <div className={styles3.boxShop}>
+          <p className={styles3.welcome}>Buena elección {props.user && props.user.firstName}!</p>
+          {(props.history.location.pathname === '/checkout/payment' || props.history.location.pathname === '/checkout/addresses') && (
+            <div className={styles.btnAddress}>
+              <IoMdAddCircle style={{ color: '#fe6849', fontSize: '1.5em', marginRight: '5%' }}/>
+              <span onClick={() => (props.history.location.pathname === '/checkout/payment' ? setCardModal(true) : setModal(!modal))}>
+                Agregar {props.history.location.pathname === '/checkout/payment' ? 'tarjeta' : 'dirección'}
+              </span>
             </div>
-          </div>
+          )}
         </div>
       </div>
-      {cardTost.view && <CardTost properties={cardTost} setCardTost={setCardTost} />}
+      <div className={styles.boxChekOut}>
+        <NavLateral navItems={navItems}/>
+        <div className={styles2.containerRenderView}>
+          <div className={styles2.renderView}>
+              {/* <Preloader /> */}
+              <div className={styles4.containerData}>
+                <div className={styles4.containAllProfile}>
+                  {view === 'addresses' ? (
+                    <Addresses user={props.userData?.data} modal={modal} setModal={setModal} />
+                  ) : view === 'payment' ? (
+                    <Payment user={props.userData?.data} cardModal={cardModal} setCardModal={setCardModal} />
+                  ): <Order user={props.userData?.data} modal={modal} setModal={setModal}/>}
+                </div>
+              </div>
+          </div>
+      </div>
     </div>
+  </div>
+
     // <div className={styles.containAll}>
     //   <div className={styles.containForm}>
     //     <div className={styles.containButtonsDelivery}>
@@ -279,6 +318,7 @@ const CheackOut = ({ userData }) => {
 const mapStateToProps = (state) => {
   return {
     userData: state.users.userData,
+    user: state.users.user
   }
 }
 
