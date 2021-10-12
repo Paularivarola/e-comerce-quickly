@@ -14,6 +14,7 @@ const adminProductActions = {
         }
     },
     createProduct: (product, props) => {
+        console.log(product)
         let token = localStorage.getItem("token");
         return async (dispatch) => {
             let response = await axios.post(
@@ -25,7 +26,7 @@ const adminProductActions = {
                     },
                 }
             );
-            console.log(response.data.response)
+            console.log(response.data)
             if (response.data.success) {
                 await dispatch({ type: "ADD_PRODUCT", payload: response.data.response });
                 return response.data;

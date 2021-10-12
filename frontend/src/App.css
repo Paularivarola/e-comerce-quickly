@@ -173,11 +173,12 @@ input#file {
   box-sizing: border-box;
 }
 
-form div {
+/* form div {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-}
+} */
+
 .spinner,
 .spinner:before,
 .spinner:after {

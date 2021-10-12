@@ -29,7 +29,7 @@ const Product = (props) => {
     const defaultStock = edited ? chosen[0].stock : ''
     const defaultDescription = edited ? chosen[0].description : ''
     const defaultIngredients = edited && chosen[0].ingredients ? chosen[0].ingredients[0].replaceAll(' ', '').split(',') : ''
-    const defaultPic = edited ? chosen[0]._id : ''
+    const defaultPic = edited && chosen[0].img
     const [newProduct, setNewProduct] = useState({ ingredients: [] })
     const [ingredients, setIngredients] = useState({})
     const [number, setNumber] = useState([1, 1, 1,])
@@ -96,6 +96,7 @@ const Product = (props) => {
             fd.append('img', img)
             fd.append('ingredients', ingredients)
             let response = await props.createProduct(fd, props)
+            console.log(response)
             if (response.success) {
                 message('success', 'Producto añadido exitosamente')
             }
@@ -123,7 +124,7 @@ const Product = (props) => {
             >
                 <div className={styles.formContainer}>
                     <div className={styles.imageContainer}>
-                        <div className={styles.imagePreview} style={{ backgroundImage: `url('${edited ? `http://localhost:4000/assets/products/${defaultPic}.png` : file}')` }}></div>
+                        <div className={styles.imagePreview} style={{ backgroundImage: `url('${edited ? `${defaultPic}` : file}')` }}></div>
                         <label htmlFor='upload'>
                             <span className={styles.uploadButton}><MdUploadFile />Subir imagen</span>
                         </label>
