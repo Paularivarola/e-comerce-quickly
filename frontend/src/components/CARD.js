@@ -70,12 +70,7 @@ const Field = ({ label, id, type, placeholder, required, autoComplete, value, on
 )
 
 const SubmitButton = ({ processing, error, children, disabled, onclick }) => (
-  <button
-    onClick={() => onclick(false)}
-    className={[styles.SubmitButton, error ? styles.SubmitButtonError : '']}
-    type='submit'
-    disabled={processing || disabled}
-  >
+  <button className={[styles.SubmitButton, error ? styles.SubmitButtonError : '']} type='submit' disabled={processing || disabled}>
     {processing ? 'Processing...' : children}
   </button>
 )
@@ -144,17 +139,21 @@ const CheckoutForm = ({ updateUser, userData, setCardModal }) => {
       card: elements.getElement(CardElement),
       billing_details: billingDetails,
     })
+    console.log(payload)
 
     const response = await axios.post(`${HOST}/api/attach-payment-method`, {
       id: payload.paymentMethod.id,
       customer: userData?.data?.customerId,
     })
     const { paymentMethodAttached } = response.data
+
+    console.log(paymentMethodAttached)
     setProcessing(false)
 
     if (payload.error) {
       setError(payload.error)
     } else {
+      setCardModal(false)
       setPaymentMethod(paymentMethodAttached)
       updateUser({
         action: 'addPaymentCard',
@@ -231,7 +230,7 @@ const CheckoutForm = ({ updateUser, userData, setCardModal }) => {
         />
       </fieldset>
       {error && <ErrorMessage>{error.message}</ErrorMessage>}
-      <SubmitButton processing={processing} error={error} disabled={!stripe} onclick={setCardModal}>
+      <SubmitButton processing={processing} error={error} disabled={!stripe}>
         Agregar
       </SubmitButton>
     </form>
