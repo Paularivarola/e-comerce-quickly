@@ -24,7 +24,7 @@ const adminProductControllers = {
       console.log(req.files)
       const { img } = req.files
       picture = `/${newProduct._id}.${img.name.split('.')[img.name.split('.').length - 1]}`
-      img.mv(`${__dirname}/../../assets/products/${newProduct._id}.${img.name.split('.')[img.name.split('.').length - 1]}`, (err) => {
+      img.mv(`${__dirname}/../../assets/${newProduct._id}.${img.name.split('.')[img.name.split('.').length - 1]}`, (err) => {
         if (err) return console.log(err)
       })
 
