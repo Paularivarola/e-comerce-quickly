@@ -54,7 +54,7 @@ const ProductCard = ({ product, setModal, user, userData, favHandler }) => {
       {cardTost.view && <CardTost properties={cardTost} setCardTost={setCardTost} />}
 
       <div className={styles.productBox}>
-        <div className={styles.productImg} style={{ backgroundImage: `url("${product.img}")` }}>
+        <div className={styles.productImg} style={{ backgroundImage: `url("https://quickly-food.herokuapp.com${product.img}")` }}>
           {!liked ? (
             <BsBookmarkStar className={styles.fav} onClick={() => favClickHandler('addFav', product._id)} />
           ) : (
