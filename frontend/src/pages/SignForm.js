@@ -159,7 +159,7 @@ const SignForm = (props) => {
           <div className={styles.boxGoogle}>
             <GoogleLogin
               className={styles.btnGoogle}
-              clientId='700780098168-b35ln15khokfkbats4tm4sl7cbcv3bup.apps.googleusercontent.com'
+              clientId='82723603056-cs149imm3c4o0us2fv5vq1ru43ccomdm.apps.googleusercontent.com'
               buttonText='con Google Account'
               onSuccess={responseGoogle}
               onFailure={responseGoogle}
