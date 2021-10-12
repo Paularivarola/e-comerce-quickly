@@ -15,6 +15,7 @@ import { Toaster } from 'react-hot-toast'
 import { connect } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { BsPersonLinesFill } from 'react-icons/bs'
+import { IoMdAddCircle } from 'react-icons/io'
 
 const Profile = (props) => {
   const [formConfirm, setFormConfirm] = useState({})
@@ -62,9 +63,12 @@ const Profile = (props) => {
         <div className={styles3.boxShop}>
           <p className={styles3.welcome}>Hola {props.user && props.user.firstName}, que bueno verte por acá!</p>
           {(props.history.location.pathname === '/profile/payment' || props.history.location.pathname === '/profile/addresses') && (
-            <button onClick={() => (props.history.location.pathname === '/profile/payment' ? setCardModal(true) : setModal(!modal))}>
-              Agregar {props.history.location.pathname === '/profile/payment' ? 'tarjeta' : 'dirección'}
-            </button>
+            <div className={styles.btnAddress}>
+              <IoMdAddCircle style={{ color: '#fe6849', fontSize: '1.5em', marginRight: '5%' }}/>
+              <span onClick={() => (props.history.location.pathname === '/checkout/payment' ? setCardModal(true) : setModal(!modal))}>
+                Agregar {props.history.location.pathname === '/checkout/payment' ? 'tarjeta' : 'dirección'}
+              </span>
+          </div>
           )}
         </div>
       </div>
