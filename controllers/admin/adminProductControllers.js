@@ -23,13 +23,10 @@ const adminProductControllers = {
       let picture
       console.log(req.files)
       const { img } = req.files
-      picture = `${newProduct._id}.${img.name.split('.')[img.name.split('.').length - 1]}`
-      img.mv(
-        `${__dirname}/../../assets/products/${newProduct._id}.${img.name.split('.')[img.name.split('.').length - 1]}`,
-        (err) => {
-          if (err) return console.log(err)
-        }
-      )
+      picture = `/${newProduct._id}.${img.name.split('.')[img.name.split('.').length - 1]}`
+      img.mv(`${__dirname}/../../assets/products/${newProduct._id}.${img.name.split('.')[img.name.split('.').length - 1]}`, (err) => {
+        if (err) return console.log(err)
+      })
 
       newProduct.img = picture
       await newProduct.save()
