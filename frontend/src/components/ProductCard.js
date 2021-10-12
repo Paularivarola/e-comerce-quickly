@@ -6,6 +6,7 @@ import Rating from '@mui/material/Rating'
 import Stack from '@mui/material/Stack'
 import { connect } from 'react-redux'
 import userActions from '../redux/actions/userActions'
+import CardTost from './CardTost'
 
 const ProductCard = ({ product, setModal, user, userData, favHandler }) => {
   const [stopper, setStopper] = useState(true)
@@ -13,22 +14,26 @@ const ProductCard = ({ product, setModal, user, userData, favHandler }) => {
   useEffect(() => {
     setLiked(product?.favs?.includes(userData?._id))
     // eslint-disable-next-line
-  }, [userData])
+  }, [userData, product])
+
+  const [cardTost, setCardTost] = useState({
+    time: '',
+    icon: '',
+    text: '',
+    view: false,
+  })
 
   const favClickHandler = async (action, _id) => {
     if (!stopper) {
       return false
     }
     if (!user) {
-      // toast.error('You must be logged in to like the products', {
-      //   position: 'top-right',
-      //   autoClose: 3000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: false,
-      //   draggable: true,
-      //   progress: undefined,
-      // })
+      setCardTost({
+        time: 1500,
+        icon: 'error',
+        text: 'Inicia Sesión para agregar a fav',
+        view: true,
+      })
       return false
     }
     setStopper(false)
@@ -46,21 +51,14 @@ const ProductCard = ({ product, setModal, user, userData, favHandler }) => {
   }
   return (
     <div className={styles.product}>
+      {cardTost.view && <CardTost properties={cardTost} setCardTost={setCardTost} />}
+
       <div className={styles.productBox}>
-        <div
-          className={styles.productImg}
-          style={{ backgroundImage: `url("${product.img}")` }}
-        >
+        <div className={styles.productImg} style={{ backgroundImage: `url("${product.img}")` }}>
           {!liked ? (
-            <BsBookmarkStar
-              className={styles.fav}
-              onClick={() => favClickHandler('addFav', product._id)}
-            />
+            <BsBookmarkStar className={styles.fav} onClick={() => favClickHandler('addFav', product._id)} />
           ) : (
-            <BsBookmarkStarFill
-              className={styles.fav}
-              onClick={() => favClickHandler('deleteFav', product._id)}
-            />
+            <BsBookmarkStarFill className={styles.fav} onClick={() => favClickHandler('deleteFav', product._id)} />
           )}
         </div>
         <div className={styles.productInfo}>
@@ -78,12 +76,7 @@ const ProductCard = ({ product, setModal, user, userData, favHandler }) => {
         <div className={styles.calification}>
           <Stack spacing={1}>
             {!user ? (
-              <Rating
-                name='half-rating-read'
-                defaultValue={product.score}
-                precision={0.1}
-                readOnly
-              />
+              <Rating name='half-rating-read' defaultValue={product.score} precision={0.1} readOnly />
             ) : (
               <Rating
                 className={styles.rating}
@@ -96,15 +89,8 @@ const ProductCard = ({ product, setModal, user, userData, favHandler }) => {
           </Stack>
         </div>
       </div>
-      <button
-        data-modal='productModal'
-        className={styles.addBtn}
-        onClick={() => setModal(true, product)}
-      >
-        <MdShoppingCart
-          style={{ color: 'white', fontSize: '1.8em', marginRight: '5%' }}
-        />{' '}
-        +
+      <button data-modal='productModal' className={styles.addBtn} onClick={() => setModal(true, product)}>
+        <MdShoppingCart style={{ color: 'white', fontSize: '1.8em', marginRight: '5%' }} /> +
       </button>
     </div>
   )

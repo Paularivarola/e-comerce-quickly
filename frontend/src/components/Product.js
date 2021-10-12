@@ -12,18 +12,17 @@ import userActions from '../redux/actions/userActions'
 const Product = ({ product, setMod, user, manageCart, edit, editCartItem, userData, ...props }) => {
   const friesSizes = [
     { size: 'Chicas', cost: 0 },
-    { size: 'Medianas', cost: 10 },
-    { size: 'Grandes', cost: 20 },
+    { size: 'Medianas', cost: 30 },
+    { size: 'Grandes', cost: 50 },
   ]
   const extrasChoices = [
-    { type: 'Carne', cost: 20 },
-    { type: 'Queso', cost: 10 },
-    { type: 'Cebolla', cost: 5 },
-    { type: 'Gaseosa 500cc', cost: 35 },
+    { type: 'Carne', cost: 100 },
+    { type: 'Queso', cost: 50 },
+    { type: 'Cebolla', cost: 30 },
   ]
   const drinkChoices = [
     { type: 'Sin bebida', cost: 0 },
-    { type: 'Coca Cola (500cc)', cost: 100 },
+    { type: 'Coca-Cola (500cc)', cost: 100 },
     { type: 'Sprite (500cc)', cost: 100 },
     { type: 'Fanta (500cc)', cost: 100 },
   ]
@@ -99,151 +98,153 @@ const Product = ({ product, setMod, user, manageCart, edit, editCartItem, userDa
 
   return (
     <main data-modal='closeModal' className={styles.main}>
-      <div className={styles.card}>
+      <div className={styles.borderCard}>
         <ImCancelCircle className={styles.exit} onClick={() => setMod(false)} />
-        <div className={styles.cardInfo}>
-          <div>
-            <h1 className={styles.h3}>{product.name}</h1>
-            <Stack className={styles.calification} spacing={1}>
-              {user ? (
-                <Rating
-                  className={styles.rating}
-                  style={{ backgroundColor: 'yelow' }}
-                  name='half-rating'
-                  defaultValue={product.score}
-                  precision={0.5}
-                />
-              ) : (
-                <Rating name='half-rating-read' defaultValue={product.score} precision={0.5} readOnly />
+        <div className={styles.card}>
+          <div className={styles.cardInfo}>
+            <div>
+              <h1 className={styles.h3}>{product.name}</h1>
+              <Stack className={styles.calification} spacing={1}>
+                {user ? (
+                  <Rating
+                    className={styles.rating}
+                    style={{ backgroundColor: 'yelow' }}
+                    name='half-rating'
+                    defaultValue={product.score}
+                    precision={0.5}
+                  />
+                ) : (
+                  <Rating name='half-rating-read' defaultValue={product.score} precision={0.5} readOnly />
+                )}
+              </Stack>
+            </div>
+
+            <div className={styles.div}>
+              <div style={{ backgroundImage: `url('${product.img}')` }} className={styles.picture} />
+              <h3 className={styles.h3}>Descripcion:</h3>
+              <p className={styles.text}>{product.description}</p>
+            </div>
+
+            <div className={styles.order}>
+              <div className={styles.amount}>
+                <p className={styles.amountButton} onClick={() => amount('res')}>
+                  -
+                </p>
+                <p>{cartItem.totalAmount}</p>
+                <p className={styles.amountButton} onClick={() => amount('sum')}>
+                  +
+                </p>
+              </div>
+              <p className={styles.addToCart} onClick={addToCart}>
+                {edit ? 'Editar orden' : 'Agregar a mi orden'}
+              </p>
+            </div>
+          </div>
+
+          <div className={styles.cardDetails}>
+            <div className={styles.choices}>
+              {product.fries && product.extras && (
+                <div className={styles.column_1}>
+                  {product.fries && (
+                    <div>
+                      <h3 className={styles.h3}>Tamaño papas</h3>
+                      {friesSizes.map((size, index) => (
+                        <div key={index}>
+                          <input
+                            type='radio'
+                            name='extras'
+                            value={size.size}
+                            id={size.size}
+                            onClick={() => setCartItem({ ...cartItem, fries: size })}
+                            defaultChecked={size.cost === cartItem.fries.cost && 'checked'}
+                          />
+
+                          <label className={styles.input} htmlFor={size.size}>
+                            {size.size}
+                            {size.cost !== 0 && <span className={styles.span}> ${size.cost}</span>}
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {product.extras && (
+                    <div>
+                      <h3 className={styles.h3}>Extras</h3>
+                      {extrasChoices.map((extra, index) => (
+                        <div key={index}>
+                          <input
+                            type='checkbox'
+                            name='extras'
+                            value={extra.type}
+                            id={extra.type}
+                            onClick={(e) => addExtras(extra, e)}
+                            defaultChecked={cartItem.extras.find((option) => option.type === extra.type) && 'checked'}
+                          />
+
+                          <label className={styles.input} htmlFor={extra.type}>
+                            {extra.type} <span className={styles.span}>${extra.cost}</span>
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
               )}
-            </Stack>
-          </div>
+              <div className={product.fries && product.extras ? styles.column_2 : styles.no_column}>
+                <div>
+                  <h3 className={styles.h3}>Gaseosa</h3>
+                  {drinkChoices.map((option, index) => (
+                    <div key={index}>
+                      <input
+                        type='radio'
+                        name='drinks'
+                        value={option.type}
+                        id={option.type}
+                        onClick={() => setCartItem({ ...cartItem, drink: option })}
+                        defaultChecked={option.type === cartItem.drink.type && 'checked'}
+                      />
 
-          <div className={styles.div}>
-            <div style={{ backgroundImage: `url('${product.img}')` }} className={styles.picture} />
-            <h3 className={styles.h3}>Descripcion:</h3>
-            <p className={styles.text}>{product.description}</p>
-          </div>
-
-          <div className={styles.order}>
-            <div className={styles.amount}>
-              <p className={styles.amountButton} onClick={() => amount('res')}>
-                -
-              </p>
-              <p>{cartItem.totalAmount}</p>
-              <p className={styles.amountButton} onClick={() => amount('sum')}>
-                +
-              </p>
-            </div>
-            <p className={styles.addToCart} onClick={addToCart}>
-              {edit ? 'Editar orden' : 'Agregar a mi orden'}
-            </p>
-          </div>
-        </div>
-
-        <div className={styles.cardPrice}>
-          <div className={styles.choices}>
-            {product.fries && product.extras && (
-              <div className={styles.column}>
-                {product.fries && (
-                  <div>
-                    <h3 className={styles.h3}>Tamaño papas</h3>
-                    {friesSizes.map((size, index) => (
-                      <div key={index}>
-                        <input
-                          type='radio'
-                          name='extras'
-                          value={size.size}
-                          id={size.size}
-                          onClick={() => setCartItem({ ...cartItem, fries: size })}
-                          defaultChecked={size.cost === cartItem.fries.cost && 'checked'}
-                        />
-
-                        <label className={styles.input} htmlFor={size.size}>
-                          {size.size}
-                          {size.cost !== 0 && <span className={styles.span}> ${size.cost}</span>}
-                        </label>
-                      </div>
-                    ))}
-                  </div>
-                )}
-                {product.extras && (
-                  <div>
-                    <h3 className={styles.h3}>Extras</h3>
-                    {extrasChoices.map((extra, index) => (
-                      <div key={index}>
-                        <input
-                          type='checkbox'
-                          name='extras'
-                          value={extra.type}
-                          id={extra.type}
-                          onClick={(e) => addExtras(extra, e)}
-                          defaultChecked={cartItem.extras.find((option) => option.type === extra.type) && 'checked'}
-                        />
-
-                        <label className={styles.input} htmlFor={extra.type}>
-                          {extra.type} <span className={styles.span}>${extra.cost}</span>
-                        </label>
-                      </div>
-                    ))}
-                  </div>
-                )}
+                      <label className={styles.input} htmlFor={option.type}>
+                        {option.type}
+                        {option.cost !== 0 && <span className={styles.span}> ${option.cost}</span>}
+                      </label>
+                    </div>
+                  ))}
+                </div>
               </div>
-            )}
-            <div className={product.fries && product.extras ? styles.column : styles.no_column}>
-              <div>
-                <h3 className={styles.h3}>Gaseosa</h3>
-                {drinkChoices.map((option, index) => (
-                  <div key={index}>
-                    <input
-                      type='radio'
-                      name='drinks'
-                      value={option.type}
-                      id={option.type}
-                      onClick={() => setCartItem({ ...cartItem, drink: option })}
-                      defaultChecked={option.type === cartItem.drink.type && 'checked'}
-                    />
-
-                    <label className={styles.input} htmlFor={option.type}>
-                      {option.type}
-                      {option.cost !== 0 && <span className={styles.span}> ${option.cost}</span>}
-                    </label>
-                  </div>
-                ))}
-              </div>
-              <Box
-                component='form'
-                sx={{
-                  '& .MuiTextField-root': {
-                    m: 1,
-                    width: '25ch',
-                    minHeight: '15ch',
-                  },
-                }}
-                noValidate
-                autoComplete='off'
-              >
-                <TextField
-                  id='outlined-multiline-flexible'
-                  label='Aclaraciones'
-                  multiline
-                  name='clarifications'
-                  maxRows={4}
-                  rows={4}
-                  defaultValue={cartItem.clarifications}
-                  onChange={(e) =>
-                    setCartItem({
-                      ...cartItem,
-                      clarifications: e.target.value,
-                    })
-                  }
-                />
-              </Box>
             </div>
-          </div>
-          <div>
-            <h4>Unidad: $ {cartItem.unitaryPrice}</h4>
-            <h2>Total: $ {cartItem.totalPrice}</h2>
+            <Box
+              component='form'
+              sx={{
+                '& .MuiTextField-root': {
+                  xl: 1,
+                  width: '90%',
+                  minHeight: '10ch',
+                },
+              }}
+              noValidate
+              autoComplete='off'
+            >
+              <TextField
+                id='outlined-multiline-flexible'
+                label='Aclaraciones'
+                multiline
+                name='clarifications'
+                maxRows={3}
+                rows={3}
+                defaultValue={cartItem.clarifications}
+                onChange={(e) =>
+                  setCartItem({
+                    ...cartItem,
+                    clarifications: e.target.value,
+                  })
+                }
+              />
+            </Box>
+            <div className={styles.price}>
+              <h4>Unidad: $ {cartItem.unitaryPrice}</h4>
+              <h2>Total: $ {cartItem.totalPrice}</h2>
+            </div>
           </div>
         </div>
       </div>

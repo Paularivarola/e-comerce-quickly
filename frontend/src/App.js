@@ -25,7 +25,6 @@ const App = (props) => {
     if (!localStorage.getItem('socket') && !localStorage.getItem('token')) {
       setSocket(io('http://localhost:4000'))
     }
-
   }, [])
 
   useEffect(() => {

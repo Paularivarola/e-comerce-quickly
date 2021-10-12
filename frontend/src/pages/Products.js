@@ -21,7 +21,7 @@ const Products = (props) => {
   }, [])
   useEffect(() => {
     setProducts(
-      props.products.filter((prod) => {
+      props.products?.filter((prod) => {
         let path = window.location.pathname.split('/')[window.location.pathname.split('/').length - 1]
         return path === 'all' || path === prod.category
       })

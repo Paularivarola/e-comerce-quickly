@@ -2,18 +2,14 @@
 // Learn how to accept a payment using the official Stripe docs.
 // https://www.stripe.com/docs/payments/integration-builder
 
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
-import {
-  CardElement,
-  Elements,
-  useElements,
-  useStripe,
-} from '@stripe/react-stripe-js'
+import { CardElement, Elements, useElements, useStripe } from '@stripe/react-stripe-js'
 import { connect } from 'react-redux'
 import userActions from '../redux/actions/userActions'
 import styles from '../styles/rafacard.module.css'
 import axios from 'axios'
+const HOST = 'http://localhost:4000'
 
 const CARD_OPTIONS = {
   iconStyle: 'solid',
@@ -49,16 +45,7 @@ const CardField = ({ onChange }) => (
   </div>
 )
 
-const Field = ({
-  label,
-  id,
-  type,
-  placeholder,
-  required,
-  autoComplete,
-  value,
-  onChange,
-}) => (
+const Field = ({ label, id, type, placeholder, required, autoComplete, value, onChange }) => (
   <div className={styles.FormRow}>
     <label htmlFor={id} className={styles.FormRowLabel}>
       {label}
@@ -82,8 +69,9 @@ const Field = ({
   </div>
 )
 
-const SubmitButton = ({ processing, error, children, disabled }) => (
+const SubmitButton = ({ processing, error, children, disabled, onclick }) => (
   <button
+    onClick={() => onclick(false)}
     className={[styles.SubmitButton, error ? styles.SubmitButtonError : '']}
     type='submit'
     disabled={processing || disabled}
@@ -109,10 +97,7 @@ const ErrorMessage = ({ children }) => (
 )
 
 const ResetButton = ({ onClick }) => (
-  <button
-    className={[styles.SubmitButton, { height: '5vh' }]}
-    onClick={onClick}
-  >
+  <button className={[styles.SubmitButton, { height: '5vh' }]} onClick={onClick}>
     <svg width='32px' height='32px' viewBox='0 0 32 32'>
       <path
         fill='#FFF'
@@ -123,7 +108,7 @@ const ResetButton = ({ onClick }) => (
   </button>
 )
 
-const CheckoutForm = ({ updateUser, userData }) => {
+const CheckoutForm = ({ updateUser, userData, setCardModal }) => {
   const stripe = useStripe()
   const elements = useElements()
   const [error, setError] = useState(null)
@@ -159,14 +144,14 @@ const CheckoutForm = ({ updateUser, userData }) => {
       card: elements.getElement(CardElement),
       billing_details: billingDetails,
     })
-    console.log('hola')
-    const response = await axios.post(
-      'http://localhost:4000/api/attach-payment-method',
-      { id: payload.paymentMethod.id, customer: userData?.data?.customerId }
-    )
+
+    const response = await axios.post(`${HOST}/api/attach-payment-method`, {
+      id: payload.paymentMethod.id,
+      customer: userData?.data?.customerId,
+    })
     const { paymentMethodAttached } = response.data
     setProcessing(false)
-    
+
     if (payload.error) {
       setError(payload.error)
     } else {
@@ -194,9 +179,7 @@ const CheckoutForm = ({ updateUser, userData }) => {
       {/* <div className={styles.ResultTitle} role='alert'>
         Payment successful
       </div> */}
-      <div className={styles.ResultMessage}>
-        Método de pago generado: {paymentMethod.id}
-      </div>
+      <div className={styles.ResultMessage}>Método de pago generado: {paymentMethod.id}</div>
       <ResetButton onClick={reset} />
     </div>
   ) : (
@@ -248,7 +231,7 @@ const CheckoutForm = ({ updateUser, userData }) => {
         />
       </fieldset>
       {error && <ErrorMessage>{error.message}</ErrorMessage>}
-      <SubmitButton processing={processing} error={error} disabled={!stripe}>
+      <SubmitButton processing={processing} error={error} disabled={!stripe} onclick={setCardModal}>
         Agregar
       </SubmitButton>
     </form>
@@ -269,11 +252,11 @@ const stripePromise = loadStripe(
   'pk_test_51JiHmiD8MtlvyDMXOy1Xz9IRz7S6hXvSX3YorvlFJSNbByoEHqgmIhvVuOuYgA3PiOR9hxBM0QzQcf6OlJs4VYgI00pB5OSjXZ'
 )
 
-const Card = ({ updateUser, userData }) => {
+const Card = ({ updateUser, userData, setCardModal }) => {
   return (
     <div className={styles.AppWrapper}>
       <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
-        <CheckoutForm updateUser={updateUser} userData={userData} />
+        <CheckoutForm updateUser={updateUser} userData={userData} setCardModal={setCardModal} />
       </Elements>
     </div>
   )

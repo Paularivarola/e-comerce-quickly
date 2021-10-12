@@ -1,4 +1,34 @@
-div.containAll{
+.mainCheckout {
+	width: 100%;
+	min-height: 80vh;
+	padding: 5%;
+	background: chocolate;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+}
+.instructions {
+	width: 50%;
+	background: chartreuse;
+}
+.orderDetail {
+	width: 50%;
+	background: rgb(0, 4, 255);
+}
+.buttonsContainer {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+.buttonsContainer img {
+	width: 45%;
+}
+.boxButtons {
+	display: flex;
+	flex-direction: column;
+}
+
+/* div.containAll{
 	display: flex;
 	width: 100%;
 	height: 140vh;
@@ -247,4 +277,4 @@ div.containCardSend{
 	align-items: center;
 	justify-content: center;
 	height: 40vh;
-}
+} */

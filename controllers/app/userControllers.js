@@ -225,7 +225,7 @@ const html = (firstName, action) => {
       ? `
       <table style="max-width: 700px; padding: 10px; margin:0 auto; border-collapse: collapse;">
       <div style="width: 100%;margin:20px 0; text-align: center;">
-          <img style="width: 40%"  src="https://i.postimg.cc/W3FQgY9z/logo-Nuevo-png.png" />
+          <img style="width: 40%"  src="https://i.postimg.cc/JzMs0v1h/logo.png" />
       </div>
     <tr>
       <td style="background-color: #F0F3F5">
@@ -243,98 +243,98 @@ const html = (firstName, action) => {
           </div>
         </td>
     </tr>
-  </table> 
+  </table>
      `
       : action === 'orderConfirm'
-      ? ` <table style="max-width: 700px; padding: 10px; margin:0 auto; border-collapse: collapse;">
-     <div style="width: 100%;margin:20px 0; text-align: center;">
-         <img style="width: 40%"  src="https://i.postimg.cc/W3FQgY9z/logo-Nuevo-png.png" />
-     </div>
+      ? `<table style="max-width: 700px; padding: 10px; margin:0 auto; border-collapse: collapse;">
+      <div style="width: 100%;margin:20px 0; text-align: center;">
+          <img style="width: 40%"  src="https://i.postimg.cc/JzMs0v1h/logo.png" />
+      </div>
+      <tr>
+      <td style="background-color: #F0F3F5">
+        <div style="color: #34495e; margin: 4% 10% 2%; text-align: justify;font-family: sans-serif">
+          
+          <h2 style="color: #525252; text-align:center; font-size: 30px;">¡Gracias, ${firstName}! </h2>
+          <h1 style="color: #FE6849; margin: 0 0 7px; text-align:center">Tu pedido ha sido confirmado!</h1>
+        
+      <div style="width: 100%;margin:20px 0; text-align: center;">
+      <img style="width: 60%; border-radius: 100%"  src="https://i.postimg.cc/9Ftccwcp/imagenmujer-adobespark.png" />
+      </div>
+          <p style="margin: 2px; font-size: 15px; color: #000">
+                    <br>
+          </p>
+          <h2 style="color: #525252;">Detalle del pedido:</h2>
+          <table style="width: 100%; background-color: rgba(0, 0, 0, .1);">
+            <thead style="background-color: #FE6849; color: #fff;">
      <tr>
-     <td style="background-color: #F0F3F5">
-       <div style="color: #34495e; margin: 4% 10% 2%; text-align: justify;font-family: sans-serif">
-         
-         <h2 style="color: #525252; text-align:center; font-size: 30px;">¡Gracias, ${firstName}! </h2>
-         <h1 style="color: #FE6849; margin: 0 0 7px; text-align:center">Tu pedido ha sido confirmado!</h1>
-       
-     <div style="width: 100%;margin:20px 0; text-align: center;">
-     <img style="width: 60%; border-radius: 100%"  src="https://i.postimg.cc/9Ftccwcp/imagenmujer-adobespark.png" />
-     </div>
-         <p style="margin: 2px; font-size: 15px; color: #000">
-                   <br>
-         </p>
-         <h2 style="color: #525252;">Detalle del pedido:</h2>
-         <table style="width: 100%; background-color: rgba(0, 0, 0, .1);">
-           <thead style="background-color: #FE6849; color: #fff;">
-    <tr>
-     <th>producto</th>
-       <th>cantidad</th>
-       <th>precio</th>
-    </tr>
-     </thead>
-     <tbody>
-       <tr>
-         <td>producto</td>
-         <td style="text-align: center">1</td>
-         <td style="text-align: center">$100</td>
-       </tr>
-     </tbody>
-     <tfoot>
-      <tr>
-       <td>Metodo de pago</td>
-       <td style="text-align: center"></td>
-       <td style="text-align: center">-</td>
-      </tr>
-      <tr>
-       <td>Total</td>
-       <td style="text-align: center"></td>
-       <td style="text-align: center">-</td>
-      </tr>
-     </tfoot>
-     
-     </table>
-        <h2 style="color: #525252;">Dirección de facturación</h2>
-              <ul style="font-size: 15px;  margin: 10px 0">
-              <li style="color: #000;">Pedido a nombre:</li>
-              <li style="color: #000;">Dirección:</li>
-              <li style="color: #000;">Numero de contacto:</li>
-        </ul>
-         <div style="width: 100%;margin:20px 0; display: inline-block;text-align: center; background-color: #FE6849;">
-           <a style="text-decoration: none; color: white;" href=""><p style="color: #fff; font-size: 14px; text-align: center;">© Copyright 2021 | miComida</p></a>    
-         </div>
-       </td>
+      <th>producto</th>
+        <th>cantidad</th>
+        <th>precio</th>
      </tr>
-     </table>`
+      </thead>
+      <tbody>
+        <tr>
+          <td>producto</td>
+          <td style="text-align: center">1</td>
+          <td style="text-align: center">$100</td>
+        </tr>
+      </tbody>
+      <tfoot>
+       <tr>
+        <td>Metodo de pago</td>
+        <td style="text-align: center"></td>
+        <td style="text-align: center">-</td>
+       </tr>
+       <tr>
+        <td>Total</td>
+        <td style="text-align: center"></td>
+        <td style="text-align: center">-</td>
+       </tr>
+      </tfoot>
+      
+      </table>
+         <h2 style="color: #525252;">Dirección de facturación</h2>
+               <ul style="font-size: 15px;  margin: 10px 0">
+               <li style="color: #000;">Pedido a nombre:</li>
+               <li style="color: #000;">Dirección:</li>
+               <li style="color: #000;">Numero de contacto:</li>
+         </ul>
+          <div style="width: 100%;margin:20px 0; display: inline-block;text-align: center; background-color: #FE6849;">
+            <a style="text-decoration: none; color: white;" href=""><p style="color: #fff; font-size: 14px; text-align: center;">© Copyright 2021 | miComida</p></a>    
+          </div>
+        </td>
+      </tr>
+      </table>`
       : action === 'orderCancell'
       ? `<table style="max-width: 700px; padding: 10px; margin:0 auto; border-collapse: collapse;">
-     <div style="width: 100%;margin:20px 0; text-align: center;">
-         <img style="width: 40%"  src="https://i.postimg.cc/W3FQgY9z/logo-Nuevo-png.png" />
-     </div>
-     
-     <tr>
-     <td style="background-color: #F0F3F5">
-       <div style="color: #FE6849; margin: 4% 10% 2%; text-align: center;font-family: sans-serif">
-         <h1 style="color: #FE6849; margin: 0 0 7px">Tu pedido fue cancelado</h1>
-        
-     <h2 style="color: #525252; margin: 0 10 7px; font-size: 19px; ">Lamentamos mucho lo ocurrido, ${firstName}. Estamos trabajando para que no vuelva a ocurrir.</h2>
-                   <br>
-           <h2 style="color: #525252; margin: 0 10 7px; font-size: 19px; ">Queremos contarte que ya estamos gestionando la devolución de tu pedido y te enviaremos un correo más adelante con todos los detalles.   </h2>
-                       <div style="width: 100%;margin:20px 0; text-align: center;">
-           <img style="width: 50%; border-radius: 100%"  src="https://i.postimg.cc/c4SQm5D4/imagen-persona-adobespark.png" />
-     </div>
+      <div style="width: 100%;margin:20px 0; text-align: center;">
+          <img style="width: 40%"  src="https://i.postimg.cc/JzMs0v1h/logo.png" />
+      </div>
+      
+      <tr>
+      <td style="background-color: #F0F3F5">
+        <div style="color: #FE6849; margin: 4% 10% 2%; text-align: center;font-family: sans-serif">
+          <h1 style="color: #FE6849; margin: 0 0 7px">Tu pedido fue cancelado</h1>
          
-         <h3 style="color: #FE6849;">¡Saludos!
-     El equipo de LLUVIA DE COMIDA</h3>
-     
-         <p style="color: #525252">Descarga la app en tu teléfono iPhone • Android</p>
-     <p style="color: #525252">Ante cualquier consulta, comunícate por Ayuda en Línea.</p>
-     
-         <div style="width: 100%;margin:20px 0; display: inline-block;text-align: center; background-color: #FE6849;">
-           <a style="text-decoration: none; color: white;" href=""><p style="color: #fff; font-size: 14px; text-align: center;">© Copyright 2021 | LLUVIADEComida.</p></a>    
-         </div>
-       </td>
-     </tr>
-     </table>`
+      <h2 style="color: #525252; margin: 0 10 7px; font-size: 19px; ">Lamentamos mucho lo ocurrido, ${firstName}. Estamos trabajando para que no vuelva a ocurrir.</h2>
+                    <br>
+            <h2 style="color: #525252; margin: 0 10 7px; font-size: 19px; ">Queremos contarte que ya estamos gestionando la devolución de tu pedido y te enviaremos un correo más adelante con todos los detalles.   </h2>
+                        <div style="width: 100%;margin:20px 0; text-align: center;">
+            <img style="width: 50%; border-radius: 100%"  src="https://i.postimg.cc/c4SQm5D4/imagen-persona-adobespark.png" />
+      </div>
+          
+          <h3 style="color: #FE6849;">¡Saludos!
+      El equipo de LLUVIA DE COMIDA</h3>
+      
+          <p style="color: #525252">Descarga la app en tu teléfono iPhone • Android</p>
+      <p style="color: #525252">Ante cualquier consulta, comunícate por Ayuda en Línea.</p>
+      
+          <div style="width: 100%;margin:20px 0; display: inline-block;text-align: center; background-color: #FE6849;">
+            <a style="text-decoration: none; color: white;" href=""><p style="color: #fff; font-size: 14px; text-align: center;">© Copyright 2021 | LLUVIADEComida.</p></a>    
+          </div>
+        </td>
+      </tr>
+      </table>`
       : null
   return mail
 }

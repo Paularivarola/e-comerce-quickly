@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { AiOutlineArrowRight, AiFillCar } from 'react-icons/ai'
 import { FaHistory, FaGrinWink } from 'react-icons/fa'
 import { connect } from 'react-redux'
-import { useEffect } from 'react'
+// import { useEffect } from 'react'
 import productActions from '../redux/actions/productActions'
 
 const Hero = (props) => {
@@ -24,7 +24,7 @@ const Hero = (props) => {
       <div className={styles.heroContainer}>
         <div className={styles.boxCall}>
           <h1 className={styles.heroH1}>
-            Con <span className={styles.spanRed}>lluvia de comida,</span> tenés <span className={styles.spanGrey}>todo.</span>
+            Con <span className={styles.spanRed}>Quickly,</span> tenés <span className={styles.spanGrey}>todo.</span>
           </h1>
           <h3 className={styles.heroH3}>Disfrutá tu comida favorita desde la comodidad de tu casa.</h3>
           <h4 className={styles.heroH4}>Vos pedis y nosotros nos encargamos del resto!</h4>

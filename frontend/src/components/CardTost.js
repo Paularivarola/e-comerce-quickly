@@ -2,26 +2,35 @@ import { useEffect, useState } from "react"
 import styles from '../styles/cardTost.module.css'
 
 
-const CardTost = () => {
-	const [typeTost, setTypeTost] = useState("good")
+const CardTost = ({properties, setCardTost}) => {
+	const {time, icon, text, view, tost} = properties
+	const [typeTost, setTypeTost] = useState(icon)
 	const [imageTost, setImageTost] = useState("")
 	const [iconTost, setIconTost] = useState("")
-	const [textTost, setTextTost] = useState("vuelve pronto")
-	const [render, setRender] = useState(false)
-
-	useEffect(() => {
-		// setRender(pasar por props, una variable de estado en false, y que pase a true cuando este pase a true.)
-	},[])
-
-	if(render){
-		setTimeout(() => {
-			setRender(false)
-		}, 1500)
-	}
+	const [textTost, setTextTost] = useState(text)
+	const [render, setRender] = useState(view)
+	const [tostType, setTostType] = useState(tost)
 	
 
+	if(render){	
+		setTimeout(() => {
+			setRender(false)
+			setCardTost({
+				icon: "",
+				text: "",
+				view: false,
+			})
+		}, time || 1500)
+	}
+	const accept = () => {
+		console.log("accept")
+	}
+
+	const deny = () => {
+		console.log("nope")
+	}
 	useEffect(() => {
-		if(typeTost === "good"){
+		if(typeTost === "success"){
 			setImageTost("https://i.postimg.cc/4dr1ZcmV/papasfritas1.jpg")
 			setIconTost("https://i.postimg.cc/J4nh2sQx/ok.png")
 		}else if(typeTost === "error"){
@@ -38,18 +47,40 @@ const CardTost = () => {
 	
 
 	return(
-		<div className={styles.containCard}>
-			<div className={styles.imageIcon} style={{backgroundImage: `url("${iconTost}")`}}> 
-
+		<>
+			{tostType ===  "accept" 
+			?
+			<div className={styles.containCard}>	
+				<div className={styles.containImage}>
+					<div className={styles.imageBack}>	
+					</div>
+				</div>
+				<div className={styles.containText}>
+					<div className={styles.text}> 	
+						<h2>Estas seguro ?</h2>
+						<p>Vas a perder los cambios no guardados</p>		
+					</div>
+				</div>
+				<div className={styles.containButtons}>
+					<button onClick={accept}>Si</button>
+					<button onClick={deny}>No</button>
+				</div>
 			</div>
-			<div>
-				<h4>{textTost}</h4>
+			:
+			<div className={styles.cardContain}>
+				<div className={styles.imageIcon} style={{backgroundImage: `url("${iconTost}")`}}> 
+				</div>
+				<div>
+					<h4>{textTost}</h4>
+				</div>
+				<div className={styles.imageTost} style={{backgroundImage: `url("${imageTost}")`}}>
+				</div>
 			</div>
-			<div className={styles.imageTost} style={{backgroundImage: `url("${imageTost}")`}}>
-
-			</div>
-		</div>
+			}
+		</>
+	
 	)
 }
 
 export default CardTost
+

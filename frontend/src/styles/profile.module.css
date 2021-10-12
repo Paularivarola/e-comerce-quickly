@@ -9,7 +9,7 @@
 .adminNav a {
   color: slategray;
   background-color: whitesmoke;
-  width: 40vw;
+  width: 100%;
 }
 .products {
   display: flex;

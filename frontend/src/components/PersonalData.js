@@ -16,15 +16,15 @@ const MyTextField = ({ name, inputHandler }) => {
     <InputAdornment position='end'>
       {!update ? (
         <IconButton onClick={() => setUpdate(true)} edge='end'>
-          <BsPencilSquare />
+          <BsPencilSquare style={{ size: '1.5em', color: 'tomato' }} />
         </IconButton>
       ) : (
         <>
           <IconButton onClick={() => setUpdate(false)} edge='end'>
-            <BsCheckSquare />
+            <BsCheckSquare style={{ size: '1.5em', color: 'tomato' }} />
           </IconButton>
           <IconButton onClick={() => setUpdate(false)} edge='end'>
-            <BsXSquare />
+            <BsXSquare style={{ size: '1.5em', color: 'tomato' }} />
           </IconButton>
         </>
       )}
@@ -40,6 +40,7 @@ const MyTextField = ({ name, inputHandler }) => {
       label={'Nombre'}
       variant='outlined'
       onChange={inputHandler}
+      color='warning'
       InputProps={{
         endAdornment: icons,
       }}
@@ -111,9 +112,7 @@ const PersonalData = ({ user, updateUser }) => {
               }")`,
             }}
           ></div>
-          <span className={styles.submitPhoto}>
-            Cambiar foto
-          </span>
+          <span className={styles.submitPhoto}>Cambiar foto</span>
         </label>
         <input id='imgUpdate' type='file' onChange={submitFile} style={{ display: 'none' }} />
         <div className={styles.containForm}>
@@ -128,8 +127,8 @@ const PersonalData = ({ user, updateUser }) => {
               noValidate
               autoComplete='off'
             >
-              <MyTextField name={user?.firstName} inputHandler={inputHandler}/>
-              <MyTextField name={user?.lastName} inputHandler={inputHandler}/>
+              <MyTextField name={user?.firstName} inputHandler={inputHandler} />
+              <MyTextField name={user?.lastName} inputHandler={inputHandler} />
               <TextField
                 type='email'
                 disabled
@@ -137,10 +136,11 @@ const PersonalData = ({ user, updateUser }) => {
                 defaultValue={user?.email}
                 label='Email'
                 variant='outlined'
+                color='warning'
                 onChange={inputHandler}
-                // sx={{
-                //   '& > :not(style)': { width: '25vw' },
-                // }}
+                sx={{
+                  '& > :not(style)': { width: '25vw' },
+                }}
               />
             </Box>
           )}
@@ -156,7 +156,7 @@ const PersonalData = ({ user, updateUser }) => {
           ></div>
         </div> */}
       </div>
-      </div>
+    </div>
   )
 }
 

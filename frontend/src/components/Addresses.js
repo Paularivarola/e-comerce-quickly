@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import styles from '../styles/personalData.module.css'
@@ -6,15 +6,10 @@ import userActions from '../redux/actions/userActions'
 import toastConfirm from './ToastConfirm'
 import { connect } from 'react-redux'
 import { ImCancelCircle } from 'react-icons/im'
-import { Toaster } from 'react-hot-toast'
 import { BsTrash } from 'react-icons/bs'
-// import styles from '../styles/checkOut.module.css'
-import IconButton from '@mui/material/IconButton'
-import InputAdornment from '@mui/material/InputAdornment'
+import CardTost from './CardTost'
 
 const MyInput = ({ input, newAddress, setNewAddress }) => {
-  const [passProtected, setPassProtected] = useState(true)
-
   const inputHandler = (e) => {
     setNewAddress({
       ...newAddress,
@@ -29,17 +24,9 @@ const MyInput = ({ input, newAddress, setNewAddress }) => {
       label={input.label}
       value={newAddress[input.name]}
       variant='outlined'
-      size="small"
+      size='small'
       fullWidth
-      // InputProps={{
-      //   endAdornment: (
-      //     <InputAdornment position='end' style={{ width: '2rem' }}>
-      //       <IconButton onClick={(e) => setPassProtected(!passProtected)} edge='end'>
-      //         {passProtected ? <BsEyeSlash /> : <BsEye />}
-      //       </IconButton>
-      //     </InputAdornment>
-      //   ),
-      // }}
+      color='warning'
       onChange={inputHandler}
       sx={{
         '& > :not(style)': { width: '25vw' },
@@ -60,12 +47,15 @@ const Address = ({ updateUser, address, active, setActive, index }) => {
           Seleccionar
         </span>
       )}
-      <BsTrash style={{color:'tomato'}} onClick={() => toastConfirm(() => updateUser({ action: 'deleteAddress', addressId: address._id }))} />
+      <BsTrash
+        style={{ color: 'tomato' }}
+        onClick={() => toastConfirm(() => updateUser({ action: 'deleteAddress', addressId: address._id }))}
+      />
     </div>
   )
 }
 
-const Addresses = ({ updateUser, userData, active, setActive }) => {
+const Addresses = ({ updateUser, userData, active, setActive, modal, setModal }) => {
   const inputs = [
     { name: 'alias', label: 'Alias' },
     { name: 'street', label: 'Calle' },
@@ -80,12 +70,18 @@ const Addresses = ({ updateUser, userData, active, setActive }) => {
     apartment: '',
     neighborhood: '',
   }
-  const [modal, setModal] = useState(false)
+  const [cardTost, setCardTost] = useState({
+    time: '',
+    icon: '',
+    text: '',
+    view: false,
+  })
+
   const [newAddress, setNewAddress] = useState(initialState)
   const submitHandler = () => {
     let validate = Object.values(newAddress).some((prop) => prop === '')
     if (validate) {
-      return alert('Todos las campos son obligatorios')
+      return setCardTost({ time: 1500, icon: 'error', text: 'Complete todos los campos', view: true })
     }
     updateUser({ action: 'addAddress', newAddress })
     setModal(!modal)
@@ -97,22 +93,26 @@ const Addresses = ({ updateUser, userData, active, setActive }) => {
   }
 
   return (
-    <div className={styles.mainPersonalData}>
+    <div className={styles.mainAddress}>
+      {cardTost.view && <CardTost properties={cardTost} setCardTost={setCardTost} />}
+      <img className={styles.world} src='https://i.postimg.cc/L5DpZzqw/globoterraqueo.png' alt='world' />
       {!userData ? (
         <div className={styles.containFormAddress}>
           <h1>No tenes ninguna direccion todavia</h1>
         </div>
       ) : (
-        userData.addresses.map((address, index) => (
-          <Address
-            key={address._id}
-            address={address}
-            updateUser={updateUser}
-            index={index}
-            active={index === active?.address}
-            setActive={setActive}
-          />
-        ))
+        <div className={styles.addressesContainer}>
+          {userData.addresses.map((address, index) => (
+            <Address
+              key={address._id}
+              address={address}
+              updateUser={updateUser}
+              index={index}
+              active={index === active?.address}
+              setActive={setActive}
+            />
+          ))}
+        </div>
       )}
       {modal && (
         <div className={styles.containFormModal} data-modal='addressModal'>
@@ -125,39 +125,15 @@ const Addresses = ({ updateUser, userData, active, setActive }) => {
               noValidate
               autoComplete='off'
             >
-              <ImCancelCircle
-                className={styles.exit}
-                onClick={() => setModal(false)}
-                style={{marginRight: '6%', color:'tomato'}}
-              />
+              <ImCancelCircle className={styles.exit} onClick={() => setModal(false)} style={{ marginRight: '6%', color: 'tomato' }} />
               {inputs.map((input) => (
-                <MyInput
-                  input={input}
-                  key={input.label}
-                  setNewAddress={setNewAddress}
-                  newAddress={newAddress}
-                />
+                <MyInput input={input} key={input.label} setNewAddress={setNewAddress} newAddress={newAddress} />
               ))}
             </Box>
             <button onClick={submitHandler}>enviar</button>
           </div>
         </div>
       )}
-      <div className={styles.boxAdressbtn}>
-        <img className={styles.world} src="https://i.postimg.cc/L5DpZzqw/globoterraqueo.png" alt='world'/>        
-        <button onClick={() => setModal(!modal)}>Agregar</button>
-      </div>
-      <Toaster
-        containerStyle={{
-          top: 80,
-          left: 20,
-          bottom: 20,
-          right: 20,
-        }}
-        toastOptions={{
-          duration: 1500,
-        }}
-      />
     </div>
   )
 }

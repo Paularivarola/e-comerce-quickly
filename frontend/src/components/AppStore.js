@@ -5,7 +5,7 @@ const AppStore = () => {
         <div className={styles.mainApp}>
             <div className={styles.descriptionBox}>
                 <div className={styles.titleBox}>
-                    <h3 className={styles.title}>Descargate LDC App</h3>
+                    <h3 className={styles.title}>Descargate Quickly App</h3>
                     <p className={styles.text}>Ahora podés realizar tus pedidos por la app, nosotros lo preparamos y te lo llevamos a tu mesa. Además vas a tener todas nuestros promos al alcance de tu mano. Con miCocina App comé fácil, rápido y rico!</p>
                 </div>
                 <div className={styles.sistemBox}>
@@ -22,7 +22,7 @@ const AppStore = () => {
                     <img className={styles.picture} src='https://i.postimg.cc/Pr4wB2v7/qr.png' alt='qr'/>
                 </div>
             </div>
-            <img className={styles.picturePhone} src='https://i.postimg.cc/sXsyd9hn/appphone.png' alt='phone'/>
+            <img className={styles.picturePhone} src='https://i.postimg.cc/rskxhyrL/appMoto.png' alt='phone'/>
         </div>
     )
 }

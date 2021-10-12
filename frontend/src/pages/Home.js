@@ -7,6 +7,7 @@ const Home = () => {
   return (
     <>
       <Hero />
+      {/* <CardTost/> */}
       <PromosCarousel />
       <AppStore />
       <Testimonios />
