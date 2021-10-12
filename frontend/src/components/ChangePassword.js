@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import { BsEyeSlash, BsEye } from 'react-icons/bs'
 import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
-import CardTost from "./CardTost"
+import CardTost from './CardTost'
 const bcrypt = require('bcryptjs')
 
 const MyInput = ({ input, updatePassword, setUpdatePassword }) => {
@@ -28,6 +28,7 @@ const MyInput = ({ input, updatePassword, setUpdatePassword }) => {
       label={input.label}
       value={updatePassword[input.name]}
       variant='outlined'
+      color='warning'
       InputProps={{
         endAdornment: (
           <InputAdornment position='end' style={{ width: '2rem' }}>
@@ -46,12 +47,11 @@ const MyInput = ({ input, updatePassword, setUpdatePassword }) => {
 }
 
 const ChangePassword = ({ updateUser, userData }) => {
-    
   const [cardTost, setCardTost] = useState({
-    time: "",
-    icon: "",
-    text: "",
-    view: false
+    time: '',
+    icon: '',
+    text: '',
+    view: false,
   })
 
   const inputs = [
@@ -69,16 +69,16 @@ const ChangePassword = ({ updateUser, userData }) => {
     const { currentPassword, newPassword, validateNewPassword } = updatePassword
     let validate = Object.values(updatePassword).some((prop) => prop === '')
     if (validate) {
-      return setCardTost({time: 1500, icon: "error", text: "Complete todos los campos", view: true,})
+      return setCardTost({ time: 1500, icon: 'error', text: 'Complete todos los campos', view: true })
     }
     if (newPassword !== validateNewPassword) {
-      return setCardTost({time: 1500, icon: "error", text: 'Las contraseñas no concuerdan', view: true,})
+      return setCardTost({ time: 1500, icon: 'error', text: 'Las contraseñas no concuerdan', view: true })
     }
     if (!bcrypt.compareSync(currentPassword, userData?.data?.password)) {
-      return setCardTost({time: 1500, icon: "error", text: 'Contraseñas incorrecta', view: true,})
+      return setCardTost({ time: 1500, icon: 'error', text: 'Contraseñas incorrecta', view: true })
     }
     if (!bcrypt.compareSync(newPassword, userData?.data?.password)) {
-      return setCardTost({time: 1500, icon: "error", text: 'No se que poner aca', view: true,})
+      return setCardTost({ time: 1500, icon: 'error', text: 'No se que poner aca', view: true })
     }
 
     let password = bcrypt.hashSync(newPassword)
@@ -88,11 +88,9 @@ const ChangePassword = ({ updateUser, userData }) => {
   }
   return (
     <div className={styles.mainPersonalData}>
-      {cardTost.view && 
-        <CardTost properties={cardTost} setCardTost={setCardTost}/>
-      }
+      {cardTost.view && <CardTost properties={cardTost} setCardTost={setCardTost} />}
       <div className={styles.formBox2}>
-        <img className={styles.key} src="https://i.postimg.cc/7PgfXd8M/key.png" alt='key'/>
+        <img className={styles.key} src='https://i.postimg.cc/7PgfXd8M/key.png' alt='key' />
         <div className={styles2.containerPassword}>
           <Box
             component='form'
@@ -103,15 +101,12 @@ const ChangePassword = ({ updateUser, userData }) => {
             autoComplete='off'
           >
             {inputs.map((input) => (
-              <MyInput
-                input={input}
-                key={input.label}
-                setUpdatePassword={setUpdatePassword}
-                updatePassword={updatePassword}
-              />
+              <MyInput input={input} key={input.label} setUpdatePassword={setUpdatePassword} updatePassword={updatePassword} />
             ))}
           </Box>
-          <button className={styles.buttonBox} onClick={submitHandler}>enviar</button>
+          <button className={styles.buttonBox} onClick={submitHandler}>
+            enviar
+          </button>
         </div>
       </div>
     </div>

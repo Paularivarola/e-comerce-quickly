@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import CardTost from "../components/CardTost"
+import CardTost from '../components/CardTost'
 import styles from '../styles/signup.module.css'
 import { useState } from 'react'
 import { GoogleLogin } from 'react-google-login'
@@ -7,6 +7,34 @@ import userActions from '../redux/actions/userActions'
 import { useEffect } from 'react'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
+import { BsEyeSlash, BsEye } from 'react-icons/bs'
+import IconButton from '@mui/material/IconButton'
+import InputAdornment from '@mui/material/InputAdornment'
+
+const MyInput = ({ label, name, inputHandler }) => {
+  const [passProtected, setPassProtected] = useState(true)
+
+  return (
+    <TextField
+      type={passProtected ? 'password' : 'text'}
+      name={name}
+      label={label}
+      variant='outlined'
+      color='warning'
+      size='small'
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position='end' style={{ width: '2rem' }}>
+            <IconButton onClick={(e) => setPassProtected(!passProtected)} edge='end'>
+              {passProtected ? <BsEyeSlash /> : <BsEye />}
+            </IconButton>
+          </InputAdornment>
+        ),
+      }}
+      onChange={inputHandler}
+    />
+  )
+}
 
 const SignForm = (props) => {
   const [user, setUser] = useState({
@@ -48,38 +76,50 @@ const SignForm = (props) => {
     })
   }
 
+  const sendToast = () => {
+    if (!shift) {
+      if (!user.email && !user.password) {
+        return setCardTost({
+          time: 1500,
+          icon: 'error',
+          text: 'Complete todos los campos',
+          view: true,
+        })
+      } else {
+        if (!user.email.includes('@')) return setCardTost({ time: 1500, icon: 'error', text: 'El mail no es valido', view: true })
+        if (!user.email) return setCardTost({ time: 1500, icon: 'error', text: 'Ingresa tu mail', view: true })
+        if (!user.password) return setCardTost({ time: 1500, icon: 'error', text: 'Ingresa tu contraseña', view: true })
+      }
+    } else {
+      if (
+        Object.keys(user)
+          .slice(0, 5)
+          .every((property) => !user[property])
+      ) {
+        setCardTost({ time: 1500, icon: 'error', text: 'Complete todos los campos', view: true })
+      } else {
+        if (!user.firstName) return setCardTost({ time: 1500, icon: 'error', text: 'Ingresa tu Nombre', view: true })
+        if (!user.lastName) return setCardTost({ time: 1500, icon: 'error', text: 'Ingresa tu Apellido', view: true })
+        if (!user.email) return setCardTost({ time: 1500, icon: 'error', text: 'Ingresa tu mail', view: true })
+        if (!user.email.includes('@')) return setCardTost({ time: 1500, icon: 'error', text: 'El mail no es valido', view: true })
+        if (!user.password) return setCardTost({ time: 1500, icon: 'error', text: 'Ingresa tu contraseña', view: true })
+        if (!user.repPass) return setCardTost({ time: 1500, icon: 'error', text: 'Valide su contraseña', view: true })
+        if (user.password !== user.repPass)
+          return setCardTost({ time: 1500, icon: 'error', text: 'La contraseña no coinciden', view: true })
+      }
+    }
+  }
 
   const [cardTost, setCardTost] = useState({
-    time: "",
-    icon: "",
-    text: "",
-    view: false
+    time: '',
+    icon: '',
+    text: '',
+    view: false,
   })
   const validatorFront = () => {
     if (!shift) {
-      if (!user.email && !user.password) {
-        setCardTost({
-          time: 1500,
-          icon: "error",
-          text: "Complete todos los campos",
-          view: true,
-        })
-        return 
-      } else {
-        !user.email.includes('@') && setCardTost({time: 1500, icon: "error",text: "El mail no es valido",view: true,})
-        !user.email && setCardTost({time: 1500, icon: "error",text: "Ingresa tu mail",view: true,})
-        !user.password && setCardTost({time: 1500, icon: "error",text: "Ingresa tu contraseña",view: true,})
-      }
       return Boolean(user.email && user.email.includes('@') && user.password)
     } else {
-      if (Object.keys(user).every((property) => !user[property])) {
-        setCardTost({time: 1500, icon: "error",text: "Complete todos los campos",view: true,})
-      } else {
-        !user.firstName && setCardTost({time: 1500, icon: "error",text: "Ingresa tu Nombre",view: true,})
-        !user.lastName && setCardTost({time: 1500, icon: "error",text: "Ingresa tu Apellido",view: true,})
-        !user.repPass && setCardTost({time: 1500, icon: "error",text: "Valide su contraseña",view: true,})
-        user.password !== user.repPass && setCardTost({time: 1500, icon: "error",text: "La contraseña no coinciden",view: true,})
-      }
       return Boolean(
         user.firstName &&
           user.lastName &&
@@ -92,10 +132,9 @@ const SignForm = (props) => {
     }
   }
 
-
   const submit = (e) => {
     e.preventDefault()
-    if (!validatorFront()) return false
+    if (!validatorFront()) return sendToast()
     const { firstName, lastName, email, password, google, src, repPass } = user
     const fd = new FormData()
     fd.append('email', email)
@@ -109,13 +148,11 @@ const SignForm = (props) => {
     } else {
       props.logUser(user, props)
     }
-  } 
+  }
 
   return (
     <main className={styles.mainSign}>
-       {cardTost.view && 
-         <CardTost properties={cardTost} setCardTost={setCardTost}/>
-       }
+      {cardTost.view && <CardTost properties={cardTost} setCardTost={setCardTost} />}
       <div className={styles.boxButtons}>
         <div className={styles.boxlogin}>
           <h1 className={styles.h1}>{!shift ? 'Crear una cuenta' : 'Ingresar con tus datos'}</h1>
@@ -172,20 +209,7 @@ const SignForm = (props) => {
                   // error
                   // helperText="Incorrect entry."
                 />
-                <TextField
-                  required
-                  id='outlined-password-input'
-                  label='Contraseña'
-                  type='password'
-                  autoComplete='current-password'
-                  name='password'
-                  onChange={inputHandler}
-                  defaultValue={user.password}
-                  color='warning'
-                  size='small'
-                  // error
-                  // helperText="Incorrect entry."
-                />
+                <MyInput label='Contraseña' name='password' inputHandler={inputHandler} />
               </div>
             </Box>
           ) : (
@@ -240,32 +264,8 @@ const SignForm = (props) => {
                     // error
                     // helperText="Incorrect entry."
                   />
-                  <TextField
-                    required
-                    id='outlined-password-input'
-                    label='Contraseña'
-                    type='password'
-                    name='password'
-                    onChange={inputHandler}
-                    color='warning'
-                    size='small'
-                    fullWidth
-                    // error
-                    // helperText="Incorrect entry."
-                  />
-                  <TextField
-                    required
-                    id='outlined-password-input'
-                    label='Repite contraseña'
-                    type='password'
-                    name='repPass'
-                    onChange={inputHandler}
-                    color='warning'
-                    size='small'
-                    fullWidth
-                    // error
-                    // helperText="Incorrect entry."
-                  />
+                  <MyInput label='Contraseña' name='password' inputHandler={inputHandler} />
+                  <MyInput label='Repite contraseña' name='repPass' inputHandler={inputHandler} />
                 </div>
                 <div className={styles.boxFile}>
                   <label htmlFor='Foto'>

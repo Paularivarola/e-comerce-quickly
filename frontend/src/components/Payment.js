@@ -26,7 +26,6 @@ const Payment = ({ userData, updateUser, setActive, active, cardModal, setCardMo
   window.onclick = (e) => {
     if (e.target.dataset.modal === 'paymentModal') setCardModal(false)
   }
-  console.log(cardModal)
   return (
     <div className={styles.mainPayment}>
       <div className={styles.boxCard}>
