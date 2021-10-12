@@ -138,7 +138,7 @@ div.containTitle {
   min-height: 40vh;
 }
 .mainAddress {
-  justify-content: space-between;
+  justify-content: center;
   padding: 0 5%;
 }
 .addressesContainer {
@@ -232,4 +232,23 @@ div.containTitle {
 }
 .addressAlias, .addressName {
   display: block;
+}
+.message {
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: #fe6849;
+}
+.message2 {
+  font-size: 1rem;
+  font-weight: 400;
+  color: slategray;
+  text-align: center;
+}
+.containMessage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 5%;
+  margin-bottom: 5%;
 }

@@ -99,9 +99,10 @@
   color: slategray;
   font-size: 1rem;
   text-align: center;
+  height: 3rem;
 }
 .productDesc {
-  height: 5rem;
+  height: 2rem;
 }
 .productIng {
   color: rgba(112, 128, 144, 0.705);

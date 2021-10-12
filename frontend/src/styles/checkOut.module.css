@@ -1,11 +1,12 @@
 .mainCheckout {
 	width: 100%;
 	min-height: 80vh;
-	padding: 5%;
-	background: chocolate;
+	padding: 1.5% 5%;
+	/* background: chocolate; */
 	display: flex;
-	justify-content: center;
-	align-items: flex-start;
+	/* justify-content: center; */
+	/* align-items: flex-start; */
+	flex-direction: column;
 }
 .instructions {
 	width: 50%;
@@ -26,6 +27,30 @@
 .boxButtons {
 	display: flex;
 	flex-direction: column;
+}
+.boxChekOut {
+	width: 100%;
+	flex: 1;
+	background-color: rgb(255, 255, 255);
+	border-radius: 10px;
+	border: solid 1px rgb(211, 211, 211);
+	margin-top: 1%;
+	box-shadow: 10px 10px 10px -1px rgba(0,0,0,0.15);
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+}
+.btnAddress {
+	display: flex;
+	width: 20%;
+	cursor: pointer;
+}
+.btnAddress span {
+	color: tomato;
+	font-weight: 500;
+}
+.btnAddress:hover {
+	opacity: 60%;
 }
 
 /* div.containAll{

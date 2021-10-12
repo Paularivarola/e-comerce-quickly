@@ -39,11 +39,6 @@ a.active {
   height: 100%;
   background-color: white;
   border-left: solid 1px rgb(207, 207, 207);
-  /* padding: 1rem; */
-
-  /* background-color: whitesmoke; */
-  /* border: solid 1px rgba(216, 216, 216, 0.199); */
-  /* border-radius: 10px; */
 }
 .containerRenderView {
   flex: 1;
@@ -147,6 +142,18 @@ a.active {
   text-align: center;
   color: tomato;
   width: 50%;
+}
+.btnAddress {
+	display: flex;
+	width: 20%;
+	cursor: pointer;
+}
+.btnAddress span {
+	color: tomato;
+	font-weight: 500;
+}
+.btnAddress:hover {
+	opacity: 60%;
 }
 
 div.containerButtonCheck {

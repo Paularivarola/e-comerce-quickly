@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Card from './CARD'
 import styles from '../styles/personalData.module.css'
-import { BsTrash } from 'react-icons/bs'
+import { BsTrash, BsCreditCard2BackFill } from 'react-icons/bs'
 import userActions from '../redux/actions/userActions'
 import { connect } from 'react-redux'
 import toastConfirm from './ToastConfirm'
@@ -29,6 +29,12 @@ const Payment = ({ userData, updateUser, setActive, active, cardModal, setCardMo
   console.log(cardModal)
   return (
     <div className={styles.mainPayment}>
+      {!userData?.paymentCards?.length ? (
+        <div className={styles.containMessage}>
+          <h1 className={styles.message}>No hay tarjetas cargadas</h1>
+          <h1 className={styles.message2}>Asegurese de tener al menos una tarjeta cargada antes de realizar su compra :)</h1>
+        </div>
+      ) : (
       <div className={styles.boxCard}>
         {userData?.paymentCards?.map((payment, index) => (
           <PaymentCard
@@ -42,6 +48,7 @@ const Payment = ({ userData, updateUser, setActive, active, cardModal, setCardMo
           />
         ))}
       </div>
+      )}
       {cardModal && (
         <div className={styles.containFormModal} data-modal='paymentModal'>
           <div className={styles.containFormAddress}>

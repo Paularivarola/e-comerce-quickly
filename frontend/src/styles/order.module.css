@@ -1,0 +1,123 @@
+.mainOrder {
+    /* background-color: slategray; */
+    width: 100%;
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+}
+.OrderContainer, .confirmContainer {
+    width: 50%;
+    /* background-color: rebeccapurple; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.OrderContainer {
+    width: 75%;
+    background-color: rgb(247, 247, 247);
+    padding: 3% 2%;
+    border-radius: 10px;
+    box-shadow: 10px 10px 14px -1px rgba(0,0,0,0.17);
+    margin-bottom: 2%;
+}
+.table {
+    width: 100%;
+}
+.head, .bodyOrder {
+    display: flex;
+    /* background-color: red; */
+    width: 100%;
+    justify-content: space-between;
+    padding: 1rem;
+    padding-bottom: 0;
+    border-bottom: solid 1px tomato;
+}
+.bodyOrder {
+    padding-bottom: 1rem;
+    border-bottom: solid 1px rgb(211, 211, 211);
+    background-color: white;
+    box-shadow: 10px 10px 28px -2px rgba(0,0,0,0.18)
+}
+.title, .data  {
+    font-weight: 500;
+    color: tomato;
+    /* background-color: white; */
+    width: 25%;
+    text-align: center;
+}
+.menu {
+    width: 50%;
+    font-weight: 500;
+    color: tomato;
+    text-align: center;
+}
+.orderNumber {
+    color: slategray;
+    font-weight: 400;
+    text-align: center;
+}
+.data {
+    text-align: center;
+    color: slategray;
+    font-weight: 400;
+}
+.totalPrice {
+    /* background-color: yellow; */
+    padding: 0.5rem;
+    margin-top: 4%;
+}
+.totalPrice p {
+    color: slategray;
+}
+.totalPrice span {
+    color: tomato;
+}
+.containInfoSend {
+    /* background-color: yellowgreen; */
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 50%;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.userData {
+    color: slategray;
+    font-size: 1rem;
+    font-weight: 500;
+}
+.userData span {
+    color: tomato;
+}
+.containInfoinput {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.input {
+    border: none;
+    padding: 0.3rem;
+    border-radius: 10px;
+    border: 1px solid rgb(226, 226, 226);
+    color: tomato;
+    text-align: center;
+}
+.input:focus {
+    border: none;
+    outline: none;
+    background-color: rgb(238, 238, 238)
+}
+.input::placeholder {
+    color: slategrey;
+    font-weight: 400;
+    text-transform: capitalize;
+}
+.containButtonSend button {
+    padding: 0.5rem 1rem ;
+}
+.containButtonSend button:hover {
+    opacity: 80%;
+}

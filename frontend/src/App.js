@@ -70,7 +70,7 @@ const App = (props) => {
         <Route path='/profile/:page' component={Profile} />
         <Route path='/notfound' component={NotFound} />
         <Route path='/cart' component={Cart} />
-        <Route exact path='/checkout' component={CheackOut} />
+        <Route exact path='/checkout/:page' component={CheackOut} />
         <Route path='/compra' component={BuyConfirmation} />
         <Route path='/admin/dashboard' render={() => <AdminPanel view={'Escritorio'} />} />
         <Route exact path='/admin/clientes' render={() => <AdminPanel view={'Clientes'} />} />
