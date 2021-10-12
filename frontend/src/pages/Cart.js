@@ -9,6 +9,7 @@ import userActions from '../redux/actions/userActions'
 import toastConfirm from '../components/ToastConfirm'
 import { Toaster } from 'react-hot-toast'
 import Product from '../components/Product'
+import productActions from '../redux/actions/productActions'
 
 const CartItem = ({ cartItem, manageCart, userData, setEdit, setCartItem }) => {
   return (
@@ -29,15 +30,7 @@ const CartItem = ({ cartItem, manageCart, userData, setEdit, setCartItem }) => {
         <hr className={styles.line}></hr>
         <div className={styles.quantity}>
           <div className={styles.boxQuantity}>
-            <div className={styles.sign}>
-              <p>-</p>
-            </div>
-            <div className={styles.number}>
-              <p>{cartItem?.totalAmount}</p>
-            </div>
-            <div className={styles.sign}>
-              <p>+</p>
-            </div>
+            <p className={styles.productName}>{cartItem?.totalAmount}</p>
           </div>
         </div>
         <hr className={styles.line}></hr>
@@ -68,8 +61,12 @@ const Cart = ({ manageCart, userData, ...props }) => {
   const [edit, setEdit] = useState(false)
   const [cartItem, setCartItem] = useState({})
   const cart = JSON.parse(localStorage.getItem('cart'))
-
+  const formatter = new Intl.NumberFormat('es-CL', {
+    style: 'currency',
+    currency: 'ARS',
+  })
   const amount = cart.reduce((acc, item) => acc + item.totalPrice, 0)
+  const { street, number, apartment } = userData?.addresses[0]
   return (
     <div className={styles.mainCart}>
       <div className={styles2.categories}>
@@ -80,7 +77,7 @@ const Cart = ({ manageCart, userData, ...props }) => {
         <div className={styles.boxData}>
           <div className={styles.boxAdress}>
             <p className={styles.adress}>
-              <span>Punto de entrega:</span> "direccion por defecto elegida"
+              <span>Punto de entrega:</span> {street + ` ` + number + ' ' + apartment}
             </p>
             <span className={styles.adressBtn}>
               <FiEdit style={{ color: '#fe6849', fontSize: '1.5em' }} />
@@ -88,7 +85,7 @@ const Cart = ({ manageCart, userData, ...props }) => {
           </div>
           <div className={styles.payBtn}>
             <p className={styles.totalPrice}>
-              <span>Precio total:</span> $ {amount}
+              <span>Precio total:</span> $ {formatter.format(amount)}
             </p>
             <button onClick={() => props.history.push('/checkout/order')}>Pagar</button>
           </div>

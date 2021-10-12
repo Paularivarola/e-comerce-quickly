@@ -9,23 +9,23 @@ import { connect } from 'react-redux'
 import userActions from '../redux/actions/userActions'
 import styles from '../styles/rafacard.module.css'
 import axios from 'axios'
-const HOST = 'https://quickly-food.herokuapp.com'
+const HOST = 'http://localhost:4000'
 
 const CARD_OPTIONS = {
   iconStyle: 'solid',
   style: {
     base: {
-      iconColor: '#c4f0ff',
+      iconColor: '#fff',
       color: '#fff',
       fontWeight: 500,
       fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
       fontSize: '16px',
       fontSmoothing: 'antialiased',
       ':-webkit-autofill': {
-        color: '#fce883',
+        color: '#fff',
       },
       '::placeholder': {
-        color: '#87bbfd',
+        color: 'rgb(214, 214, 214)',
       },
     },
     invalid: {
@@ -70,7 +70,7 @@ const Field = ({ label, id, type, placeholder, required, autoComplete, value, on
 )
 
 const SubmitButton = ({ processing, error, children, disabled, onclick }) => (
-  <button className={[styles.SubmitButton, error ? styles.SubmitButtonError : '']} type='submit' disabled={processing || disabled}>
+  <button style={{ backgroundColor: '#a84531d0' }} type='submit' disabled={processing || disabled}>
     {processing ? 'Processing...' : children}
   </button>
 )

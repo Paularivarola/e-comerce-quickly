@@ -29,7 +29,7 @@ const MyInput = ({ input, newAddress, setNewAddress }) => {
       color='warning'
       onChange={inputHandler}
       sx={{
-        '& > :not(style)': { width: '25vw' },
+        '& > :not(style)': { width: '30vw', marginBottom: '10px' },
       }}
     />
   )
@@ -120,7 +120,7 @@ const Addresses = ({ updateUser, userData, active, setActive, modal, setModal })
             <Box
               component='form'
               sx={{
-                '& .MuiTextField-root': { m: 1, width: '25ch' },
+                '& .MuiTextField-root': { m: 1, width: '30vw' },
               }}
               noValidate
               autoComplete='off'
@@ -130,7 +130,9 @@ const Addresses = ({ updateUser, userData, active, setActive, modal, setModal })
                 <MyInput input={input} key={input.label} setNewAddress={setNewAddress} newAddress={newAddress} />
               ))}
             </Box>
-            <button onClick={submitHandler}>enviar</button>
+            <button style={{ marginTop: '1rem' }} onClick={submitHandler}>
+              Agregar
+            </button>
           </div>
         </div>
       )}

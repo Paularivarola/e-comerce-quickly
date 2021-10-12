@@ -51,6 +51,9 @@ const SignForm = (props) => {
   useEffect(() => {
     setShift(props.match.params.susi === 'signup')
   }, [props.match.params])
+  useEffect(() => {
+    props.history.push(shift ? '/signup' : '/signin')
+  }, [shift])
 
   const responseGoogle = (googleRegister) => {
     let googleUser = {
@@ -159,7 +162,7 @@ const SignForm = (props) => {
           <div className={styles.boxGoogle}>
             <GoogleLogin
               className={styles.btnGoogle}
-              clientId='82723603056-4bt7ee9r5l0f9tlr6o14ut92g7erhg92.apps.googleusercontent.com'
+              clientId='82723603056-o12gv1mu2alua7qnd7igq2rlrj6he3gg.apps.googleusercontent.com'
               buttonText='con Google Account'
               onSuccess={responseGoogle}
               onFailure={responseGoogle}

@@ -65,9 +65,9 @@ const Profile = (props) => {
           {(props.history.location.pathname === '/profile/payment' || props.history.location.pathname === '/profile/addresses') && (
             <div className={styles.btnAddress}>
               <IoMdAddCircle style={{ color: '#fe6849', fontSize: '1.5em', marginRight: '5%' }} />
-              <span onClick={() => (props.history.location.pathname === '/checkout/payment' ? setCardModal(true) : setModal(true))}>
-                <button>Agregar {props.history.location.pathname === '/checkout/payment' ? 'tarjeta' : 'dirección'}</button>
-              </span>
+              <button onClick={() => (props.history.location.pathname === '/checkout/payment' ? setCardModal(true) : setModal(true))}>
+                Agregar {props.history.location.pathname === '/checkout/payment' ? 'tarjeta' : 'dirección'}
+              </button>
             </div>
           )}
         </div>

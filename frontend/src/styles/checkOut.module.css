@@ -1,56 +1,56 @@
 .mainCheckout {
-	width: 100%;
-	min-height: 80vh;
-	padding: 1.5% 5%;
-	/* background: chocolate; */
-	display: flex;
-	/* justify-content: center; */
-	/* align-items: flex-start; */
-	flex-direction: column;
+  width: 100%;
+  min-height: 80vh;
+  padding: 1.5% 5%;
+  /* background: chocolate; */
+  display: flex;
+  /* justify-content: center; */
+  /* align-items: flex-start; */
+  flex-direction: column;
 }
 .instructions {
-	width: 50%;
-	background: chartreuse;
+  width: 50%;
+  background: chartreuse;
 }
 .orderDetail {
-	width: 50%;
-	background: rgb(0, 4, 255);
+  width: 50%;
+  background: rgb(0, 4, 255);
 }
 .buttonsContainer {
-	display: flex;
-	justify-content: flex-start;
-	align-items: center;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 .buttonsContainer img {
-	width: 45%;
+  width: 45%;
 }
 .boxButtons {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 .boxChekOut {
-	width: 100%;
-	flex: 1;
-	background-color: rgb(255, 255, 255);
-	border-radius: 10px;
-	border: solid 1px rgb(211, 211, 211);
-	margin-top: 1%;
-	box-shadow: 10px 10px 10px -1px rgba(0,0,0,0.15);
-	display: flex;
-	justify-content: center;
-	align-items: flex-start;
+  width: 100%;
+  flex: 1;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  border: solid 1px rgb(211, 211, 211);
+  margin-top: 1%;
+  box-shadow: 10px 10px 10px -1px rgba(0, 0, 0, 0.15);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 .btnAddress {
-	display: flex;
-	width: 20%;
-	cursor: pointer;
+  display: flex;
+  width: 20%;
+  cursor: pointer;
 }
 .btnAddress span {
-	color: tomato;
-	font-weight: 500;
+  color: tomato;
+  font-weight: 500;
 }
 .btnAddress:hover {
-	opacity: 60%;
+  opacity: 80%;
 }
 
 /* div.containAll{
