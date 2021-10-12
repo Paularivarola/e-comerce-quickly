@@ -40,7 +40,7 @@ const Products = (props) => {
   const navItems = [
     { page: 'products', comp: 'all', name: 'todos' },
     ...props.products
-      .map((prod) => Object.values(prod)[3])
+      .map((prod) => prod.category)
       .filter((cat, index, array) => index === array.indexOf(cat))
       .map((cat) => {
         return { page: 'products', comp: cat, name: cat }
