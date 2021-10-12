@@ -2,18 +2,7 @@ const Product = require('../../models/Product')
 const bcrypt = require('bcryptjs')
 const adminProductControllers = {
   createProduct: async (req, res) => {
-    const {
-      name,
-      description,
-      price,
-      category,
-      ingredients,
-      stock,
-      img,
-      extras,
-      papas,
-      score,
-    } = req.body
+    const { name, description, price, category, ingredients, stock, img, extras, papas, score } = req.body
     const { key } = req.user.data.admin
     try {
       const match = key && bcrypt.compareSync(process.env.SECRETORKEY, key)
@@ -30,22 +19,18 @@ const adminProductControllers = {
         extras: extras || false,
         papas: papas || false,
       })
-      // let picture
-      // console.log(req.files)
-      // const { img } = req.files
-      // picture = `${newProduct._id}.${
-      //   img.name.split('.')[img.name.split('.').length - 1]
-      // }`
-      // img.mv(
-      //   `${__dirname}/../../assets/products/${newProduct._id}.${
-      //     img.name.split('.')[img.name.split('.').length - 1]
-      //   }`,
-      //   (err) => {
-      //     if (err) return console.log(err)
-      //   }
-      // )
+      let picture
+      console.log(req.files)
+      const { img } = req.files
+      picture = `${newProduct._id}.${img.name.split('.')[img.name.split('.').length - 1]}`
+      img.mv(
+        `${__dirname}/../../frontend/public/assets/products/${newProduct._id}.${img.name.split('.')[img.name.split('.').length - 1]}`,
+        (err) => {
+          if (err) return console.log(err)
+        }
+      )
 
-      // newProduct.img = picture
+      newProduct.img = picture
       await newProduct.save()
       res.json({
         success: true,
@@ -60,11 +45,7 @@ const adminProductControllers = {
     try {
       const match = key && bcrypt.compareSync(process.env.SECRETORKEY, key)
       if (!match) throw new Error('key error')
-      const product = await Product.findOneAndUpdate(
-        { _id: req.params.id },
-        { ...req.body },
-        { new: true }
-      )
+      const product = await Product.findOneAndUpdate({ _id: req.params.id }, { ...req.body }, { new: true })
       res.json({ success: true, response: product })
     } catch (error) {
       res.json({ success: false, error: error.message })

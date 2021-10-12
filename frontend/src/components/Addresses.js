@@ -26,6 +26,7 @@ const MyInput = ({ input, newAddress, setNewAddress }) => {
       variant='outlined'
       size='small'
       fullWidth
+      color='warning'
       onChange={inputHandler}
       sx={{
         '& > :not(style)': { width: '25vw' },
