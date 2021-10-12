@@ -34,19 +34,19 @@ const Payment = ({ userData, updateUser, setActive, active, cardModal, setCardMo
           <h1 className={styles.message2}>Asegurese de tener al menos una tarjeta cargada antes de realizar su compra :)</h1>
         </div>
       ) : (
-      <div className={styles.boxCard}>
-        {userData?.paymentCards?.map((payment, index) => (
-          <PaymentCard
-            updateUser={updateUser}
-            card={payment.card}
-            id={payment.id}
-            key={payment.id}
-            index={index}
-            active={active?.card === index}
-            setActive={setActive}
-          />
-        ))}
-      </div>
+        <div className={styles.boxCard}>
+          {userData?.paymentCards?.map((payment, index) => (
+            <PaymentCard
+              updateUser={updateUser}
+              card={payment.card}
+              id={payment.id}
+              key={payment.id}
+              index={index}
+              active={active?.card === index}
+              setActive={setActive}
+            />
+          ))}
+        </div>
       )}
       {cardModal && (
         <div className={styles.containFormModal} data-modal='paymentModal'>

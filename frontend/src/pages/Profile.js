@@ -64,11 +64,11 @@ const Profile = (props) => {
           <p className={styles3.welcome}>Hola {props.user && props.user.firstName}, que bueno verte por acá!</p>
           {(props.history.location.pathname === '/profile/payment' || props.history.location.pathname === '/profile/addresses') && (
             <div className={styles.btnAddress}>
-              <IoMdAddCircle style={{ color: '#fe6849', fontSize: '1.5em', marginRight: '5%' }}/>
-              <span onClick={() => (props.history.location.pathname === '/checkout/payment' ? setCardModal(true) : setModal(!modal))}>
-                Agregar {props.history.location.pathname === '/checkout/payment' ? 'tarjeta' : 'dirección'}
+              <IoMdAddCircle style={{ color: '#fe6849', fontSize: '1.5em', marginRight: '5%' }} />
+              <span onClick={() => (props.history.location.pathname === '/checkout/payment' ? setCardModal(true) : setModal(true))}>
+                <button>Agregar {props.history.location.pathname === '/checkout/payment' ? 'tarjeta' : 'dirección'}</button>
               </span>
-          </div>
+            </div>
           )}
         </div>
       </div>
