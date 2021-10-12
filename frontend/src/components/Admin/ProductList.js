@@ -46,7 +46,7 @@ const ProductList = (props) => {
     return (
         <tr>
             <td style={{ width: '15%' }}>
-                <div className={styles.profilePic} style={{ backgroundImage: `url('http://localhost:4000/products/${img}')` }}></div>
+                <div className={styles.profilePic} style={{ backgroundImage: `url('${img}')` }}></div>
             </td>
             <td style={{ width: '30%' }}>{name}</td>
             <td style={{ width: '20%' }}>{category}</td>
