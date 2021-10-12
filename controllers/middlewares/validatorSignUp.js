@@ -38,6 +38,8 @@ const validator = (req, res, next) => {
     }),
     google: joi.boolean(),
     fileImg: joi.string(),
+    src: joi.string(),
+    action: joi.string(),
   })
   const validation = schema.validate(req.body, { abortEarly: false })
   if (!validation.error) {
