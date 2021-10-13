@@ -12,6 +12,7 @@ const Header = (props) => {
   useEffect(() => {
     localStorage.getItem('socket') && props.setSocketLS(localStorage.getItem('socket'))
     localStorage.getItem('token') && props.verifyToken()
+    !localStorage.getItem('cart') && localStorage.setItem('cart', JSON.stringify([]))
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

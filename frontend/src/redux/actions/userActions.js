@@ -117,11 +117,16 @@ const userActions = {
   },
   manageCart: (body) => {
     return async (dispatch) => {
-      console.log(body)
       let token = localStorage.getItem('token')
       if (!token) {
         let cart = JSON.parse(localStorage.getItem('cart'))
-        localStorage.setItem('cart', cart ? JSON.stringify([...cart, body.cartItem]) : JSON.stringify([body.cartItem]))
+        if (body.action === 'deleteLS') {
+          localStorage.setItem('cart', JSON.stringify(cart.filter((item, index) => index !== body.index)))
+          return dispatch({
+            type: 'LS_CART',
+            payload: cart.filter((item, index) => index !== body.index),
+          })
+        } else localStorage.setItem('cart', cart ? JSON.stringify([...cart, body.cartItem]) : JSON.stringify([body.cartItem]))
       } else {
         try {
           let response = await axios.put(`${HOST}/api/products`, body)

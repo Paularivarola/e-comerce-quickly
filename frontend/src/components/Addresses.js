@@ -3,7 +3,6 @@ import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import styles from '../styles/personalData.module.css'
 import userActions from '../redux/actions/userActions'
-import toastConfirm from './ToastConfirm'
 import { connect } from 'react-redux'
 import { ImCancelCircle } from 'react-icons/im'
 import { BsTrash } from 'react-icons/bs'
@@ -49,7 +48,7 @@ const Address = ({ updateUser, address, active, setActive, index }) => {
       )}
       <BsTrash
         style={{ color: 'tomato' }}
-        onClick={() => toastConfirm(() => updateUser({ action: 'deleteAddress', addressId: address._id }))}
+        // onClick={() => toastConfirm(() => updateUser({ action: 'deleteAddress', addressId: address._id }))}
       />
     </div>
   )

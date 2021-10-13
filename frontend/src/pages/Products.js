@@ -28,7 +28,7 @@ const Products = (props) => {
     )
   }, [window.location.pathname, props.products])
   const cart = JSON.parse(localStorage.getItem('cart'))
-  const [cartState, setCartState] = useState(cart.length)
+  const [cartState, setCartState] = useState(cart?.length)
   useEffect(() => {
     setCartState(cart)
   }, [cart])

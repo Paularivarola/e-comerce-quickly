@@ -4,7 +4,7 @@ import styles from '../styles/personalData.module.css'
 import { BsTrash, BsCreditCard2BackFill } from 'react-icons/bs'
 import userActions from '../redux/actions/userActions'
 import { connect } from 'react-redux'
-import toastConfirm from './ToastConfirm'
+// import toastConfirm from './ToastConfirm'
 
 const PaymentCard = ({ updateUser, card, id, setActive, active, index }) => {
   return (
@@ -17,7 +17,7 @@ const PaymentCard = ({ updateUser, card, id, setActive, active, index }) => {
           Seleccionar
         </span>
       )}
-      <BsTrash onClick={() => toastConfirm(() => updateUser({ action: 'deletePaymentCard', paymentCardId: id }))} />
+      {/* <BsTrash onClick={() => toastConfirm(() => updateUser({ action: 'deletePaymentCard', paymentCardId: id }))} /> */}
     </div>
   )
 }

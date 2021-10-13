@@ -3,15 +3,23 @@ import styles2 from '../styles/products.module.css'
 import { FiEdit } from 'react-icons/fi'
 import { MdShoppingCart } from 'react-icons/md'
 import { RiDeleteBin7Fill } from 'react-icons/ri'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import userActions from '../redux/actions/userActions'
-import toastConfirm from '../components/ToastConfirm'
-import { Toaster } from 'react-hot-toast'
+// import toastConfirm from '../components/ToastConfirm'
 import Product from '../components/Product'
-import productActions from '../redux/actions/productActions'
+import CardTost from '../components/CardTost'
 
-const CartItem = ({ cartItem, manageCart, userData, setEdit, setCartItem }) => {
+const CartItem = ({ cartItem, manageCart, userData, setEdit, setCartItem, index, ...props }) => {
+  let initialCardTost = {
+    time: '',
+    icon: '',
+    text: '',
+    view: false,
+    tost: '',
+  }
+  let [cardTost, setCardTost] = useState(initialCardTost)
+
   return (
     <>
       <div className={styles.cartItem}>
@@ -46,9 +54,31 @@ const CartItem = ({ cartItem, manageCart, userData, setEdit, setCartItem }) => {
               setEdit(true)
             }}
           >
-            <FiEdit style={{ color: '#fe6849', fontSize: '1.5em' }} />
+            {userData && <FiEdit style={{ color: '#fe6849', fontSize: '1.5em' }} />}
           </span>
-          <span onClick={() => toastConfirm(() => manageCart({ action: 'delete', cartItem, _id: userData._id }))} className={styles.span}>
+          <span
+            style={{ cursor: 'pointer' }}
+            onClick={() =>
+              userData
+                ? console.log('ooso')
+                : setCardTost({
+                    time: 10000,
+                    icon: 'error',
+                    text: 'No podras revertir estos cambios',
+                    view: true,
+                    tost: 'accept',
+                    question: '¿Borrar?',
+                  })
+            }
+          >
+            {cardTost.view && (
+              <CardTost
+                properties={cardTost}
+                setCardTost={setCardTost}
+                accept={() => manageCart({ action: 'deleteLS', index })}
+                deny={() => setCardTost(initialCardTost)}
+              />
+            )}
             <RiDeleteBin7Fill style={{ color: '#fe6849', fontSize: '1.5em' }} />
           </span>
         </div>
@@ -60,13 +90,27 @@ const CartItem = ({ cartItem, manageCart, userData, setEdit, setCartItem }) => {
 const Cart = ({ manageCart, userData, ...props }) => {
   const [edit, setEdit] = useState(false)
   const [cartItem, setCartItem] = useState({})
-  const cart = JSON.parse(localStorage.getItem('cart'))
+  const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')))
+  useEffect(() => {
+    setCart(JSON.parse(localStorage.getItem('cart')))
+  }, [JSON.parse(localStorage.getItem('cart'))])
   const formatter = new Intl.NumberFormat('es-CL', {
     style: 'currency',
     currency: 'ARS',
   })
+
+  let initialCardTost = {
+    time: '',
+    icon: '',
+    text: '',
+    view: false,
+    tost: '',
+  }
+  let [cardTost, setCardTost] = useState(initialCardTost)
   const amount = cart.reduce((acc, item) => acc + item.totalPrice, 0)
-  const { street, number, apartment } = userData?.addresses[0]
+  let address = userData
+    ? userData?.addresses[0]?.street + ` ` + userData?.addresses[0]?.number + ' ' + userData?.addresses[0]?.apartment
+    : null
   return (
     <div className={styles.mainCart}>
       <div className={styles2.categories}>
@@ -77,17 +121,42 @@ const Cart = ({ manageCart, userData, ...props }) => {
         <div className={styles.boxData}>
           <div className={styles.boxAdress}>
             <p className={styles.adress}>
-              <span>Punto de entrega:</span> {street + ` ` + number + ' ' + apartment}
+              <span>Punto de entrega:</span> {address || '-'}
             </p>
-            <span className={styles.adressBtn}>
-              <FiEdit style={{ color: '#fe6849', fontSize: '1.5em' }} />
-            </span>
+            {userData && (
+              <span className={styles.adressBtn}>
+                <FiEdit style={{ color: '#fe6849', fontSize: '1.5em' }} />
+              </span>
+            )}
           </div>
           <div className={styles.payBtn}>
             <p className={styles.totalPrice}>
               <span>Precio total:</span> $ {formatter.format(amount)}
             </p>
-            <button onClick={() => props.history.push('/checkout/order')}>Pagar</button>
+            <button
+              onClick={() =>
+                userData
+                  ? console.log('ooso')
+                  : setCardTost({
+                      time: 10000,
+                      icon: 'error',
+                      text: 'Debes iniciar sesión para pagar',
+                      view: true,
+                      tost: 'accept',
+                      question: '¿Ir a Iniciar Sesión?',
+                    })
+              }
+            >
+              Pagar
+            </button>
+            {cardTost.view && (
+              <CardTost
+                properties={cardTost}
+                setCardTost={setCardTost}
+                accept={() => props.history.push('/sign-forms/signin')}
+                deny={() => setCardTost(initialCardTost)}
+              />
+            )}
           </div>
         </div>
       </div>
@@ -108,31 +177,22 @@ const Cart = ({ manageCart, userData, ...props }) => {
         </div>
         <div className={styles.gridBox}>
           <div className={styles.cartGrid}>
-            {cart?.map((cartItem) => (
+            {cart?.map((cartItem, index) => (
               <CartItem
+                index={index}
                 key={cartItem._id}
                 cartItem={cartItem}
                 manageCart={manageCart}
                 userData={userData}
                 setEdit={setEdit}
                 setCartItem={setCartItem}
+                setCardTost={setCardTost}
               />
             ))}
           </div>
         </div>
       </div>
       {edit && <Product product={cartItem.productId} editCartItem={cartItem} setMod={setEdit} edit={edit} />}
-      <Toaster
-        containerStyle={{
-          top: 200,
-          left: 20,
-          bottom: 20,
-          right: 20,
-        }}
-        toastOptions={{
-          duration: 1500,
-        }}
-      />
     </div>
   )
 }

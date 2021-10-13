@@ -56,6 +56,8 @@ const userReducer = (state = initialState, action) => {
         userData: action.payload,
         cart: action.payload.cart,
       }
+    case 'LS_CART':
+      return { ...state, cart: action.payload }
     case 'LOG_OUT':
       localStorage.removeItem('token')
       localStorage.removeItem('socket')

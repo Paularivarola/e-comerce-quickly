@@ -14,11 +14,7 @@ const productControllers = {
     const { action, _id } = req.body
     // return console.log(req.body)
     let operation =
-      action === 'addFav'
-        ? { $push: { favs: req.user._id } }
-        : action === 'deleteFav'
-        ? { $pull: { favs: req.user._id } }
-        : null
+      action === 'addFav' ? { $push: { favs: req.user._id } } : action === 'deleteFav' ? { $pull: { favs: req.user._id } } : null
 
     try {
       await Product.findOneAndUpdate({ _id }, operation, { new: true })
@@ -31,8 +27,7 @@ const productControllers = {
   },
   manageCart: async (req, res) => {
     const { cartItem, action, _id } = req.body
-    let searchOption =
-      action === 'editCartItem' ? { 'cart._id': cartItem._id } : { _id }
+    let searchOption = action === 'editCartItem' ? { 'cart._id': cartItem._id } : { _id }
     let operation =
       action === 'add'
         ? { $push: { cart: cartItem } }
@@ -43,11 +38,7 @@ const productControllers = {
         : { $set: { cart: [] } }
     let options = { new: true }
     try {
-      let user = await User.findOneAndUpdate(
-        searchOption,
-        operation,
-        options
-      ).populate({ path: 'cart.productId', model: 'product' })
+      let user = await User.findOneAndUpdate(searchOption, operation, options).populate({ path: 'cart.productId', model: 'product' })
       res.json({
         success: true,
         userData: user,

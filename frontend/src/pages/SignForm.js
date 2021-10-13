@@ -50,10 +50,8 @@ const SignForm = (props) => {
   const [shift, setShift] = useState(props.match.params.susi === 'signup')
   useEffect(() => {
     setShift(props.match.params.susi === 'signup')
+    // props.history.push('/sign-forms/' + props.match.params.susi)
   }, [props.match.params])
-  useEffect(() => {
-    props.history.push(shift ? '/signup' : '/signin')
-  }, [shift])
 
   const responseGoogle = (googleRegister) => {
     let googleUser = {
