@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "heroku-postbuild": "cd client && npm install && npm run build",
-    "host": "git add . && git commit HOST && git push origin master && git push heroku master"
+    "host": "git add . && git commit -m HOST && git push origin master && git push heroku master"
   },
   "keywords": [],
   "author": "",
