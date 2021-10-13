@@ -3,35 +3,11 @@ import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 
 const PromosCarousel = () => {
-  const promos = [
-    {
-      img: 'https://i.postimg.cc/yWq5xyLZ/hamburguesas.png',
-      title: 'PROMO 1',
-      description: 'Hamburguesa completa + porcion de papas',
-      price: '$550',
-    },
-    {
-      img: 'https://i.postimg.cc/yWq5xyLZ/hamburguesas.png',
-      title: 'PROMO 1',
-      description: 'Hamburguesa completa + porcion de papas',
-      price: '$550',
-    },
-    {
-      img: 'https://i.postimg.cc/yWq5xyLZ/hamburguesas.png',
-      title: 'PROMO 1',
-      description: 'Hamburguesa completa + porcion de papas',
-      price: '$550',
-    },
-    {
-      img: 'https://i.postimg.cc/yWq5xyLZ/hamburguesas.png',
-      title: 'PROMO 1',
-      description: 'Hamburguesa completa + porcion de papas',
-      price: '$550',
-    },
-  ]
+  const promos = ['https://i.postimg.cc/sfBT4rfs/publicidad.png', 'https://i.postimg.cc/4x37pJZ1/publicidad2.png', 'https://i.postimg.cc/wTw3qSJR/publicidad3.png', 'https://i.postimg.cc/kGfM5bVP/publicidad4.jpg', 'https://i.postimg.cc/QM1XTPBb/publicidad5.png', 'https://i.postimg.cc/25RYrwHB/publicidad6.png' ]
 
   return (
     <>
+      <p className={styles.textPromos}>¡Las mejores Promos!</p>
       <Carousel
         className={styles.carouselContainer}
         additionalTransfrom={0}
@@ -44,7 +20,7 @@ const PromosCarousel = () => {
         draggable
         focusOnSelect={false}
         infinite
-        itemClass=''
+        itemClass='imgCarousel'
         keyBoardControl
         minimumTouchDrag={80}
         renderButtonGroupOutside={false}
@@ -80,14 +56,10 @@ const PromosCarousel = () => {
         slidesToSlide={1}
         swipeable
       >
+        
         {promos.map((promo, index) => (
-          <div className={styles.carouselBox} key={promo.title + index.toString()}>
-            <div className={styles.carousel} style={{ backgroundImage: `url("${promo.img}")` }} key={index}></div>
-            <div className={styles.promo}>
-              <h3 className={styles.promoH3}>{promo.title}</h3>
-              <p className={styles.promoDesc}>{promo.description}</p>
-              <h4 className={styles.promoPrice}>{promo.price}</h4>
-            </div>
+          <div className={styles.carouselBox} key={index.toString()}>
+            <div className={styles.carousel} style={{ backgroundImage: `url("${promo}")` }} key={index}></div>
           </div>
         ))}
       </Carousel>
