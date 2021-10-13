@@ -55,7 +55,7 @@ const Products = (props) => {
         </div>
         <div className={styles.boxShop}>
           <p className={styles.welcome}>Hola {props.user && props.user.firstName}! ¿Qué vas a comer hoy?</p>
-          <button className={styles.carritoBtn} onClick={() => props.history.push('/cart')}>
+          <button id='cart' className={styles.carritoBtn} onClick={() => props.history.push('/cart')}>
             <span style={{ marginRight: '0.7rem', color: 'white', fontSize: '1rem' }}>{props?.cart?.length + ' '}</span>
             <MdShoppingCart style={{ color: 'white', fontSize: '1.8em', marginRight: '5%' }} /> Carrito
           </button>
@@ -69,7 +69,7 @@ const Products = (props) => {
           ) : (
             <div className={styles2.products}>
               {products.map((prod, index) => (
-                <ProductCard product={prod} key={'product' + index} setModal={setModal} />
+                <ProductCard index={index} product={prod} key={'product' + index} setModal={setModal} />
               ))}
               {mod && <Product product={product} setMod={setMod} />}
             </div>

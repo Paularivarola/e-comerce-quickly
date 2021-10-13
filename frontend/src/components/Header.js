@@ -26,7 +26,7 @@ const Header = (props) => {
     ? props.user.data.google || props.user.data.admin.flag
       ? props.user.data.src
       : props.user.data.src !== 'assets/user.png'
-      ? 'http://localhost:4000/' + props.user.data.src
+      ? 'https://quickly-food.herokuapp.com/' + props.user.data.src
       : '/assets/user.png'
     : '/assets/user.png'
 
@@ -52,14 +52,16 @@ const Header = (props) => {
             <NavLink className={styles.textRoute} exact activeClassName={styles.active} to='/' onClick={() => setUserMenu(false)}>
               Home
             </NavLink>
-            <NavLink
-              className={styles.textRoute}
-              activeClassName={styles.active}
-              to='/products'
-              onClick={() => setUserMenu(false)}
-            >
-              Menu
-            </NavLink>
+            <span id='menu'>
+              <NavLink
+                className={styles.textRoute}
+                activeClassName={styles.active}
+                to='/products'
+                onClick={() => setUserMenu(false)}
+              >
+                Menu
+              </NavLink>
+            </span>
             <NavLink
               className={styles.textRoute}
               activeClassName={styles.active}

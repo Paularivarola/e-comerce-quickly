@@ -134,6 +134,7 @@ const Cart = ({ manageCart, userData, ...props }) => {
               <span>Precio total:</span> $ {formatter.format(amount)}
             </p>
             <button
+              id='checkout'
               onClick={() =>
                 userData && cart?.length
                   ? props.history.push('/checkout/order')
