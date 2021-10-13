@@ -105,7 +105,7 @@ const PersonalData = ({ user, updateUser }) => {
                   ? user.google || user.admin.flag
                     ? user.src
                     : user.src !== 'assets/user.png'
-                    ? 'https://quickly-food.herokuapp.com/' + user.src
+                    ? 'http://localhost:4000/' + user.src
                     : '/assets/user.png'
                   : '/assets/user.png'
               }")`,
