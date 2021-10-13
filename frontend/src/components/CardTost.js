@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import styles from '../styles/cardTost.module.css'
 
 const CardTost = ({ properties, setCardTost, accept, deny }) => {
-  const { time, icon, text, view, tost, question = question || '' } = properties
+  const { time, icon, text, view, tost } = properties
   const [typeTost, setTypeTost] = useState(icon)
   const [imageTost, setImageTost] = useState('')
   const [iconTost, setIconTost] = useState('')
@@ -48,7 +48,7 @@ const CardTost = ({ properties, setCardTost, accept, deny }) => {
           <div className={styles.containText}>
             <div className={styles.text}>
               <h2>{text}</h2>
-              <p>{question}</p>
+              <p>{properties?.question || ''}</p>
             </div>
           </div>
           <div className={styles.containButtons}>

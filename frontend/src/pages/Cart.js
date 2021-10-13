@@ -137,6 +137,13 @@ const Cart = ({ manageCart, userData, ...props }) => {
               onClick={() =>
                 userData
                   ? console.log('ooso')
+                  : !cart?.length
+                  ? setCardTost({
+                      time: 4000,
+                      icon: 'error',
+                      text: 'No has ingresado nada al carrito',
+                      view: true,
+                    })
                   : setCardTost({
                       time: 10000,
                       icon: 'error',
@@ -189,6 +196,7 @@ const Cart = ({ manageCart, userData, ...props }) => {
                 setCardTost={setCardTost}
               />
             ))}
+            {!cart?.length && <p className={styles.productName}>No tenés nada en el carrito, vuelve y encuentra algo para tí!</p>}
           </div>
         </div>
       </div>
