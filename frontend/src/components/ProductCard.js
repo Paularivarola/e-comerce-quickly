@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import userActions from '../redux/actions/userActions'
 import CardTost from './CardTost'
 
-const ProductCard = ({ product, setModal, user, userData, favHandler }) => {
+const ProductCard = ({ product, setModal, user, userData, favHandler, index }) => {
   const [stopper, setStopper] = useState(true)
   const [liked, setLiked] = useState(false)
   useEffect(() => {
@@ -90,6 +90,7 @@ const ProductCard = ({ product, setModal, user, userData, favHandler }) => {
         </div>
       </div>
       <button
+        id={'addP' + index}
         data-modal='productModal'
         className={styles.addBtn}
         onClick={() => {

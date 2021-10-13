@@ -152,7 +152,7 @@ const Product = ({ product, setMod, user, manageCart, edit, editCartItem, userDa
                   +
                 </p>
               </div>
-              <p className={styles.addToCart} onClick={addToCart}>
+              <p id='addToCart' className={styles.addToCart} onClick={addToCart}>
                 {edit ? 'Editar orden' : 'Agregar a mi orden'}
               </p>
             </div>

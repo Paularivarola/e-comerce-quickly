@@ -17,6 +17,7 @@ const MyInput = ({ label, name, inputHandler }) => {
   return (
     <TextField
       type={passProtected ? 'password' : 'text'}
+      id={label === 'Contraseña' ? 'password' : undefined}
       name={name}
       label={label}
       variant='outlined'
@@ -199,7 +200,7 @@ const SignForm = (props) => {
               <div className={styles.inputsForm}>
                 <TextField
                   required
-                  id='outlined-required'
+                  id='email'
                   label='Email'
                   type='email'
                   name='email'
