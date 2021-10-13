@@ -153,6 +153,7 @@ const Addresses = ({
     icon: '',
     text: '',
     view: false,
+    tost: '',
   }
   const [cardTost, setCardTost] = useState(initialCardTostState)
   const [functionX, setFunctionX] = useState(null)
@@ -242,6 +243,11 @@ const Addresses = ({
         (!view ? (
           <div className={styles.containFormModal} data-modal='addressModal'>
             <div className={styles.containFormAddress}>
+              <ImCancelCircle
+                className={styles.exit}
+                onClick={() => setModal(false)}
+                style={{ marginRight: '6%', color: 'tomato' }}
+              />
               <Card setCardModal={setModal} />
             </div>
           </div>
