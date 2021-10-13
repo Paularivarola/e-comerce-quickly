@@ -4,12 +4,10 @@ import styles3 from '../styles/products.module.css'
 import styles4 from '../styles/data.module.css'
 import { connect } from 'react-redux'
 import { useEffect, useRef, useState } from 'react'
-import Card2 from '../components/CheckoutTESTING'
 import CardTost from '../components/CardTost'
 import { BsFillBagCheckFill } from 'react-icons/bs'
 import { IoMdAddCircle } from 'react-icons/io'
 import Addresses from '../components/Addresses'
-import Payment from '../components/Payment'
 import NavLateral from '../components/NavLateral'
 import Order from '../components/Order'
 import Preloader from '../components/Preloader'
@@ -48,19 +46,41 @@ const CheackOut = (props) => {
 
   return (
     <div className={styles.mainCheckout}>
-      {cardTost.view && <CardTost properties={cardTost} setCardTost={setCardTost} />}
+      {cardTost.view && (
+        <CardTost properties={cardTost} setCardTost={setCardTost} />
+      )}
       <div className={styles3.categories}>
         <div className={styles3.categoriesList}>
-          <BsFillBagCheckFill style={{ color: '#fe6849', fontSize: '1.5em', marginRight: '5%' }} />
+          <BsFillBagCheckFill
+            style={{ color: '#fe6849', fontSize: '1.5em', marginRight: '5%' }}
+          />
           <p className={styles3.categoriesTitle}> CheckOut</p>
         </div>
         <div className={styles3.boxShop}>
-          <p className={styles3.welcome}>Buena elección {props.user && props.user.firstName}!</p>
-          {(props.history.location.pathname === '/checkout/payment' || props.history.location.pathname === '/checkout/addresses') && (
+          <p className={styles3.welcome}>
+            Buena elección {props.user && props.user.firstName}!
+          </p>
+          {(props.history.location.pathname === '/checkout/payment' ||
+            props.history.location.pathname === '/checkout/addresses') && (
             <div className={styles.btnAddress}>
-              <IoMdAddCircle style={{ color: '#fe6849', fontSize: '1.5em', marginRight: '5%' }} />
-              <span onClick={() => (props.history.location.pathname === '/checkout/payment' ? setCardModal(true) : setModal(!modal))}>
-                Agregar {props.history.location.pathname === '/checkout/payment' ? 'tarjeta' : 'dirección'}
+              <IoMdAddCircle
+                style={{
+                  color: '#fe6849',
+                  fontSize: '1.5em',
+                  marginRight: '5%',
+                }}
+              />
+              <span
+                onClick={() =>
+                  props.history.location.pathname === '/checkout/payment'
+                    ? setCardModal(true)
+                    : setModal(!modal)
+                }
+              >
+                Agregar{' '}
+                {props.history.location.pathname === '/checkout/payment'
+                  ? 'tarjeta'
+                  : 'dirección'}
               </span>
             </div>
           )}
@@ -73,12 +93,21 @@ const CheackOut = (props) => {
             {/* <Preloader /> */}
             <div className={styles4.containerData}>
               <div className={styles4.containAllProfile}>
-                {view === 'addresses' ? (
-                  <Addresses user={props.userData?.data} modal={modal} setModal={setModal} />
-                ) : view === 'payment' ? (
-                  <Payment user={props.userData?.data} cardModal={cardModal} setCardModal={setCardModal} />
+                {view === 'addresses' || view === 'payment' ? (
+                  <Addresses
+                    user={props.userData?.data}
+                    modal={modal}
+                    setModal={setModal}
+                    cardModal={cardModal}
+                    setCardModal={setCardModal}
+                    view={view === 'addresses'}
+                  />
                 ) : (
-                  <Order user={props.userData?.data} modal={modal} setModal={setModal} />
+                  <Order
+                    user={props.userData?.data}
+                    modal={modal}
+                    setModal={setModal}
+                  />
                 )}
               </div>
             </div>

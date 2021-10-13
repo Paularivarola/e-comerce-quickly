@@ -3,8 +3,6 @@ import styles2 from '../styles/data.module.css'
 import PersonalData from '../components/PersonalData'
 import ChangePassword from '../components/ChangePassword'
 import Addresses from '../components/Addresses'
-import Payment from '../components/Payment'
-import Notifications from '../components/Notifications'
 import History from '../components/History'
 import Favorites from '../components/Favorites'
 import NavLateral from '../components/NavLateral'
@@ -47,27 +45,34 @@ const Profile = (props) => {
         { comp: 'password', name: 'Cambiar Contraseña' },
         { comp: 'addresses', name: 'Direcciones' },
         { comp: 'payment', name: 'Métodos de Pago' },
-        { comp: 'notif', name: 'Notificaciones' },
       ],
     },
   ]
   const [modal, setModal] = useState(false)
-  const [cardModal, setCardModal] = useState(false)
   return (
     <div className={styles.mainProfile}>
       <div className={styles3.categories}>
         <div className={styles3.categoriesList}>
-          <BsPersonLinesFill style={{ color: '#fe6849', fontSize: '1.5em', marginRight: '5%' }} />
+          <BsPersonLinesFill
+            style={{ color: '#fe6849', fontSize: '1.5em', marginRight: '5%' }}
+          />
           <p className={styles3.categoriesTitle}> Mi cuenta</p>
         </div>
         <div className={styles3.boxShop}>
-          <p className={styles3.welcome}>Hola {props.user && props.user.firstName}, que bueno verte por acá!</p>
-          {(props.history.location.pathname === '/profile/payment' || props.history.location.pathname === '/profile/addresses') && (
+          <p className={styles3.welcome}>
+            Hola {props.user && props.user.firstName}, que bueno verte por acá!
+          </p>
+          {(props.history.location.pathname === '/profile/payment' ||
+            props.history.location.pathname === '/profile/addresses') && (
             <div className={styles.btnAddress}>
-              <IoMdAddCircle style={{ color: '#fe6849', fontSize: '1.5em', marginRight: '5%' }} />
-              <button onClick={() => (props.history.location.pathname === '/checkout/payment' ? setCardModal(true) : setModal(true))}>
-                Agregar {props.history.location.pathname === '/checkout/payment' ? 'tarjeta' : 'dirección'}
-              </button>
+              <IoMdAddCircle
+                style={{
+                  color: '#fe6849',
+                  fontSize: '1.5em',
+                  marginRight: '5%',
+                }}
+              />
+              <span onClick={() => setModal(true)}>Agregar</span>
             </div>
           )}
         </div>
@@ -79,22 +84,36 @@ const Profile = (props) => {
             {!props.userData ? (
               <Preloader />
             ) : view === 'fav' ? (
-              <Favorites favorites={props.userData?.favouriteProductsId} setFormConfirm={setFormConfirm} />
+              <Favorites
+                favorites={props.userData?.favouriteProductsId}
+                setFormConfirm={setFormConfirm}
+              />
             ) : view === 'his' ? (
-              <History orders={props.userData?.ordersId} setFormConfirm={setFormConfirm} />
+              <History
+                orders={props.userData?.ordersId}
+                setFormConfirm={setFormConfirm}
+              />
             ) : (
               <div className={styles2.containerData}>
                 <div className={styles2.containAllProfile}>
                   {view === 'data' ? (
-                    <PersonalData user={props.userData?.data} setCancelForm={setFormConfirm} />
+                    <PersonalData
+                      user={props.userData?.data}
+                      setCancelForm={setFormConfirm}
+                    />
                   ) : view === 'password' ? (
-                    <ChangePassword user={props.userData?.data} setCancelForm={setFormConfirm} />
-                  ) : view === 'addresses' ? (
-                    <Addresses user={props.userData?.data} setCancelForm={setFormConfirm} modal={modal} setModal={setModal} />
-                  ) : view === 'payment' ? (
-                    <Payment user={props.userData?.data} setCancelForm={setFormConfirm} cardModal={cardModal} setCardModal={setCardModal} />
+                    <ChangePassword
+                      user={props.userData?.data}
+                      setCancelForm={setFormConfirm}
+                    />
                   ) : (
-                    <Notifications user={props.userData?.data} setCancelForm={setFormConfirm} />
+                    <Addresses
+                      user={props.userData?.data}
+                      setCancelForm={setFormConfirm}
+                      modal={modal}
+                      setModal={setModal}
+                      view={view === 'addresses'}
+                    />
                   )}
                 </div>
               </div>

@@ -4,7 +4,12 @@
 
 import React, { useState } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
-import { CardElement, Elements, useElements, useStripe } from '@stripe/react-stripe-js'
+import {
+  CardElement,
+  Elements,
+  useElements,
+  useStripe,
+} from '@stripe/react-stripe-js'
 import { connect } from 'react-redux'
 import userActions from '../redux/actions/userActions'
 import styles from '../styles/rafacard.module.css'
@@ -45,7 +50,16 @@ const CardField = ({ onChange }) => (
   </div>
 )
 
-const Field = ({ label, id, type, placeholder, required, autoComplete, value, onChange }) => (
+const Field = ({
+  label,
+  id,
+  type,
+  placeholder,
+  required,
+  autoComplete,
+  value,
+  onChange,
+}) => (
   <div className={styles.FormRow}>
     <label htmlFor={id} className={styles.FormRowLabel}>
       {label}
@@ -70,7 +84,11 @@ const Field = ({ label, id, type, placeholder, required, autoComplete, value, on
 )
 
 const SubmitButton = ({ processing, error, children, disabled, onclick }) => (
-  <button style={{ backgroundColor: '#a84531d0' }} type='submit' disabled={processing || disabled}>
+  <button
+    style={{ backgroundColor: '#a84531d0' }}
+    type='submit'
+    disabled={processing || disabled}
+  >
     {processing ? 'Processing...' : children}
   </button>
 )
@@ -92,7 +110,10 @@ const ErrorMessage = ({ children }) => (
 )
 
 const ResetButton = ({ onClick }) => (
-  <button className={[styles.SubmitButton, { height: '5vh' }]} onClick={onClick}>
+  <button
+    className={[styles.SubmitButton, { height: '5vh' }]}
+    onClick={onClick}
+  >
     <svg width='32px' height='32px' viewBox='0 0 32 32'>
       <path
         fill='#FFF'
@@ -178,7 +199,9 @@ const CheckoutForm = ({ updateUser, userData, setCardModal }) => {
       {/* <div className={styles.ResultTitle} role='alert'>
         Payment successful
       </div> */}
-      <div className={styles.ResultMessage}>Método de pago generado: {paymentMethod.id}</div>
+      <div className={styles.ResultMessage}>
+        Método de pago generado: {paymentMethod.id}
+      </div>
       <ResetButton onClick={reset} />
     </div>
   ) : (
@@ -255,7 +278,11 @@ const Card = ({ updateUser, userData, setCardModal }) => {
   return (
     <div className={styles.AppWrapper}>
       <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
-        <CheckoutForm updateUser={updateUser} userData={userData} setCardModal={setCardModal} />
+        <CheckoutForm
+          updateUser={updateUser}
+          userData={userData}
+          setCardModal={setCardModal}
+        />
       </Elements>
     </div>
   )
