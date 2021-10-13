@@ -29,7 +29,6 @@ const userActions = {
             })
           window.scrollTo(0, 0)
           props.history.push('/')
-          localStorage.setItem('socket', userData._id)
           let socket = io(`${HOST}`, {
             query: { socketId: userData._id, admin: userData.data.admin.flag },
           })
@@ -50,9 +49,14 @@ const userActions = {
         let res = await axios.post(`${HOST}/api/user/logIn`, { ...user })
         if (res.data.success) {
           const { user, userData, token } = res.data
-          let keep = false
-          localStorage.getItem('cart') &&
-            JSON.parse(localStorage.getItem('cart')).length > 0 &&
+          window.scrollTo(0, 0)
+          props.history.push('/')
+          let socket = io(HOST, {
+            query: { socketId: userData._id, admin: userData.data.admin.flag },
+          })
+          dispatch({ type: 'SET_SOCKET', payload: { socket } })
+          let cart = localStorage.getItem('cart') && JSON.parse(localStorage.getItem('cart'))
+          if (cart.length > 0) {
             Swal.fire({
               title: 'Desea conservar el carrito actual?',
               icon: 'question',
@@ -61,22 +65,26 @@ const userActions = {
               cancelButtonColor: '#d33',
               confirmButtonText: 'Sí',
               denyButtonText: 'No',
-            }).then((result) => {
+            }).then(async (result) => {
               if (result.isConfirmed) {
-                keep = true
+                let response = await axios.post(`${HOST}/api/products/keep-cart`, { cart, _id: userData._id })
+                return dispatch({
+                  type: 'LOG_IN',
+                  payload: { user, userData: response.data.user, token },
+                })
+              } else {
+                return dispatch({
+                  type: 'LOG_IN',
+                  payload: { user, userData, token },
+                })
               }
             })
-          window.scrollTo(0, 0)
-          props.history.push('/')
-          localStorage.setItem('socket', userData._id)
-          let socket = io(HOST, {
-            query: { socketId: userData._id, admin: userData.data.admin.flag },
-          })
-          dispatch({ type: 'SET_SOCKET', payload: { socket } })
-          return dispatch({
-            type: 'LOG_IN',
-            payload: { user, userData, token, keep },
-          })
+          } else {
+            return dispatch({
+              type: 'LOG_IN',
+              payload: { user, userData, token },
+            })
+          }
         }
       } catch (error) {
         console.log(error)
@@ -92,12 +100,12 @@ const userActions = {
     return async (dispatch) => {
       let token = localStorage.getItem('token')
       try {
+        if (!token) throw new Error('No hay token')
         let response = await axios.get(`${HOST}/api/user/token`, {
           headers: {
             Authorization: 'Bearer ' + token,
           },
         })
-        localStorage.setItem('socket', response.data.userData._id)
         let socket = io(HOST, {
           query: {
             socketId: response.data.userData._id,
@@ -126,11 +134,19 @@ const userActions = {
             type: 'LS_CART',
             payload: cart.filter((item, index) => index !== body.index),
           })
-        } else localStorage.setItem('cart', cart ? JSON.stringify([...cart, body.cartItem]) : JSON.stringify([body.cartItem]))
+        } else {
+          cart = cart ? [...cart, body.cartItem] : [body.cartItem]
+          localStorage.setItem('cart', JSON.stringify(cart))
+          return dispatch({ type: 'LS_CART', payload: cart })
+        }
       } else {
         try {
           let response = await axios.put(`${HOST}/api/products`, body)
           if (!response?.data?.success) throw new Error('Algo salió mal')
+          dispatch({
+            type: 'GET_PRODUCTS',
+            payload: response.data.products,
+          })
           return dispatch({
             type: 'HANDLE_CART',
             payload: response.data.userData,

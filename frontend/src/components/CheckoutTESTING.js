@@ -42,7 +42,6 @@ const stripePromise = loadStripe(
 
 const Card2 = ({ userData, index }) => (
   <>
-    {console.log(userData)}
     <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
       <CheckoutForm2 paymentMethod={userData?.paymentCards[index]} customer={userData?.data?.customerId} />
     </Elements>

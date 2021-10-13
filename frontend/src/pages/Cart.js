@@ -59,23 +59,21 @@ const CartItem = ({ cartItem, manageCart, userData, setEdit, setCartItem, index,
           <span
             style={{ cursor: 'pointer' }}
             onClick={() =>
-              userData
-                ? console.log('ooso')
-                : setCardTost({
-                    time: 10000,
-                    icon: 'error',
-                    text: 'No podras revertir estos cambios',
-                    view: true,
-                    tost: 'accept',
-                    question: '¿Borrar?',
-                  })
+              setCardTost({
+                time: 10000,
+                icon: 'error',
+                text: 'No podras revertir estos cambios',
+                view: true,
+                tost: 'accept',
+                question: '¿Borrar?',
+              })
             }
           >
             {cardTost.view && (
               <CardTost
                 properties={cardTost}
                 setCardTost={setCardTost}
-                accept={() => manageCart({ action: 'deleteLS', index })}
+                accept={() => manageCart(userData ? { action: 'delete', cartItem, _id: userData._id } : { action: 'deleteLS', index })}
                 deny={() => setCardTost(initialCardTost)}
               />
             )}
@@ -93,7 +91,7 @@ const Cart = ({ manageCart, userData, ...props }) => {
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')))
   useEffect(() => {
     setCart(JSON.parse(localStorage.getItem('cart')))
-  }, [JSON.parse(localStorage.getItem('cart'))])
+  }, [props.cart])
   const formatter = new Intl.NumberFormat('es-CL', {
     style: 'currency',
     currency: 'ARS',
@@ -136,7 +134,7 @@ const Cart = ({ manageCart, userData, ...props }) => {
             <button
               onClick={() =>
                 userData
-                  ? console.log('ooso')
+                  ? props.history.push('/checkout/order')
                   : !cart?.length
                   ? setCardTost({
                       time: 4000,
@@ -208,6 +206,7 @@ const Cart = ({ manageCart, userData, ...props }) => {
 const mapStateToProps = (state) => {
   return {
     userData: state.users.userData,
+    cart: state.users.cart,
   }
 }
 

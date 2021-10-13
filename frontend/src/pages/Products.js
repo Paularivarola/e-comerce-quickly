@@ -27,11 +27,6 @@ const Products = (props) => {
       })
     )
   }, [window.location.pathname, props.products])
-  const cart = JSON.parse(localStorage.getItem('cart'))
-  const [cartState, setCartState] = useState(cart?.length)
-  useEffect(() => {
-    setCartState(cart)
-  }, [cart])
 
   const setModal = (bool, product) => {
     setMod(bool)
@@ -51,7 +46,6 @@ const Products = (props) => {
         return { page: 'products', comp: cat, name: cat }
       }),
   ]
-
   return (
     <div className={styles.mainProducts}>
       <div className={styles.categories}>
@@ -62,7 +56,7 @@ const Products = (props) => {
         <div className={styles.boxShop}>
           <p className={styles.welcome}>Hola {props.user && props.user.firstName}! ¿Qué vas a comer hoy?</p>
           <button className={styles.carritoBtn} onClick={() => props.history.push('/cart')}>
-            <span style={{ marginRight: '0.7rem', color: 'white', fontSize: '1rem' }}>{cartState.length + ' '}</span>
+            <span style={{ marginRight: '0.7rem', color: 'white', fontSize: '1rem' }}>{props?.cart?.length + ' '}</span>
             <MdShoppingCart style={{ color: 'white', fontSize: '1.8em', marginRight: '5%' }} /> Carrito
           </button>
         </div>
@@ -90,6 +84,7 @@ const mapStateToProps = (state) => {
   return {
     user: state.users.user,
     products: state.products.products,
+    cart: state.users.cart,
   }
 }
 const mapDispatchToProps = {

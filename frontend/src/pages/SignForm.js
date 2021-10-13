@@ -47,6 +47,12 @@ const SignForm = (props) => {
     src: null,
     google: false,
   })
+  const [cardTost, setCardTost] = useState({
+    time: '',
+    icon: '',
+    text: '',
+    view: false,
+  })
   const [shift, setShift] = useState(props.match.params.susi === 'signup')
   useEffect(() => {
     setShift(props.match.params.susi === 'signup')
@@ -111,12 +117,6 @@ const SignForm = (props) => {
     }
   }
 
-  const [cardTost, setCardTost] = useState({
-    time: '',
-    icon: '',
-    text: '',
-    view: false,
-  })
   const validatorFront = () => {
     if (!shift) {
       return Boolean(user.email && user.email.includes('@') && user.password)

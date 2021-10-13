@@ -4,13 +4,11 @@ import { Link, NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import userActions from '../redux/actions/userActions'
 import { useState } from 'react'
-import socketActions from '../redux/actions/socketActions'
 import { RiMenuFoldLine } from 'react-icons/ri'
 
 const Header = (props) => {
   const [userMenu, setUserMenu] = useState(false)
   useEffect(() => {
-    localStorage.getItem('socket') && props.setSocketLS(localStorage.getItem('socket'))
     localStorage.getItem('token') && props.verifyToken()
     !localStorage.getItem('cart') && localStorage.setItem('cart', JSON.stringify([]))
 
@@ -133,7 +131,6 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = {
   logOut: userActions.logOut,
-  setSocketLS: socketActions.setSocketLS,
   verifyToken: userActions.verifyToken,
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Header)

@@ -50,7 +50,7 @@ const ProductCard = ({ product, setModal, user, userData, favHandler }) => {
     }
   }
   return (
-    <div className={styles.product}>
+    <div className={styles.product} id={product._id}>
       {cardTost.view && <CardTost properties={cardTost} setCardTost={setCardTost} />}
 
       <div className={styles.productBox}>

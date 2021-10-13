@@ -10,35 +10,13 @@ import AdminPanel from './components/Admin/AdminPanel'
 import SignForm from './pages/SignForm'
 import Header from './components/Header'
 import Footer from './components/Footer'
-import { useEffect, useState } from 'react'
-import io from 'socket.io-client'
 import { connect } from 'react-redux'
-import socketActions from './redux/actions/socketActions'
 import BuyConfirmation from './components/BuyConfirmation'
 import Cart from './pages/Cart'
 import Card2 from './components/CheckoutTESTING'
 
 const App = (props) => {
-  const [socket, setSocket] = useState(null)
-  useEffect(() => {
-    if (!localStorage.getItem('socket') && !localStorage.getItem('token')) {
-      setSocket(io('http://localhost:4000'))
-    }
-  }, [])
-
-  useEffect(() => {
-    if (socket) {
-      socket.on('socketId', ({ socketId }) => {
-        if (!localStorage.getItem('socket')) {
-          localStorage.setItem('socket', socketId)
-          props.setSocketLS(socketId)
-        }
-      })
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [socket])
-
-  if (props.socket && localStorage.getItem('socket')) {
+  if (props.socket) {
     if (props.userData?.data?.admin?.flag) {
       props.socket.on('createOrder', () => {
         console.log('order created')
@@ -93,8 +71,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = {
-  setSocketLS: socketActions.setSocketLS,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps)(App)

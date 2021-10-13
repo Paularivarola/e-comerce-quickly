@@ -2,23 +2,23 @@ let initialState = {
   token: null,
   user: null,
   userData: null,
-  cart: localStorage.getItem('cart') || [],
-  orders: localStorage.getItem('orders') || [],
+  cart: JSON.parse(localStorage.getItem('cart')) || [],
+  orders: JSON.parse(localStorage.getItem('orders')) || [],
   socket: null,
 }
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'LOG_IN':
-      let { token, userData, user, keep } = action.payload
+      let { token, userData, user } = action.payload
       localStorage.setItem('token', token)
-      !keep && localStorage.setItem('cart', JSON.stringify(userData.cart))
+      localStorage.setItem('cart', JSON.stringify(userData.cart))
       return {
         ...state,
         token: token,
         user: user,
         userData: userData,
-        cart: keep ? state.cart : userData.cart,
+        cart: userData.cart,
       }
     case 'CREATE_ORDER':
       state.socket.emit('createOrder')

@@ -38,11 +38,18 @@ const Address = ({ updateUser, address, active, setActive, index }) => {
   return (
     <div className={active ? styles.active : styles.addressCard}>
       <div>
-        <span className={styles.addressAlias}>{address?.alias.toUpperCase()}</span>
-        <span className={styles.addressName}>{address.street + ', ' + address.number + ' - ' + address.apartment}</span>
+        <span className={styles.addressAlias}>
+          {address?.alias.toUpperCase()}
+        </span>
+        <span className={styles.addressName}>
+          {address.street + ', ' + address.number + ' - ' + address.apartment}
+        </span>
       </div>
       {setActive && !active && (
-        <span onClick={() => setActive({ ...active, address: index })} style={{ cursor: 'pointer' }}>
+        <span
+          onClick={() => setActive({ ...active, address: index })}
+          style={{ cursor: 'pointer' }}
+        >
           Seleccionar
         </span>
       )}
@@ -54,7 +61,14 @@ const Address = ({ updateUser, address, active, setActive, index }) => {
   )
 }
 
-const Addresses = ({ updateUser, userData, active, setActive, modal, setModal }) => {
+const Addresses = ({
+  updateUser,
+  userData,
+  active,
+  setActive,
+  modal,
+  setModal,
+}) => {
   const inputs = [
     { name: 'alias', label: 'Alias' },
     { name: 'street', label: 'Calle' },
@@ -80,7 +94,12 @@ const Addresses = ({ updateUser, userData, active, setActive, modal, setModal })
   const submitHandler = () => {
     let validate = Object.values(newAddress).some((prop) => prop === '')
     if (validate) {
-      return setCardTost({ time: 1500, icon: 'error', text: 'Complete todos los campos', view: true })
+      return setCardTost({
+        time: 1500,
+        icon: 'error',
+        text: 'Complete todos los campos',
+        view: true,
+      })
     }
     updateUser({ action: 'addAddress', newAddress })
     setModal(!modal)
@@ -93,8 +112,14 @@ const Addresses = ({ updateUser, userData, active, setActive, modal, setModal })
 
   return (
     <div className={styles.mainAddress}>
-      {cardTost.view && <CardTost properties={cardTost} setCardTost={setCardTost} />}
-      <img className={styles.world} src='https://i.postimg.cc/L5DpZzqw/globoterraqueo.png' alt='world' />
+      {cardTost.view && (
+        <CardTost properties={cardTost} setCardTost={setCardTost} />
+      )}
+      <img
+        className={styles.world}
+        src='https://i.postimg.cc/L5DpZzqw/globoterraqueo.png'
+        alt='world'
+      />
       {!userData?.addresses?.length ? (
         <div className={styles.containFormAddress}>
           <h1 className={styles.message}>No tenes ninguna direccion todavia</h1>
@@ -124,9 +149,18 @@ const Addresses = ({ updateUser, userData, active, setActive, modal, setModal })
               noValidate
               autoComplete='off'
             >
-              <ImCancelCircle className={styles.exit} onClick={() => setModal(false)} style={{ marginRight: '6%', color: 'tomato' }} />
+              <ImCancelCircle
+                className={styles.exit}
+                onClick={() => setModal(false)}
+                style={{ marginRight: '6%', color: 'tomato' }}
+              />
               {inputs.map((input) => (
-                <MyInput input={input} key={input.label} setNewAddress={setNewAddress} newAddress={newAddress} />
+                <MyInput
+                  input={input}
+                  key={input.label}
+                  setNewAddress={setNewAddress}
+                  newAddress={newAddress}
+                />
               ))}
             </Box>
             <button style={{ marginTop: '1rem' }} onClick={submitHandler}>
