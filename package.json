@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "host": "git add . && git commit -m AutoHostPa && git push origin master && git push heroku master",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm run build",
+    "host": "git add . && git commit HOST && git push origin master && git push heroku master"
   },
   "keywords": [],
   "author": "",

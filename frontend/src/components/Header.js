@@ -4,14 +4,13 @@ import { Link, NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import userActions from '../redux/actions/userActions'
 import { useState } from 'react'
-import socketActions from '../redux/actions/socketActions'
 import { RiMenuFoldLine } from 'react-icons/ri'
 
 const Header = (props) => {
   const [userMenu, setUserMenu] = useState(false)
   useEffect(() => {
-    localStorage.getItem('socket') && props.setSocketLS(localStorage.getItem('socket'))
     localStorage.getItem('token') && props.verifyToken()
+    !localStorage.getItem('cart') && localStorage.setItem('cart', JSON.stringify([]))
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -27,8 +26,8 @@ const Header = (props) => {
     ? props.user.data.google || props.user.data.admin.flag
       ? props.user.data.src
       : props.user.data.src !== 'assets/user.png'
-        ? 'https://quickly-food.herokuapp.com/' + props.user.data.src
-        : '/assets/user.png'
+      ? 'http://localhost:4000/' + props.user.data.src
+      : '/assets/user.png'
     : '/assets/user.png'
 
   const MyNavLink = ({ path, page }) => (
@@ -53,10 +52,20 @@ const Header = (props) => {
             <NavLink className={styles.textRoute} exact activeClassName={styles.active} to='/' onClick={() => setUserMenu(false)}>
               Home
             </NavLink>
-            <NavLink className={styles.textRoute} activeClassName={styles.active} to='/products' onClick={() => setUserMenu(false)}>
+            <NavLink
+              className={styles.textRoute}
+              activeClassName={styles.active}
+              to='/products'
+              onClick={() => setUserMenu(false)}
+            >
               Menu
             </NavLink>
-            <NavLink className={styles.textRoute} activeClassName={styles.active} to='/contact' onClick={() => setUserMenu(false)}>
+            <NavLink
+              className={styles.textRoute}
+              activeClassName={styles.active}
+              to='/contact'
+              onClick={() => setUserMenu(false)}
+            >
               Contacto
             </NavLink>
           </div>
@@ -103,7 +112,7 @@ const Header = (props) => {
                     <MyNavLink page={'Contacto'} path={'/contact'} />
                   </span>
                 }
-                <MyNavLink page={'Favoritos'} path={'/profile/fav'} />
+                <MyNavLink page={'Mis Favoritos'} path={'/profile/fav'} />
                 <MyNavLink page={'Mis Pedidos'} path={'/profile/his'} />
                 <MyNavLink page={'Mi Cuenta'} path={'/profile/data'} />
                 <Link
@@ -132,7 +141,6 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = {
   logOut: userActions.logOut,
-  setSocketLS: socketActions.setSocketLS,
   verifyToken: userActions.verifyToken,
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Header)

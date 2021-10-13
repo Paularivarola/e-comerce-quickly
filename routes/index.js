@@ -17,7 +17,7 @@ router.route('/user').put(passport, userControllers.updateUser).delete(passport,
 // PRODUCTS
 router.route('/products').get(productControllers.getProducts).put(productControllers.manageCart)
 router.route('/products/favs').put(passport, productControllers.favHandler)
-// .put(passport, productControllers.manageCart)
+router.route('/products/keep-cart').post(productControllers.keepCart)
 
 //ORDERS
 router.route('/orders').post(orderControllers.createOrder).put(orderControllers.cancellOrder)

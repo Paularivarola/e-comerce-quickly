@@ -8,7 +8,6 @@ import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
 import { BsPencilSquare, BsCheckSquare, BsXSquare } from 'react-icons/bs'
 import { connect } from 'react-redux'
-import { style } from '@mui/system'
 
 const MyTextField = ({ name, inputHandler }) => {
   const [update, setUpdate] = useState(false)
@@ -101,14 +100,15 @@ const PersonalData = ({ user, updateUser }) => {
           <div
             className={styles.containImage}
             style={{
-              backgroundImage: `url("${user
+              backgroundImage: `url("${
+                user
                   ? user.google || user.admin.flag
                     ? user.src
                     : user.src !== 'assets/user.png'
-                      ? 'https://quickly-food.herokuapp.com/' + user.src
-                      : '/assets/user.png'
+                    ? 'http://localhost:4000/' + user.src
+                    : '/assets/user.png'
                   : '/assets/user.png'
-                }")`,
+              }")`,
             }}
           ></div>
           <span className={styles.submitPhoto}>Cambiar foto</span>

@@ -8,6 +8,7 @@ import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import userActions from '../redux/actions/userActions'
+import CardTost from './CardTost'
 
 const Product = ({ product, setMod, user, manageCart, edit, editCartItem, userData, ...props }) => {
   const friesSizes = [
@@ -28,7 +29,7 @@ const Product = ({ product, setMod, user, manageCart, edit, editCartItem, userDa
   ]
 
   const initialCartItem = {
-    productId: product._id,
+    productId: userData ? product._id : product,
     clarifications: '',
     fries: friesSizes[0],
     extras: [],
@@ -38,7 +39,12 @@ const Product = ({ product, setMod, user, manageCart, edit, editCartItem, userDa
     totalPrice: product.price,
   }
   const [cartItem, setCartItem] = useState(edit ? editCartItem : initialCartItem)
-
+  const [cardTost, setCardTost] = useState({
+    time: '',
+    icon: '',
+    text: '',
+    view: false,
+  })
   const amount = (operation) => {
     const { totalAmount, unitaryPrice } = cartItem
     if (operation === 'sum') {
@@ -49,7 +55,12 @@ const Product = ({ product, setMod, user, manageCart, edit, editCartItem, userDa
           totalPrice: unitaryPrice * (totalAmount + 1),
         })
       } else {
-        alert('ha llegado al límite de este producto')
+        return setCardTost({
+          time: 2000,
+          icon: 'error',
+          text: 'No hay más stock de este producto',
+          view: true,
+        })
       }
     } else {
       if (totalAmount > 1)
@@ -86,18 +97,24 @@ const Product = ({ product, setMod, user, manageCart, edit, editCartItem, userDa
   }, [cartItem.fries, cartItem.extras, cartItem.drink])
 
   const addToCart = () => {
-    console.log(cartItem)
     manageCart({
       cartItem,
       action: edit ? 'editCartItem' : 'add',
       _id: userData?._id,
+      dif: edit ? editCartItem.totalAmount - cartItem.totalAmount : null,
     })
-    //alert toast
     setMod(false)
+    setCardTost({
+      time: 2000,
+      icon: 'success',
+      text: 'Producto agregado al carrito',
+      view: true,
+    })
   }
 
   return (
     <main data-modal='closeModal' className={styles.main}>
+      {cardTost.view && <CardTost properties={cardTost} setCardTost={setCardTost} />}
       <div className={styles.borderCard}>
         <ImCancelCircle className={styles.exit} onClick={() => setMod(false)} />
         <div className={styles.card}>

@@ -47,9 +47,16 @@ const SignForm = (props) => {
     src: null,
     google: false,
   })
+  const [cardTost, setCardTost] = useState({
+    time: '',
+    icon: '',
+    text: '',
+    view: false,
+  })
   const [shift, setShift] = useState(props.match.params.susi === 'signup')
   useEffect(() => {
     setShift(props.match.params.susi === 'signup')
+    // props.history.push('/sign-forms/' + props.match.params.susi)
   }, [props.match.params])
 
   const responseGoogle = (googleRegister) => {
@@ -110,12 +117,6 @@ const SignForm = (props) => {
     }
   }
 
-  const [cardTost, setCardTost] = useState({
-    time: '',
-    icon: '',
-    text: '',
-    view: false,
-  })
   const validatorFront = () => {
     if (!shift) {
       return Boolean(user.email && user.email.includes('@') && user.password)
@@ -159,7 +160,7 @@ const SignForm = (props) => {
           <div className={styles.boxGoogle}>
             <GoogleLogin
               className={styles.btnGoogle}
-              clientId='82723603056-4bt7ee9r5l0f9tlr6o14ut92g7erhg92.apps.googleusercontent.com'
+              clientId='82723603056-o12gv1mu2alua7qnd7igq2rlrj6he3gg.apps.googleusercontent.com'
               buttonText='con Google Account'
               onSuccess={responseGoogle}
               onFailure={responseGoogle}

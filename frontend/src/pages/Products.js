@@ -46,7 +46,6 @@ const Products = (props) => {
         return { page: 'products', comp: cat, name: cat }
       }),
   ]
-
   return (
     <div className={styles.mainProducts}>
       <div className={styles.categories}>
@@ -57,8 +56,8 @@ const Products = (props) => {
         <div className={styles.boxShop}>
           <p className={styles.welcome}>Hola {props.user && props.user.firstName}! ¿Qué vas a comer hoy?</p>
           <button className={styles.carritoBtn} onClick={() => props.history.push('/cart')}>
-            <MdShoppingCart style={{ color: 'white', fontSize: '1.8em', marginRight: '5%' }} />
-            Carrito
+            <span style={{ marginRight: '0.7rem', color: 'white', fontSize: '1rem' }}>{props?.cart?.length + ' '}</span>
+            <MdShoppingCart style={{ color: 'white', fontSize: '1.8em', marginRight: '5%' }} /> Carrito
           </button>
         </div>
       </div>
@@ -85,6 +84,7 @@ const mapStateToProps = (state) => {
   return {
     user: state.users.user,
     products: state.products.products,
+    cart: state.users.cart,
   }
 }
 const mapDispatchToProps = {

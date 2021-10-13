@@ -26,9 +26,10 @@ const NavItems = (props) => {
             exact
             to={`/${item.page}/${item.comp}`}
             className={
-              (path === item.comp ||
-                item?.desplegable?.some((i) => i.comp === path)) &&
-              styles.active
+              path === item.comp ||
+              item?.desplegable?.some((i) => i.comp === path)
+                ? styles.active
+                : undefined
             }
           >
             {item.name}
@@ -54,7 +55,7 @@ const NavItems = (props) => {
               <NavLink
                 exact
                 to={`/${item.page}/${desp.comp}`}
-                className={path === desp.comp && styles.active}
+                className={path === desp.comp ? styles.active : undefined}
               >
                 {desp.name}
               </NavLink>

@@ -47,7 +47,7 @@ const io = socket(server, {
 io.on('connection', (socket) => {
   const { socketId, admin } = socket.handshake.query
 
-  socketId ? socket.join(admin ? 'admins' : socketId) : io.to(socket.id).emit('socketId', { socketId: socket.id })
+  socket.join(admin ? 'admins' : socketId)
 
   !admin
     ? socket.on('createOrder', () => {

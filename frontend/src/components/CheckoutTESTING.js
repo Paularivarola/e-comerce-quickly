@@ -3,7 +3,7 @@ import { loadStripe } from '@stripe/stripe-js'
 import { CardElement, Elements, useElements, useStripe } from '@stripe/react-stripe-js'
 import { connect } from 'react-redux'
 import axios from 'axios'
-const HOST = 'https://quickly-food.herokuapp.com'
+const HOST = 'http://localhost:4000'
 const CARD_OPTIONS = {
   iconStyle: 'solid',
   style: {
@@ -42,7 +42,6 @@ const stripePromise = loadStripe(
 
 const Card2 = ({ userData, index }) => (
   <>
-    {console.log(userData)}
     <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
       <CheckoutForm2 paymentMethod={userData?.paymentCards[index]} customer={userData?.data?.customerId} />
     </Elements>
