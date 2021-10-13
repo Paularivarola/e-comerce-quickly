@@ -1,104 +1,44 @@
 import styles from '../styles/testimonios.module.css'
-import Carousel from "react-multi-carousel"
-import "react-multi-carousel/lib/styles.css"
 
 const Testimonios = () => {
     const testimonies = [
         {
-            userImg: 'https://i.ytimg.com/vi/xnoummdS3DA/maxresdefault.jpg',
-            name: 'Cosme Fulanito',
-            description: 'Tremendas las hamburguesa!! Mejores que las de Krusty',
+            userImg: 'https://i.postimg.cc/fRnR9n7q/opinion1.jpg',
+            name: 'Agustina López',
+            description: 'Excelente como siempre. Extensa carta, buenos platos, para todos los gustos. Muy buena atencion y tiempos.',
         },
         {
-            userImg: 'https://i.ytimg.com/vi/xnoummdS3DA/maxresdefault.jpg',
-            name: 'Cosme Fulanito',
-            description: 'Tremendas las hamburguesa!! Mejores que las de Krusty',
+            userImg: 'https://i.postimg.cc/sxG3MwMR/chico.jpg',
+            name: 'Carlos Gómez',
+            description: 'La comida es muy rica. Los precios son acordes. También nos atendieron muy bien. Así que todo de 10',
         },
         {
-            userImg: 'https://i.ytimg.com/vi/xnoummdS3DA/maxresdefault.jpg',
-            name: 'Cosme Fulanito',
-            description: 'Tremendas las hamburguesa!! Mejores que las de Krusty',
-        },
-        {
-            userImg: 'https://i.ytimg.com/vi/xnoummdS3DA/maxresdefault.jpg',
-            name: 'Cosme Fulanito',
-            description: 'Tremendas las hamburguesa!! Mejores que las de Krusty',
-        },
-        {
-            userImg: 'https://i.ytimg.com/vi/xnoummdS3DA/maxresdefault.jpg',
-            name: 'Cosme Fulanito',
-            description: 'Tremendas las hamburguesa!! Mejores que las de Krusty',
-        },
-        {
-            userImg: 'https://i.ytimg.com/vi/xnoummdS3DA/maxresdefault.jpg',
-            name: 'Cosme Fulanito',
-            description: 'Tremendas las hamburguesa!! Mejores que las de Krusty',
+            userImg: 'https://i.postimg.cc/Gmd9fnB8/opinion2.jpg',
+            name: 'Natalie Esperante',
+            description: 'Muy buen lugar, muy buenos platos, excelente carta de vinos.Están en todos los detalles, super recomendable'
         },
     ]
 
+   
     return (
         <>
-            <Carousel
-                className={styles.carouselContainer}
-                additionalTransfrom={0}
-                arrows
-                autoPlaySpeed={3000}
-                centerMode={false}
-                className="carouselTestimony"
-                containerClass="container-with-dots"
-                dotListClass=""
-                draggable
-                focusOnSelect={false}
-                infinite
-                itemClass="carouselTestimonies"
-                keyBoardControl
-                minimumTouchDrag={80}
-                renderButtonGroupOutside={false}
-                renderDotsOutside={false}
-                responsive={{
-                    desktop: {
-                        breakpoint: {
-                            max: 3000,
-                            min: 1024
-                        },
-                        items: 2,
-                        partialVisibilityGutter: 40
-                    },
-                    mobile: {
-                        breakpoint: {
-                            max: 464,
-                            min: 0
-                        },
-                        items: 1,
-                        partialVisibilityGutter: 30
-                    },
-                    tablet: {
-                        breakpoint: {
-                            max: 1024,
-                            min: 464
-                        },
-                        items: 1,
-                        partialVisibilityGutter: 30
-                    }
-                }}
-                showDots={false}
-                sliderClass="chao"
-                slidesToSlide={1}
-                swipeable
-            >
+            <div className={styles.textTestimony}>
+                <p className={styles.title1}>Ya todos usan Quickly</p>
+                <p className={styles.title2}>Testimonios</p>
+            </div>
+            <div className={styles.mainTestimony}>
                 {testimonies.map((testimony, index) => {
                     return (
                         <div className={styles.cardTestimony} key={index}>
                             <div className={styles.boxTestimony}>
-                                <hr className={styles.line}></hr>
                                 <div className={styles.circle} style={{ backgroundImage: `url("${testimony.userImg}")` }}></div>
-                                <hr className={styles.line}></hr>
                             </div>
                             <p className={styles.descriptionTestimony}>{testimony.description}</p>
                             <p className={styles.nameTestimony}>{testimony.name}</p>
-                        </div>)
+                        </div>
+                        )
                 })}
-            </Carousel>
+            </div>
         </>
     )
 }

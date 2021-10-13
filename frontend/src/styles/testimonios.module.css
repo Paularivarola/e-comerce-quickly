@@ -1,31 +1,41 @@
+.mainTestimony {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 60vh;
+    padding: 3% 5%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
 .cardTestimony {
+    width: 20%;
+    height: 100%;
+    background-color: rgb(247, 247, 247);
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
-    /* min-height: 50vh; */
-    /* width: 48vw; */
-    background-color: whitesmoke;
-    /* padding: 100%; */
-    margin: 20%;
-    width: 100vw;
+    box-shadow: 10px 10px 20px 1px rgba(0,0,0,0.14);
+    padding: 2%;
 }
 .boxTestimony {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* width: 40%; */
+    width: 100%;
 }
 .line {
     width: 25%;
     border-width: 0;
-    height: 3px;
+    height: 2px;
     background-color: #fe6849;
 }
 .circle {
-    border: solid 3px #fe6849;
-    width: 6rem;
-    height: 6rem;
+    border: solid 2px #fe6849;
+    width: 4rem;
+    height: 4rem;
     border-radius: 100px 100px;
     display: flex;
     justify-content: center;
@@ -36,11 +46,15 @@
 }
 .descriptionTestimony {
     width: 100%;
+    font-size: 2vmin;
+    margin-top: 5%;
 }
 .nameTestimony {
     text-align: center;
     font-weight: 700;
     margin-top: 5vh;
+    font-size: 2vmin;
+    color: tomato;
 }
 .descriptionTestimony {
     text-align: center;
@@ -49,4 +63,55 @@
 
 .lalala{
     background-color: red;
+}
+
+.testimonyTitle {
+    display: flex;
+}
+
+.textTestimony {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+.title1 {
+    color: slategray;
+    text-transform: uppercase;
+}
+.title2 {
+    color: slategray;
+    font-size: 3rem;
+    font-weight: lighter;
+}
+
+
+@media only screen and (max-width: 425px) {
+    .cardTestimony {
+        width: 30%;
+        height: 65%;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .cardTestimony {
+        width: 30%;
+        height: 70%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .cardTestimony {
+        width: 25%;
+        height: 80%;
+    }
+ 
+}
+
+@media only screen and (max-width: 991px) {
+    .cardTestimony {
+        width: 25%;
+        height: 85%;
+    }
 }

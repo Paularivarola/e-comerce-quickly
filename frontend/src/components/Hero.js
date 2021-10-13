@@ -13,7 +13,7 @@ const Hero = () => {
           </h1>
           <h3 className={styles.heroH3}>Disfrutá tu comida favorita desde la comodidad de tu casa.</h3>
           <h4 className={styles.heroH4}>Vos pedis y nosotros nos encargamos del resto!</h4>
-          <NavLink to='/products/all' className={styles.button}>
+          <NavLink to='/' className={styles.button}>
             Ver más categorias
           </NavLink>
         </div>
@@ -49,34 +49,43 @@ const Hero = () => {
           </div>
         </div>
       </div>
-      <div className={styles.heroBanner}>
-        <div className={styles.bannerBox}>
-          <div className={styles.circle}>
-            <FaHistory style={{ color: '#fe6849', fontSize: '3rem' }} />
-          </div>
-          <hr className={styles.line}></hr>
-          <div className={styles.circle}>
-            <AiFillCar style={{ color: '#fe6849', fontSize: '3rem' }} />
-          </div>
-          <hr className={styles.line}></hr>
-          <div className={styles.circle}>
-            <FaGrinWink style={{ color: '#fe6849', fontSize: '3rem' }} />
-          </div>
+      <div>
+        <div className={styles.titleBanner}>
+          <p className={styles.title1}>¡PEDÍ TODO EN EL MISMO LUGAR!</p>
+          <p className={styles.title2}>
+            ¡Vos a lo tuyo y lo demás <span className={styles.span1}>dejáselo a</span>{' '}
+            <span className={styles.span2}>Quickly!</span>
+          </p>
         </div>
-        <div className={styles.mainText}>
-          <div className={styles.textBox}>
-            <p className={styles.bannerTitle}>¡Ahorrá tiempo!</p>
-            <p className={styles.bannerText}>
-              Ya no tenés que perder tiempo cocinando. Pensá qué querés comer hoy y hacé tu pedido.
-            </p>
+        <div className={styles.heroBanner}>
+          <div className={styles.bannerBox}>
+            <div className={styles.circle}>
+              <FaHistory style={{ color: '#fe6849', fontSize: '3rem' }} />
+            </div>
+            <hr className={styles.line}></hr>
+            <div className={styles.circle}>
+              <AiFillCar style={{ color: '#fe6849', fontSize: '3rem' }} />
+            </div>
+            <hr className={styles.line}></hr>
+            <div className={styles.circle}>
+              <FaGrinWink style={{ color: '#fe6849', fontSize: '3rem' }} />
+            </div>
           </div>
-          <div className={styles.textBox}>
-            <p className={styles.bannerTitle}>Te lo llevamos a tu casa</p>
-            <p className={styles.bannerText}>Te hacemos la vida más facil y te llevamos tu plato a tu casa</p>
-          </div>
-          <div className={styles.textBox}>
-            <p className={styles.bannerTitle}>¡Se feliz!</p>
-            <p className={styles.bannerText}>Listo! Ahora disfrutá de tus comidas favoritas rápido, fácil y rico!</p>
+          <div className={styles.mainText}>
+            <div className={styles.textBox}>
+              <p className={styles.bannerTitle}>¡Ahorrá tiempo!</p>
+              <p className={styles.bannerText}>
+                Ya no tenés que perder tiempo cocinando. Pensá qué querés comer hoy y hacé tu pedido.
+              </p>
+            </div>
+            <div className={styles.textBox}>
+              <p className={styles.bannerTitle}>Te lo llevamos a tu casa</p>
+              <p className={styles.bannerText}>Te hacemos la vida más facil y te llevamos tu plato a tu casa</p>
+            </div>
+            <div className={styles.textBox}>
+              <p className={styles.bannerTitle}>¡Se feliz!</p>
+              <p className={styles.bannerText}>Listo! Ahora disfrutá de tus comidas favoritas rápido, fácil y rico!</p>
+            </div>
           </div>
         </div>
       </div>

@@ -8,7 +8,7 @@
 }
 
 .logo {
-  width: 10vw;
+  width: 10rem;
 }
 
 .iconsFooter {
@@ -29,22 +29,54 @@ flex-direction: column;
 .boxIcons {
   padding: 1vw;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .map {
   width: 25vw;
 } 
 
+.boxSocial {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
+.boxData {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 20vw;
+}
+
+.boxData p {
+  color: slategray;
+}
+
+.street {
+  width: 100%;
+}
+
+.navegation a {
+  color: slategray;
+}
+
+.navegation a:hover {
+  color: tomato;
+}
 
 
 @media only screen and (max-width: 425px) {
 .information {
   display: none;
 }
-.logo {
-  width: 35vw;
-}
+/* .logo {
+  width: 10rem;
+} */
 .iconsFooter {
   width: 8vw;
  padding: 0.5vw;
@@ -62,9 +94,9 @@ flex-direction: column;
   .information {
     display: none;
   }
-  .logo {
+  /* .logo {
     width: 20vw;
-  }
+  } */
   .iconsFooter {
     width: 3vw;
    padding: 0.5vw;

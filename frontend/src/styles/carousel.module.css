@@ -39,3 +39,9 @@
     font-size: 2rem;
     color: #fe6849;
 }
+.textPromos {
+    text-align: center;
+    color: slategrey;
+    font-size: 1.3rem;
+    margin-top: 3%;
+}

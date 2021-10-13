@@ -1,9 +1,11 @@
 .boxNavigation {
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0 5%;
+  /* background-color: springgreen; */
 }
 
 .logo {
@@ -74,13 +76,26 @@
   color: slategray;
 }
 
+.navegation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 25%;
+}
+
 .navegation a {
-  padding: 6vh 2vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 3%;
   text-decoration: none;
+  height: 100%;
 }
 
 .textRoute {
   color: slategrey;
+  /* height: 100%; */
 }
 .textRoute:hover {
   color: #fe6849;

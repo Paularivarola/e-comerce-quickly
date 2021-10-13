@@ -98,7 +98,7 @@
 
 /* BANNER */
 .heroBanner {
-    margin-top: 5%;
+    padding: 5% 0;
 }
 .bannerBox, .mainText {
     display: flex;
@@ -142,7 +142,31 @@
     font-size: 1rem;
     font-weight: 400;
 }
-
+.titleBanner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2%;
+}
+.title1 {
+    color: slategrey;
+    font-weight: 600;
+}
+.title2 {
+    width: 50%;
+    color: slategray;
+    font-size: 3rem;
+    font-weight: lighter;
+    text-align: center;
+}
+.span1, .span2 {
+    font-weight: bold;
+    color: slategrey;
+}
+.span2 {
+    color: tomato;
+}
 
 
 @media only screen and (max-width: 425px) {
