@@ -8,6 +8,7 @@ import { ImCancelCircle } from 'react-icons/im'
 import { BsTrash } from 'react-icons/bs'
 import CardTost from './CardTost'
 import Card from './CARD'
+import Swal from 'sweetalert2'
 
 const MyInput = ({ input, newAddress, setNewAddress }) => {
   const inputHandler = (e) => {
@@ -35,104 +36,71 @@ const MyInput = ({ input, newAddress, setNewAddress }) => {
   )
 }
 
-const PaymentCard = ({
-  updateUser,
-  card,
-  id,
-  setActive,
-  active,
-  index,
-  setCardTost,
-  setFunctionX,
-}) => {
+const PaymentCard = ({ updateUser, card, id, setActive, active, index, setCardTost, setFunctionX }) => {
+  const clickHandler = () => {
+    Swal.fire({
+      title: 'Desea conservar el carrito actual?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí',
+      denyButtonText: 'No',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        updateUser({ action: 'deletePaymentCard', paymentCardId: id })
+      }
+    })
+  }
+
   return (
     <div className={active ? styles.active : styles.addressCard}>
       <span className={styles.addressAlias}>
         Tarjeta {card?.brand.toUpperCase()} ...{card?.last4}
       </span>
       {setActive && !active && (
-        <span
-          onClick={() => setActive({ ...active, card: index })}
-          style={{ cursor: 'pointer' }}
-        >
+        <span onClick={() => setActive({ ...active, card: index })} style={{ cursor: 'pointer' }}>
           Seleccionar
         </span>
       )}
-      <BsTrash
-        onClick={() => {
-          setFunctionX(() =>
-            updateUser({ action: 'deletePaymentCard', paymentCardId: id })
-          )
-          setCardTost({
-            time: 7000,
-            icon: 'error',
-            text: 'No podras revertir estos cambios',
-            view: true,
-            tost: 'accept',
-            question: '¿Borrar?',
-          })
-        }}
-      />
+      <BsTrash onClick={clickHandler} style={{ cursor: 'pointer' }} />
     </div>
   )
 }
 
-const Address = ({
-  updateUser,
-  address,
-  active,
-  setActive,
-  index,
-  setCardTost,
-  setFunctionX,
-}) => {
+const Address = ({ updateUser, address, active, setActive, index, setCardTost, setFunctionX }) => {
+  const clickHandler = () => {
+    Swal.fire({
+      title: 'Desea conservar el carrito actual?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí',
+      denyButtonText: 'No',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        updateUser({ action: 'deleteAddress', addressId: address._id })
+      }
+    })
+  }
   return (
     <div className={active ? styles.active : styles.addressCard}>
       <div>
-        <span className={styles.addressAlias}>
-          {address?.alias.toUpperCase()}
-        </span>
-        <span className={styles.addressName}>
-          {address.street + ', ' + address.number + ' - ' + address.apartment}
-        </span>
+        <span className={styles.addressAlias}>{address?.alias.toUpperCase()}</span>
+        <span className={styles.addressName}>{address.street + ', ' + address.number + ' - ' + address.apartment}</span>
       </div>
       {setActive && !active && (
-        <span
-          onClick={() => setActive({ ...active, address: index })}
-          style={{ cursor: 'pointer' }}
-        >
+        <span onClick={() => setActive({ ...active, address: index })} style={{ cursor: 'pointer' }}>
           Seleccionar
         </span>
       )}
-      <BsTrash
-        style={{ color: 'tomato' }}
-        onClick={() => {
-          setFunctionX(() =>
-            updateUser({ action: 'deleteAddress', addressId: address._id })
-          )
-          setCardTost({
-            time: 7000,
-            icon: 'error',
-            text: 'No podras revertir estos cambios',
-            view: true,
-            tost: 'accept',
-            question: '¿Borrar?',
-          })
-        }}
-      />
+      <BsTrash style={{ color: 'tomato' }} onClick={clickHandler} style={{ cursor: 'pointer' }} />
     </div>
   )
 }
 //
-const Addresses = ({
-  updateUser,
-  userData,
-  active,
-  setActive,
-  modal,
-  setModal,
-  view,
-}) => {
+const Addresses = ({ updateUser, userData, active, setActive, modal, setModal, view }) => {
   const inputs = [
     { name: 'alias', label: 'Alias' },
     { name: 'street', label: 'Calle' },
@@ -148,14 +116,7 @@ const Addresses = ({
     neighborhood: '',
   }
 
-  const initialCardTostState = {
-    time: '',
-    icon: '',
-    text: '',
-    view: false,
-    tost: '',
-  }
-  const [cardTost, setCardTost] = useState(initialCardTostState)
+  const [cardTost, setCardTost] = useState(null)
   const [functionX, setFunctionX] = useState(null)
   const [newAddress, setNewAddress] = useState(initialState)
   const submitHandler = () => {
@@ -179,29 +140,21 @@ const Addresses = ({
 
   return (
     <div className={styles.mainAddress}>
-      {cardTost.view && (
-        <CardTost properties={cardTost} setCardTost={setCardTost} />
-      )}
-      <img
-        className={styles.world}
-        src='https://i.postimg.cc/L5DpZzqw/globoterraqueo.png'
-        alt='world'
-      />
-      {!userData?.addresses?.length || !userData?.paymentCards?.length ? (
+      <img className={styles.world} src='https://i.postimg.cc/L5DpZzqw/globoterraqueo.png' alt='world' />
+      {!userData?.addresses?.length && view && (
         <div className={styles.containFormAddress}>
-          <h1 className={styles.message}>
-            {view
-              ? 'No tenes ninguna direccion todavia'
-              : 'No hay tarjetas cargadas'}
-          </h1>
+          <h1 className={styles.message}>No tenes ninguna direccion todavia</h1>
+        </div>
+      )}
+      {!userData?.paymentCards?.length && !view && (
+        <div className={styles.containFormAddress}>
+          <h1 className={styles.message}>{view ? 'No tenes ninguna direccion todavia' : 'No hay tarjetas cargadas'}</h1>
           {!view && (
-            <h1 className={styles.message2}>
-              Asegurese de tener al menos una tarjeta cargada antes de realizar
-              su compra :)
-            </h1>
+            <h1 className={styles.message2}>Asegurese de tener al menos una tarjeta cargada antes de realizar su compra :)</h1>
           )}
         </div>
-      ) : (
+      )}
+      {(userData?.addresses?.length && view) || (userData?.paymentCards?.length && !view) ? (
         <div className={styles.addressesContainer}>
           {view
             ? userData.addresses.map((address, index) => (
@@ -230,15 +183,9 @@ const Addresses = ({
                 />
               ))}
         </div>
-      )}
-      {cardTost.view && (
-        <CardTost
-          properties={cardTost}
-          setCardTost={setCardTost}
-          accept={() => functionX()}
-          deny={() => setCardTost(initialState)}
-        />
-      )}
+      ) : null}
+
+      {/* {cardTost && <CardTost properties={cardTost} setCardTost={setCardTost} accept={functionX} deny={() => setCardTost(null)} />} */}
       {modal &&
         (!view ? (
           <div className={styles.containFormModal} data-modal='addressModal'>
@@ -268,12 +215,7 @@ const Addresses = ({
                   style={{ marginRight: '6%', color: 'tomato' }}
                 />
                 {inputs.map((input) => (
-                  <MyInput
-                    input={input}
-                    key={input.label}
-                    setNewAddress={setNewAddress}
-                    newAddress={newAddress}
-                  />
+                  <MyInput input={input} key={input.label} setNewAddress={setNewAddress} newAddress={newAddress} />
                 ))}
               </Box>
               <button style={{ marginTop: '1rem' }} onClick={submitHandler}>

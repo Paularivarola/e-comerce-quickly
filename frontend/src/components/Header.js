@@ -52,10 +52,20 @@ const Header = (props) => {
             <NavLink className={styles.textRoute} exact activeClassName={styles.active} to='/' onClick={() => setUserMenu(false)}>
               Home
             </NavLink>
-            <NavLink className={styles.textRoute} activeClassName={styles.active} to='/products' onClick={() => setUserMenu(false)}>
+            <NavLink
+              className={styles.textRoute}
+              activeClassName={styles.active}
+              to='/products'
+              onClick={() => setUserMenu(false)}
+            >
               Menu
             </NavLink>
-            <NavLink className={styles.textRoute} activeClassName={styles.active} to='/contact' onClick={() => setUserMenu(false)}>
+            <NavLink
+              className={styles.textRoute}
+              activeClassName={styles.active}
+              to='/contact'
+              onClick={() => setUserMenu(false)}
+            >
               Contacto
             </NavLink>
           </div>
@@ -102,7 +112,7 @@ const Header = (props) => {
                     <MyNavLink page={'Contacto'} path={'/contact'} />
                   </span>
                 }
-                <MyNavLink page={'Favoritos'} path={'/profile/fav'} />
+                <MyNavLink page={'Mis Favoritos'} path={'/profile/fav'} />
                 <MyNavLink page={'Mis Pedidos'} path={'/profile/his'} />
                 <MyNavLink page={'Mi Cuenta'} path={'/profile/data'} />
                 <Link

@@ -31,7 +31,7 @@ const ProductCard = ({ product, setModal, user, userData, favHandler }) => {
       setCardTost({
         time: 1500,
         icon: 'error',
-        text: 'Inicia Sesión para agregar a fav',
+        text: 'Inicia Sesión para agregar a tus favoritos',
         view: true,
       })
       return false
@@ -89,7 +89,22 @@ const ProductCard = ({ product, setModal, user, userData, favHandler }) => {
           </Stack>
         </div>
       </div>
-      <button data-modal='productModal' className={styles.addBtn} onClick={() => setModal(true, product)}>
+      <button
+        data-modal='productModal'
+        className={styles.addBtn}
+        onClick={() => {
+          if (!product.stock) {
+            setCardTost({
+              time: 1500,
+              icon: 'error',
+              text: 'No hay más stock de este producto',
+              view: true,
+            })
+          } else {
+            setModal(true, product)
+          }
+        }}
+      >
         <MdShoppingCart style={{ color: 'white', fontSize: '1.8em', marginRight: '5%' }} /> +
       </button>
     </div>

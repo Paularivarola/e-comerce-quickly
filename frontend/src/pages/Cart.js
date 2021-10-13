@@ -10,15 +10,7 @@ import userActions from '../redux/actions/userActions'
 import Product from '../components/Product'
 import CardTost from '../components/CardTost'
 
-const CartItem = ({
-  cartItem,
-  manageCart,
-  userData,
-  setEdit,
-  setCartItem,
-  index,
-  ...props
-}) => {
+const CartItem = ({ cartItem, manageCart, userData, setEdit, setCartItem, index, ...props }) => {
   let initialCardTost = {
     time: '',
     icon: '',
@@ -35,8 +27,7 @@ const CartItem = ({
           <div
             className={styles.productImg}
             style={{
-              backgroundImage:
-                'url("https://sevilla.abc.es/gurme/wp-content/uploads/sites/24/2013/04/pizza-margarita.jpg")',
+              backgroundImage: `url("${cartItem?.productId?.img}")`,
             }}
           ></div>
           <div className={styles.productDetails}>
@@ -63,9 +54,7 @@ const CartItem = ({
               setEdit(true)
             }}
           >
-            {userData && (
-              <FiEdit style={{ color: '#fe6849', fontSize: '1.5em' }} />
-            )}
+            {userData && <FiEdit style={{ color: '#fe6849', fontSize: '1.5em' }} />}
           </span>
           <span
             style={{ cursor: 'pointer' }}
@@ -85,11 +74,7 @@ const CartItem = ({
                 properties={cardTost}
                 setCardTost={setCardTost}
                 accept={() =>
-                  manageCart(
-                    userData
-                      ? { action: 'delete', cartItem, _id: userData._id }
-                      : { action: 'deleteLS', index }
-                  )
+                  manageCart(userData ? { action: 'delete', cartItem, _id: userData._id } : { action: 'deleteLS', index })
                 }
                 deny={() => setCardTost(initialCardTost)}
               />
@@ -124,19 +109,13 @@ const Cart = ({ manageCart, userData, ...props }) => {
   let [cardTost, setCardTost] = useState(initialCardTost)
   const amount = cart.reduce((acc, item) => acc + item.totalPrice, 0)
   let address = userData
-    ? userData?.addresses[0]?.street +
-      ` ` +
-      userData?.addresses[0]?.number +
-      ' ' +
-      userData?.addresses[0]?.apartment
+    ? userData?.addresses[0]?.street + ` ` + userData?.addresses[0]?.number + ' ' + userData?.addresses[0]?.apartment
     : null
   return (
     <div className={styles.mainCart}>
       <div className={styles2.categories}>
         <div className={styles2.categoriesList}>
-          <MdShoppingCart
-            style={{ color: '#fe6849', fontSize: '1.5em', marginRight: '5%' }}
-          />
+          <MdShoppingCart style={{ color: '#fe6849', fontSize: '1.5em', marginRight: '5%' }} />
           <p className={styles2.categoriesTitle}> Mi carrito</p>
         </div>
         <div className={styles.boxData}>
@@ -156,7 +135,7 @@ const Cart = ({ manageCart, userData, ...props }) => {
             </p>
             <button
               onClick={() =>
-                userData
+                userData && cart?.length
                   ? props.history.push('/checkout/order')
                   : !cart?.length
                   ? setCardTost({
@@ -217,22 +196,11 @@ const Cart = ({ manageCart, userData, ...props }) => {
                 setCardTost={setCardTost}
               />
             ))}
-            {!cart?.length && (
-              <p className={styles.productName}>
-                No tenés nada en el carrito, vuelve y encuentra algo para tí!
-              </p>
-            )}
+            {!cart?.length && <p className={styles.productName}>No tenés nada en el carrito, vuelve y encuentra algo para tí!</p>}
           </div>
         </div>
       </div>
-      {edit && (
-        <Product
-          product={cartItem.productId}
-          editCartItem={cartItem}
-          setMod={setEdit}
-          edit={edit}
-        />
-      )}
+      {edit && <Product product={cartItem.productId} editCartItem={cartItem} setMod={setEdit} edit={edit} />}
     </div>
   )
 }

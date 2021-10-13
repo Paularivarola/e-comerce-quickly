@@ -34,7 +34,7 @@ const Profile = (props) => {
   }, [props.match.params])
 
   const navItems = [
-    { page: 'profile', comp: 'fav', name: 'Favoritos' },
+    { page: 'profile', comp: 'fav', name: 'Mis Favoritos' },
     { page: 'profile', comp: 'his', name: 'Mis Pedidos' },
     {
       page: 'profile',
@@ -53,15 +53,11 @@ const Profile = (props) => {
     <div className={styles.mainProfile}>
       <div className={styles3.categories}>
         <div className={styles3.categoriesList}>
-          <BsPersonLinesFill
-            style={{ color: '#fe6849', fontSize: '1.5em', marginRight: '5%' }}
-          />
+          <BsPersonLinesFill style={{ color: '#fe6849', fontSize: '1.5em', marginRight: '5%' }} />
           <p className={styles3.categoriesTitle}> Mi cuenta</p>
         </div>
         <div className={styles3.boxShop}>
-          <p className={styles3.welcome}>
-            Hola {props.user && props.user.firstName}, que bueno verte por acá!
-          </p>
+          <p className={styles3.welcome}>Hola {props.user && props.user.firstName}, que bueno verte por acá!</p>
           {(props.history.location.pathname === '/profile/payment' ||
             props.history.location.pathname === '/profile/addresses') && (
             <div className={styles.btnAddress}>
@@ -84,28 +80,16 @@ const Profile = (props) => {
             {!props.userData ? (
               <Preloader />
             ) : view === 'fav' ? (
-              <Favorites
-                favorites={props.userData?.favouriteProductsId}
-                setFormConfirm={setFormConfirm}
-              />
+              <Favorites favorites={props.userData?.favouriteProductsId} setFormConfirm={setFormConfirm} />
             ) : view === 'his' ? (
-              <History
-                orders={props.userData?.ordersId}
-                setFormConfirm={setFormConfirm}
-              />
+              <History orders={props.userData?.ordersId} setFormConfirm={setFormConfirm} />
             ) : (
               <div className={styles2.containerData}>
                 <div className={styles2.containAllProfile}>
                   {view === 'data' ? (
-                    <PersonalData
-                      user={props.userData?.data}
-                      setCancelForm={setFormConfirm}
-                    />
+                    <PersonalData user={props.userData?.data} setCancelForm={setFormConfirm} />
                   ) : view === 'password' ? (
-                    <ChangePassword
-                      user={props.userData?.data}
-                      setCancelForm={setFormConfirm}
-                    />
+                    <ChangePassword user={props.userData?.data} setCancelForm={setFormConfirm} />
                   ) : (
                     <Addresses
                       user={props.userData?.data}
