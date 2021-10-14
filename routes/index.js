@@ -2,6 +2,7 @@ const express = require('express')
 const userControllers = require('../controllers/app/userControllers')
 const productControllers = require('../controllers/app/productControllers')
 const orderControllers = require('../controllers/app/orderControllers')
+const ticketControllers = require('../controllers/app/ticketControllers')
 const passport = require('passport').authenticate('jwt', { session: false })
 const validatorSignUp = require('../controllers/middlewares/validatorSignUp')
 //Validar con joi las actualizaciones de usuario
@@ -25,6 +26,9 @@ router.route('/order/:id').put(orderControllers.cancellOrder)
 
 //EMAIL
 // router.route('/mail').post(passport)
+
+//TICKETS
+router.route('/tickets').post(ticketControllers.createTicket).get(ticketControllers.getTickets)
 
 router.route('/create-payment-intent').post(userControllers.paymentIntent)
 router.route('/attach-payment-method').post(userControllers.attach)
