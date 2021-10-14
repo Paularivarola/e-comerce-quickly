@@ -23,9 +23,12 @@ const userControllers = {
       if (req.files) {
         const { fileImg } = req.files
         picture = `${newUser._id}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`
-        fileImg.mv(`${__dirname}/../../assets/${newUser._id}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`, (err) => {
-          if (err) return console.log(err)
-        })
+        fileImg.mv(
+          `${__dirname}/../../assets/${newUser._id}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`,
+          (err) => {
+            if (err) return console.log(err)
+          }
+        )
       } else {
         picture = src ? src : 'assets/user.png'
       }
@@ -54,6 +57,8 @@ const userControllers = {
     const { email, password, google } = req.body
     try {
       let user = await User.findOne({ 'data.email': email })
+        .populate({ path: 'cart.productId', model: 'product' })
+        .populate({ path: 'ordersId', model: 'order' })
       if (!user) throw new Error('No encotramos una cuenta asociada a ese email')
       if (user.data.google && !google) {
         throw new Error('Debes iniciar sesión con Google')
@@ -118,8 +123,11 @@ const userControllers = {
     let options = { new: true }
     try {
       if (!operation) throw new Error()
-      if (action === 'updatePass' && !bcrypt.compareSync(currentPassword, req.user.data.password)) throw new Error('Contraseña incorrecta')
+      if (action === 'updatePass' && !bcrypt.compareSync(currentPassword, req.user.data.password))
+        throw new Error('Contraseña incorrecta')
       let user = await User.findOneAndUpdate({ _id }, operation, options)
+        .populate({ path: 'cart.productId', model: 'product' })
+        .populate({ path: 'ordersId', model: 'order' })
       res.json({
         success: true,
         user: {

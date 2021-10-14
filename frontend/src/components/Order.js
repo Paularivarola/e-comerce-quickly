@@ -2,6 +2,7 @@ import styles from '../styles/order.module.css'
 import { connect } from 'react-redux'
 import { useEffect, useRef, useState } from 'react'
 import Card2 from '../components/CheckoutTESTING'
+import CardTost from './CardTost'
 
 const Order = (props) => {
   let userData = props.userData
@@ -30,47 +31,44 @@ const Order = (props) => {
 
   const emailRef = useRef()
   const sendForm = () => {
-    if (emailRef.current?.value !== user.email) return setCardTost({ time: 1500, icon: 'error', text: 'Confirmá el email pa', view: true })
-
-    setCardTost({ time: 1500, icon: 'success', text: 'Enviado, todo ok', view: true })
+    if (emailRef.current?.value !== user.email)
+      return setCardTost({ time: 1500, icon: 'error', text: 'Confirmá el email pa', view: true })
+    if (!userData?.addresses?.length)
+      return setCardTost({ time: 1500, icon: 'error', text: 'Debes seleccionar un método de pago', view: true })
+    if (!userData?.paymentCards?.length)
+      return setCardTost({ time: 1500, icon: 'error', text: 'Debes seleccionar una dirección', view: true })
+    setCardTost({ time: 1500, icon: 'success', text: 'Está todo en orden, ya puedes pagar!', view: true })
     setPay(true)
   }
+  const formatter = new Intl.NumberFormat('es-AR', {
+    style: 'currency',
+    currency: 'ARS',
+  })
 
   return (
     <div className={styles.mainOrder}>
       <div className={styles.OrderContainer}>
         <h4 className={styles.orderNumber}>
-          <pan className={styles.title}>Nro de orden:</pan> 000{' '}
+          <span className={styles.title}>Nro de orden:</span>{' '}
+          {userData ? userData?._id + '_ord' + userData?.ordersId?.length : '.-'}{' '}
         </h4>
         <div className={styles.table}>
           <div className={styles.head}>
             <div className={styles.title}>Cantidad</div>
             <div className={styles.menu}>Menu</div>
-            {/* <div className={styles.title}>Extras</div> */}
             <div className={styles.title}>Precio Unit.</div>
           </div>
-          <div className={styles.bodyOrder}>
-            <div className={styles.data}>cantidad</div>
-            <div className={styles.data}>nombre</div>
-            {/* <div className={styles.data}>extras</div> */}
-            <div className={styles.data}>precio</div>
-          </div>
-          <div className={styles.bodyOrder}>
-            <div className={styles.data}>cantidad</div>
-            <div className={styles.data}>nombre</div>
-            {/* <div className={styles.data}>extras</div> */}
-            <div className={styles.data}>precio</div>
-          </div>
-          <div className={styles.bodyOrder}>
-            <div className={styles.data}>cantidad</div>
-            <div className={styles.data}>nombre</div>
-            {/* <div className={styles.data}>extras</div> */}
-            <div className={styles.data}>precio</div>
-          </div>
+          {props?.cart?.map((cartItem, index) => (
+            <div key={'cartItem' + index} className={styles.bodyOrder}>
+              <div className={styles.data}>{cartItem.totalAmount}</div>
+              <div className={styles.dataMenu}>{cartItem.productId.name}</div>
+              <div className={styles.data}>{formatter.format(cartItem.unitaryPrice)}</div>
+            </div>
+          ))}
         </div>
         <div className={styles.totalPrice}>
           <p>
-            <span>Total:</span> 000
+            <span>Total:</span> {formatter.format(props.cart.reduce((acc, item) => acc + item.totalPrice, 0))}
           </p>
         </div>
       </div>
@@ -95,10 +93,13 @@ const Order = (props) => {
         </div>
         <div className={styles.containButtonSend}>
           <span>
-            <span>{pay ? <Card2 index={0} /> : <button onClick={() => sendForm()}>Confirmar</button>}</span>
+            <span>
+              {pay ? <Card2 index={props.active.card} {...props} /> : <button onClick={() => sendForm()}>Confirmar</button>}
+            </span>
           </span>
         </div>
       </div>
+      {cardTost.view && <CardTost properties={cardTost} setCardTost={setCardTost} />}
     </div>
   )
 }

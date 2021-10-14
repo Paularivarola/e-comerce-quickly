@@ -3,6 +3,7 @@ import { loadStripe } from '@stripe/stripe-js'
 import { CardElement, Elements, useElements, useStripe } from '@stripe/react-stripe-js'
 import { connect } from 'react-redux'
 import axios from 'axios'
+import orderActions from '../redux/actions/orderActions'
 const HOST = 'http://localhost:4000'
 const CARD_OPTIONS = {
   iconStyle: 'solid',
@@ -40,26 +41,35 @@ const stripePromise = loadStripe(
   'pk_test_51JiHmiD8MtlvyDMXOy1Xz9IRz7S6hXvSX3YorvlFJSNbByoEHqgmIhvVuOuYgA3PiOR9hxBM0QzQcf6OlJs4VYgI00pB5OSjXZ'
 )
 
-const Card2 = ({ userData, index }) => (
+const Card2 = ({ userData, index, cart, ...props }) => (
   <>
     <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
-      <CheckoutForm2 paymentMethod={userData?.paymentCards[index]} customer={userData?.data?.customerId} />
+      <CheckoutForm2
+        paymentMethod={userData?.paymentCards[index]}
+        customer={userData?.data?.customerId}
+        userData={userData}
+        cart={cart}
+        {...props}
+      />
     </Elements>
   </>
 )
 const mapStateToProps = (state) => {
-  return { userData: state.users.userData }
+  return { userData: state.users.userData, cart: state.users.cart }
 }
 
-export default connect(mapStateToProps)(Card2)
+const mapDispatchToProps = {
+  createOrder: orderActions.createOrder,
+}
 
-const CheckoutForm2 = ({ paymentMethod, customer }) => {
+export default connect(mapStateToProps, mapDispatchToProps)(Card2)
+
+const CheckoutForm2 = ({ userData, paymentMethod, customer, createOrder, cart, ...props }) => {
   const [succeeded, setSucceeded] = useState(false)
   const [error, setError] = useState(null)
   const [processing, setProcessing] = useState('')
   const [disabled, setDisabled] = useState(false)
   const [paymentIntent, setpaymentIntent] = useState('')
-  const stripe = useStripe()
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
@@ -68,9 +78,7 @@ const CheckoutForm2 = ({ paymentMethod, customer }) => {
 
   const createPayment = async () => {
     const cart = JSON.parse(localStorage.getItem('cart'))
-    console.log('hola')
     let res = await axios.post(`${HOST}/api/create-payment-intent`, { cart, customer })
-    console.log(res.data)
     setpaymentIntent(res.data.paymentIntent.id)
   }
 
@@ -89,6 +97,14 @@ const CheckoutForm2 = ({ paymentMethod, customer }) => {
       customer,
     })
 
+    const order = {
+      purchased: cart,
+      customerId: customer,
+      metadata: payload,
+      userId: userData._id,
+      paymentMethod,
+    }
+    console.log(order)
     if (payload.error) {
       setError(`Payment failed ${payload.error.message}`)
       setProcessing(false)
@@ -96,22 +112,17 @@ const CheckoutForm2 = ({ paymentMethod, customer }) => {
       setError(null)
       setProcessing(false)
       setSucceeded(true)
+      createOrder(props, order)
     }
   }
 
   return (
     <form id='payment-form' onSubmit={handleSubmit}>
-      {/* <CardElement
-        id='card-element'
-        options={CARD_OPTIONS}
-        onChange={handleChange}
-      /> */}
       <button disabled={processing || disabled || succeeded} id='submit'>
         <span id='button-text'>
           {processing ? <div className='spinner' id='spinner'></div> : succeeded ? 'Gracias por tu compra' : 'Pagá ahora'}
         </span>
       </button>
-      {/* Show any error that happens when processing the payment */}
       {error && (
         <div className='card-error' role='alert'>
           {error}

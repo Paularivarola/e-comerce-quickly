@@ -12,6 +12,7 @@ module.exports = passport.use(
     (payload, done) => {
       User.findOne({ _id: payload._doc._id })
         .populate({ path: 'cart.productId', model: 'product' })
+        .populate({ path: 'ordersId', model: 'order' })
         .then((response) => {
           if (!response) {
             return done(null, false)

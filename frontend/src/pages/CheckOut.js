@@ -13,8 +13,8 @@ import Order from '../components/Order'
 import Preloader from '../components/Preloader'
 
 const CheackOut = (props) => {
-  let userData = props.userData
   const [view, setView] = useState(props.match.params.page)
+  const [active, setActive] = useState({ card: 0, address: 0 })
 
   const [cardTost, setCardTost] = useState({
     time: '',
@@ -40,26 +40,17 @@ const CheackOut = (props) => {
       name: 'Metodo de pago',
     },
   ]
-
   const [modal, setModal] = useState(false)
-  const [cardModal, setCardModal] = useState(false)
-
   return (
     <div className={styles.mainCheckout}>
-      {cardTost.view && (
-        <CardTost properties={cardTost} setCardTost={setCardTost} />
-      )}
+      {cardTost.view && <CardTost properties={cardTost} setCardTost={setCardTost} />}
       <div className={styles3.categories}>
         <div className={styles3.categoriesList}>
-          <BsFillBagCheckFill
-            style={{ color: '#fe6849', fontSize: '1.5em', marginRight: '5%' }}
-          />
+          <BsFillBagCheckFill style={{ color: '#fe6849', fontSize: '1.5em', marginRight: '5%' }} />
           <p className={styles3.categoriesTitle}> CheckOut</p>
         </div>
         <div className={styles3.boxShop}>
-          <p className={styles3.welcome}>
-            Buena elección {props.user && props.user.firstName}!
-          </p>
+          <p className={styles3.welcome}>Buena elección {props.user && props.user.firstName}!</p>
           {(props.history.location.pathname === '/checkout/payment' ||
             props.history.location.pathname === '/checkout/addresses') && (
             <div className={styles.btnAddress}>
@@ -70,17 +61,8 @@ const CheackOut = (props) => {
                   marginRight: '5%',
                 }}
               />
-              <span
-                onClick={() =>
-                  props.history.location.pathname === '/checkout/payment'
-                    ? setCardModal(true)
-                    : setModal(!modal)
-                }
-              >
-                Agregar{' '}
-                {props.history.location.pathname === '/checkout/payment'
-                  ? 'tarjeta'
-                  : 'dirección'}
+              <span onClick={() => setModal(true)}>
+                Agregar {props.history.location.pathname === '/checkout/payment' ? 'tarjeta' : 'dirección'}
               </span>
             </div>
           )}
@@ -95,19 +77,15 @@ const CheackOut = (props) => {
               <div className={styles4.containAllProfile}>
                 {view === 'addresses' || view === 'payment' ? (
                   <Addresses
+                    active={active}
+                    setActive={setActive}
                     user={props.userData?.data}
                     modal={modal}
                     setModal={setModal}
-                    cardModal={cardModal}
-                    setCardModal={setCardModal}
                     view={view === 'addresses'}
                   />
                 ) : (
-                  <Order
-                    user={props.userData?.data}
-                    modal={modal}
-                    setModal={setModal}
-                  />
+                  <Order active={active} user={props.userData?.data} cart={props?.cart} {...props} />
                 )}
               </div>
             </div>
@@ -122,6 +100,7 @@ const mapStateToProps = (state) => {
   return {
     userData: state.users.userData,
     user: state.users.user,
+    cart: state.users.cart,
   }
 }
 

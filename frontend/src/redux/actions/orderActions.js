@@ -3,7 +3,7 @@ const HOST = 'http://localhost:4000'
 
 const orderActions = {
   getUserOders: (userId) => {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
       try {
         const res = await axios.get(`${HOST}/api/orders`, userId)
         if (!res.data.success) throw new Error(res.data.error)
@@ -14,23 +14,22 @@ const orderActions = {
       }
     }
   },
-
-  // const { products, delivery, paymentMethod } = req.body
-  createOrder: (order) => {
-    return async (dispatch, getState) => {
+  createOrder: (props, order) => {
+    return async (dispatch) => {
+      console.log(order)
       try {
         const res = await axios.post(`${HOST}/api/orders`, order)
         if (!res.data.success) throw new Error(res.data.error)
         const { newOrder, userData } = res.data.response
-        return dispatch({ type: 'CREATE_ORDER', payload: { newOrder, userData } })
+        dispatch({ type: 'CREATE_ORDER', payload: { newOrder, userData } })
+        return props.history.push('/profile/his')
       } catch (e) {
         return { success: false, response: null, error: e.message }
       }
     }
   },
-
   cancelOrder: (orderId) => {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
       try {
         const res = await axios.put(`${HOST}/api/orders`, orderId)
         if (!res.data.success) throw new Error(res.data.error)

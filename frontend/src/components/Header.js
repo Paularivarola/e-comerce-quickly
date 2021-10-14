@@ -52,16 +52,17 @@ const Header = (props) => {
             <NavLink className={styles.textRoute} exact activeClassName={styles.active} to='/' onClick={() => setUserMenu(false)}>
               Home
             </NavLink>
-            <span id='menu'>
-              <NavLink
-                className={styles.textRoute}
-                activeClassName={styles.active}
-                to='/products'
-                onClick={() => setUserMenu(false)}
-              >
-                Menu
-              </NavLink>
-            </span>
+
+            <NavLink
+              id='menu'
+              className={styles.textRoute}
+              activeClassName={styles.active}
+              to='/products'
+              onClick={() => setUserMenu(false)}
+            >
+              Menu
+            </NavLink>
+
             <NavLink
               className={styles.textRoute}
               activeClassName={styles.active}

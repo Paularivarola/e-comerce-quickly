@@ -3,7 +3,7 @@ let initialState = {
   user: null,
   userData: null,
   cart: JSON.parse(localStorage.getItem('cart')) || [],
-  orders: JSON.parse(localStorage.getItem('orders')) || [],
+  orders: null,
   socket: null,
 }
 
@@ -19,6 +19,7 @@ const userReducer = (state = initialState, action) => {
         user: user,
         userData: userData,
         cart: userData.cart,
+        orders: userData.ordersId,
       }
     case 'CREATE_ORDER':
       state.socket.emit('createOrder')

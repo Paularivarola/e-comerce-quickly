@@ -6,7 +6,6 @@ import userActions from '../redux/actions/userActions'
 import { connect } from 'react-redux'
 import { ImCancelCircle } from 'react-icons/im'
 import { BsTrash } from 'react-icons/bs'
-import CardTost from './CardTost'
 import Card from './CARD'
 import Swal from 'sweetalert2'
 
@@ -36,7 +35,7 @@ const MyInput = ({ input, newAddress, setNewAddress }) => {
   )
 }
 
-const PaymentCard = ({ updateUser, card, id, setActive, active, index, setCardTost, setFunctionX }) => {
+const PaymentCard = ({ updateUser, card, id, setActive, active, index }) => {
   const clickHandler = () => {
     Swal.fire({
       title: 'Desea conservar el carrito actual?',
@@ -54,21 +53,20 @@ const PaymentCard = ({ updateUser, card, id, setActive, active, index, setCardTo
   }
 
   return (
-    <div className={active ? styles.active : styles.addressCard}>
+    <div
+      onClick={() => setActive({ ...active, card: index })}
+      style={{ cursor: 'pointer' }}
+      className={active ? styles.activeCard : styles.addressCard}
+    >
       <span className={styles.addressAlias}>
         Tarjeta {card?.brand.toUpperCase()} ...{card?.last4}
       </span>
-      {setActive && !active && (
-        <span onClick={() => setActive({ ...active, card: index })} style={{ cursor: 'pointer' }}>
-          Seleccionar
-        </span>
-      )}
       <BsTrash onClick={clickHandler} style={{ cursor: 'pointer' }} />
     </div>
   )
 }
 
-const Address = ({ updateUser, address, active, setActive, index, setCardTost, setFunctionX }) => {
+const Address = ({ updateUser, address, active, setActive, index }) => {
   const clickHandler = () => {
     Swal.fire({
       title: 'Desea conservar el carrito actual?',
@@ -85,16 +83,15 @@ const Address = ({ updateUser, address, active, setActive, index, setCardTost, s
     })
   }
   return (
-    <div className={active ? styles.active : styles.addressCard}>
+    <div
+      onClick={() => setActive({ ...active, address: index })}
+      style={{ cursor: 'pointer' }}
+      className={active ? styles.activeCard : styles.addressCard}
+    >
       <div>
         <span className={styles.addressAlias}>{address?.alias.toUpperCase()}</span>
         <span className={styles.addressName}>{address.street + ', ' + address.number + ' - ' + address.apartment}</span>
       </div>
-      {setActive && !active && (
-        <span onClick={() => setActive({ ...active, address: index })} style={{ cursor: 'pointer' }}>
-          Seleccionar
-        </span>
-      )}
       <BsTrash style={{ color: 'tomato' }} onClick={clickHandler} style={{ cursor: 'pointer' }} />
     </div>
   )
@@ -117,7 +114,7 @@ const Addresses = ({ updateUser, userData, active, setActive, modal, setModal, v
   }
 
   const [cardTost, setCardTost] = useState(null)
-  const [functionX, setFunctionX] = useState(null)
+
   const [newAddress, setNewAddress] = useState(initialState)
   const submitHandler = () => {
     let validate = Object.values(newAddress).some((prop) => prop === '')
@@ -159,7 +156,6 @@ const Addresses = ({ updateUser, userData, active, setActive, modal, setModal, v
           {view
             ? userData.addresses.map((address, index) => (
                 <Address
-                  setFunctionX={setFunctionX}
                   key={address._id}
                   address={address}
                   updateUser={updateUser}
@@ -171,7 +167,6 @@ const Addresses = ({ updateUser, userData, active, setActive, modal, setModal, v
               ))
             : userData?.paymentCards?.map((payment, index) => (
                 <PaymentCard
-                  setFunctionX={setFunctionX}
                   updateUser={updateUser}
                   card={payment.card}
                   id={payment.id}
