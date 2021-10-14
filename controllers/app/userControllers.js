@@ -73,6 +73,8 @@ const userControllers = {
       res.json({ success: false, error: error.message })
     }
   },
+
+  uploadImgMob: () => {},
   updateUser: async (req, res) => {
     const { _id } = req.user
     const { action, userData, newPaymentCard, paymentCardId, newAddress, addressId, password, currentPassword } = req.body

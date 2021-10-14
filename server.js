@@ -39,7 +39,7 @@ const server = app.listen(PORT, HOST, () => console.log(`Server listening on por
 
 const io = socket(server, {
   cors: {
-    origin: '*',
+    origin: 'https://quickly-food.herokuapp.com/',
     credentials: true,
   },
 })
