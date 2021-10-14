@@ -20,15 +20,15 @@ a.active {
   color: #fe6849 !important;
 }
 .boxProfile {
-	display: flex;
-	justify-content: flex-start;
-	align-items: flex-start;
-	border: solid 1px rgb(214, 214, 214);
-	margin-top: 1%;
-	border-radius: 5px;
-	width: 100%;
-	min-height: 100%;
-	box-shadow: 10px 10px 10px -1px rgba(0,0,0,0.15);
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border: solid 1px rgb(214, 214, 214);
+  margin-top: 1%;
+  border-radius: 5px;
+  width: 100%;
+  min-height: 100%;
+  box-shadow: 10px 10px 10px -1px rgba(0, 0, 0, 0.15);
 }
 .adminNav {
   width: 20%;
@@ -43,6 +43,9 @@ a.active {
 .containerRenderView {
   flex: 1;
   height: 100%;
+  border-bottom-right-radius: 1.5vw;
+  border-top-right-radius: 1.5vw;
+  overflow: auto;
   /* padding-top: 1%; */
   /* background-color: rgba(255, 4, 4, 0.06); */
 }
@@ -113,12 +116,12 @@ a.active {
   width: 40%;
 }
 .boxFav {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	background-color: whitesmoke;
-	border-bottom: solid 1px rgb(201, 201, 201);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: whitesmoke;
+  border-bottom: solid 1px rgb(201, 201, 201);
 }
 .boxFav img {
   width: 30%;
@@ -144,16 +147,16 @@ a.active {
   width: 50%;
 }
 .btnAddress {
-	display: flex;
-	width: 20%;
-	cursor: pointer;
+  display: flex;
+  width: 20%;
+  cursor: pointer;
 }
 .btnAddress span {
-	color: tomato;
-	font-weight: 500;
+  color: tomato;
+  font-weight: 500;
 }
 .btnAddress:hover {
-	opacity: 60%;
+  opacity: 60%;
 }
 
 div.containerButtonCheck {

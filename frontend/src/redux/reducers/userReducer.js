@@ -29,8 +29,9 @@ const userReducer = (state = initialState, action) => {
         orders: [...state.orders, newOrder],
         userData: action.payload.userData,
       }
-    case 'CANCEL_ORDER':
+    case 'CANCELL_ORDER':
       let { orderCancelled } = action.payload
+      state.socket.emit('cancellOrder')
       const cancell = (orders) => {
         return orders.map((order) => {
           return order._id === orderCancelled._id ? orderCancelled : order

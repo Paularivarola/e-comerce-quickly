@@ -40,9 +40,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 1rem;
+  margin: 2rem;
   width: 50%;
-  height: 50vh;
+  height: 38vh;
   flex-direction: column;
 }
 
@@ -54,7 +54,7 @@
   padding: 3%;
 }
 .form textarea:focus {
-  outline-color: #ED6C02;
+  outline-color: #ed6c02;
 }
 
 /* ::placeholder {
@@ -76,10 +76,7 @@ button {
   text-transform: uppercase;
 }
 
-
-
 @media screen and (max-width: 1280px) {
-
   .containerContact {
     justify-content: center;
     align-items: center;
@@ -131,34 +128,33 @@ button {
 }
 
 @media screen and (max-width: 576px) {
-    .containerContact {
-      justify-content: center;
-      align-items: center;
-    }
-    .deliveryImage {
-      width: 40vw;
-    }
-    .titleContact {
-      font-size: 5vw;
-    }
-    .form input {
-      width: 80%;
-      border-radius: 2vw;
-    }
-    .form textarea {
-      width: 80%;
-      border-radius: 3vw;
-    }
-    .containerImage {
-      margin-bottom: 20vw;
-    }
+  .containerContact {
+    justify-content: center;
+    align-items: center;
   }
+  .deliveryImage {
+    width: 40vw;
+  }
+  .titleContact {
+    font-size: 5vw;
+  }
+  .form input {
+    width: 80%;
+    border-radius: 2vw;
+  }
+  .form textarea {
+    width: 80%;
+    border-radius: 3vw;
+  }
+  .containerImage {
+    margin-bottom: 20vw;
+  }
+}
 
 @media screen and (max-width: 480px) {
   .containerContact {
     flex-wrap: wrap;
     flex-direction: column-reverse;
-
   }
   .deliveryImage {
     display: none;

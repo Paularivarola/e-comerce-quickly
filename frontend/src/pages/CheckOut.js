@@ -85,7 +85,13 @@ const CheackOut = (props) => {
                     view={view === 'addresses'}
                   />
                 ) : (
-                  <Order active={active} user={props.userData?.data} cart={props?.cart} {...props} />
+                  <Order
+                    deliveryAddress={active.address}
+                    active={active}
+                    user={props.userData?.data}
+                    cart={props?.cart}
+                    {...props}
+                  />
                 )}
               </div>
             </div>

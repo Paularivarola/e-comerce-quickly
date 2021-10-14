@@ -94,7 +94,11 @@ const Order = (props) => {
         <div className={styles.containButtonSend}>
           <span>
             <span>
-              {pay ? <Card2 index={props.active.card} {...props} /> : <button onClick={() => sendForm()}>Confirmar</button>}
+              {pay ? (
+                <Card2 index={props.active.card} deliveryAddress={props.deliveryAddress} {...props} />
+              ) : (
+                <button onClick={() => sendForm()}>Confirmar</button>
+              )}
             </span>
           </span>
         </div>

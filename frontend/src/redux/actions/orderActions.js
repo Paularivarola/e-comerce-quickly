@@ -28,14 +28,15 @@ const orderActions = {
       }
     }
   },
-  cancelOrder: (orderId) => {
+  cancellOrder: (orderId) => {
     return async (dispatch) => {
       try {
-        const res = await axios.put(`${HOST}/api/orders`, orderId)
+        const res = await axios.put(`${HOST}/api/order/` + orderId)
         if (!res.data.success) throw new Error(res.data.error)
-        const { orderCancelled } = res.data.resoponse
-        return dispatch({ type: 'CANCEL_ORDER', payload: { orderCancelled } })
+        const { orderCancelled } = res.data.response
+        return dispatch({ type: 'CANCELL_ORDER', payload: { orderCancelled } })
       } catch (e) {
+        console.log(e.message)
         return { success: false, response: null, error: e.message }
       }
     }

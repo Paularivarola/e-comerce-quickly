@@ -1,10 +1,12 @@
+const moment = require('moment')
 const Order = require('../../models/Order')
 const User = require('../../models/User')
 
 const orderControllers = {
   createOrder: async (req, res) => {
-    const { customerId, userId, purchased, paymentMethod, metadata } = req.body
-    const date = new Date()
+    const { customerId, userId, purchased, paymentMethod, metadata, deliveryAddress } = req.body
+    const date = await new Date()
+    const deliveryTime = new Date(date.getTime() + 30 * 60000)
     try {
       let newOrder = new Order({
         date,
@@ -13,6 +15,8 @@ const orderControllers = {
         userId,
         metadata,
         paymentMethod,
+        deliveryAddress,
+        deliveryTime,
       })
       await newOrder.save()
       let userData = await User.findOneAndUpdate(
@@ -31,10 +35,10 @@ const orderControllers = {
     }
   },
   cancellOrder: async (req, res) => {
-    const { orderId } = req.body
+    console.log(req.params.id)
     try {
-      let orderCancelled = Order.findOneAndUpdate({ _id: orderId }, { $set: { status: 'Cancelado' } }, { new: true })
-      res.json({ succes: true, response: orderCancelled })
+      let orderCancelled = await Order.findOneAndUpdate({ _id: req.params.id }, { $set: { status: 'Cancelado' } }, { new: true })
+      res.json({ success: true, response: { orderCancelled } })
     } catch (error) {
       res.json({ success: false, error: error.message })
     }

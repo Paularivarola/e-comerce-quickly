@@ -94,7 +94,7 @@ const Cart = ({ manageCart, userData, ...props }) => {
   useEffect(() => {
     setCart(JSON.parse(localStorage.getItem('cart')))
   }, [props.cart])
-  const formatter = new Intl.NumberFormat('es-CL', {
+  const formatter = new Intl.NumberFormat('es-AR', {
     style: 'currency',
     currency: 'ARS',
   })
