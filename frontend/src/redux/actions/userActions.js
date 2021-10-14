@@ -1,7 +1,7 @@
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import io from 'socket.io-client'
-const HOST = 'http://localhost:4000'
+const HOST = 'https://quickly-food.herokuapp.com'
 
 const userActions = {
   createUser: (user, props) => {
@@ -178,17 +178,7 @@ const userActions = {
       }
     }
   },
-  updateUser: ({
-    action,
-    userData,
-    fileImg,
-    currentPassword,
-    password,
-    newPaymentCard,
-    paymentCardId,
-    newAddress,
-    addressId,
-  }) => {
+  updateUser: ({ action, userData, fileImg, currentPassword, password, newPaymentCard, paymentCardId, newAddress, addressId }) => {
     return async (dispatch) => {
       let token = localStorage.getItem('token')
       let body = fileImg || {

@@ -101,13 +101,7 @@ const PersonalData = ({ user, updateUser }) => {
             className={styles.containImage}
             style={{
               backgroundImage: `url("${
-                user
-                  ? user.google || user.admin.flag
-                    ? user.src
-                    : user.src !== 'assets/user.png'
-                    ? 'http://localhost:4000/' + user.src
-                    : '/assets/user.png'
-                  : '/assets/user.png'
+                user ? (user.google || user.admin.flag ? user.src : user.src !== 'assets/user.png' ? 'https://quickly-food.herokuapp.com/' + user.src : '/assets/user.png') : '/assets/user.png'
               }")`,
             }}
           ></div>
