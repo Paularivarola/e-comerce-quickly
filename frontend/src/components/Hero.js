@@ -13,7 +13,7 @@ const Hero = () => {
           </h1>
           <h3 className={styles.heroH3}>Disfrutá tu comida favorita desde la comodidad de tu casa.</h3>
           <h4 className={styles.heroH4}>Vos pedis y nosotros nos encargamos del resto!</h4>
-          <NavLink to='/' className={styles.button}>
+          <NavLink to='/products/all' className={styles.button}>
             Ver más categorias
           </NavLink>
         </div>

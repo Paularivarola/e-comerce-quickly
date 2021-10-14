@@ -32,7 +32,7 @@ const Order = (props) => {
   const emailRef = useRef()
   const sendForm = () => {
     if (emailRef.current?.value !== user.email)
-      return setCardTost({ time: 1500, icon: 'error', text: 'Confirmá el email pa', view: true })
+      return setCardTost({ time: 1500, icon: 'error', text: 'Debes confirmar tu email', view: true })
     if (!userData?.addresses?.length)
       return setCardTost({ time: 1500, icon: 'error', text: 'Debes seleccionar un método de pago', view: true })
     if (!userData?.paymentCards?.length)

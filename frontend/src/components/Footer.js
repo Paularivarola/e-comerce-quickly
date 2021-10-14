@@ -29,7 +29,7 @@ const Footer = () => {
         <div className={styles.navegation}>
           <Link to="/">Home</Link>
           <Link to="/products">Menu</Link>
-          <Link to="/contacto">Contacto</Link>
+          <Link to="/contact">Contacto</Link>
         </div>
         {/* <img className={styles.map} src="../assets/mapa-prueba.png" alt="map" /> */}
    
