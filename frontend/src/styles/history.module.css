@@ -88,3 +88,8 @@
   background-size: cover;
   border-radius: 100%;
 }
+.textNo {
+  text-align: center;
+  color: tomato;
+  font-weight: bold;
+}
