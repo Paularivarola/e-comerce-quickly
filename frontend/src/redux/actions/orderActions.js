@@ -16,12 +16,12 @@ const orderActions = {
   },
   createOrder: (props, order) => {
     return async (dispatch) => {
-      console.log(order)
       try {
         const res = await axios.post(`${HOST}/api/orders`, order)
         if (!res.data.success) throw new Error(res.data.error)
         const { newOrder, userData } = res.data.response
         dispatch({ type: 'CREATE_ORDER', payload: { newOrder, userData } })
+        dispatch({ type: 'RESET_CART' })
         return props.history.push('/profile/his')
       } catch (e) {
         return { success: false, response: null, error: e.message }
@@ -33,7 +33,8 @@ const orderActions = {
       try {
         const res = await axios.put(`${HOST}/api/order/` + orderId)
         if (!res.data.success) throw new Error(res.data.error)
-        const { orderCancelled } = res.data.response
+        const { orderCancelled, products } = res.data.response
+        dispatch({ type: 'GET_PRODUCTS', payload: products })
         return dispatch({ type: 'CANCELL_ORDER', payload: { orderCancelled } })
       } catch (e) {
         console.log(e.message)

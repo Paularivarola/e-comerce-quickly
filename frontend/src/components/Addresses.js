@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import styles from '../styles/personalData.module.css'
@@ -35,16 +35,16 @@ const MyInput = ({ input, newAddress, setNewAddress }) => {
   )
 }
 
-const PaymentCard = ({ updateUser, card, id, setActive, active, index }) => {
+const PaymentCard = ({ updateUser, card, id, setActive, active, index, act }) => {
   const clickHandler = () => {
     Swal.fire({
-      title: 'Desea conservar el carrito actual?',
+      title: 'Estás seguro que deseas borrar la tarjeta?',
       icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Sí',
-      denyButtonText: 'No',
+      cancelButtonText: 'No',
     }).then((result) => {
       if (result.isConfirmed) {
         updateUser({ action: 'deletePaymentCard', paymentCardId: id })
@@ -53,11 +53,7 @@ const PaymentCard = ({ updateUser, card, id, setActive, active, index }) => {
   }
 
   return (
-    <div
-      onClick={() => setActive({ ...active, card: index })}
-      style={{ cursor: 'pointer' }}
-      className={active ? styles.activeCard : styles.addressCard}
-    >
+    <div onClick={() => setActive && setActive({ ...act, card: index })} style={{ cursor: 'pointer' }} className={active ? styles.activeCard : styles.addressCard}>
       <span className={styles.addressAlias}>
         Tarjeta {card?.brand.toUpperCase()} ...{card?.last4}
       </span>
@@ -66,16 +62,16 @@ const PaymentCard = ({ updateUser, card, id, setActive, active, index }) => {
   )
 }
 
-const Address = ({ updateUser, address, active, setActive, index }) => {
+const Address = ({ updateUser, address, active, setActive, index, act }) => {
   const clickHandler = () => {
     Swal.fire({
-      title: 'Desea conservar el carrito actual?',
+      title: 'Estás seguro que deseas borrar la dirección?',
       icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Sí',
-      denyButtonText: 'No',
+      cancelButtonText: 'No',
     }).then((result) => {
       if (result.isConfirmed) {
         updateUser({ action: 'deleteAddress', addressId: address._id })
@@ -83,11 +79,7 @@ const Address = ({ updateUser, address, active, setActive, index }) => {
     })
   }
   return (
-    <div
-      onClick={() => setActive({ ...active, address: index })}
-      style={{ cursor: 'pointer' }}
-      className={active ? styles.activeCard : styles.addressCard}
-    >
+    <div onClick={() => setActive && setActive({ ...act, address: index })} style={{ cursor: 'pointer' }} className={active ? styles.activeCard : styles.addressCard}>
       <div>
         <span className={styles.addressAlias}>{address?.alias.toUpperCase()}</span>
         <span className={styles.addressName}>{address.street + ', ' + address.number + ' - ' + address.apartment}</span>
@@ -137,33 +129,23 @@ const Addresses = ({ updateUser, userData, active, setActive, modal, setModal, v
 
   return (
     <div className={styles.mainAddress}>
-      <img className={styles.world} src='https://i.postimg.cc/L5DpZzqw/globoterraqueo.png' alt='world' />
-      {!userData?.addresses?.length && view && (
-        <div className={styles.containFormAddress}>
-          <h1 className={styles.message}>No tenes ninguna direccion todavia</h1>
-        </div>
+      <img className={styles.world} src={view ? 'https://i.postimg.cc/L5DpZzqw/globoterraqueo.png' : 'https://i.postimg.cc/QtKg6LzK/tarjeta.png'} alt='world' />
+      {((!userData?.addresses?.length && view) || (!userData?.paymentCards?.length && !view)) && (
+        <>
+          <div className={styles.containFormAddress}>
+            <h1 className={styles.message}>{view ? 'No tenes ninguna direccion todavia' : 'No hay tarjetas cargadas'}</h1>
+            <h1 className={styles.message2}>
+              {view ? 'Asegurese de tener al menos una dirección cargada antes de realizar su compra' : 'Asegurese de tener al menos una tarjeta cargada antes de realizar su compra'}
+            </h1>
+          </div>
+        </>
       )}
-      {!userData?.paymentCards?.length && !view && (
-        <div className={styles.containFormAddress}>
-          <h1 className={styles.message}>{view ? 'No tenes ninguna direccion todavia' : 'No hay tarjetas cargadas'}</h1>
-          {!view && (
-            <h1 className={styles.message2}>Asegurese de tener al menos una tarjeta cargada antes de realizar su compra :)</h1>
-          )}
-        </div>
-      )}
+
       {(userData?.addresses?.length && view) || (userData?.paymentCards?.length && !view) ? (
         <div className={styles.addressesContainer}>
           {view
             ? userData.addresses.map((address, index) => (
-                <Address
-                  key={address._id}
-                  address={address}
-                  updateUser={updateUser}
-                  index={index}
-                  active={index === active?.address}
-                  setActive={setActive}
-                  setCardTost={setCardTost}
-                />
+                <Address key={address._id} address={address} updateUser={updateUser} index={index} act={active} active={index === active?.address} setActive={setActive} setCardTost={setCardTost} />
               ))
             : userData?.paymentCards?.map((payment, index) => (
                 <PaymentCard
@@ -173,6 +155,7 @@ const Addresses = ({ updateUser, userData, active, setActive, modal, setModal, v
                   key={payment.id}
                   index={index}
                   active={active?.card === index}
+                  act={active}
                   setActive={setActive}
                   setCardTost={setCardTost}
                 />
@@ -185,11 +168,7 @@ const Addresses = ({ updateUser, userData, active, setActive, modal, setModal, v
         (!view ? (
           <div className={styles.containFormModal} data-modal='addressModal'>
             <div className={styles.containFormAddress}>
-              <ImCancelCircle
-                className={styles.exit}
-                onClick={() => setModal(false)}
-                style={{ marginRight: '6%', color: 'tomato' }}
-              />
+              <ImCancelCircle className={styles.exit} onClick={() => setModal(false)} style={{ marginRight: '6%', color: 'tomato' }} />
               <Card setCardModal={setModal} />
             </div>
           </div>
@@ -204,11 +183,7 @@ const Addresses = ({ updateUser, userData, active, setActive, modal, setModal, v
                 noValidate
                 autoComplete='off'
               >
-                <ImCancelCircle
-                  className={styles.exit}
-                  onClick={() => setModal(false)}
-                  style={{ marginRight: '6%', color: 'tomato' }}
-                />
+                <ImCancelCircle className={styles.exit} onClick={() => setModal(false)} style={{ marginRight: '6%', color: 'tomato' }} />
                 {inputs.map((input) => (
                   <MyInput input={input} key={input.label} setNewAddress={setNewAddress} newAddress={newAddress} />
                 ))}
