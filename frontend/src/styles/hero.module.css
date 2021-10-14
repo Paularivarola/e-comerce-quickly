@@ -86,7 +86,7 @@
 .button:hover {
   transform: scale(1.1);
   box-shadow: 10px 10px 11px -3px rgba(0, 0, 0, 0.07);
-  opacity: 80%;
+  background-color: whitesmoke;
   color: #fe6849;
 }
 .categoryName {
