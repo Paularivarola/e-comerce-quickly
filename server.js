@@ -46,10 +46,10 @@ const io = socket(server, {
 
 io.on('connection', (socket) => {
   const { socketId, admin } = socket.handshake.query
-  if (admin === 'true') {
-    socket.join('admins')
-  } else {
+  if (admin !== 'true') {
     socket.join(socketId)
+  } else {
+    socket.join('admins')
   }
 
   socket.on('createOrder', () => {
