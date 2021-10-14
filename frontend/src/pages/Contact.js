@@ -4,6 +4,7 @@ import TextareaAutosize from '@mui/material/TextareaAutosize'
 import { useState } from 'react'
 import ticketActions from '../redux/actions/admin/ticketActions'
 import { connect } from 'react-redux'
+import CardTost from '../components/CardTost'
 
 const Contact = ({ createTicket }) => {
   const initialTicket = { name: '', email: '', message: '' }
@@ -12,6 +13,12 @@ const Contact = ({ createTicket }) => {
   const inputHandler = (e) => {
     setTicket({ ...ticket, [e.target.name]: e.target.value })
   }
+  const [cardTost, setCardTost] = useState({
+    time: '',
+    icon: '',
+    text: '',
+    view: false,
+  })
 
   return (
     <div className={styles.containerContact}>
@@ -38,11 +45,13 @@ const Contact = ({ createTicket }) => {
             onClick={() => {
               createTicket(ticket)
               setTicket(initialTicket)
+              setCardTost({ time: 1500, icon: 'success', text: 'Tu mensaje ha sido envidado', view: true })
             }}
           >
             Enviar
           </button>
         </div>
+        {cardTost.view && <CardTost properties={cardTost} setCardTost={setCardTost} />}
       </div>
     </div>
   )

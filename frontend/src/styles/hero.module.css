@@ -1,355 +1,348 @@
 * {
-    font-family: 'Poppins', sans-serif;
-    text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+  text-decoration: none;
 }
 
 /* HERO */
 .heroContainer {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 5%;
 }
 .boxCall {
-    width: 45%;
+  width: 45%;
 }
 .heroH1 {
-    color: slategrey;
-    font-size: 3rem;
-    font-weight: 300;
-    line-height : 4rem;
-    padding-bottom: 5%;
+  color: slategrey;
+  font-size: 3rem;
+  font-weight: 300;
+  line-height: 4rem;
+  padding-bottom: 5%;
 }
 .spanRed {
-    color: #fe6849;
-    font-weight: 700;
+  color: #fe6849;
+  font-weight: 700;
 }
 .spanGrey {
-    font-weight: 700;
+  font-weight: 700;
 }
 .heroH3 {
-    color: slategrey;
-    font-size: 1.5rem;
-    font-weight: 300;
-    line-height : 2.5rem;
-    padding-bottom: 3%;
-
+  color: slategrey;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 2.5rem;
+  padding-bottom: 3%;
 }
 .heroH4 {
-    color: #fe6849;
-    font-size: 1.3rem;
-    font-weight: 500;
-    line-height : 2.5rem;
-    margin-top: -4%;
-    padding-bottom: 5%;
+  color: #fe6849;
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 2.5rem;
+  margin-top: -4%;
+  padding-bottom: 5%;
 }
 .categoriesBox {
-    width: 40%;
-    display: flex;
-    flex-direction: column;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
 }
 .categoriesRow {
-    display: flex;
-    flex: 1
+  display: flex;
+  flex: 1;
 }
 /* categorias */
-.categoryBox { 
-    width: 50%;
-    background-color: whitesmoke;
-    margin: 0.5rem;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 0.5rem;
-    box-shadow: 13px 13px 14px -6px rgba(0,0,0,0.15);
-    transition: transform .3s;
+.categoryBox {
+  width: 50%;
+  background-color: whitesmoke;
+  margin: 0.5rem;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  box-shadow: 13px 13px 14px -6px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s;
 }
 .categoryBox:hover {
-    box-shadow: 13px 13px 14px -10px rgba(0,0,0,0.15);
+  box-shadow: 13px 13px 14px -10px rgba(0, 0, 0, 0.15);
 }
 .categoriesP {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .button {
-    padding: 2%;
-    border-radius: 25px;
-    font-weight: 500;
-    transition: transform .3s;
-    box-shadow: 13px 13px 14px -10px rgba(0,0,0,0.15);
-    background-color: #fe6849;
-    color: whitesmoke;
+  padding: 2%;
+  border-radius: 25px;
+  font-weight: 500;
+  transition: transform 0.3s;
+  box-shadow: 13px 13px 14px -10px rgba(0, 0, 0, 0.15);
+  background-color: #fe6849;
+  color: whitesmoke;
+  transition: all 300ms;
 }
 .button:hover {
-    transform: scale(1.1);
-    box-shadow: 10px 10px 11px -3px rgba(0,0,0,0.07);
-    background-color: whitesmoke;
-    color: #fe6849;
+  transform: scale(1.1);
+  box-shadow: 10px 10px 11px -3px rgba(0, 0, 0, 0.07);
+  background-color: whitesmoke;
+  color: #fe6849;
 }
 .categoryName {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 /* BANNER */
 .heroBanner {
-    padding: 5% 0;
+  padding: 5% 0;
 }
-.bannerBox, .mainText {
-    display: flex;
-    padding: 1% 3%;
-    justify-content: center;
-    align-items: center;
+.bannerBox,
+.mainText {
+  display: flex;
+  padding: 1% 3%;
+  justify-content: center;
+  align-items: center;
 }
 .circle {
+  border: solid 3px rgb(212, 212, 212);
+  width: 6rem;
+  height: 6rem;
+  border-radius: 100px 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.line {
+  width: 25%;
+  border-width: 0;
+  height: 3px;
+  background-color: rgb(212, 212, 212);
+}
+.mainText {
+  justify-content: space-around;
+  align-items: flex-start;
+}
+.textBox {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.bannerTitle,
+.bannerText {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: slategrey;
+}
+.bannerText {
+  font-size: 1rem;
+  font-weight: 400;
+}
+.titleBanner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2%;
+}
+.title1 {
+  color: slategrey;
+  font-weight: 600;
+}
+.title2 {
+  width: 50%;
+  color: slategray;
+  font-size: 3rem;
+  font-weight: lighter;
+  text-align: center;
+}
+.span1,
+.span2 {
+  font-weight: bold;
+  color: slategrey;
+}
+.span2 {
+  color: tomato;
+}
+
+@media only screen and (max-width: 425px) {
+  .heroContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 5%;
+  }
+  .categoryBox {
+    width: 50%;
+    background-color: whitesmoke;
+    margin: 0.5rem;
+    border-radius: 20px;
+    padding: 0.5rem;
+    box-shadow: 13px 13px 14px -6px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s;
+  }
+
+  .boxCall {
+    width: 100%;
+    padding: 2rem;
+  }
+  .categoriesBox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .bannerBox,
+  .mainText {
+    display: flex;
+    padding: 1% 3%;
+    flex-wrap: wrap;
+  }
+  .textBox {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 4%;
+  }
+  .line {
+    width: 10%;
+    border-width: 0;
+    height: 3px;
+    background-color: rgb(212, 212, 212);
+  }
+  .circle {
     border: solid 3px rgb(212, 212, 212);
-    width: 6rem;
-    height: 6rem;
+    width: 5rem;
+    height: 5rem;
     border-radius: 100px 100px;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-.line {
-    width: 25%;
-    border-width: 0;
-    height: 3px;
-    background-color: rgb(212, 212, 212);
-}
-.mainText{
-    justify-content: space-around;
-    align-items: flex-start;
-}
-.textBox {
-    width: 25%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.bannerTitle, .bannerText {
-    text-align: center;
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: slategrey;
-}
-.bannerText {
-    font-size: 1rem;
-    font-weight: 400;
-}
-.titleBanner {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 2%;
-}
-.title1 {
-    color: slategrey;
-    font-weight: 600;
-}
-.title2 {
-    width: 50%;
-    color: slategray;
-    font-size: 3rem;
-    font-weight: lighter;
-    text-align: center;
-}
-.span1, .span2 {
-    font-weight: bold;
-    color: slategrey;
-}
-.span2 {
-    color: tomato;
-}
-
-
-@media only screen and (max-width: 425px) {
-
-    .heroContainer {
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        flex-wrap: wrap;
-        padding: 5%;
-    }
-    .categoryBox { 
-        width: 50%;
-        background-color: whitesmoke;
-        margin: 0.5rem;
-        border-radius: 20px;
-        padding: 0.5rem;
-        box-shadow: 13px 13px 14px -6px rgba(0,0,0,0.15);
-        transition: transform .3s;
-
- 
-    }
-
-    .boxCall {
-        width: 100%;
-        padding: 2rem;
-    }
-    .categoriesBox {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-    .bannerBox, .mainText {
-        display: flex;
-        padding: 1% 3%;
-        flex-wrap: wrap;
-    }
-    .textBox {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        padding: 4%;
-    }
-    .line {
-        width: 10%;
-        border-width: 0;
-        height: 3px;
-        background-color: rgb(212, 212, 212);
-    }
-    .circle {
-        border: solid 3px rgb(212, 212, 212);
-        width: 5rem;
-        height: 5rem;
-        border-radius: 100px 100px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-
-
+  }
 }
 
 @media only screen and (max-width: 576px) {
-    .heroContainer {
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        flex-wrap: wrap;
-        padding: 5%;
-    }
-    .categoryBox { 
-        width: 50%;
-        background-color: whitesmoke;
-        margin: 0.5rem;
-        border-radius: 20px;
-        padding: 0.5rem;
-        box-shadow: 13px 13px 14px -6px rgba(0,0,0,0.15);
-        transition: transform .3s;
-    }
+  .heroContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 5%;
+  }
+  .categoryBox {
+    width: 50%;
+    background-color: whitesmoke;
+    margin: 0.5rem;
+    border-radius: 20px;
+    padding: 0.5rem;
+    box-shadow: 13px 13px 14px -6px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s;
+  }
 
-    .boxCall {
-        width: 100%;
-        padding: 2rem;
-    }
-    .categoriesBox {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-    .categoriesBox {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-    .bannerBox, .mainText {
-        display: flex;
-        padding: 1% 3%;
-        flex-wrap: wrap;
-    }
-    .textBox {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        padding: 4%;
-    }
-    .line {
-        width: 10%;
-        border-width: 0;
-        height: 3px;
-        background-color: rgb(212, 212, 212);
-    }
-    .circle {
-        border: solid 3px rgb(212, 212, 212);
-        width: 5rem;
-        height: 5rem;
-        border-radius: 100px 100px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-
+  .boxCall {
+    width: 100%;
+    padding: 2rem;
+  }
+  .categoriesBox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .categoriesBox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .bannerBox,
+  .mainText {
+    display: flex;
+    padding: 1% 3%;
+    flex-wrap: wrap;
+  }
+  .textBox {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 4%;
+  }
+  .line {
+    width: 10%;
+    border-width: 0;
+    height: 3px;
+    background-color: rgb(212, 212, 212);
+  }
+  .circle {
+    border: solid 3px rgb(212, 212, 212);
+    width: 5rem;
+    height: 5rem;
+    border-radius: 100px 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 @media only screen and (max-width: 768px) {
-    .heroContainer {
-        flex-wrap: wrap;
-        padding: 5%;
-    }
-    .categoryBox { 
-        width: 50%;
-        background-color: whitesmoke;
-        margin: 0.5rem;
-        border-radius: 20px;
-        padding: 0.5rem;
-        box-shadow: 13px 13px 14px -6px rgba(0,0,0,0.15);
-        transition: transform .3s;
- 
-    }
-    .boxCall {
-        width: 100%; 
-        padding: 2rem;
-    }
-    .categoriesBox {
-        width: 100%;
-        display: flex;
-    }
-    .categoriesBox {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-    .bannerBox, .mainText {
-        display: flex;
-        padding: 1% 3%;
-        flex-wrap: wrap;
-    }
-    .textBox {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        padding: 4%;
-    }
-    .line {
-        width: 10%;
-        border-width: 0;
-        height: 3px;
-        background-color: rgb(212, 212, 212);
-    }
-    .circle {
-        border: solid 3px rgb(212, 212, 212);
-        width: 5rem;
-        height: 5rem;
-        border-radius: 100px 100px;
-    }
-
+  .heroContainer {
+    flex-wrap: wrap;
+    padding: 5%;
+  }
+  .categoryBox {
+    width: 50%;
+    background-color: whitesmoke;
+    margin: 0.5rem;
+    border-radius: 20px;
+    padding: 0.5rem;
+    box-shadow: 13px 13px 14px -6px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s;
+  }
+  .boxCall {
+    width: 100%;
+    padding: 2rem;
+  }
+  .categoriesBox {
+    width: 100%;
+    display: flex;
+  }
+  .categoriesBox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .bannerBox,
+  .mainText {
+    display: flex;
+    padding: 1% 3%;
+    flex-wrap: wrap;
+  }
+  .textBox {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 4%;
+  }
+  .line {
+    width: 10%;
+    border-width: 0;
+    height: 3px;
+    background-color: rgb(212, 212, 212);
+  }
+  .circle {
+    border: solid 3px rgb(212, 212, 212);
+    width: 5rem;
+    height: 5rem;
+    border-radius: 100px 100px;
+  }
 }
 
 @media only screen and (max-width: 991px) {
-
-
 }
