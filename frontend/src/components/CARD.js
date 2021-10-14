@@ -70,7 +70,7 @@ const Field = ({ label, id, type, placeholder, required, autoComplete, value, on
 )
 
 const SubmitButton = ({ processing, error, children, disabled, onclick }) => (
-  <button style={{ backgroundColor: '#a84531d0' }} type='submit' disabled={processing || disabled}>
+  <button style={{ backgroundColor: '#a84531d0', width: '40%' }} type='submit' disabled={processing || disabled}>
     {processing ? 'Processing...' : children}
   </button>
 )
