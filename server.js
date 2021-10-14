@@ -53,14 +53,14 @@ io.on('connection', (socket) => {
   }
 
   socket.on('createOrder', () => {
-    io.to('admins').emit('createOrder')
+    socket.to('admins').emit('createOrder')
   })
 
   socket.on('cancellOrder', () => {
-    io.to('admins').emit('cancellOrder')
+    socket.to('admins').emit('cancellOrder')
   })
 
-  socket.on('updateOrders', ({ userId }) => {
-    io.to(userId).emit('updateOrders')
+  socket.on('updateOrders', (userId) => {
+    socket.to(userId).emit('updateOrders')
   })
 })

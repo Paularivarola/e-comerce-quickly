@@ -18,7 +18,6 @@ import adminOrderActions from './redux/actions/admin/adminOrderActions'
 import userActions from './redux/actions/userActions'
 
 const App = (props) => {
-  console.log(props)
   if (props.socket) {
     if (props.userData?.data?.admin?.flag) {
       props.socket.on('createOrder', () => {
