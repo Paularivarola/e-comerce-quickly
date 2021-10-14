@@ -86,7 +86,7 @@ const ProductCard = ({ product, setModal, user, userData, favHandler, index }) =
       <button
         id={'addP' + index}
         data-modal='productModal'
-        className={styles.addBtn}
+        className={!product.stock ? styles.noStock : styles.addBtn}
         onClick={() => {
           if (!product.stock) {
             setCardTost({
