@@ -63,6 +63,16 @@ const userReducer = (state = initialState, action) => {
     case 'RESET_CART':
       localStorage.setItem('cart', JSON.stringify([]))
       return { ...state, cart: [] }
+    case 'EMIT_UPDATE':
+      const { userId } = action.payload
+      state.socket.emit('updateOrders', userId)
+      break
+    case 'UPDATE_USER_ORDERS':
+      return {
+        ...state,
+        orders: action.payload,
+        userData: { ...userData, ordersId: action.payload },
+      }
     case 'LOG_OUT':
       localStorage.removeItem('token')
       localStorage.removeItem('socket')

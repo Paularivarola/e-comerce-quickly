@@ -26,7 +26,8 @@ const adminOrderActions = {
         },
       })
       if (response.data.success) {
-        await dispatch({ type: 'UPDATE_ORDER', payload: updated })
+        dispatch({ type: 'EMIT_UPDATE', payload: response.data.response })
+        dispatch({ type: 'UPDATE_ADMIN_ORDER', payload: response.data.response })
         return response.data
       }
     }

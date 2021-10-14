@@ -42,6 +42,9 @@ const orderControllers = {
       res.json({ success: false, error: error.message })
     }
   },
+  getUserOrders: (req, res) => {
+    res.json({ ordersId: req.user.ordersId })
+  },
 }
 
 module.exports = orderControllers
