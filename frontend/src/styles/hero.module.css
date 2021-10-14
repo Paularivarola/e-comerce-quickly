@@ -81,12 +81,12 @@
   box-shadow: 13px 13px 14px -10px rgba(0, 0, 0, 0.15);
   background-color: #fe6849;
   color: whitesmoke;
-  transition: all 300;
+  transition: all 300ms;
 }
 .button:hover {
   transform: scale(1.1);
   box-shadow: 10px 10px 11px -3px rgba(0, 0, 0, 0.07);
-  background-color: rgb(194, 194, 194);
+  opacity: 80%;
   color: #fe6849;
 }
 .categoryName {
