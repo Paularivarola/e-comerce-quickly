@@ -31,12 +31,18 @@ const Order = (props) => {
 
   const emailRef = useRef()
   const sendForm = () => {
+<<<<<<< HEAD
     if (emailRef.current?.value !== user.email)
       return setCardTost({ time: 1500, icon: 'error', text: 'Debes confirmar tu email', view: true })
     if (!userData?.addresses?.length)
       return setCardTost({ time: 1500, icon: 'error', text: 'Debes seleccionar un método de pago', view: true })
     if (!userData?.paymentCards?.length)
       return setCardTost({ time: 1500, icon: 'error', text: 'Debes seleccionar una dirección', view: true })
+=======
+    if (emailRef.current?.value !== user.email) return setCardTost({ time: 1500, icon: 'error', text: 'Confirmá el email pa', view: true })
+    if (!userData?.addresses?.length) return setCardTost({ time: 1500, icon: 'error', text: 'Debes seleccionar un método de pago', view: true })
+    if (!userData?.paymentCards?.length) return setCardTost({ time: 1500, icon: 'error', text: 'Debes seleccionar una dirección', view: true })
+>>>>>>> 0e5192c1223afbb9e2884a5b9f822e4630325463
     setCardTost({ time: 1500, icon: 'success', text: 'Está todo en orden, ya puedes pagar!', view: true })
     setPay(true)
   }
@@ -49,8 +55,7 @@ const Order = (props) => {
     <div className={styles.mainOrder}>
       <div className={styles.OrderContainer}>
         <h4 className={styles.orderNumber}>
-          <span className={styles.title}>Nro de orden:</span>{' '}
-          {userData ? userData?._id + '_ord' + userData?.ordersId?.length : '.-'}{' '}
+          <span className={styles.title}>Nro de orden:</span> {userData ? userData?._id + '_ord' + userData?.ordersId?.length : '.-'}{' '}
         </h4>
         <div className={styles.table}>
           <div className={styles.head}>
@@ -93,13 +98,7 @@ const Order = (props) => {
         </div>
         <div className={styles.containButtonSend}>
           <span>
-            <span>
-              {pay ? (
-                <Card2 index={props.active.card} deliveryAddress={props.deliveryAddress} {...props} />
-              ) : (
-                <button onClick={() => sendForm()}>Confirmar</button>
-              )}
-            </span>
+            <span>{pay ? <Card2 index={props.active.card} deliveryAddress={props.deliveryAddress} {...props} /> : <button onClick={() => sendForm()}>Confirmar</button>}</span>
           </span>
         </div>
       </div>

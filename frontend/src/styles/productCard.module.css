@@ -65,6 +65,7 @@
 .calification:hover {
   cursor: pointer;
 }
+.noStock,
 .addBtn {
   display: flex;
   justify-content: center;
@@ -79,6 +80,9 @@
   cursor: pointer;
   background-color: rgb(250, 143, 124);
   transition: opacity 0.2s linear;
+}
+.noStock {
+  background-color: rgba(177, 167, 165, 0.89);
 }
 .priceBox {
   margin: 5% 0;

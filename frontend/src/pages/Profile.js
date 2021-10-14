@@ -58,8 +58,7 @@ const Profile = (props) => {
         </div>
         <div className={styles3.boxShop}>
           <p className={styles3.welcome}>Hola {props.user && props.user.firstName}, que bueno verte por acá!</p>
-          {(props.history.location.pathname === '/profile/payment' ||
-            props.history.location.pathname === '/profile/addresses') && (
+          {(props.history.location.pathname === '/profile/payment' || props.history.location.pathname === '/profile/addresses') && (
             <div className={styles.btnAddress}>
               <IoMdAddCircle
                 style={{
@@ -91,13 +90,7 @@ const Profile = (props) => {
                   ) : view === 'password' ? (
                     <ChangePassword user={props.userData?.data} setCancelForm={setFormConfirm} />
                   ) : (
-                    <Addresses
-                      user={props.userData?.data}
-                      setCancelForm={setFormConfirm}
-                      modal={modal}
-                      setModal={setModal}
-                      view={view === 'addresses'}
-                    />
+                    <Addresses user={props.userData?.data} setCancelForm={setFormConfirm} active={null} setActive={null} modal={modal} setModal={setModal} view={view === 'addresses'} />
                   )}
                 </div>
               </div>

@@ -73,9 +73,7 @@ const CartItem = ({ cartItem, manageCart, userData, setEdit, setCartItem, index,
               <CardTost
                 properties={cardTost}
                 setCardTost={setCardTost}
-                accept={() =>
-                  manageCart(userData ? { action: 'delete', cartItem, _id: userData._id } : { action: 'deleteLS', index })
-                }
+                accept={() => manageCart(userData ? { action: 'delete', cartItem, _id: userData._id } : { action: 'deleteLS', index })}
                 deny={() => setCardTost(initialCardTost)}
               />
             )}
@@ -108,9 +106,7 @@ const Cart = ({ manageCart, userData, ...props }) => {
   }
   let [cardTost, setCardTost] = useState(initialCardTost)
   const amount = cart.reduce((acc, item) => acc + item.totalPrice, 0)
-  let address = userData
-    ? userData?.addresses[0]?.street + ` ` + userData?.addresses[0]?.number + ' ' + userData?.addresses[0]?.apartment
-    : null
+  let address = userData?.addresses?.length ? userData?.addresses[0]?.street + ` ` + userData?.addresses[0]?.number + ' ' + userData?.addresses[0]?.apartment : 'No has agregado ninguna dirección'
   return (
     <div className={styles.mainCart}>
       <div className={styles2.categories}>
@@ -123,11 +119,6 @@ const Cart = ({ manageCart, userData, ...props }) => {
             <p className={styles.adress}>
               <span>Punto de entrega:</span> {address || '-'}
             </p>
-            {userData && (
-              <span className={styles.adressBtn}>
-                <FiEdit style={{ color: '#fe6849', fontSize: '1.5em' }} />
-              </span>
-            )}
           </div>
           <div className={styles.payBtn}>
             <p className={styles.totalPrice}>
@@ -157,14 +148,7 @@ const Cart = ({ manageCart, userData, ...props }) => {
             >
               Pagar
             </button>
-            {cardTost.view && (
-              <CardTost
-                properties={cardTost}
-                setCardTost={setCardTost}
-                accept={() => props.history.push('/sign-forms/signin')}
-                deny={() => setCardTost(initialCardTost)}
-              />
-            )}
+            {cardTost.view && <CardTost properties={cardTost} setCardTost={setCardTost} accept={() => props.history.push('/sign-forms/signin')} deny={() => setCardTost(initialCardTost)} />}
           </div>
         </div>
       </div>
@@ -186,16 +170,7 @@ const Cart = ({ manageCart, userData, ...props }) => {
         <div className={styles.gridBox}>
           <div className={styles.cartGrid}>
             {cart?.map((cartItem, index) => (
-              <CartItem
-                index={index}
-                key={cartItem._id}
-                cartItem={cartItem}
-                manageCart={manageCart}
-                userData={userData}
-                setEdit={setEdit}
-                setCartItem={setCartItem}
-                setCardTost={setCardTost}
-              />
+              <CartItem index={index} key={cartItem._id} cartItem={cartItem} manageCart={manageCart} userData={userData} setEdit={setEdit} setCartItem={setCartItem} setCardTost={setCardTost} />
             ))}
             {!cart?.length && <p className={styles.productName}>No tenés nada en el carrito, vuelve y encuentra algo para tí!</p>}
           </div>

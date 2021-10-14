@@ -56,7 +56,7 @@ const Order = ({ userData, order, index, cancellOrder }) => {
               confirmButtonColor: '#3085d6',
               cancelButtonColor: '#d33',
               confirmButtonText: 'Sí',
-              denyButtonText: 'No',
+              cancelButtonText: 'No',
             }).then((result) => {
               if (result.isConfirmed) {
                 cancellOrder(order._id)

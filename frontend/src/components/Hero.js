@@ -53,8 +53,7 @@ const Hero = () => {
         <div className={styles.titleBanner}>
           <p className={styles.title1}>¡PEDÍ TODO EN EL MISMO LUGAR!</p>
           <p className={styles.title2}>
-            ¡Vos a lo tuyo y lo demás <span className={styles.span1}>dejáselo a</span>{' '}
-            <span className={styles.span2}>Quickly!</span>
+            ¡Vos a lo tuyo y lo demás <span className={styles.span1}>dejáselo a</span> <span className={styles.span2}>Quickly!</span>
           </p>
         </div>
         <div className={styles.heroBanner}>
@@ -74,9 +73,7 @@ const Hero = () => {
           <div className={styles.mainText}>
             <div className={styles.textBox}>
               <p className={styles.bannerTitle}>¡Ahorrá tiempo!</p>
-              <p className={styles.bannerText}>
-                Ya no tenés que perder tiempo cocinando. Pensá qué querés comer hoy y hacé tu pedido.
-              </p>
+              <p className={styles.bannerText}>Ya no tenés que perder tiempo cocinando. Pensá qué querés comer hoy y hacé tu pedido.</p>
             </div>
             <div className={styles.textBox}>
               <p className={styles.bannerTitle}>Te lo llevamos a tu casa</p>

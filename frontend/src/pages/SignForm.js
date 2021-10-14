@@ -112,8 +112,7 @@ const SignForm = (props) => {
         if (!user.email.includes('@')) return setCardTost({ time: 1500, icon: 'error', text: 'El mail no es valido', view: true })
         if (!user.password) return setCardTost({ time: 1500, icon: 'error', text: 'Ingresa tu contraseña', view: true })
         if (!user.repPass) return setCardTost({ time: 1500, icon: 'error', text: 'Valide su contraseña', view: true })
-        if (user.password !== user.repPass)
-          return setCardTost({ time: 1500, icon: 'error', text: 'La contraseña no coinciden', view: true })
+        if (user.password !== user.repPass) return setCardTost({ time: 1500, icon: 'error', text: 'La contraseña no coinciden', view: true })
       }
     }
   }
@@ -122,15 +121,7 @@ const SignForm = (props) => {
     if (!shift) {
       return Boolean(user.email && user.email.includes('@') && user.password)
     } else {
-      return Boolean(
-        user.firstName &&
-          user.lastName &&
-          user.email &&
-          user.email.includes('@') &&
-          user.password &&
-          user.repPass &&
-          user.password === user.repPass
-      )
+      return Boolean(user.firstName && user.lastName && user.email && user.email.includes('@') && user.password && user.repPass && user.password === user.repPass)
     }
   }
 
@@ -157,7 +148,7 @@ const SignForm = (props) => {
       {cardTost.view && <CardTost properties={cardTost} setCardTost={setCardTost} />}
       <div className={styles.boxButtons}>
         <div className={styles.boxlogin}>
-          <h1 className={styles.h1}>{!shift ? 'Crear una cuenta' : 'Ingresar con tus datos'}</h1>
+          <h1 className={styles.h1}>{shift ? 'Crear una cuenta' : 'Ingresar con tus datos'}</h1>
           <div className={styles.boxGoogle}>
             <GoogleLogin
               className={styles.btnGoogle}
@@ -273,14 +264,7 @@ const SignForm = (props) => {
                   <label htmlFor='Foto'>
                     <span className={styles.submitPhoto}>{user?.src ? 'Foto cargada' : 'Cargar foto de perfil'}</span>
                   </label>
-                  <input
-                    id='Foto'
-                    style={{ display: 'none' }}
-                    type='file'
-                    name='src'
-                    placeholder='Agregá una foto de perfil'
-                    onChange={inputHandler}
-                  />
+                  <input id='Foto' style={{ display: 'none' }} type='file' name='src' placeholder='Agregá una foto de perfil' onChange={inputHandler} />
                 </div>
               </div>
             </Box>

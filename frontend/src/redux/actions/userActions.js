@@ -21,7 +21,7 @@ const userActions = {
               confirmButtonColor: '#3085d6',
               cancelButtonColor: '#d33',
               confirmButtonText: 'Sí',
-              denyButtonText: 'No',
+              cancelButtonText: 'No',
             }).then((result) => {
               if (result.isConfirmed) {
                 keep = true
@@ -64,7 +64,7 @@ const userActions = {
               confirmButtonColor: '#3085d6',
               cancelButtonColor: '#d33',
               confirmButtonText: 'Sí',
-              denyButtonText: 'No',
+              cancelButtonText: 'No',
             }).then(async (result) => {
               if (result.isConfirmed) {
                 let response = await axios.post(`${HOST}/api/products/keep-cart`, { cart, _id: userData._id })
@@ -178,17 +178,7 @@ const userActions = {
       }
     }
   },
-  updateUser: ({
-    action,
-    userData,
-    fileImg,
-    currentPassword,
-    password,
-    newPaymentCard,
-    paymentCardId,
-    newAddress,
-    addressId,
-  }) => {
+  updateUser: ({ action, userData, fileImg, currentPassword, password, newPaymentCard, paymentCardId, newAddress, addressId }) => {
     return async (dispatch) => {
       let token = localStorage.getItem('token')
       let body = fileImg || {
