@@ -14,6 +14,7 @@ router.route('/user/signUp').post(validatorSignUp, userControllers.signUp, userC
 router.route('/user/logIn').post(userControllers.logIn)
 router.route('/user/token').get(passport, userControllers.verifyToken)
 router.route('/user').put(passport, userControllers.updateUser).delete(passport, userControllers.deleteUser)
+router.route('/mob/userimg').post(userControllers.uploadImgMob)
 
 // PRODUCTS
 router.route('/products').get(productControllers.getProducts).put(productControllers.manageCart)
