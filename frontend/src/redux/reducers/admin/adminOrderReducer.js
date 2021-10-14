@@ -1,6 +1,7 @@
-const adminOrderReducer = (state = {
-    orders: [],
-}, action) => {
+const adminOrderReducer = (
+    state = {
+        orders: [],
+    }, action) => {
     switch (action.type) {
         case "GET_ORDERS":
             return {
@@ -12,15 +13,14 @@ const adminOrderReducer = (state = {
                     order._id !== action.payload
                 )
             }
-        case "UPDATE_ORDER":
+        case 'UPDATE_ADMIN_ORDER':
             return {
-                order: state.order.map(order =>
-                    order._id === action.payload._id ? action.payload : order
-                )
+                orders: state.orders.map((order) => (order._id === action.payload._id ? action.payload : order)),
             }
         default:
             return { ...state };
     }
 };
 
-export default adminOrderReducer;
+
+export default adminOrderReducer

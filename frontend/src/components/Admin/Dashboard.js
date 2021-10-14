@@ -10,11 +10,11 @@ import Categories from './Categories'
 import ProductCard from './ProductCard'
 import DashboardCard from './DashboardCard'
 import OrdersHistory from './OrdersHistory'
+import Order from './Orders'
 
 const Dashboard = (props) => {
     window.scrollTo(0, 0)
     const todayOrders = props.orders
-    console.log(props.orders)
     // const todayIncome =
     return (
         <section className={styles.dashboardContainer}>
@@ -45,7 +45,25 @@ const Dashboard = (props) => {
                     </div>
                     <hr />
                     <div className={styles.orders}>
-                        <span>No existen pedidos pendientes</span>
+                        <div style={{ height: 400, width: '100%' }}>
+                            <table className={styles2.customersTable}>
+                                <thead>
+                                    <tr>
+                                        <th>Usuario </th>
+                                        <th>Status</th>
+                                        <th>Modificar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {props.orders.map(order =>
+                                        <Order order={order} key={order._id} />
+                                    )}
+                                </tbody>
+                                <tfoot></tfoot>
+                            </table>
+                        </div>
+
+                        {/* <span>No existen pedidos pendientes</span> */}
                     </div>
                 </div>
                 <div className={styles.infoTable}>

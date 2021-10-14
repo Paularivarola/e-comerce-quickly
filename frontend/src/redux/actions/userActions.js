@@ -91,6 +91,24 @@ const userActions = {
       }
     }
   },
+  updateOrders: () => {
+    return async (dispatch) => {
+      let token = localStorage.getItem('token')
+      try {
+        if (!token) throw new Error('No hay token')
+        let response = await axios.get(`${HOST}/api/orders`, {
+          headers: {
+            Authorization: 'Bearer ' + token,
+          },
+        })
+        const { ordersId } = response.data
+        dispatch({ type: 'UPDATE_USER_ORDERS', payload: ordersId })
+      } catch (error) {
+        console.log(error)
+        // return dispatch({ type: 'LOG_OUT' })
+      }
+    }
+  },
   logOut: () => {
     return (dispatch) => {
       return dispatch({ type: 'LOG_OUT' })

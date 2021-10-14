@@ -14,20 +14,25 @@ import { connect } from 'react-redux'
 import BuyConfirmation from './components/BuyConfirmation'
 import Cart from './pages/Cart'
 import Card2 from './components/CheckoutTESTING'
+import adminOrderActions from './redux/actions/admin/adminOrderActions'
+import userActions from './redux/actions/userActions'
 
 const App = (props) => {
   console.log(props)
   if (props.socket) {
     if (props.userData?.data?.admin?.flag) {
       props.socket.on('createOrder', () => {
-        console.log('order created')
+        console.log('createOrder')
+        props.getOrders()
       })
       props.socket.on('cancellOrder', () => {
+        props.getOrders()
         console.log('order cancelled')
       })
     } else {
       props.socket.on('updateOrders', () => {
-        console.log('order updated')
+        console.log('updateOrders')
+        props.updateOrders()
       })
     }
   }
@@ -36,8 +41,8 @@ const App = (props) => {
     <BrowserRouter>
       {!window.location.pathname.includes('/admin') && <Header />}
       {/* <button onClick={() => props.socket.emit('createOrder')}>create</button>
-        <button onClick={() => props.socket.emit('cancellOrder')}>cancell</button>
-        <button onClick={() => props.socket.emit('updateOrders')}>update</button> */}
+      <button onClick={() => props.socket.emit('cancellOrder')}>cancell</button>
+      <button onClick={() => props.socket.emit('updateOrders')}>update</button> */}
       <Switch>
         <Route exact path='/' component={Home} />
         <Route path='/contact' component={Contact} />
@@ -76,4 +81,9 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(App)
+const mapDispatchToProps = {
+  getOrders: adminOrderActions.getOrders,
+  updateOrders: userActions.updateOrders,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

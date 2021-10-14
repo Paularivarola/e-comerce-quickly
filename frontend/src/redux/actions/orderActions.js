@@ -22,6 +22,7 @@ const orderActions = {
         const { newOrder, userData } = res.data.response
         dispatch({ type: 'CREATE_ORDER', payload: { newOrder, userData } })
         dispatch({ type: 'RESET_CART' })
+        dispatch({ type: 'EMIT_CREATE' })
         return props.history.push('/profile/his')
       } catch (e) {
         return { success: false, response: null, error: e.message }
@@ -34,6 +35,7 @@ const orderActions = {
         const res = await axios.put(`${HOST}/api/order/` + orderId)
         if (!res.data.success) throw new Error(res.data.error)
         const { orderCancelled, products } = res.data.response
+        dispatch({ type: 'EMIT_CANCELL' })
         dispatch({ type: 'GET_PRODUCTS', payload: products })
         return dispatch({ type: 'CANCELL_ORDER', payload: { orderCancelled } })
       } catch (e) {

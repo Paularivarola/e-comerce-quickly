@@ -21,7 +21,7 @@ router.route('/products/favs').put(passport, productControllers.favHandler)
 router.route('/products/keep-cart').post(productControllers.keepCart)
 
 //ORDERS
-router.route('/orders').post(orderControllers.createOrder)
+router.route('/orders').post(orderControllers.createOrder).get(passport, orderControllers.getUserOrders)
 router.route('/order/:id').put(orderControllers.cancellOrder)
 
 //EMAIL
