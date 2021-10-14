@@ -61,6 +61,6 @@ io.on('connection', (socket) => {
   })
 
   socket.on('updateOrders', (userId) => {
-    socket.to(userId).emit('updateOrders')
+    io.emit('updateOrders')
   })
 })
