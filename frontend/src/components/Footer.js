@@ -36,9 +36,15 @@ const Footer = () => {
           </div>
         </div>
         <div className={styles.navegation}>
-          <Link to="/">Home</Link>
-          <Link to="/products">Menu</Link>
-          <Link to="/contact">Contacto</Link>
+          <Link onClick={() => window.scrollTo(0, 0)} to='/'>
+            Home
+          </Link>
+          <Link onClick={() => window.scrollTo(0, 0)} to='/products'>
+            Menu
+          </Link>
+          <Link onClick={() => window.scrollTo(0, 0)} to='/contact'>
+            Contacto
+          </Link>
         </div>
         {/* <img className={styles.map} src="../assets/mapa-prueba.png" alt="map" /> */}
       </div>

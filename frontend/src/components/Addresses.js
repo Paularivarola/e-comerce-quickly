@@ -53,10 +53,11 @@ const PaymentCard = ({ updateUser, card, id, setActive, active, index, act }) =>
   }
 
   return (
-    <div onClick={() => !active && setActive({ ...act, card: index })} style={{ cursor: 'pointer' }} className={active ? styles.activeCard : styles.addressCard}>
+    <div style={{ cursor: 'pointer' }} className={active ? styles.activeCard : styles.addressCard}>
       <span className={styles.addressAlias}>
         Tarjeta {card?.brand.toUpperCase()} ...{card?.last4}
       </span>
+      {setActive && <span onClick={() => setActive({ ...act, card: index })}>Seleccionar</span>}
       <BsTrash onClick={clickHandler} style={{ cursor: 'pointer' }} />
     </div>
   )
@@ -79,10 +80,11 @@ const Address = ({ updateUser, address, active, setActive, index, act }) => {
     })
   }
   return (
-    <div onClick={() => !active && setActive({ ...act, address: index })} style={{ cursor: 'pointer' }} className={active ? styles.activeCard : styles.addressCard}>
+    <div style={{ cursor: 'pointer' }} className={active ? styles.activeCard : styles.addressCard}>
       <div>
         <span className={styles.addressAlias}>{address?.alias.toUpperCase()}</span>
         <span className={styles.addressName}>{address.street + ', ' + address.number + ' - ' + address.apartment}</span>
+        {setActive && <span onClick={() => setActive({ ...act, address: index })}>Seleccionar</span>}
       </div>
       <BsTrash style={{ color: 'tomato' }} onClick={clickHandler} style={{ cursor: 'pointer' }} />
     </div>
@@ -129,21 +131,17 @@ const Addresses = ({ updateUser, userData, active, setActive, modal, setModal, v
 
   return (
     <div className={styles.mainAddress}>
-      {!userData?.addresses?.length && view && (
-        <>
-        <div className={styles.containFormAddress}>
-          <img className={styles.world} src='https://i.postimg.cc/L5DpZzqw/globoterraqueo.png' alt='world' />
-          <h1 className={styles.message}>No tenes ninguna direccion todavia</h1>
-        </div>
-        </>
-      )}
-      {!userData?.paymentCards?.length && !view && (
-        <div className={styles.containFormAddress}>
-          <img className={styles.world} src='https://i.postimg.cc/QtKg6LzK/tarjeta.png' alt='world' />
-          <h1 className={styles.message}>{view ? 'No tenes ninguna direccion todavia' : 'No hay tarjetas cargadas'}</h1>
-          {!view && <h1 className={styles.message2}>Asegurese de tener al menos una tarjeta cargada antes de realizar su compra :)</h1>}
-        </div>
-      )}
+      <img className={styles.world} src={view ? 'https://i.postimg.cc/L5DpZzqw/globoterraqueo.png' : 'https://i.postimg.cc/QtKg6LzK/tarjeta.png'} alt='world' />
+      {(!userData?.addresses?.length && view) ||
+        (!userData?.addresses?.length && !view && (
+          <>
+            <div className={styles.containFormAddress}>
+              <h1 className={styles.message}>{view ? 'No tenes ninguna direccion todavia' : 'No hay tarjetas cargadas'}</h1>
+              {!view && <h1 className={styles.message2}>Asegurese de tener al menos una tarjeta cargada antes de realizar su compra :)</h1>}
+            </div>
+          </>
+        ))}
+
       {(userData?.addresses?.length && view) || (userData?.paymentCards?.length && !view) ? (
         <div className={styles.addressesContainer}>
           {view
