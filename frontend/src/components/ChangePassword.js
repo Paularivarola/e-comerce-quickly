@@ -33,7 +33,7 @@ const MyInput = ({ input, updatePassword, setUpdatePassword }) => {
         endAdornment: (
           <InputAdornment position='end' style={{ width: '2rem' }}>
             <IconButton onClick={(e) => setPassProtected(!passProtected)} edge='end'>
-              {passProtected ? <BsEyeSlash style={{ marginLeft: 0, width: '2rem' }} /> : <BsEye style={{ marginLeft: 0, width: '2rem' }} />}
+              {passProtected ? <BsEyeSlash style={{ size: '1.5em', color: 'tomato' }} /> : <BsEye style={{ size: '1.5em', color: 'tomato' }} />}
             </IconButton>
           </InputAdornment>
         ),

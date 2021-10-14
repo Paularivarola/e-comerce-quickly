@@ -41,7 +41,19 @@ const MyTextField = ({ name, inputHandler }) => {
       onChange={inputHandler}
       color='warning'
       InputProps={{
-        endAdornment: icons,
+        endAdornment: (
+          <InputAdornment position='end' style={{ width: '2rem' }}>
+            {!update ? (
+              <IconButton onClick={() => setUpdate(true)} edge='end'>
+                <BsPencilSquare style={{ size: '1.5em', color: 'tomato' }} />
+              </IconButton>
+            ) : (
+              <IconButton onClick={() => setUpdate(false)} edge='end'>
+                <BsCheckSquare style={{ size: '1.5em', color: 'tomato' }} />
+              </IconButton>
+            )}
+          </InputAdornment>
+        ),
       }}
       sx={{
         '& > :not(style)': { width: '25vw' },

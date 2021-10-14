@@ -130,15 +130,16 @@ const Addresses = ({ updateUser, userData, active, setActive, modal, setModal, v
   return (
     <div className={styles.mainAddress}>
       <img className={styles.world} src={view ? 'https://i.postimg.cc/L5DpZzqw/globoterraqueo.png' : 'https://i.postimg.cc/QtKg6LzK/tarjeta.png'} alt='world' />
-      {(!userData?.addresses?.length && view) ||
-        (!userData?.addresses?.length && !view && (
-          <>
-            <div className={styles.containFormAddress}>
-              <h1 className={styles.message}>{view ? 'No tenes ninguna direccion todavia' : 'No hay tarjetas cargadas'}</h1>
-              {!view && <h1 className={styles.message2}>Asegurese de tener al menos una tarjeta cargada antes de realizar su compra :)</h1>}
-            </div>
-          </>
-        ))}
+      {((!userData?.addresses?.length && view) || (!userData?.paymentCards?.length && !view)) && (
+        <>
+          <div className={styles.containFormAddress}>
+            <h1 className={styles.message}>{view ? 'No tenes ninguna direccion todavia' : 'No hay tarjetas cargadas'}</h1>
+            <h1 className={styles.message2}>
+              {view ? 'Asegurese de tener al menos una dirección cargada antes de realizar su compra' : 'Asegurese de tener al menos una tarjeta cargada antes de realizar su compra'}
+            </h1>
+          </div>
+        </>
+      )}
 
       {(userData?.addresses?.length && view) || (userData?.paymentCards?.length && !view) ? (
         <div className={styles.addressesContainer}>

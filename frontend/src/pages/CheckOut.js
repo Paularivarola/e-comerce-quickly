@@ -51,8 +51,7 @@ const CheackOut = (props) => {
         </div>
         <div className={styles3.boxShop}>
           <p className={styles3.welcome}>Buena elección {props.user && props.user.firstName}!</p>
-          {(props.history.location.pathname === '/checkout/payment' ||
-            props.history.location.pathname === '/checkout/addresses') && (
+          {(props.history.location.pathname === '/checkout/payment' || props.history.location.pathname === '/checkout/addresses') && (
             <div className={styles.btnAddress}>
               <IoMdAddCircle
                 style={{
@@ -61,9 +60,7 @@ const CheackOut = (props) => {
                   marginRight: '5%',
                 }}
               />
-              <span onClick={() => setModal(true)}>
-                Agregar {props.history.location.pathname === '/checkout/payment' ? 'tarjeta' : 'dirección'}
-              </span>
+              <span onClick={() => setModal(true)}>Agregar {props.history.location.pathname === '/checkout/payment' ? 'tarjeta' : 'dirección'}</span>
             </div>
           )}
         </div>
@@ -76,22 +73,9 @@ const CheackOut = (props) => {
             <div className={styles4.containerData}>
               <div className={styles4.containAllProfile}>
                 {view === 'addresses' || view === 'payment' ? (
-                  <Addresses
-                    active={active}
-                    setActive={setActive}
-                    user={props.userData?.data}
-                    modal={modal}
-                    setModal={setModal}
-                    view={view === 'addresses'}
-                  />
+                  <Addresses active={active} setActive={setActive} user={props.userData?.data} modal={modal} setModal={setModal} view={view === 'addresses'} />
                 ) : (
-                  <Order
-                    deliveryAddress={active.address}
-                    active={active}
-                    user={props.userData?.data}
-                    cart={props?.cart}
-                    {...props}
-                  />
+                  <Order deliveryAddress={props?.userData?.addresses[active.address]} active={active} user={props.userData?.data} cart={props?.cart} {...props} />
                 )}
               </div>
             </div>

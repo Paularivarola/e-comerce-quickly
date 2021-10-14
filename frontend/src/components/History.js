@@ -10,7 +10,7 @@ const Order = ({ userData, order, index, cancellOrder }) => {
     style: 'currency',
     currency: 'ARS',
   })
-  const { street, number, alias } = userData.addresses[order.deliveryAddress]
+  const { street, number, alias } = order?.deliveryAddress
   useEffect(() => {
     setAddress(`${street} ${number} ${alias}`)
   }, [])
@@ -18,11 +18,11 @@ const Order = ({ userData, order, index, cancellOrder }) => {
   deliveryTime = deliveryTime.split(':').slice(0, 2).join(':')
   return (
     <div className={styles.boxHistory}>
-      {!order && 
-      <div>
-        <p>no hay pedidos</p>
-      </div>
-        }
+      {!order && (
+        <div>
+          <p>no hay pedidos</p>
+        </div>
+      )}
       {order.status === 'Pendiente' && <div className={styles.historyImg} style={{ backgroundImage: 'url("https://i.postimg.cc/KcH4B8tN/preparacion.gif")' }}></div>}
       {order.status === 'En camino' && <div className={styles.historyImg} style={{ backgroundImage: 'url("https://i.postimg.cc/rsg8yc5K/moto.png")' }}></div>}
       {order.status === 'Entregado' && <div className={styles.historyImg} style={{ backgroundImage: 'url("https://i.postimg.cc/tJtPC0mf/entregado.gif")' }}></div>}
