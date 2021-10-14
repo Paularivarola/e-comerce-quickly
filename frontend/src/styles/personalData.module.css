@@ -103,7 +103,7 @@ div.containTitle {
   margin: 10px;
   background-color: rgb(248, 248, 248);
   border-radius: 10px;
-  box-shadow: 9px 11px 44px -19px rgba(0, 0, 0, 0.24);
+  box-shadow: 2px 2px 2px rgb(78, 78, 78);
   border: solid 1px rgb(221, 221, 221);
 }
 .addressCard span {
