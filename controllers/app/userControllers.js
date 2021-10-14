@@ -76,7 +76,8 @@ const userControllers = {
 
   uploadImgMob: async (req, res) => {
     const { _id, img } = req.body
-    res.json({ success: true, userData: await User.findOneAndUpdate({ _id }, { 'data.src': img }, { new: true }) })
+    let user = await User.findOneAndUpdate({ _id }, { 'data.src': img }, { new: true })
+    res.json({ success: true, userData: user })
   },
   updateUser: async (req, res) => {
     const { _id } = req.user
