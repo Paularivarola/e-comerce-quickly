@@ -78,13 +78,7 @@ const ProductCard = ({ product, setModal, user, userData, favHandler, index }) =
             {!user ? (
               <Rating name='half-rating-read' defaultValue={product.score} precision={0.1} readOnly />
             ) : (
-              <Rating
-                className={styles.rating}
-                style={{ backgroundColor: 'yelow' }}
-                name='half-rating'
-                defaultValue={product.score}
-                precision={0.1}
-              />
+              <Rating className={styles.rating} style={{ backgroundColor: 'yelow' }} name='half-rating' defaultValue={product.score} precision={0.1} />
             )}
           </Stack>
         </div>
