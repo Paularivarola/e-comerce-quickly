@@ -173,11 +173,13 @@ input#file {
   box-sizing: border-box;
 }
 
-/* form div {
-  display: flex;
-  justify-content: flex-end;
-  /* align-items: center; */
+form button{
+  width: 100%;
+}
 
+form button svg {
+  margin-left: 80%;
+}
 
 .carouselTestimony, .promosCarousel {
   width: 100%;

@@ -122,7 +122,7 @@ const Cart = ({ manageCart, userData, ...props }) => {
           </div>
           <div className={styles.payBtn}>
             <p className={styles.totalPrice}>
-              <span>Precio total:</span> $ {formatter.format(amount)}
+              <span>Precio total:</span> {formatter.format(amount)}
             </p>
             <button
               id='checkout'
