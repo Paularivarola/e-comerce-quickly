@@ -53,7 +53,7 @@ const PaymentCard = ({ updateUser, card, id, setActive, active, index, act }) =>
   }
 
   return (
-    <div onClick={() => !active && setActive({ ...act, card: index })} style={{ cursor: 'pointer' }} className={active ? styles.activeCard : styles.addressCard}>
+    <div onClick={() => setActive && setActive({ ...act, card: index })} style={{ cursor: 'pointer' }} className={active ? styles.activeCard : styles.addressCard}>
       <span className={styles.addressAlias}>
         Tarjeta {card?.brand.toUpperCase()} ...{card?.last4}
       </span>
@@ -79,7 +79,7 @@ const Address = ({ updateUser, address, active, setActive, index, act }) => {
     })
   }
   return (
-    <div onClick={() => !active && setActive({ ...act, address: index })} style={{ cursor: 'pointer' }} className={active ? styles.activeCard : styles.addressCard}>
+    <div onClick={() => setActive && setActive({ ...act, address: index })} style={{ cursor: 'pointer' }} className={active ? styles.activeCard : styles.addressCard}>
       <div>
         <span className={styles.addressAlias}>{address?.alias.toUpperCase()}</span>
         <span className={styles.addressName}>{address.street + ', ' + address.number + ' - ' + address.apartment}</span>
