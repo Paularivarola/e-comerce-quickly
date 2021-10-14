@@ -27,7 +27,7 @@ a.active {
   margin-top: 1%;
   border-radius: 5px;
   width: 100%;
-  min-height: 100%;
+  min-height: 55vh;
   box-shadow: 10px 10px 10px -1px rgba(0, 0, 0, 0.15);
 }
 .adminNav {

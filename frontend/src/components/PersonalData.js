@@ -41,10 +41,19 @@ const MyTextField = ({ name, inputHandler }) => {
       onChange={inputHandler}
       color='warning'
       InputProps={{
-        endAdornment: icons,
-      }}
-      sx={{
-        '& > :not(style)': { width: '25vw' },
+        endAdornment: (
+          <InputAdornment position='end' style={{ width: '2rem' }}>
+            {!update ? (
+              <IconButton onClick={() => setUpdate(true)} edge='end'>
+                <BsPencilSquare style={{ size: '1.5em', color: 'tomato' }} />
+              </IconButton>
+            ) : (
+              <IconButton onClick={() => setUpdate(false)} edge='end'>
+                <BsCheckSquare style={{ size: '1.5em', color: 'tomato' }} />
+              </IconButton>
+            )}
+          </InputAdornment>
+        ),
       }}
     />
   )
@@ -97,14 +106,16 @@ const PersonalData = ({ user, updateUser }) => {
     <div className={styles.mainPersonalData}>
       <div className={styles.formBox}>
         <label htmlFor='imgUpdate'>
-          <div
-            className={styles.containImage}
-            style={{
-              backgroundImage: `url("${
-                user ? (user.google || user.admin.flag ? user.src : user.src !== 'assets/user.png' ? 'https://quickly-food.herokuapp.com/' + user.src : '/assets/user.png') : '/assets/user.png'
-              }")`,
-            }}
-          ></div>
+          <div className={styles.imageDivContainer}>
+            <div
+              className={styles.containImage}
+              style={{
+                backgroundImage: `url("${
+                  user ? (user.google || user.admin.flag ? user.src : user.src !== 'assets/user.png' ? 'https://quickly-food.herokuapp.com/' + user.src : '/assets/user.png') : '/assets/user.png'
+                }")`,
+              }}
+            ></div>
+          </div>
           <span className={styles.submitPhoto}>Cambiar foto</span>
         </label>
         <input id='imgUpdate' type='file' onChange={submitFile} style={{ display: 'none' }} />
@@ -122,19 +133,7 @@ const PersonalData = ({ user, updateUser }) => {
             >
               <MyTextField name={user?.firstName} inputHandler={inputHandler} />
               <MyTextField name={user?.lastName} inputHandler={inputHandler} />
-              <TextField
-                type='email'
-                disabled
-                name='email'
-                defaultValue={user?.email}
-                label='Email'
-                variant='outlined'
-                color='warning'
-                onChange={inputHandler}
-                sx={{
-                  '& > :not(style)': { width: '25vw' },
-                }}
-              />
+              <TextField type='email' disabled name='email' defaultValue={user?.email} label='Email' variant='outlined' color='warning' onChange={inputHandler} />
             </Box>
           )}
           <div className={styles.buttonBox}>

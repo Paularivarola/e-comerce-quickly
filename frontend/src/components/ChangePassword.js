@@ -33,15 +33,12 @@ const MyInput = ({ input, updatePassword, setUpdatePassword }) => {
         endAdornment: (
           <InputAdornment position='end' style={{ width: '2rem' }}>
             <IconButton onClick={(e) => setPassProtected(!passProtected)} edge='end'>
-              {passProtected ? <BsEyeSlash /> : <BsEye />}
+              {passProtected ? <BsEyeSlash style={{ size: '1.5em', color: 'tomato' }} /> : <BsEye style={{ size: '1.5em', color: 'tomato' }} />}
             </IconButton>
           </InputAdornment>
         ),
       }}
       onChange={inputHandler}
-      sx={{
-        '& > :not(style)': { width: '25vw' },
-      }}
     />
   )
 }
@@ -90,12 +87,12 @@ const ChangePassword = ({ updateUser, userData }) => {
     <div className={styles.mainPersonalData}>
       {cardTost.view && <CardTost properties={cardTost} setCardTost={setCardTost} />}
       <div className={styles.formBox2}>
-        <img className={styles.key} src='https://i.postimg.cc/7PgfXd8M/key.png' alt='key' />
+        <div className={styles.key} alt='key'></div>
         <div className={styles2.containerPassword}>
           <Box
             component='form'
             sx={{
-              '& .MuiTextField-root': { m: 1, width: '25ch' },
+              '& .MuiTextField-root': { m: 1, width: '30ch' },
             }}
             noValidate
             autoComplete='off'
@@ -104,9 +101,11 @@ const ChangePassword = ({ updateUser, userData }) => {
               <MyInput input={input} key={input.label} setUpdatePassword={setUpdatePassword} updatePassword={updatePassword} />
             ))}
           </Box>
-          <button className={styles.buttonBox} onClick={submitHandler}>
-            enviar
-          </button>
+          <div className={styles.buttonBox}>
+            <button style={{ padding: '.5rem 2rem' }} onClick={submitHandler}>
+              enviar
+            </button>
+          </div>
         </div>
       </div>
     </div>

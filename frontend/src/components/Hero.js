@@ -80,8 +80,8 @@ const Hero = () => {
               <p className={styles.bannerText}>Te hacemos la vida más facil y te llevamos tu plato a tu casa</p>
             </div>
             <div className={styles.textBox}>
-              <p className={styles.bannerTitle}>¡Se feliz!</p>
-              <p className={styles.bannerText}>Listo! Ahora disfrutá de tus comidas favoritas rápido, fácil y rico!</p>
+              <p className={styles.bannerTitle}>¡Sé feliz!</p>
+              <p className={styles.bannerText}>¡Listo! Ahora disfrutá de tus comidas favoritas rápido, fácil y rico!</p>
             </div>
           </div>
         </div>

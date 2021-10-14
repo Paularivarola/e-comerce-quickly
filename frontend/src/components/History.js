@@ -10,7 +10,7 @@ const Order = ({ userData, order, index, cancellOrder }) => {
     style: 'currency',
     currency: 'ARS',
   })
-  const { street, number, alias } = userData.addresses[order.deliveryAddress]
+  const { street, number, alias } = order?.deliveryAddress
   useEffect(() => {
     setAddress(`${street} ${number} ${alias}`)
   }, [])
@@ -18,7 +18,11 @@ const Order = ({ userData, order, index, cancellOrder }) => {
   deliveryTime = deliveryTime.split(':').slice(0, 2).join(':')
   return (
     <div className={styles.boxHistory}>
-      <img src='https://i.postimg.cc/yxFkk4g3/moto.png' alt='delivery' />
+      {order.status === 'Pendiente' && <div className={styles.historyImg} style={{ backgroundImage: 'url("https://i.postimg.cc/Ls7XBvbv/pendiente.png")' }}></div>}
+      {order.status === 'En preparación' && <div className={styles.historyImg} style={{ backgroundImage: 'url("https://i.postimg.cc/KcH4B8tN/preparacion.gif")' }}></div>}
+      {order.status === 'En camino' && <div className={styles.historyImg} style={{ backgroundImage: 'url("https://i.postimg.cc/rsg8yc5K/moto.png")' }}></div>}
+      {order.status === 'Entregado' && <div className={styles.historyImg} style={{ backgroundImage: 'url("https://i.postimg.cc/tJtPC0mf/entregado.gif")' }}></div>}
+      {order.status === 'Cancelado' && <div className={styles.historyImg} style={{ backgroundImage: 'url("https://i.postimg.cc/L5D1mLxP/cancelado.gif")' }}></div>}
       <div className={styles.boxDelivery}>
         <p className={styles.state}>Estado de pedido</p>
         <p className={styles.text}>
@@ -70,6 +74,11 @@ const Order = ({ userData, order, index, cancellOrder }) => {
 const History = ({ orders, userData, cancellOrder, ...props }) => {
   return (
     <div className={styles.mainHistory}>
+      {!orders?.length && (
+        <div>
+          <p className={styles.textNo}>No se realizaron pedidos</p>
+        </div>
+      )}
       {[...orders]?.reverse().map((order, index) => (
         <Order cancellOrder={cancellOrder} key={order._id} userData={userData} order={order} index={index} />
       ))}

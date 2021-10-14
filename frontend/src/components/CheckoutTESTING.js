@@ -97,7 +97,6 @@ const CheckoutForm2 = ({ userData, paymentMethod, customer, createOrder, deliver
       paymentMethod,
       deliveryAddress,
     }
-    console.log(order)
     if (payload.error) {
       setError(`Payment failed ${payload.error.message}`)
       setProcessing(false)

@@ -75,6 +75,7 @@
     align-content: center;
     flex-direction: column;
     text-align: center;
+    margin-top: 3.5%;
 }
 .title1 {
     color: slategray;

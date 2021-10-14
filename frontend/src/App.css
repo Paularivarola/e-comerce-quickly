@@ -173,11 +173,16 @@ input#file {
   box-sizing: border-box;
 }
 
-/* form div {
+form.MuiInputAdornment-root {
   display: flex;
-  justify-content: flex-end;
-  /* align-items: center; */
+  justify-self: flex-end;
+  background-color: rgb(71, 57, 47);
+  width: 100%;
+}
 
+.MuiButtonBase-root {
+  justify-self: flex-end;
+}
 
 .carouselTestimony, .promosCarousel {
   width: 100%;

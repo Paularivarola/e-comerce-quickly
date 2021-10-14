@@ -36,13 +36,13 @@ const Footer = () => {
           </div>
         </div>
         <div className={styles.navegation}>
-          <Link onClick={window.scrollTo(0, 0)} to='/'>
+          <Link onClick={() => window.scrollTo(0, 0)} to='/'>
             Home
           </Link>
-          <Link onClick={window.scrollTo(0, 0)} to='/products'>
+          <Link onClick={() => window.scrollTo(0, 0)} to='/products'>
             Menu
           </Link>
-          <Link onClick={window.scrollTo(0, 0)} to='/contact'>
+          <Link onClick={() => window.scrollTo(0, 0)} to='/contact'>
             Contacto
           </Link>
         </div>
