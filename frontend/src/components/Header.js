@@ -26,8 +26,8 @@ const Header = (props) => {
     ? props.user.data.google || props.user.data.admin.flag
       ? props.user.data.src
       : props.user.data.src !== 'assets/user.png'
-      ? 'http://localhost:4000/' + props.user.data.src
-      : '/assets/user.png'
+        ? 'http://localhost:4000/' + props.user.data.src
+        : '/assets/user.png'
     : '/assets/user.png'
 
   const MyNavLink = ({ path, page }) => (
@@ -118,6 +118,12 @@ const Header = (props) => {
                 <MyNavLink page={'Mis Favoritos'} path={'/profile/fav'} />
                 <MyNavLink page={'Mis Pedidos'} path={'/profile/his'} />
                 <MyNavLink page={'Mi Cuenta'} path={'/profile/data'} />
+                {props?.user?.data?.admin?.flag && <Link
+                  className={styles.textRoute}
+                  to='/admin/dashboard'
+                >
+                  Admin
+                </Link>}
                 <Link
                   className={styles.textRoute}
                   to='/'

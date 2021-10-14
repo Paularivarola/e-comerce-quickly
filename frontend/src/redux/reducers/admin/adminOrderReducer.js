@@ -2,7 +2,7 @@ const adminOrderReducer = (state = {
     orders: [],
 }, action) => {
     switch (action.type) {
-        case "GET_PRODUCTS":
+        case "GET_ORDERS":
             return {
                 orders: action.payload,
             };

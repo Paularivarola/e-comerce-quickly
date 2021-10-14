@@ -16,6 +16,7 @@ import Cart from './pages/Cart'
 import Card2 from './components/CheckoutTESTING'
 
 const App = (props) => {
+  console.log(props)
   if (props.socket) {
     if (props.userData?.data?.admin?.flag) {
       props.socket.on('createOrder', () => {
@@ -49,7 +50,7 @@ const App = (props) => {
         <Route path='/cart' component={Cart} />
         <Route exact path='/checkout/:page' component={CheackOut} />
         <Route path='/compra' component={BuyConfirmation} />
-        {props?.userData?.admin?.flag && (
+        {props?.userData?.data?.admin?.flag && (
           <>
             <Route path='/admin/dashboard' render={() => <AdminPanel view={'Escritorio'} />} />
             <Route exact path='/admin/clientes' render={() => <AdminPanel view={'Clientes'} />} />

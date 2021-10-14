@@ -3,6 +3,7 @@ const HOST = 'http://localhost:4000'
 
 const adminOrderActions = {
   getOrders: () => {
+    console.log('entro')
     let token = localStorage.getItem('token')
     return async (dispatch) => {
       let response = await axios.get(`${HOST}/api/admin/orders`, {
@@ -10,7 +11,9 @@ const adminOrderActions = {
           Authorization: 'Bearer ' + token,
         },
       })
+      console.log(response)
       if (response.data.success) {
+        console.log(response.data.response)
         await dispatch({ type: 'GET_ORDERS', payload: response.data.response })
         return response.data
       }

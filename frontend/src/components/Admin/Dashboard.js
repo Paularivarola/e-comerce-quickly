@@ -12,9 +12,9 @@ import DashboardCard from './DashboardCard';
 import OrdersHistory from './OrdersHistory';
 
 const Dashboard = (props) => {
+    console.log(props.orders)
     window.scrollTo(0, 0)
     const todayOrders = props.orders.filter(order => order.date === Date.now())
-    console.log(props.user)
     // const todayIncome = 
     return (
         <section className={styles.dashboardContainer}>
