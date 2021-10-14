@@ -73,7 +73,6 @@ const Product = ({ product, setMod, user, manageCart, edit, editCartItem, userDa
   }
 
   const addExtras = (extra, e) => {
-    console.log(e.target.checked)
     if (e.target.checked) {
       setCartItem({ ...cartItem, extras: [...cartItem.extras, extra] })
     } else {
@@ -90,9 +89,7 @@ const Product = ({ product, setMod, user, manageCart, edit, editCartItem, userDa
     setCartItem({
       ...cartItem,
       unitaryPrice: product.price + fries.cost + extrasCost + (product.multipleDrinks ? drink.cost : 0),
-      totalPrice: product.multipleDrinks
-        ? (product.price + fries.cost + extrasCost + drink.cost) * totalAmount
-        : (product.price + fries.cost + extrasCost) * totalAmount + drink.cost,
+      totalPrice: product.multipleDrinks ? (product.price + fries.cost + extrasCost + drink.cost) * totalAmount : (product.price + fries.cost + extrasCost) * totalAmount + drink.cost,
     })
   }, [cartItem.fries, cartItem.extras, cartItem.drink])
 
@@ -123,13 +120,7 @@ const Product = ({ product, setMod, user, manageCart, edit, editCartItem, userDa
               <h1 className={styles.h3}>{product.name}</h1>
               <Stack className={styles.calification} spacing={1}>
                 {user ? (
-                  <Rating
-                    className={styles.rating}
-                    style={{ backgroundColor: 'yelow' }}
-                    name='half-rating'
-                    defaultValue={product.score}
-                    precision={0.5}
-                  />
+                  <Rating className={styles.rating} style={{ backgroundColor: 'yelow' }} name='half-rating' defaultValue={product.score} precision={0.5} />
                 ) : (
                   <Rating name='half-rating-read' defaultValue={product.score} precision={0.5} readOnly />
                 )}

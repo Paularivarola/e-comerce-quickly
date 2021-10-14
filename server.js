@@ -11,8 +11,8 @@ const fileUpload = require('express-fileupload')
 
 const app = express()
 
-app.use(express.static('assets'))
 app.use(cors())
+app.use(express.static('assets'))
 app.use(express.json())
 app.use(
   fileUpload({
