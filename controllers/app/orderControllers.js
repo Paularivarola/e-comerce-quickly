@@ -1,4 +1,3 @@
-const moment = require('moment')
 const Order = require('../../models/Order')
 const User = require('../../models/User')
 
@@ -19,11 +18,7 @@ const orderControllers = {
         deliveryTime,
       })
       await newOrder.save()
-      let userData = await User.findOneAndUpdate(
-        { _id: userId },
-        { $push: { ordersId: newOrder._id }, $set: { cart: [] } },
-        { new: true }
-      )
+      let userData = await User.findOneAndUpdate({ _id: userId }, { $push: { ordersId: newOrder._id }, $set: { cart: [] } }, { new: true })
         .populate({
           path: 'cart.productId',
           model: 'product',
