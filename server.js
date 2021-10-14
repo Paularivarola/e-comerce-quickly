@@ -46,19 +46,21 @@ const io = socket(server, {
 
 io.on('connection', (socket) => {
   const { socketId, admin } = socket.handshake.query
-  socket.join(admin === 'true' ? 'admins' : socketId)
+  if (admin === 'true') {
+    socket.join('admins')
+  } else {
+    socket.join(socketId)
+  }
 
   socket.on('createOrder', () => {
     io.to('admins').emit('createOrder')
   })
 
   socket.on('cancellOrder', () => {
-    console.log('cancell')
     io.to('admins').emit('cancellOrder')
   })
 
-  socket.on('updateOrders', (userId) => {
-    console.log('update')
+  socket.on('updateOrders', ({ userId }) => {
     io.to(userId).emit('updateOrders')
   })
 })

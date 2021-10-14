@@ -29,12 +29,11 @@ const App = (props) => {
         props.getOrders()
         console.log('order cancelled')
       })
-    } else {
-      props.socket.on('updateOrders', () => {
-        console.log('updateOrders')
-        props.updateOrders()
-      })
     }
+    props.socket.on('updateOrders', () => {
+      console.log('updateOrders')
+      props.updateOrders()
+    })
   }
 
   return (

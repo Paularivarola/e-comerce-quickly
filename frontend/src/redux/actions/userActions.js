@@ -102,6 +102,7 @@ const userActions = {
           },
         })
         const { ordersId } = response.data
+        console.log(ordersId)
         dispatch({ type: 'UPDATE_USER_ORDERS', payload: ordersId })
       } catch (error) {
         console.log(error)

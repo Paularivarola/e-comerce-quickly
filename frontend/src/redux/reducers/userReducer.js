@@ -66,7 +66,7 @@ const userReducer = (state = initialState, action) => {
     case 'EMIT_UPDATE':
       const { userId } = action.payload
       console.log(userId)
-      state.socket.emit('updateOrders', userId)
+      state.socket.emit('updateOrders', { userId })
       return state
     case 'UPDATE_USER_ORDERS':
       return {
