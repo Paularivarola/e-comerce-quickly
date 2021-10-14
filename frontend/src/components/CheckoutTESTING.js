@@ -61,7 +61,7 @@ const CheckoutForm2 = ({ userData, paymentMethod, customer, createOrder, deliver
   const [error, setError] = useState(null)
   const [processing, setProcessing] = useState('')
   const [disabled, setDisabled] = useState(false)
-  const [paymentIntent, setpaymentIntent] = useState('')
+  const [paymentIntent, setpaymentIntent] = useState(null)
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
@@ -82,6 +82,8 @@ const CheckoutForm2 = ({ userData, paymentMethod, customer, createOrder, deliver
   const handleSubmit = async (ev) => {
     ev.preventDefault()
     setProcessing(true)
+
+    if (!paymentIntent) return false
 
     const payload = await axios.post(`${HOST}/api/confirm-payment-intent`, {
       paymentIntent,

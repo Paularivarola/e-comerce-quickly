@@ -53,22 +53,11 @@ const Header = (props) => {
               Home
             </NavLink>
 
-            <NavLink
-              id='menu'
-              className={styles.textRoute}
-              activeClassName={styles.active}
-              to='/products'
-              onClick={() => setUserMenu(false)}
-            >
+            <NavLink id='menu' className={styles.textRoute} activeClassName={styles.active} to='/products' onClick={() => setUserMenu(false)}>
               Menu
             </NavLink>
 
-            <NavLink
-              className={styles.textRoute}
-              activeClassName={styles.active}
-              to='/contact'
-              onClick={() => setUserMenu(false)}
-            >
+            <NavLink className={styles.textRoute} activeClassName={styles.active} to='/contact' onClick={() => setUserMenu(false)}>
               Contacto
             </NavLink>
           </div>
@@ -118,12 +107,7 @@ const Header = (props) => {
                 <MyNavLink page={'Mis Favoritos'} path={'/profile/fav'} />
                 <MyNavLink page={'Mis Pedidos'} path={'/profile/his'} />
                 <MyNavLink page={'Mi Cuenta'} path={'/profile/data'} />
-                {props?.user?.data?.admin?.flag && <Link
-                  className={styles.textRoute}
-                  to='/admin/dashboard'
-                >
-                  Admin
-                </Link>}
+                {props?.user?.data?.admin?.flag && <MyNavLink page={'Dashboard'} path={'/admin/dashboard'} />}
                 <Link
                   className={styles.textRoute}
                   to='/'
