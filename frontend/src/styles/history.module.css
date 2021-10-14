@@ -17,6 +17,7 @@
   width: 30%;
 }
 .boxDelivery {
+  margin-left: 2vw;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -81,10 +82,15 @@
   box-shadow: 13px 13px 14px -10px rgba(0, 0, 0, 0.15);
 }
 .historyImg {
-  width: 10rem;
-  height: 10rem;
+  width: 13rem;
+  height: 13rem;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 100%;
+}
+.textNo {
+  text-align: center;
+  color: tomato;
+  font-weight: bold;
 }

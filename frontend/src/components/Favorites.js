@@ -30,11 +30,9 @@ const Favorites = ({ userData, products }) => {
     }
   }, [mod])
   return (
-    <div className={styles.gridBox}>
+    <div className={styles.gridBoxFav}>
       <div className={styles3.boxFav}>
-        <p className={styles3.fovouritesTitle}>
-          ¡Estos son tus platos favoritos!
-        </p>
+        <p className={styles3.fovouritesTitle}>¡Estos son tus platos favoritos!</p>
         <img src='https://i.postimg.cc/B6TqCZmN/compufav.png' alt='imgFav' />
       </div>
 
@@ -55,11 +53,7 @@ const Favorites = ({ userData, products }) => {
         {products
           .filter((prod) => prod.favs.includes(userData._id))
           .map((prod, index) => (
-            <ProductCard
-              product={prod}
-              key={'product' + index}
-              setModal={setModal}
-            />
+            <ProductCard product={prod} key={'product' + index} setModal={setModal} />
           ))}
         {mod && <Product product={product} setMod={setMod} />}
       </div>
