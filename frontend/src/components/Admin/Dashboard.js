@@ -2,45 +2,32 @@ import styles from '../../styles/dashboard.module.css'
 import styles2 from '../../styles/customer.module.css'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { FaClipboardList, FaUserTie, FaCashRegister } from "react-icons/fa";
+import { FaClipboardList, FaUserTie, FaCashRegister } from 'react-icons/fa'
 import { MdShoppingCart } from 'react-icons/md'
-import Button from '@mui/material/Button';
-import Visits from './Visits';
-import Categories from './Categories';
-import ProductCard from './ProductCard';
-import DashboardCard from './DashboardCard';
-import OrdersHistory from './OrdersHistory';
+import Button from '@mui/material/Button'
+import Visits from './Visits'
+import Categories from './Categories'
+import ProductCard from './ProductCard'
+import DashboardCard from './DashboardCard'
+import OrdersHistory from './OrdersHistory'
+import Order from './Orders'
 
 const Dashboard = (props) => {
     window.scrollTo(0, 0)
-    const todayOrders = props.orders.filter(order => order.date === Date.now())
-    console.log(props.user)
-    // const todayIncome = 
+    const todayOrders = props.orders
+    // const todayIncome =
     return (
         <section className={styles.dashboardContainer}>
             <h1>Bienvenido, Admin.</h1>
 
             <div className={styles.resumeContainer}>
-                <DashboardCard
-                    data={{ title: 'Productos Activos', qty: props.products.length, route: 'productos' }}
-                    icon={<MdShoppingCart />}
-                    setView={props.setView} view='Productos'
-                    color={styles.boxOne}
-                />
-                <DashboardCard
-                    data={{ title: 'Pedidos de Hoy', qty: todayOrders.length, route: 'pedidos' }}
-                    icon={<FaClipboardList />}
-                    setView={props.setView} view='Pedidos'
-                    color={styles.boxTwo}
-                />
-                <DashboardCard
-                    data={{ title: 'Usuarios Registrados', qty: props.users.length, route: 'clientes' }}
-                    icon={<FaUserTie />}
-                    setView={props.setView} view='Clientes'
-                    color={styles.boxThree}
-                />
+                <DashboardCard data={{ title: 'Productos Activos', qty: props.products.length, route: 'productos' }} icon={<MdShoppingCart />} setView={props.setView} view='Productos' color={styles.boxOne} />
+                <DashboardCard data={{ title: 'Pedidos de Hoy', qty: todayOrders.length, route: 'pedidos' }} icon={<FaClipboardList />} setView={props.setView} view='Pedidos' color={styles.boxTwo} />
+                <DashboardCard data={{ title: 'Usuarios Registrados', qty: props.users.length, route: 'clientes' }} icon={<FaUserTie />} setView={props.setView} view='Clientes' color={styles.boxThree} />
                 <div className={styles.resumeBox}>
-                    <div className={styles.boxFour}><FaCashRegister /></div>
+                    <div className={styles.boxFour}>
+                        <FaCashRegister />
+                    </div>
                     <div className={styles.data}>
                         <p>Ingresos de Hoy</p>
                         <span className={styles.noLink}>$55.780</span>
@@ -52,17 +39,39 @@ const Dashboard = (props) => {
                 <div className={styles.infoTable}>
                     <div className={styles.tableHeader}>
                         <h2>Pedidos Pendientes</h2>
-                        <Button variant="contained" color="info" size="medium" onClick={() => props.setView('Pedidos')}><Link to='/admin/productos'>Ver Todos</Link></Button>
+                        <Button variant='contained' color='info' size='medium' onClick={() => props.setView('Pedidos')}>
+                            <Link to='/admin/productos'>Ver Todos</Link>
+                        </Button>
                     </div>
                     <hr />
                     <div className={styles.orders}>
-                        <span>No existen pedidos pendientes</span>
+                        <div style={{ height: 400, width: '100%' }}>
+                            <table className={styles2.customersTable}>
+                                <thead>
+                                    <tr>
+                                        <th>Usuario </th>
+                                        <th>Status</th>
+                                        <th>Modificar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {props.orders.map(order =>
+                                        <Order order={order} key={order._id} />
+                                    )}
+                                </tbody>
+                                <tfoot></tfoot>
+                            </table>
+                        </div>
+
+                        {/* <span>No existen pedidos pendientes</span> */}
                     </div>
                 </div>
                 <div className={styles.infoTable}>
                     <div className={styles.tableHeader}>
                         <h2>Pedidos Completados</h2>
-                        <Button variant="contained" color="info" size="medium" onClick={() => props.setView('Pedidos')}><Link to='/admin/productos'>Ver Todos</Link></Button>
+                        <Button variant='contained' color='info' size='medium' onClick={() => props.setView('Pedidos')}>
+                            <Link to='/admin/productos'>Ver Todos</Link>
+                        </Button>
                     </div>
                     <hr />
                     <div className={styles2.tableContainer}>
@@ -91,20 +100,18 @@ const Dashboard = (props) => {
                                     <td>$36.560</td>
                                 </tr>
                             </tbody>
-                            <tfoot>
-
-                            </tfoot>
+                            <tfoot></tfoot>
                         </table>
                     </div>
-
                 </div>
             </section>
 
             <section className={styles.topProducts}>
                 <div className={styles.tableHeader}>
                     <h2>Productos Más Vendidos</h2>
-                    <Button variant="contained" color="info" size="medium" onClick={() => props.setView('Productos')}><Link to='/admin/productos'>Ver Todos</Link></Button>
-
+                    <Button variant='contained' color='info' size='medium' onClick={() => props.setView('Productos')}>
+                        <Link to='/admin/productos'>Ver Todos</Link>
+                    </Button>
                 </div>
                 <hr />
                 <div className={styles.bestSeller}>
@@ -114,7 +121,6 @@ const Dashboard = (props) => {
                     <ProductCard data={{ name: 'Nombre de Producto', image: '/assets/pizzas.jpeg', price: 150 }} />
                 </div>
             </section>
-
 
             <section className={styles.tableContainerBig}>
                 <div className={styles.infoTable}>
@@ -142,12 +148,12 @@ const Dashboard = (props) => {
         </section>
     )
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return {
         products: state.adminProducts.products,
         orders: state.adminOrders.orders,
         users: state.adminUsers.users,
-        user: state.users.userData
+        user: state.users.userData,
     }
 }
 export default connect(mapStateToProps)(Dashboard)

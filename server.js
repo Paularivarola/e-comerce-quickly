@@ -46,17 +46,19 @@ const io = socket(server, {
 
 io.on('connection', (socket) => {
   const { socketId, admin } = socket.handshake.query
+  socket.join(admin === 'true' ? 'admins' : socketId)
 
-  socket.join(admin ? 'admins' : socketId)
+  socket.on('createOrder', () => {
+    io.to('admins').emit('createOrder')
+  })
 
-  !admin
-    ? socket.on('createOrder', () => {
-        io.to('615dfda3ac8bf6ad5f495470').emit('createOrder')
-      }) &&
-      socket.on('cancellOrder', () => {
-        io.to('615dfda3ac8bf6ad5f495470').emit('cancellOrder')
-      })
-    : socket.on('updateOrders', () => {
-        io.to('w1KgI3CGGP914GTyAAAJ').emit('updateOrders')
-      })
+  socket.on('cancellOrder', () => {
+    console.log('cancell')
+    io.to('admins').emit('cancellOrder')
+  })
+
+  socket.on('updateOrders', (userId) => {
+    console.log('update')
+    io.to(userId).emit('updateOrders')
+  })
 })

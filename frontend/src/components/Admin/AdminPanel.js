@@ -27,15 +27,14 @@ const AdminPanel = (props) => {
 
     const getAllData = async () => {
         try {
+            await props.getOrders()
             await props.getUsers()
             await props.getProducts()
-            await props.getOrders()
             setLoader(false)
         } catch (error) {
             Swal.fire('Tenemos problemas en estos momentos. Por favor intenta más tarde.')
         }
     }
-
     useEffect(() => {
         // document.title = 'Escritorio - Mi Cocina'
         setView(props.view)

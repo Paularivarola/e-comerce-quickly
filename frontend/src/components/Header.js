@@ -107,6 +107,7 @@ const Header = (props) => {
                 <MyNavLink page={'Mis Favoritos'} path={'/profile/fav'} />
                 <MyNavLink page={'Mis Pedidos'} path={'/profile/his'} />
                 <MyNavLink page={'Mi Cuenta'} path={'/profile/data'} />
+                {props?.user?.data?.admin?.flag && <MyNavLink page={'Dashboard'} path={'/admin/dashboard'} />}
                 <Link
                   className={styles.textRoute}
                   to='/'
