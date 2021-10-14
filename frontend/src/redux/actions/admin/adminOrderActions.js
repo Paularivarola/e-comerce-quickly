@@ -10,6 +10,7 @@ const adminOrderActions = {
           Authorization: 'Bearer ' + token,
         },
       })
+      console.log(response)
       if (response.data.success) {
         await dispatch({ type: 'GET_ORDERS', payload: response.data.response })
         return response.data

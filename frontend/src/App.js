@@ -49,7 +49,7 @@ const App = (props) => {
         <Route path='/cart' component={Cart} />
         <Route exact path='/checkout/:page' component={CheackOut} />
         <Route path='/compra' component={BuyConfirmation} />
-        {props?.userData?.admin?.flag && (
+        {props?.userData?.data?.admin?.flag && (
           <>
             <Route path='/admin/dashboard' render={() => <AdminPanel view={'Escritorio'} />} />
             <Route exact path='/admin/clientes' render={() => <AdminPanel view={'Clientes'} />} />
