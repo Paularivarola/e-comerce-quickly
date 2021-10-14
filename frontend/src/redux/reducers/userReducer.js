@@ -71,7 +71,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         orders: action.payload,
-        userData: { ...userData, ordersId: action.payload },
+        userData: { ...state.userData, ordersId: action.payload },
       }
     case 'LOG_OUT':
       localStorage.removeItem('token')
