@@ -3,39 +3,47 @@
 .titleContact {
   text-transform: uppercase;
   color: #fe6849;
-  font-size: 3vw;
+  font-size: 1.5rem;
   font-weight: bold;
 }
 
 .containerContact {
   display: flex;
-  min-height: 80vh;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding-top: 4vh;
+  height: 90vh;
+}
+
+.containerImage {
+  width: 40%;
 }
 
 .deliveryImage {
   background-position: center;
   background-size: cover;
-  width: 40vw;
-  margin-bottom: 15vh;
+  width: 80%;
 }
 /* 
 .form {
   margin-bottom: 20vh;
 } */
-
-.form input,
-.form textarea {
-  background-color: #eaeaea;
-  border-radius: 1vw;
-  border: none;
-  color: #000;
-  padding: 2.5vh 0.5vw;
-  margin: 1vw;
-  outline: none;
+.form {
+  /* height: 40vw; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  width: 70%;
+}
+.boxInputs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem;
+  width: 50%;
+  height: 50vh;
+  flex-direction: column;
 }
 
 .form textarea {
@@ -43,14 +51,21 @@
   height: 25vh;
   resize: none;
   font-size: 16px;
+  padding: 3%;
+}
+.form textarea:focus {
+  outline-color: #ED6C02;
 }
 
-::placeholder {
-  text-align: center;
-  text-transform: uppercase;
-  font-weight: bold;
-  color: #000;
-}
+/* ::placeholder {
+  padding-left: 2%;
+  padding-top: 2%;
+} */
+
+/* .textArea:focus {
+  outline: orange;
+  outline-color: orange;
+} */
 
 button {
   background-color: #fe6849;
@@ -77,14 +92,14 @@ button {
   }
   .form input {
     width: 70%;
-    border-radius: 1vw;
+    /* border-radius: 1vw; */
   }
   .containerLink {
     display: none;
   }
   .form textarea {
     width: 70%;
-    border-radius: 2vw;
+    /* border-radius: 2vw; */
   }
   /* .containerImage {
     margin-bottom: 20vw;
@@ -104,11 +119,11 @@ button {
   }
   .form input {
     width: 80%;
-    border-radius: 2vw;
+    /* border-radius: 2vw; */
   }
   .form textarea {
     width: 80%;
-    border-radius: 3vw;
+    /* border-radius: 3vw; */
   }
   .containerImage {
     margin-bottom: 20vw;
