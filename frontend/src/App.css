@@ -173,12 +173,15 @@ input#file {
   box-sizing: border-box;
 }
 
-form button{
+form.MuiInputAdornment-root {
+  display: flex;
+  justify-self: flex-end;
+  background-color: rgb(71, 57, 47);
   width: 100%;
 }
 
-form button svg {
-  margin-left: 80%;
+.MuiButtonBase-root {
+  justify-self: flex-end;
 }
 
 .carouselTestimony, .promosCarousel {

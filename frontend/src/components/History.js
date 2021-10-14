@@ -18,12 +18,14 @@ const Order = ({ userData, order, index, cancellOrder }) => {
   deliveryTime = deliveryTime.split(':').slice(0, 2).join(':')
   return (
     <div className={styles.boxHistory}>
-      {/* {!order && 
+      {!order && 
       <div>
         <p>no hay pedidos</p>
       </div>
-        } */}
-      <img src='https://i.postimg.cc/yxFkk4g3/moto.png' alt='delivery' />
+        }
+      {order.status === 'Pendiente' && <div className={styles.historyImg} style={{ backgroundImage: 'url("https://i.postimg.cc/KcH4B8tN/preparacion.gif")' }}></div>}
+      {order.status === 'En camino' && <div className={styles.historyImg} style={{ backgroundImage: 'url("https://i.postimg.cc/rsg8yc5K/moto.png")' }}></div>}
+      {order.status === 'Entregado' && <div className={styles.historyImg} style={{ backgroundImage: 'url("https://i.postimg.cc/tJtPC0mf/entregado.gif")' }}></div>}
       <div className={styles.boxDelivery}>
         <p className={styles.state}>Estado de pedido</p>
         <p className={styles.text}>
