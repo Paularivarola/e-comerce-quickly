@@ -31,7 +31,7 @@ const Order = (props) => {
 
   const emailRef = useRef()
   const sendForm = () => {
-    if (emailRef.current?.value !== user.email) return setCardTost({ time: 1500, icon: 'error', text: 'Confirmá el email pa', view: true })
+    if (emailRef.current?.value !== user.email) return setCardTost({ time: 1500, icon: 'error', text: 'Debes confirmar el email', view: true })
     if (!userData?.paymentCards?.length) return setCardTost({ time: 1500, icon: 'error', text: 'Debes seleccionar un método de pago', view: true })
     if (!userData?.addresses?.length) return setCardTost({ time: 1500, icon: 'error', text: 'Debes seleccionar una dirección', view: true })
     setCardTost({ time: 1500, icon: 'success', text: 'Está todo en orden, ya puedes pagar!', view: true })
