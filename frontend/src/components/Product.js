@@ -88,7 +88,9 @@ const Product = ({ product, setMod, user, manageCart, edit, editCartItem, userDa
     setCartItem({
       ...cartItem,
       unitaryPrice: product.price + fries.cost + extrasCost + (product.multipleDrinks ? drink.cost : 0),
-      totalPrice: product.multipleDrinks ? (product.price + fries.cost + extrasCost + drink.cost) * totalAmount : (product.price + fries.cost + extrasCost) * totalAmount + drink.cost,
+      totalPrice: product.multipleDrinks
+        ? (product.price + fries.cost + extrasCost + drink.cost) * totalAmount
+        : (product.price + fries.cost + extrasCost) * totalAmount + drink.cost,
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cartItem.fries, cartItem.extras, cartItem.drink])
@@ -110,7 +112,7 @@ const Product = ({ product, setMod, user, manageCart, edit, editCartItem, userDa
   }
 
   return (
-    <main data-modal='closeModal' className={styles.main}>
+    <main data-modal='closeModal' data-stock={product.stock} className={styles.main}>
       {cardTost.view && <CardTost properties={cardTost} setCardTost={setCardTost} />}
       <div className={styles.borderCard}>
         <ImCancelCircle className={styles.exit} onClick={() => setMod(false)} />
