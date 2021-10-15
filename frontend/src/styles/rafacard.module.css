@@ -42,17 +42,6 @@ body {
   align-items: center;
 }
 
-@keyframes fade {
-  from {
-    opacity: 0;
-    transform: scale3D(0.95, 0.95, 0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale3D(1, 1, 1);
-  }
-}
-
 .Form {
   animation: fade 200ms ease-out;
   display: flex;
@@ -94,13 +83,6 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-@keyframes void-animation-out {
-  0%,
-  to {
-    opacity: 1;
-  }
 }
 .FormRowInput:-webkit-autofill {
   -webkit-text-fill-color: #fff;
