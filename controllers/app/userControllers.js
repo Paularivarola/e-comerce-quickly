@@ -42,7 +42,6 @@ const userControllers = {
       })
       return next()
     } catch (error) {
-      console.log(error)
       error.message.includes('Google') ? res.json({ error: [{ message: error.message }] }) : res.json({ success: false, error: error.message })
     }
   },
@@ -69,7 +68,6 @@ const userControllers = {
         token,
       })
     } catch (error) {
-      console.log(error)
       res.json({ success: false, error: error.message })
     }
   },
@@ -91,22 +89,22 @@ const userControllers = {
     let operation =
       action === 'updateData'
         ? {
-            $set: {
-              'data.firstName': userData.firstName,
-              'data.lastName': userData.lastName,
-            },
-          }
+          $set: {
+            'data.firstName': userData.firstName,
+            'data.lastName': userData.lastName,
+          },
+        }
         : action === 'updatePass'
-        ? { $set: { 'data.password': password } }
-        : action === 'addPaymentCard'
-        ? { $push: { paymentCards: newPaymentCard } }
-        : action === 'deletePaymentCard'
-        ? { $pull: { paymentCards: { id: paymentCardId } } }
-        : action === 'addAddress'
-        ? { $push: { addresses: newAddress } }
-        : action === 'deleteAddress'
-        ? { $pull: { addresses: { _id: addressId } } }
-        : { $set: { 'data.src': src, __v: req.user.__v + 1 } }
+          ? { $set: { 'data.password': password } }
+          : action === 'addPaymentCard'
+            ? { $push: { paymentCards: newPaymentCard } }
+            : action === 'deletePaymentCard'
+              ? { $pull: { paymentCards: { id: paymentCardId } } }
+              : action === 'addAddress'
+                ? { $push: { addresses: newAddress } }
+                : action === 'deleteAddress'
+                  ? { $pull: { addresses: { _id: addressId } } }
+                  : { $set: { 'data.src': src, __v: req.user.__v + 1 } }
 
     let options = { new: true }
     try {
@@ -159,7 +157,6 @@ const userControllers = {
       })
       res.json({ success: true, paymentMethodAttached })
     } catch (error) {
-      console.log(error)
       return res.json({ success: false, error: error.message })
     }
   },
@@ -177,14 +174,12 @@ const userControllers = {
   },
   confirmPayment: async (req, res) => {
     const { payment_method, paymentIntent } = req.body
-    console.log(req.body)
     try {
       let confirmation = await stripe.paymentIntents.confirm(paymentIntent, {
         payment_method,
       })
       res.json({ success: true, confirmation })
     } catch (error) {
-      console.log(error.message)
       return res.json({ success: false, error: error.message })
     }
   },
@@ -240,7 +235,7 @@ const html = (firstName, action) => {
   </table>
      `
       : action === 'orderConfirm'
-      ? `<table style="max-width: 700px; padding: 10px; margin:0 auto; border-collapse: collapse;">
+        ? `<table style="max-width: 700px; padding: 10px; margin:0 auto; border-collapse: collapse;">
       <div style="width: 100%;margin:20px 0; text-align: center;">
           <img style="width: 40%"  src="https://i.postimg.cc/JzMs0v1h/logo.png" />
       </div>
@@ -299,8 +294,8 @@ const html = (firstName, action) => {
         </td>
       </tr>
       </table>`
-      : action === 'orderCancell'
-      ? `<table style="max-width: 700px; padding: 10px; margin:0 auto; border-collapse: collapse;">
+        : action === 'orderCancell'
+          ? `<table style="max-width: 700px; padding: 10px; margin:0 auto; border-collapse: collapse;">
       <div style="width: 100%;margin:20px 0; text-align: center;">
           <img style="width: 40%"  src="https://i.postimg.cc/JzMs0v1h/logo.png" />
       </div>
@@ -329,6 +324,6 @@ const html = (firstName, action) => {
         </td>
       </tr>
       </table>`
-      : null
+          : null
   return mail
 }

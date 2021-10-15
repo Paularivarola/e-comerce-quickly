@@ -5,9 +5,9 @@ const PersonalData = (props) => {
     const { firstName, lastName, email, src, google } = props.user.data
     let img = props.user
         ? props.user.data.google || props.user.data.admin.flag
-            ? props.user.src
-            : props.user.src !== 'assets/user.png'
-                ? 'http://localhost:4000/' + props.user.data.src
+            ? props.user.data.src
+            : props.user.data.src !== 'assets/user.png'
+                ? 'https://quickly-food.herokuapp.com/' + props.user.data.src
                 : '/assets/user.png'
         : '/assets/user.png'
 
@@ -15,14 +15,14 @@ const PersonalData = (props) => {
 
     return (
         <div className={styles.dataContainer}>
-            <div className={styles.userImage} style={{ backgroundImage: `url('http://localhost:4000/${src}')` }}></div>
+            <div className={styles.userImage} style={{ backgroundImage: `url("${img}")` }}></div>
             <div className={styles.information}>
                 <h2>Datos Personales</h2>
                 <h3>Nombre: <span>{fullName}</span></h3>
                 <h3>Correo: <span>{email}</span></h3>
                 <h3>¿Registrado con Google?: <span>{google ? 'Sí' : 'No'}</span></h3>
                 <h2>Direcciones</h2>
-                {!props.user.addresses.length ?
+                {!props?.user?.addresses?.length ?
                     <div>
                         <span className={styles.warning}><MdOutlineInfo />El usuario no ha ingresado ninguna dirección.</span>
                     </div>

@@ -1,5 +1,5 @@
 import axios from 'axios'
-const HOST = 'https://quickly-food.herokuapp.com'
+const HOST = 'http://localhost:4000'
 
 const orderActions = {
   getUserOders: (userId) => {
@@ -39,7 +39,6 @@ const orderActions = {
         dispatch({ type: 'GET_PRODUCTS', payload: products })
         return dispatch({ type: 'CANCELL_ORDER', payload: { orderCancelled } })
       } catch (e) {
-        console.log(e.message)
         return { success: false, response: null, error: e.message }
       }
     }

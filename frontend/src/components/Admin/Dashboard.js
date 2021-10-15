@@ -11,11 +11,34 @@ import ProductCard from './ProductCard'
 import DashboardCard from './DashboardCard'
 import OrdersHistory from './OrdersHistory'
 import Order from './Orders'
+import { useState, useEffect } from 'react'
+import { BiDrink } from 'react-icons/bi'
 
 const Dashboard = (props) => {
-    window.scrollTo(0, 0)
-    const todayOrders = props.orders
-    // const todayIncome =
+    const [orders, setOrders] = useState(props.orders)
+
+    useEffect(() => {
+        setOrders(props.orders)
+    }, [props.orders])
+
+    let today = (new Date).toLocaleDateString()
+    const todayOrders = props.orders.filter(order => (new Date(Date.parse(order.date))).toLocaleDateString() === today)
+    const formatter = new Intl.NumberFormat('es-AR', {
+        style: 'currency',
+        currency: 'ARS',
+    })
+    console.log(todayOrders)
+    const todayIncome = todayOrders.reduce((acc, order) => {
+        if (order.status !== 'Cancelado') {
+            let subTotal = order.purchased.reduce((acc, order) => {
+                var sub = acc + order.totalPrice + order.totalAmount * order.drink.cost + order.totalAmount * order.fries.cost
+                return sub
+            }, 0)
+            var total = acc + subTotal
+        }
+        return total
+    }, 0)
+    console.log(todayIncome)
     return (
         <section className={styles.dashboardContainer}>
             <h1>Bienvenido, Admin.</h1>
@@ -30,7 +53,7 @@ const Dashboard = (props) => {
                     </div>
                     <div className={styles.data}>
                         <p>Ingresos de Hoy</p>
-                        <span className={styles.noLink}>$55.780</span>
+                        <span className={styles.noLink}>{!isNaN(todayIncome) ? formatter.format(todayIncome) : '$0'}</span>
                     </div>
                 </div>
             </div>
@@ -40,37 +63,38 @@ const Dashboard = (props) => {
                     <div className={styles.tableHeader}>
                         <h2>Pedidos Pendientes</h2>
                         <Button variant='contained' color='info' size='medium' onClick={() => props.setView('Pedidos')}>
-                            <Link to='/admin/productos'>Ver Todos</Link>
+                            <Link to='/admin/pedidos'>Ver Todos</Link>
                         </Button>
                     </div>
                     <hr />
-                    <div className={styles.orders}>
-                        <div style={{ height: 400, width: '100%' }}>
-                            <table className={styles2.customersTable}>
-                                <thead>
-                                    <tr>
-                                        <th>Usuario </th>
-                                        <th>Status</th>
-                                        <th>Modificar</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {props.orders.map(order =>
-                                        <Order order={order} key={order._id} />
-                                    )}
-                                </tbody>
-                                <tfoot></tfoot>
-                            </table>
-                        </div>
-
-                        {/* <span>No existen pedidos pendientes</span> */}
+                    <div className={styles2.tableContainer}>
+                        <table className={styles2.customersTable}>
+                            <thead>
+                                <tr>
+                                    <th>Orden N° </th>
+                                    <th>Cliente</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {orders?.map(order => {
+                                    if (order.status !== 'Entregado') {
+                                        return <Order order={order} key={order._id} />
+                                    }
+                                }
+                                )}
+                            </tbody>
+                            <tfoot></tfoot>
+                        </table>
                     </div>
+
+                    {!orders.filter(order => order.status !== 'Entregado').length && <span>No existen pedidos pendientes</span>}
                 </div>
                 <div className={styles.infoTable}>
                     <div className={styles.tableHeader}>
                         <h2>Pedidos Completados</h2>
                         <Button variant='contained' color='info' size='medium' onClick={() => props.setView('Pedidos')}>
-                            <Link to='/admin/productos'>Ver Todos</Link>
+                            <Link to='/admin/pedidos'>Ver Todos</Link>
                         </Button>
                     </div>
                     <hr />
@@ -80,56 +104,25 @@ const Dashboard = (props) => {
                                 <tr>
                                     <th>Orden N°</th>
                                     <th>Cliente</th>
-                                    <th>Total</th>
+                                    <th>Estado</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>354</td>
-                                    <td>Rafael Mian</td>
-                                    <td>$15.790</td>
-                                </tr>
-                                <tr>
-                                    <td>352</td>
-                                    <td>Daniel Sepúlveda</td>
-                                    <td>$25.890</td>
-                                </tr>
-                                <tr>
-                                    <td>351</td>
-                                    <td>Cristian Tortoza</td>
-                                    <td>$36.560</td>
-                                </tr>
+                                {orders?.map(order => {
+                                    if (order.status === 'Entregado') {
+                                        return <Order order={order} key={order._id} />
+                                    }
+                                }
+                                )}
                             </tbody>
                             <tfoot></tfoot>
                         </table>
                     </div>
+                    {!orders.filter(order => order.status === 'Entregado').length && <span>Aún no existen pedidos completados.</span>}
+
                 </div>
             </section>
-
-            <section className={styles.topProducts}>
-                <div className={styles.tableHeader}>
-                    <h2>Productos Más Vendidos</h2>
-                    <Button variant='contained' color='info' size='medium' onClick={() => props.setView('Productos')}>
-                        <Link to='/admin/productos'>Ver Todos</Link>
-                    </Button>
-                </div>
-                <hr />
-                <div className={styles.bestSeller}>
-                    <ProductCard data={{ name: 'Nombre de Producto', image: '/assets/pizzas.jpeg', price: 150 }} />
-                    <ProductCard data={{ name: 'Nombre de Producto', image: '/assets/pizzas.jpeg', price: 150 }} />
-                    <ProductCard data={{ name: 'Nombre de Producto', image: '/assets/pizzas.jpeg', price: 150 }} />
-                    <ProductCard data={{ name: 'Nombre de Producto', image: '/assets/pizzas.jpeg', price: 150 }} />
-                </div>
-            </section>
-
             <section className={styles.tableContainerBig}>
-                <div className={styles.infoTable}>
-                    <div className={styles.tableHeader}>
-                        <h2>Visitas últimos 7 días</h2>
-                    </div>
-                    <hr />
-                    <Visits />
-                </div>
                 <div className={styles.infoTable}>
                     <div className={styles.tableHeader}>
                         <h2>Productos por categoría</h2>
@@ -139,10 +132,10 @@ const Dashboard = (props) => {
                 </div>
                 <div className={styles.infoTable}>
                     <div className={styles.tableHeader}>
-                        <h2>Pedidos últimos 7 días</h2>
+                        <h2>Pedidos de Hoy</h2>
                     </div>
                     <hr />
-                    <OrdersHistory />
+                    <OrdersHistory orders={orders} />
                 </div>
             </section>
         </section>

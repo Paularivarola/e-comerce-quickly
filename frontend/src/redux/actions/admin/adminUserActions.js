@@ -1,5 +1,5 @@
 import axios from 'axios'
-const HOST = 'https://quickly-food.herokuapp.com'
+const HOST = 'http://localhost:4000'
 const adminUsersActions = {
   getUsers: () => {
     let token = localStorage.getItem('token')
@@ -52,7 +52,6 @@ const adminUsersActions = {
           Authorization: 'Bearer ' + token,
         },
       })
-      console.log(response)
       if (response.data.success) {
         await dispatch({ type: 'DELETE_USER', payload: userId })
         return response.data

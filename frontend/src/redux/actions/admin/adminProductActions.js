@@ -1,5 +1,5 @@
 import axios from 'axios'
-const HOST = 'https://quickly-food.herokuapp.com'
+const HOST = 'http://localhost:4000'
 
 const adminProductActions = {
   getProducts: () => {
@@ -22,7 +22,6 @@ const adminProductActions = {
           Authorization: 'Bearer ' + token,
         },
       })
-      console.log(response.data.response)
       if (response.data.success) {
         await dispatch({ type: 'ADD_PRODUCT', payload: response.data.response })
         return response.data

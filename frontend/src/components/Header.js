@@ -15,7 +15,6 @@ const Header = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  // console.log(props.socket?.id)
 
   window.onclick = (e) => {
     if (e.target.dataset.usermenu !== 'true') setUserMenu(false)
@@ -26,8 +25,8 @@ const Header = (props) => {
     ? props.user.data.google || props.user.data.admin.flag
       ? props.user.data.src
       : props.user.data.src !== 'assets/user.png'
-      ? 'https://quickly-food.herokuapp.com/' + props.user.data.src
-      : '/assets/user.png'
+        ? 'https://quickly-food.herokuapp.com/' + props.user.data.src
+        : '/assets/user.png'
     : '/assets/user.png'
 
   const MyNavLink = ({ path, page }) => (
@@ -47,7 +46,7 @@ const Header = (props) => {
     <header>
       <div className={styles.boxNavigation}>
         <nav className={styles.containerNavegation}>
-          <img className={styles.logo} src='/assets/quicklyLogo.png' alt='logo' />
+          <Link to='/'><img className={styles.logo} src='/assets/quicklyLogo.png' alt='logo' /></Link>
           <div className={styles.navegation}>
             <NavLink className={styles.textRoute} exact activeClassName={styles.active} to='/' onClick={() => setUserMenu(false)}>
               Home

@@ -33,7 +33,7 @@ const Product = (props) => {
     const [newProduct, setNewProduct] = useState({ ingredients: [] })
     const [ingredients, setIngredients] = useState({})
     const [number, setNumber] = useState([1, 1, 1,])
-    const [file, setFile] = useState('/assets/tarjeta.png')
+    const [file, setFile] = useState('https://i.postimg.cc/rFQ6QKxZ/memelogin.png')
     const [saving, setSaving] = useState(false)
     const [update, setUpdate] = useState({})
 
@@ -96,7 +96,6 @@ const Product = (props) => {
             fd.append('img', img)
             fd.append('ingredients', ingredients)
             let response = await props.createProduct(fd, props)
-            console.log(response)
             if (response.success) {
                 message('success', 'Producto añadido exitosamente')
             }

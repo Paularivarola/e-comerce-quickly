@@ -7,14 +7,14 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 const ProductCard = (props) => {
-    const { name, image, price } = props.data
+    const { name, img, price, description } = props.data
     return (
         <Card sx={{ maxWidth: 345 }}>
             <CardMedia
                 component="img"
                 height="150"
-                image={image}
-                alt="green iguana"
+                image={`https://quickly-food.herokuapp.com${img}`}
+                alt={name}
             />
             <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
@@ -22,13 +22,9 @@ const ProductCard = (props) => {
                     <p className='cardPrice'>${price}</p>
                 </Typography>
                 <div className='priceContainer'>
-                    <p>Pedidos: <span>25</span></p>
-                    <p>Ingresos: <span>$3.750</span></p>
+                    <p>{description}</p>
                 </div>
             </CardContent>
-            <CardActions>
-                <Button size="small">Ver Producto</Button>
-            </CardActions>
         </Card>
     )
 }

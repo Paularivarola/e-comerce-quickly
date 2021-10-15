@@ -29,6 +29,7 @@ const adminUserReducer = (
         users: state.users.map((user) => (user._id === action.payload._id ? action.payload : user)),
       }
     case 'GET_USER':
+      console.log(action.payload)
       return {
         ...state,
         user: state.users.filter((user) => user._id === action.payload),

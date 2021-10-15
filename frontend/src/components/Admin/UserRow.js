@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom'
 
 
 const UserRow = (props) => {
+    const { render, setRender } = props
     const [details, setDetails] = useState(false)
     let { firstName, lastName, email } = props.user.data
     const { _id } = props.user
@@ -19,9 +20,9 @@ const UserRow = (props) => {
     const fullName = firstName + " " + lastName
     let img = props.user
         ? props.user.data.google || props.user.data.admin.flag
-            ? props.user.src
-            : props.user.src !== 'assets/user.png'
-                ? 'http://localhost:4000/' + props.user.data.src
+            ? props.user.data.src
+            : props.user.data.src !== 'assets/user.png'
+                ? 'https://quickly-food.herokuapp.com/' + props.user.data.src
                 : '/assets/user.png'
         : '/assets/user.png'
 
@@ -40,6 +41,7 @@ const UserRow = (props) => {
                     let response = await props.deleteUser(id)
                     if (response.success) {
                         message('success', 'Usuario eliminado exitosamente.')
+                        setRender(!render)
                     }
                 } catch (error) {
                     message('error', 'Surgió un problema. Intente más tarde.')
@@ -57,13 +59,12 @@ const UserRow = (props) => {
                 </td>
                 <td>{fullName}</td>
                 <td>{email}</td>
-                <td>{!props.user.ordersId.length ? 'Sin Pedidos' : 'Calcular'}</td>
+                <td>{props.user.data.admin.flag ? 'Administrador' : 'Cliente'}</td>
                 <td className={styles.buttonsSection}>
-                    <Link to={`/admin/cliente/${_id}`}><Button variant="contained" color="info" size="small" onClick={() => props.setChosen(props.user)}><MdInfoOutline />Más Info</Button></Link>
+                    <Button variant="contained" color="info" size="small" onClick={() => props.setChosen(props.user)}><MdInfoOutline />Más Info</Button>
                     <Button onClick={() => verification(_id)} variant="outlined" color="error" size="small"><MdDelete />Borrar</Button>
                 </td>
             </tr>
-            {/* {details && <CustomerDetails setDetails={setDetails} user={props.user.data} />} */}
         </>
     )
 }

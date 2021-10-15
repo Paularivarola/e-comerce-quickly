@@ -98,7 +98,6 @@ const PersonalData = ({ user, updateUser }) => {
     // if(user.firstName && user.lastName && user.email && user.email.includes('@') && user.password && user.repPass && user.password === user.repPass){
     //   aca sale la funcion linda
     // }
-    console.log('esta todo bien')
     updateUser({ action: 'updateData', userData })
   }
 
@@ -110,9 +109,8 @@ const PersonalData = ({ user, updateUser }) => {
             <div
               className={styles.containImage}
               style={{
-                backgroundImage: `url("${
-                  user ? (user.google || user.admin.flag ? user.src : user.src !== 'assets/user.png' ? 'https://quickly-food.herokuapp.com/' + user.src : '/assets/user.png') : '/assets/user.png'
-                }")`,
+                backgroundImage: `url("${user ? (user.google || user.admin.flag ? user.src : user.src !== 'assets/user.png' ? 'https://quickly-food.herokuapp.com/' + user.src : '/assets/user.png') : '/assets/user.png'
+                  }")`,
               }}
             ></div>
           </div>
