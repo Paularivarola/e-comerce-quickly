@@ -24,7 +24,9 @@ const userControllers = {
         const { fileImg } = req.files
         picture = `${newUser._id}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`
         fileImg.mv(
-          `${__dirname}/../../assets/${newUser._id}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`,
+          `${__dirname}/../../assets/${newUser._id}.${
+            fileImg.name.split('.')[fileImg.name.split('.').length - 1]
+          }`,
           (err) => {
             if (err) return console.log(err)
           }
@@ -84,13 +86,26 @@ const userControllers = {
   },
   updateUser: async (req, res) => {
     const { _id } = req.user
-    const { action, userData, newPaymentCard, paymentCardId, newAddress, addressId, password, currentPassword } = req.body
+    const {
+      action,
+      userData,
+      newPaymentCard,
+      paymentCardId,
+      newAddress,
+      addressId,
+      password,
+      currentPassword,
+    } = req.body
     let src
     if (req.files) {
       const { fileImg } = req.files
-      src = `${_id}v${req.user.__v + 1}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`
+      src = `${_id}v${req.user.__v + 1}.${
+        fileImg.name.split('.')[fileImg.name.split('.').length - 1]
+      }`
       fileImg.mv(
-        `${__dirname}/../../assets/${_id}v${req.user.__v + 1}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`,
+        `${__dirname}/../../assets/${_id}v${req.user.__v + 1}.${
+          fileImg.name.split('.')[fileImg.name.split('.').length - 1]
+        }`,
         (err) => {
           if (err) {
             res.json({ success: false, error: err.message })
@@ -205,12 +220,16 @@ const userControllers = {
 
   sendEmail: async (req, res) => {
     const { firstName, email, action } = req.body
-
     try {
       let options = {
         from: 'miComida <micomidaweb@gmail.com>', //de
         to: email, //para
-        subject: 'esto es una prueba',
+        subject:
+          action === 'sign'
+            ? 'Bienvenido'
+            : action === 'orderConfirm'
+            ? 'Orden confirmada'
+            : 'Orden cancelada',
         html: html(firstName, action),
       }
       transport.sendMail(options, (err, info) => {

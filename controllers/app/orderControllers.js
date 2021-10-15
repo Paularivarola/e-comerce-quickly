@@ -5,8 +5,9 @@ const User = require('../../models/User')
 const orderControllers = {
   createOrder: async (req, res) => {
     const { customerId, userId, purchased, paymentMethod, metadata, deliveryAddress } = req.body
-    const date = await new Date()
-    const deliveryTime = new Date(date.getTime() + 30 * 60000)
+    var date = new Date()
+    var deliveryTime = new Date()
+    deliveryTime.setTime(date.getTime() + 30 * 60 * 1000)
     try {
       let newOrder = new Order({
         date,
@@ -19,7 +20,11 @@ const orderControllers = {
         deliveryTime,
       })
       await newOrder.save()
-      let userData = await User.findOneAndUpdate({ _id: userId }, { $push: { ordersId: newOrder._id }, $set: { cart: [] } }, { new: true })
+      let userData = await User.findOneAndUpdate(
+        { _id: userId },
+        { $push: { ordersId: newOrder._id }, $set: { cart: [] } },
+        { new: true }
+      )
         .populate({
           path: 'cart.productId',
           model: 'product',
@@ -32,9 +37,17 @@ const orderControllers = {
   },
   cancellOrder: async (req, res) => {
     try {
-      let orderCancelled = await Order.findOneAndUpdate({ _id: req.params.id }, { $set: { status: 'Cancelado' } }, { new: true })
+      let orderCancelled = await Order.findOneAndUpdate(
+        { _id: req.params.id },
+        { $set: { status: 'Cancelado' } },
+        { new: true }
+      )
       orderCancelled.purchased.forEach(async (item) => {
-        await Product.findOneAndUpdate({ _id: item.productId._id }, { $inc: { stock: item.totalAmount } }, { new: true })
+        await Product.findOneAndUpdate(
+          { _id: item.productId._id },
+          { $inc: { stock: item.totalAmount } },
+          { new: true }
+        )
       })
       let products = await Product.find()
       res.json({ success: true, response: { orderCancelled, products } })

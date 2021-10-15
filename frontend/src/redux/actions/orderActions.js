@@ -14,10 +14,10 @@ const orderActions = {
       }
     }
   },
-  createOrder: (props, order) => {
+  createOrder: ({ props, order, firstName, action }) => {
     return async (dispatch) => {
       try {
-        const res = await axios.post(`${HOST}/api/orders`, order)
+        const res = await axios.post(`${HOST}/api/orders`, { ...order, firstName, action })
         if (!res.data.success) throw new Error(res.data.error)
         const { newOrder, userData } = res.data.response
         dispatch({ type: 'CREATE_ORDER', payload: { newOrder, userData } })
@@ -28,7 +28,7 @@ const orderActions = {
       }
     }
   },
-  cancellOrder: (orderId) => {
+  cancellOrder: ({ orderId, firstName, action }) => {
     return async (dispatch) => {
       try {
         const res = await axios.put(`${HOST}/api/order/` + orderId)

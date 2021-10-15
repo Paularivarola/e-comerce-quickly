@@ -37,12 +37,21 @@ const ELEMENTS_OPTIONS = {
   ],
 }
 
-const stripePromise = loadStripe('pk_test_51JiHmiD8MtlvyDMXOy1Xz9IRz7S6hXvSX3YorvlFJSNbByoEHqgmIhvVuOuYgA3PiOR9hxBM0QzQcf6OlJs4VYgI00pB5OSjXZ')
+const stripePromise = loadStripe(
+  'pk_test_51JiHmiD8MtlvyDMXOy1Xz9IRz7S6hXvSX3YorvlFJSNbByoEHqgmIhvVuOuYgA3PiOR9hxBM0QzQcf6OlJs4VYgI00pB5OSjXZ'
+)
 
 const Card2 = ({ userData, index, cart, deliveryAddress, ...props }) => (
   <>
     <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
-      <CheckoutForm2 paymentMethod={userData?.paymentCards[index]} customer={userData?.data?.customerId} userData={userData} cart={cart} deliveryAddress={deliveryAddress} {...props} />
+      <CheckoutForm2
+        paymentMethod={userData?.paymentCards[index]}
+        customer={userData?.data?.customerId}
+        userData={userData}
+        cart={cart}
+        deliveryAddress={deliveryAddress}
+        {...props}
+      />
     </Elements>
   </>
 )
@@ -56,7 +65,15 @@ const mapDispatchToProps = {
 
 export default connect(mapStateToProps, mapDispatchToProps)(Card2)
 
-const CheckoutForm2 = ({ userData, paymentMethod, customer, createOrder, deliveryAddress, cart, ...props }) => {
+const CheckoutForm2 = ({
+  userData,
+  paymentMethod,
+  customer,
+  createOrder,
+  deliveryAddress,
+  cart,
+  ...props
+}) => {
   const [succeeded, setSucceeded] = useState(false)
   const [error, setError] = useState(null)
   const [processing, setProcessing] = useState('')
@@ -104,14 +121,22 @@ const CheckoutForm2 = ({ userData, paymentMethod, customer, createOrder, deliver
       setError(null)
       setProcessing(false)
       setSucceeded(true)
-      createOrder(props, order)
+      createOrder({ props, order, firstName: userData.data.firstName, action: 'orderConfirm' })
     }
   }
 
   return (
     <form id='payment-form' onSubmit={handleSubmit}>
       <button disabled={processing || disabled || succeeded} id='submit'>
-        <span id='button-text'>{processing ? <div className='spinner' id='spinner'></div> : succeeded ? 'Gracias por tu compra' : 'Pagá ahora'}</span>
+        <span id='button-text'>
+          {processing ? (
+            <div className='spinner' id='spinner'></div>
+          ) : succeeded ? (
+            'Gracias por tu compra'
+          ) : (
+            'Pagá ahora'
+          )}
+        </span>
       </button>
       {error && (
         <div className='card-error' role='alert'>
