@@ -156,7 +156,7 @@ a.active {
   font-weight: 500;
 }
 .btnAddress:hover {
-  opacity: 60%;
+  color: rgba(255, 99, 71, 0.739);
 }
 
 div.containerButtonCheck {

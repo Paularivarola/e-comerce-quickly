@@ -50,7 +50,7 @@
   font-weight: 500;
 }
 .btnAddress:hover {
-  opacity: 80%;
+  color: rgba(255, 99, 71, 0.739);
 }
 
 /* div.containAll{
