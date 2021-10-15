@@ -1,22 +1,19 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { NavLink } from 'react-router-dom'
 import Accordion from '@mui/material/Accordion'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import AccordionSummary from '@mui/material/AccordionSummary'
-import Typography from '@mui/material/Typography'
 import { BsFillCaretRightFill } from 'react-icons/bs'
-import { FiArrowRightCircle } from 'react-icons/fi'
 import styles from '../styles/profile.module.css'
 
 const NavItems = (props) => {
   const { item, index } = props
-  const [expanded, setExpanded] = useState(Boolean(item.desplegable))
   let path =
     window.location.pathname.split('/')[
-      window.location.pathname.split('/').length - 1
+    window.location.pathname.split('/').length - 1
     ]
   return (
-    <Accordion expanded={expanded}>
+    <Accordion expanded={Boolean(item.desplegable)}>
       <AccordionSummary
         aria-controls={`panel${index}bh-content`}
         id={`panel${index}bh-header`}
@@ -27,7 +24,7 @@ const NavItems = (props) => {
             to={`/${item.page}/${item.comp}`}
             className={
               path === item.comp ||
-              item?.desplegable?.some((i) => i.comp === path)
+                item?.desplegable?.some((i) => i.comp === path)
                 ? styles.active
                 : undefined
             }

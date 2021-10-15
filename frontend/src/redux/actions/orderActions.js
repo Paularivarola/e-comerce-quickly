@@ -39,7 +39,6 @@ const orderActions = {
         dispatch({ type: 'GET_PRODUCTS', payload: products })
         return dispatch({ type: 'CANCELL_ORDER', payload: { orderCancelled } })
       } catch (e) {
-        console.log(e.message)
         return { success: false, response: null, error: e.message }
       }
     }

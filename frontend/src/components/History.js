@@ -13,6 +13,7 @@ const Order = ({ userData, order, index, cancellOrder }) => {
   const { street, number, alias } = order?.deliveryAddress
   useEffect(() => {
     setAddress(`${street} ${number} ${alias}`)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   let deliveryTime = order.deliveryTime.split(' ').slice(4, 5)[0]
   deliveryTime = deliveryTime.split(':').slice(0, 2).join(':')

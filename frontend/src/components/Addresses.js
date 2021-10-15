@@ -8,6 +8,7 @@ import { ImCancelCircle } from 'react-icons/im'
 import { BsTrash } from 'react-icons/bs'
 import Card from './CARD'
 import Swal from 'sweetalert2'
+import CardTost from './CardTost'
 
 const MyInput = ({ input, newAddress, setNewAddress }) => {
   const inputHandler = (e) => {
@@ -84,7 +85,7 @@ const Address = ({ updateUser, address, active, setActive, index, act }) => {
         <span className={styles.addressAlias}>{address?.alias.toUpperCase()}</span>
         <span className={styles.addressName}>{address.street + ', ' + address.number + ' - ' + address.apartment}</span>
       </div>
-      <BsTrash style={{ color: 'tomato' }} onClick={clickHandler} style={{ cursor: 'pointer' }} />
+      <BsTrash style={{ color: 'tomato', cursor: 'pointer' }} onClick={clickHandler} />
     </div>
   )
 }
@@ -129,6 +130,7 @@ const Addresses = ({ updateUser, userData, active, setActive, modal, setModal, v
 
   return (
     <div className={styles.mainAddress}>
+      {cardTost.view && <CardTost properties={cardTost} setCardTost={setCardTost} />}
       <img className={styles.world} src={view ? 'https://i.postimg.cc/L5DpZzqw/globoterraqueo.png' : 'https://i.postimg.cc/QtKg6LzK/tarjeta.png'} alt='world' />
       {((!userData?.addresses?.length && view) || (!userData?.paymentCards?.length && !view)) && (
         <>
@@ -145,21 +147,21 @@ const Addresses = ({ updateUser, userData, active, setActive, modal, setModal, v
         <div className={styles.addressesContainer}>
           {view
             ? userData.addresses.map((address, index) => (
-                <Address key={address._id} address={address} updateUser={updateUser} index={index} act={active} active={index === active?.address} setActive={setActive} setCardTost={setCardTost} />
-              ))
+              <Address key={address._id} address={address} updateUser={updateUser} index={index} act={active} active={index === active?.address} setActive={setActive} setCardTost={setCardTost} />
+            ))
             : userData?.paymentCards?.map((payment, index) => (
-                <PaymentCard
-                  updateUser={updateUser}
-                  card={payment.card}
-                  id={payment.id}
-                  key={payment.id}
-                  index={index}
-                  active={active?.card === index}
-                  act={active}
-                  setActive={setActive}
-                  setCardTost={setCardTost}
-                />
-              ))}
+              <PaymentCard
+                updateUser={updateUser}
+                card={payment.card}
+                id={payment.id}
+                key={payment.id}
+                index={index}
+                active={active?.card === index}
+                act={active}
+                setActive={setActive}
+                setCardTost={setCardTost}
+              />
+            ))}
         </div>
       ) : null}
 

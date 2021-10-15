@@ -110,11 +110,24 @@ span.warning svg{
 
 .favouritesContainer,
 .ordersContainer{
-    width: 100%;
-    height: 65vh;
+    /* width: 65vw; */
+    /* height: 65vh; */
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
     overflow-y: scroll;
-    padding: 1vh 1vw;
+    padding: 5vh 1vw;
+}
+
+.favouritesContainer::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+.favouritesContainer::-webkit-scrollbar-thumb {
+    background-color: #fe674991;
+    border-radius: 8px;
+}
+
+.favouritesContainer>div{
+    margin: 0 1vw;
+    min-width: 300px;
+    min-height: 310px;
 }

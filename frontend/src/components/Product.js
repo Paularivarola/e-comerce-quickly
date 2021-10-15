@@ -1,6 +1,5 @@
 import styles from '../styles/product.module.css'
 import { connect } from 'react-redux'
-import productActions from '../redux/actions/productActions'
 import { ImCancelCircle } from 'react-icons/im'
 import React, { useEffect, useState } from 'react'
 import Rating from '@mui/material/Rating'
@@ -91,6 +90,7 @@ const Product = ({ product, setMod, user, manageCart, edit, editCartItem, userDa
       unitaryPrice: product.price + fries.cost + extrasCost + (product.multipleDrinks ? drink.cost : 0),
       totalPrice: product.multipleDrinks ? (product.price + fries.cost + extrasCost + drink.cost) * totalAmount : (product.price + fries.cost + extrasCost) * totalAmount + drink.cost,
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cartItem.fries, cartItem.extras, cartItem.drink])
 
   const addToCart = () => {

@@ -52,7 +52,6 @@ const adminUsersActions = {
           Authorization: 'Bearer ' + token,
         },
       })
-      console.log(response)
       if (response.data.success) {
         await dispatch({ type: 'DELETE_USER', payload: userId })
         return response.data

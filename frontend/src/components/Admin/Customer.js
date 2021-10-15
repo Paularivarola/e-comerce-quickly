@@ -14,6 +14,7 @@ import { Typography } from '@mui/material';
 const Customer = (props) => {
     const [newUser, setNewUser] = useState()
     const [saving, setSaving] = useState(false)
+    const [file, setFile] = useState('https://i.postimg.cc/rFQ6QKxZ/memelogin.png')
     window.scrollTo(0, 0)
 
     const inputHandler = (e) => {
@@ -21,6 +22,10 @@ const Customer = (props) => {
             ...newUser,
             [e.target.name]: e.target.name === 'src' ? e.target.files[0] : e.target.value
         })
+        if (e.target.name === 'src') {
+            const newFile = URL.createObjectURL(e.target.files[0])
+            setFile(newFile)
+        }
     }
 
     const createUser = async (e) => {
@@ -56,7 +61,7 @@ const Customer = (props) => {
         <>
             <div className={styles.newAdminContainer}>
                 <div style={{ width: '30%' }} className={styles.userPicture}>
-                    <div className={styles2.userImage} style={{ backgroundImage: `url('http://localhost:4000/')`, height: '50vh', width: '100%', marginBottom: '2vh', marginRight: '0px' }}></div>
+                    <div className={styles2.userImage} style={{ backgroundImage: `url(${file})`, height: '50vh', width: '100%', marginBottom: '2vh', marginRight: '0px' }}></div>
                     <label htmlFor='upload' className={styles.label}>
                         <span className={styles.uploadButton}><MdUploadFile />Subir imagen</span>
                     </label>

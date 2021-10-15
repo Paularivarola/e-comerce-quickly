@@ -12,7 +12,6 @@ const productControllers = {
   },
   favHandler: async (req, res) => {
     const { action, _id } = req.body
-    // return console.log(req.body)
     let operation = action === 'addFav' ? { $push: { favs: req.user._id } } : action === 'deleteFav' ? { $pull: { favs: req.user._id } } : null
 
     try {
@@ -20,7 +19,6 @@ const productControllers = {
       let products = await Product.find()
       res.json({ success: true, response: products })
     } catch (error) {
-      console.log(error)
       res.json({ succes: false, error: error.message })
     }
   },
@@ -30,7 +28,6 @@ const productControllers = {
       let user = await User.findOneAndUpdate({ _id }, { $set: { cart } }, { new: true }).populate({ path: 'cart.productId', model: 'product' }).populate({ path: 'ordersId', model: 'order' })
       res.json({ success: true, user })
     } catch (err) {
-      console.log(err.message)
       res.json({ success: false, error: err.message })
     }
   },
@@ -41,10 +38,10 @@ const productControllers = {
       action === 'add'
         ? { $push: { cart: cartItem } }
         : action === 'delete'
-        ? { $pull: { cart: { _id: cartItem._id } } }
-        : action === 'editCartItem'
-        ? { $set: { 'cart.$': cartItem } }
-        : { $set: { cart: [] } }
+          ? { $pull: { cart: { _id: cartItem._id } } }
+          : action === 'editCartItem'
+            ? { $set: { 'cart.$': cartItem } }
+            : { $set: { cart: [] } }
     let options = { new: true }
 
     let operationProd = {
@@ -66,7 +63,6 @@ const productControllers = {
         products,
       })
     } catch (error) {
-      console.log(error)
       res.json({ success: false, error: error.message })
     }
   },

@@ -21,16 +21,13 @@ const App = (props) => {
   if (props.socket) {
     if (props.userData?.data?.admin?.flag) {
       props.socket.on('createOrder', () => {
-        console.log('createOrder')
         props.getOrders()
       })
       props.socket.on('cancellOrder', () => {
         props.getOrders()
-        console.log('order cancelled')
       })
     }
     props.socket.on('updateOrders', () => {
-      console.log('updateOrders')
       props.updateOrders()
     })
   }

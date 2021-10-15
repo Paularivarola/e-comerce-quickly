@@ -4,7 +4,6 @@ const adminProductControllers = {
   createProduct: async (req, res) => {
     const { name, description, price, category, ingredients, stock, img, extras, papas, score } = req.body
     const { key } = req.user.data.admin
-    console.log(req.body)
     try {
       const match = key && bcrypt.compareSync(process.env.SECRETORKEY, key)
       if (!match) throw new Error('key error')
@@ -21,7 +20,6 @@ const adminProductControllers = {
         papas: papas || false,
       })
       let picture
-      console.log(req.files)
       const { img } = req.files
       picture = `/${newProduct._id}.${img.name.split('.')[img.name.split('.').length - 1]}`
       img.mv(`${__dirname}/../../assets/${newProduct._id}.${img.name.split('.')[img.name.split('.').length - 1]}`, (err) => {

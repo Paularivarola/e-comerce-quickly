@@ -3,14 +3,13 @@ import styles2 from '../styles/profile.module.css'
 import styles3 from '../styles/products.module.css'
 import styles4 from '../styles/data.module.css'
 import { connect } from 'react-redux'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import CardTost from '../components/CardTost'
 import { BsFillBagCheckFill } from 'react-icons/bs'
 import { IoMdAddCircle } from 'react-icons/io'
 import Addresses from '../components/Addresses'
 import NavLateral from '../components/NavLateral'
 import Order from '../components/Order'
-import Preloader from '../components/Preloader'
 
 const CheackOut = (props) => {
   const [view, setView] = useState(props.match.params.page)

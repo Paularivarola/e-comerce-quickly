@@ -42,8 +42,12 @@
   align-items: center;
   margin: 2rem;
   width: 50%;
-  height: 30vh;
+  height: 35vh;
   flex-direction: column;
+}
+
+.boxInputs>div{
+  margin-bottom: 1em;
 }
 
 .form textarea {

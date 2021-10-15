@@ -22,7 +22,6 @@ const adminProductActions = {
           Authorization: 'Bearer ' + token,
         },
       })
-      console.log(response.data.response)
       if (response.data.success) {
         await dispatch({ type: 'ADD_PRODUCT', payload: response.data.response })
         return response.data

@@ -3,7 +3,7 @@ import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 
 const PromosCarousel = () => {
-  const promos = ['https://i.postimg.cc/sfBT4rfs/publicidad.png', 'https://i.postimg.cc/4x37pJZ1/publicidad2.png', 'https://i.postimg.cc/wTw3qSJR/publicidad3.png', 'https://i.postimg.cc/kGfM5bVP/publicidad4.jpg', 'https://i.postimg.cc/QM1XTPBb/publicidad5.png', 'https://i.postimg.cc/25RYrwHB/publicidad6.png' ]
+  const promos = ['https://i.postimg.cc/sfBT4rfs/publicidad.png', 'https://i.postimg.cc/4x37pJZ1/publicidad2.png', 'https://i.postimg.cc/wTw3qSJR/publicidad3.png', 'https://i.postimg.cc/kGfM5bVP/publicidad4.jpg', 'https://i.postimg.cc/QM1XTPBb/publicidad5.png', 'https://i.postimg.cc/25RYrwHB/publicidad6.png']
 
   return (
     <>
@@ -56,7 +56,7 @@ const PromosCarousel = () => {
         slidesToSlide={1}
         swipeable
       >
-        
+
         {promos.map((promo, index) => (
           <div className={styles.carouselBox} key={index.toString()}>
             <div className={styles.carousel} style={{ backgroundImage: `url("${promo}")` }} key={index}></div>
