@@ -2,7 +2,7 @@ import styles from '../../styles/customerdetails.module.css'
 import { MdOutlineInfo } from "react-icons/md";
 
 const PersonalData = (props) => {
-    const { firstName, lastName, email, src, google } = props.user.data
+    const { firstName, lastName, email, google } = props.user.data
     let img = props.user
         ? props.user.data.google || props.user.data.admin.flag
             ? props.user.data.src

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { MdCancel } from "react-icons/md";
 
 const OrderDetails = (props) => {
-    const { date, userId, purchased, status } = props.order
+    const { date, purchased, status } = props.order
     let orderDate = (new Date(Date.parse(date))).toLocaleDateString()
     const formatter = new Intl.NumberFormat('es-AR', {
         style: 'currency',
@@ -52,6 +52,7 @@ const OrderDetails = (props) => {
                                         </tr>
                                     )
                                 }
+                                return true
                             }
                             )}
                             {purchased.map(product =>

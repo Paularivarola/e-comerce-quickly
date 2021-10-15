@@ -5,14 +5,11 @@ import { Link } from 'react-router-dom'
 import { FaClipboardList, FaUserTie, FaCashRegister } from 'react-icons/fa'
 import { MdShoppingCart } from 'react-icons/md'
 import Button from '@mui/material/Button'
-import Visits from './Visits'
 import Categories from './Categories'
-import ProductCard from './ProductCard'
 import DashboardCard from './DashboardCard'
 import OrdersHistory from './OrdersHistory'
 import Order from './Orders'
 import { useState, useEffect } from 'react'
-import { BiDrink } from 'react-icons/bi'
 
 const Dashboard = (props) => {
     const [orders, setOrders] = useState(props.orders)
@@ -81,6 +78,7 @@ const Dashboard = (props) => {
                                     if (order.status !== 'Entregado') {
                                         return <Order order={order} key={order._id} />
                                     }
+                                    return true
                                 }
                                 )}
                             </tbody>
@@ -112,6 +110,7 @@ const Dashboard = (props) => {
                                     if (order.status === 'Entregado') {
                                         return <Order order={order} key={order._id} />
                                     }
+                                    return true
                                 }
                                 )}
                             </tbody>

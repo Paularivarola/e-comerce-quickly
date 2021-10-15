@@ -15,6 +15,7 @@ const Customers = (props) => {
     useEffect(() => {
         setFiltered(props.users)
         inputVal.current.value = ''
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [render])
 
     console.log(chosen)

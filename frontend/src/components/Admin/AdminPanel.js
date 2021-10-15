@@ -5,15 +5,12 @@ import AdminMenu from './AdminMenu'
 import Dashboard from './Dashboard'
 import Customers from './Customers'
 import Customer from './Customer'
-import Orders from './Orders'
 import OrdersPage from './OrdersPage'
 import Products from './Products'
 import Abandoned from './Abandoned'
 import Reviews from './Reviews'
 import Product from './Product'
 import Preloader from '../Preloader'
-import { FaBell, FaEnvelope } from "react-icons/fa";
-import { MdOutlineMenu } from "react-icons/md";
 import adminUsersActions from '../../redux/actions/admin/adminUserActions'
 import adminProductActions from '../../redux/actions/admin/adminProductActions'
 import adminOrderActions from '../../redux/actions/admin/adminOrderActions'
@@ -54,7 +51,7 @@ const AdminPanel = (props) => {
     return (
         <>
             <div className={styles.mainContainer}>
-                <AdminMenu open={open} view={view} setView={setView} />
+                <AdminMenu open={open} view={view} setView={setView} setOpen={setOpen} />
                 <main className={styles.bodyContainer} >
                     {/* <section className={styles.header}>
                         <MdOutlineMenu onClick={() => setOpen(!open)} />

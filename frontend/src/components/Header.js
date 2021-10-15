@@ -31,7 +31,6 @@ const Header = (props) => {
 
   const MyNavLink = ({ path, page }) => (
     <NavLink
-      onClick={() => setUserMenu(false)}
       exact={path === '/'}
       className={styles.textRoute}
       activeClassName={styles.activeHamburguesa}

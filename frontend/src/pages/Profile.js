@@ -18,12 +18,7 @@ import { IoMdAddCircle } from 'react-icons/io'
 const Profile = (props) => {
   const [formConfirm, setFormConfirm] = useState({})
   const [view, setView] = useState(props.match.params.page)
-  const [cardTost, setCardTost] = useState({
-    time: '',
-    icon: '',
-    text: '',
-    view: false,
-  })
+
 
   useEffect(() => {
     let verification = Object.values(formConfirm).some((input) => input !== '')
@@ -31,6 +26,7 @@ const Profile = (props) => {
       alert('todo mal')
     }
     setView(props.match.params.page)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.match.params])
 
   const navItems = [

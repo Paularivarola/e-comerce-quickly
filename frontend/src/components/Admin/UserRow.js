@@ -6,13 +6,10 @@ import { connect } from 'react-redux';
 import adminUsersActions from '../../redux/actions/admin/adminUserActions';
 import Swal from 'sweetalert2'
 import { message } from './Message';
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
 
 
 const UserRow = (props) => {
     const { render, setRender } = props
-    const [details, setDetails] = useState(false)
     let { firstName, lastName, email } = props.user.data
     const { _id } = props.user
     firstName = firstName[0].toUpperCase() + firstName.slice(1).toLowerCase()

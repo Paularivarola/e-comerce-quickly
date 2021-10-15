@@ -35,7 +35,6 @@ const Product = (props) => {
     const [number, setNumber] = useState([1, 1, 1,])
     const [file, setFile] = useState('https://i.postimg.cc/rFQ6QKxZ/memelogin.png')
     const [saving, setSaving] = useState(false)
-    const [update, setUpdate] = useState({})
 
     useEffect(() => {
         setChosen(props.products.filter(product => product._id === window.location.pathname.slice(24)))

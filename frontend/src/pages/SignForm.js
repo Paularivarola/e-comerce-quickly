@@ -128,7 +128,7 @@ const SignForm = (props) => {
   const submit = (e) => {
     e.preventDefault()
     if (!validatorFront()) return sendToast()
-    const { firstName, lastName, email, password, google, src, repPass } = user
+    const { firstName, lastName, email, password, google, src } = user
     const fd = new FormData()
     fd.append('email', email)
     fd.append('password', password)
@@ -199,8 +199,8 @@ const SignForm = (props) => {
                   onChange={inputHandler}
                   color='warning'
                   size='small'
-                  // error
-                  // helperText="Incorrect entry."
+                // error
+                // helperText="Incorrect entry."
                 />
                 <MyInput label='Contraseña' name='password' inputHandler={inputHandler} />
               </div>
@@ -226,8 +226,8 @@ const SignForm = (props) => {
                     color='warning'
                     size='small'
                     fullWidth
-                    // error
-                    // helperText="Incorrect entry."
+                  // error
+                  // helperText="Incorrect entry."
                   />
                   <TextField
                     required
@@ -239,8 +239,8 @@ const SignForm = (props) => {
                     color='warning'
                     size='small'
                     fullWidth
-                    // error
-                    // helperText="Incorrect entry."
+                  // error
+                  // helperText="Incorrect entry."
                   />
                 </div>
                 <div className={styles.inputsFormColum}>
@@ -254,8 +254,8 @@ const SignForm = (props) => {
                     color='warning'
                     size='small'
                     fullWidth
-                    // error
-                    // helperText="Incorrect entry."
+                  // error
+                  // helperText="Incorrect entry."
                   />
                   <MyInput label='Contraseña' name='password' inputHandler={inputHandler} />
                   <MyInput label='Repite contraseña' name='repPass' inputHandler={inputHandler} />

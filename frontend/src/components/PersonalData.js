@@ -88,9 +88,9 @@ const PersonalData = ({ user, updateUser }) => {
 
   const validatorFront = () => {
     let initialValues = Object.values(initialState)
-    let valid = Object.values(userData).some((value, index) => {
-      return value !== initialValues[index]
-    })
+    // let valid = Object.values(userData).some((value, index) => {
+    //   return value !== initialValues[index]
+    // })
 
     // if (!valid) {
     //   return setUpdate(false)

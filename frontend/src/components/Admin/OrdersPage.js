@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import styles from '../../styles/customer.module.css'
 import { connect } from 'react-redux'
-import NoResults from './NoResults';
 import OrderRow from './OrderRow';
 import OrderDetails from './OrderDetails';
 
