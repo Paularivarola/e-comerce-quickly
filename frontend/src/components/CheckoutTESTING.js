@@ -92,7 +92,7 @@ const CheckoutForm2 = ({ userData, paymentMethod, customer, createOrder, deliver
   return (
     <form id='payment-form' onSubmit={handleSubmit}>
       <button disabled={processing || succeeded} id='submit'>
-        <span id='button-text'>{processing ? <div className='spinner' id='spinner'></div> : succeeded ? 'Gracias por tu compra' : 'Pagá ahora'}</span>
+        <span id='button-text'>{processing ? 'Procesando...' : succeeded ? 'Gracias por tu compra' : 'Pagá ahora'}</span>
       </button>
       {error && (
         <div className='card-error' role='alert'>

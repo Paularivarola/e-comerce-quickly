@@ -88,9 +88,7 @@ const Order = (props) => {
           </div>
         </div>
         <div className={styles.containButtonSend}>
-          <span>
-            <span>{pay ? <Card2 index={props.active.card} deliveryAddress={props.deliveryAddress} {...props} /> : <button onClick={() => sendForm()}>Confirmar</button>}</span>
-          </span>
+          {pay ? <Card2 index={props.active.card} deliveryAddress={props.deliveryAddress} {...props} /> : <button onClick={() => sendForm()}>Confirmar</button>}
         </div>
       </div>
       {cardTost.view && <CardTost properties={cardTost} setCardTost={setCardTost} />}
