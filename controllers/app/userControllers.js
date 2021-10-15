@@ -34,7 +34,7 @@ const userControllers = {
         success: true,
         user: {
           firstName,
-          src: picture,
+          src: newUser.data.src,
           google: google,
         },
         userData: newUser,
@@ -73,12 +73,6 @@ const userControllers = {
     } catch (error) {
       res.json({ success: false, error: error.message })
     }
-  },
-
-  uploadImgMob: async (req, res) => {
-    const { _id, img } = req.body
-    let user = await User.findOneAndUpdate({ _id }, { 'data.src': img }, { new: true })
-    res.json({ success: true, userData: user })
   },
   updateUser: async (req, res) => {
     const { _id } = req.user

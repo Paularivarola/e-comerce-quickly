@@ -121,7 +121,9 @@ const SignForm = (props) => {
     if (!shift) {
       return Boolean(user.email && user.email.includes('@') && user.password)
     } else {
-      return Boolean(user.firstName && user.lastName && user.email && user.email.includes('@') && user.password && user.repPass && user.password === user.repPass)
+      return Boolean(
+        user.firstName && user.lastName && user.email && user.email.includes('@') && user.password && user.repPass && user.password === user.repPass
+      )
     }
   }
 
@@ -137,7 +139,7 @@ const SignForm = (props) => {
       fd.append('lastName', lastName)
       fd.append('google', google)
       fd.append(google ? 'src' : 'fileImg', src)
-      props.createUser(fd, props).then((res) => console.log(res))
+      props.createUser(fd, props)
     } else {
       props.logUser(user, props)
     }
@@ -199,8 +201,8 @@ const SignForm = (props) => {
                   onChange={inputHandler}
                   color='warning'
                   size='small'
-                // error
-                // helperText="Incorrect entry."
+                  // error
+                  // helperText="Incorrect entry."
                 />
                 <MyInput label='Contraseña' name='password' inputHandler={inputHandler} />
               </div>
@@ -226,8 +228,8 @@ const SignForm = (props) => {
                     color='warning'
                     size='small'
                     fullWidth
-                  // error
-                  // helperText="Incorrect entry."
+                    // error
+                    // helperText="Incorrect entry."
                   />
                   <TextField
                     required
@@ -239,8 +241,8 @@ const SignForm = (props) => {
                     color='warning'
                     size='small'
                     fullWidth
-                  // error
-                  // helperText="Incorrect entry."
+                    // error
+                    // helperText="Incorrect entry."
                   />
                 </div>
                 <div className={styles.inputsFormColum}>
@@ -254,8 +256,8 @@ const SignForm = (props) => {
                     color='warning'
                     size='small'
                     fullWidth
-                  // error
-                  // helperText="Incorrect entry."
+                    // error
+                    // helperText="Incorrect entry."
                   />
                   <MyInput label='Contraseña' name='password' inputHandler={inputHandler} />
                   <MyInput label='Repite contraseña' name='repPass' inputHandler={inputHandler} />
