@@ -14,7 +14,6 @@ import adminUsersActions from '../../redux/actions/admin/adminUserActions';
 import { useEffect, useState } from 'react'
 
 const CustomerDetails = (props) => {
-    console.log(props.user)
     const favorites = props.products.filter(product => product.favs.includes(props.user._id))
 
 

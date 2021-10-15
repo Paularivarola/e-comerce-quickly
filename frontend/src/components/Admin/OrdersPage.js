@@ -6,7 +6,6 @@ import OrderDetails from './OrderDetails';
 
 const OrderPage = (props) => {
     const [chosen, setChosen] = useState(null)
-    console.log(chosen)
     return (
         <section className={styles.customerContainer}>
             <div className={styles.infoTable}>

@@ -18,7 +18,6 @@ const Customers = (props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [render])
 
-    console.log(chosen)
 
     const handleChange = (e) => {
         setFiltered(props.users.filter(user => `${user.data.firstName} ${user.data.lastName}`.trim().toLowerCase().includes(e.target.value.toLowerCase())))

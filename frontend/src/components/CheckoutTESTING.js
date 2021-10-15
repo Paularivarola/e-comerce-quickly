@@ -1,33 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
-import { CardElement, Elements, useElements, useStripe } from '@stripe/react-stripe-js'
+import { Elements } from '@stripe/react-stripe-js'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import orderActions from '../redux/actions/orderActions'
 const HOST = 'https://quickly-food.herokuapp.com'
-const CARD_OPTIONS = {
-  iconStyle: 'solid',
-  style: {
-    base: {
-      iconColor: '#c4f0ff',
-      color: '#fff',
-      fontWeight: 500,
-      fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
-      fontSize: '16px',
-      fontSmoothing: 'antialiased',
-      ':-webkit-autofill': {
-        color: '#fce883',
-      },
-      '::placeholder': {
-        color: '#87bbfd',
-      },
-    },
-    invalid: {
-      iconColor: '#ffc7ee',
-      color: '#ffc7ee',
-    },
-  },
-}
 
 const ELEMENTS_OPTIONS = {
   fonts: [
@@ -60,12 +37,12 @@ const CheckoutForm2 = ({ userData, paymentMethod, customer, createOrder, deliver
   const [succeeded, setSucceeded] = useState(false)
   const [error, setError] = useState(null)
   const [processing, setProcessing] = useState('')
-  const [disabled, setDisabled] = useState(false)
   const [paymentIntent, setpaymentIntent] = useState(null)
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
     customer && createPayment()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [customer])
 
   const createPayment = async () => {
@@ -74,10 +51,6 @@ const CheckoutForm2 = ({ userData, paymentMethod, customer, createOrder, deliver
     setpaymentIntent(res.data.paymentIntent.id)
   }
 
-  const handleChange = async (event) => {
-    setDisabled(event.empty)
-    setError(event.error ? event.error.message : '')
-  }
 
   const handleSubmit = async (ev) => {
     ev.preventDefault()
@@ -112,7 +85,7 @@ const CheckoutForm2 = ({ userData, paymentMethod, customer, createOrder, deliver
 
   return (
     <form id='payment-form' onSubmit={handleSubmit}>
-      <button disabled={processing || disabled || succeeded} id='submit'>
+      <button disabled={processing || succeeded} id='submit'>
         <span id='button-text'>{processing ? <div className='spinner' id='spinner'></div> : succeeded ? 'Gracias por tu compra' : 'Pagá ahora'}</span>
       </button>
       {error && (

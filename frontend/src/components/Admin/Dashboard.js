@@ -18,13 +18,12 @@ const Dashboard = (props) => {
         setOrders(props.orders)
     }, [props.orders])
 
-    let today = (new Date).toLocaleDateString()
+    let today = new Date.toLocaleDateString()
     const todayOrders = props.orders.filter(order => (new Date(Date.parse(order.date))).toLocaleDateString() === today)
     const formatter = new Intl.NumberFormat('es-AR', {
         style: 'currency',
         currency: 'ARS',
     })
-    console.log(todayOrders)
     const todayIncome = todayOrders.reduce((acc, order) => {
         if (order.status !== 'Cancelado') {
             let subTotal = order.purchased.reduce((acc, order) => {
@@ -35,7 +34,6 @@ const Dashboard = (props) => {
         }
         return total
     }, 0)
-    console.log(todayIncome)
     return (
         <section className={styles.dashboardContainer}>
             <h1>Bienvenido, Admin.</h1>

@@ -106,7 +106,6 @@ const Product = (props) => {
 
     const updateProduct = () => {
         setSaving(true)
-        alert('hola')
     }
 
 

@@ -6,29 +6,11 @@ import styles from '../styles/personalData.module.css'
 import userActions from '../redux/actions/userActions'
 import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
-import { BsPencilSquare, BsCheckSquare, BsXSquare } from 'react-icons/bs'
+import { BsPencilSquare, BsCheckSquare } from 'react-icons/bs'
 import { connect } from 'react-redux'
 
 const MyTextField = ({ name, inputHandler }) => {
   const [update, setUpdate] = useState(false)
-  const icons = (
-    <InputAdornment position='end'>
-      {!update ? (
-        <IconButton onClick={() => setUpdate(true)} edge='end'>
-          <BsPencilSquare style={{ size: '1.5em', color: 'tomato' }} />
-        </IconButton>
-      ) : (
-        <>
-          <IconButton onClick={() => setUpdate(false)} edge='end'>
-            <BsCheckSquare style={{ size: '1.5em', color: 'tomato' }} />
-          </IconButton>
-          <IconButton onClick={() => setUpdate(false)} edge='end'>
-            <BsXSquare style={{ size: '1.5em', color: 'tomato' }} />
-          </IconButton>
-        </>
-      )}
-    </InputAdornment>
-  )
 
   return (
     <TextField
@@ -60,10 +42,6 @@ const MyTextField = ({ name, inputHandler }) => {
 }
 
 const PersonalData = ({ user, updateUser }) => {
-  const initialState = {
-    firstName: user?.firstName,
-    lastName: user?.lastName,
-  }
   const [userData, setUserData] = useState()
 
   useEffect(() => {
@@ -87,7 +65,6 @@ const PersonalData = ({ user, updateUser }) => {
   }
 
   const validatorFront = () => {
-    let initialValues = Object.values(initialState)
     // let valid = Object.values(userData).some((value, index) => {
     //   return value !== initialValues[index]
     // })

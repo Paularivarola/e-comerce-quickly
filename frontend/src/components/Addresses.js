@@ -8,6 +8,7 @@ import { ImCancelCircle } from 'react-icons/im'
 import { BsTrash } from 'react-icons/bs'
 import Card from './CARD'
 import Swal from 'sweetalert2'
+import CardTost from './CardTost'
 
 const MyInput = ({ input, newAddress, setNewAddress }) => {
   const inputHandler = (e) => {
@@ -129,6 +130,7 @@ const Addresses = ({ updateUser, userData, active, setActive, modal, setModal, v
 
   return (
     <div className={styles.mainAddress}>
+      {cardTost.view && <CardTost properties={cardTost} setCardTost={setCardTost} />}
       <img className={styles.world} src={view ? 'https://i.postimg.cc/L5DpZzqw/globoterraqueo.png' : 'https://i.postimg.cc/QtKg6LzK/tarjeta.png'} alt='world' />
       {((!userData?.addresses?.length && view) || (!userData?.paymentCards?.length && !view)) && (
         <>

@@ -23,7 +23,7 @@ const Profile = (props) => {
   useEffect(() => {
     let verification = Object.values(formConfirm).some((input) => input !== '')
     if (verification) {
-      alert('todo mal')
+      console.log('todo mal')
     }
     setView(props.match.params.page)
     // eslint-disable-next-line react-hooks/exhaustive-deps
