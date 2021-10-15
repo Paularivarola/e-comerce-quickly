@@ -1,5 +1,5 @@
 import axios from 'axios'
-const HOST = 'https://quickly-food.herokuapp.com'
+const HOST = 'http://localhost:4000'
 
 const adminOrderActions = {
   getOrders: () => {

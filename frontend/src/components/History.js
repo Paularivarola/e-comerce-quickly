@@ -58,7 +58,11 @@ const Order = ({ userData, order, index, cancellOrder }) => {
               cancelButtonText: 'No',
             }).then((result) => {
               if (result.isConfirmed) {
-                cancellOrder(order._id)
+                cancellOrder({
+                  orderId: order?._id,
+                  action: 'orderCancell',
+                  firstName: userData?.data?.firstName,
+                })
               }
             })
           }
@@ -80,7 +84,13 @@ const History = ({ orders, userData, cancellOrder, ...props }) => {
         </div>
       )}
       {[...orders]?.reverse().map((order, index) => (
-        <Order cancellOrder={cancellOrder} key={order._id} userData={userData} order={order} index={index} />
+        <Order
+          cancellOrder={cancellOrder}
+          key={order._id}
+          userData={userData}
+          order={order}
+          index={index}
+        />
       ))}
     </div>
   )

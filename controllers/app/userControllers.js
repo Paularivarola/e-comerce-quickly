@@ -21,9 +21,20 @@ const userControllers = {
       if (req.files) {
         const { fileImg } = req.files
         picture = `${newUser._id}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`
+<<<<<<< HEAD
         fileImg.mv(`${__dirname}/../../assets/${newUser._id}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`, (err) => {
           if (err) return console.log(err)
         })
+=======
+        fileImg.mv(
+          `${__dirname}/../../assets/${newUser._id}.${
+            fileImg.name.split('.')[fileImg.name.split('.').length - 1]
+          }`,
+          (err) => {
+            if (err) return console.log(err)
+          }
+        )
+>>>>>>> rafael
       } else {
         picture = src ? src : 'assets/user.png'
       }
@@ -75,15 +86,39 @@ const userControllers = {
   },
   updateUser: async (req, res) => {
     const { _id } = req.user
-    const { action, userData, newPaymentCard, paymentCardId, newAddress, addressId, password, currentPassword } = req.body
+    const {
+      action,
+      userData,
+      newPaymentCard,
+      paymentCardId,
+      newAddress,
+      addressId,
+      password,
+      currentPassword,
+    } = req.body
     let src
     if (req.files) {
       const { fileImg } = req.files
+<<<<<<< HEAD
       src = `${_id}v${req.user.__v + 1}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`
       fileImg.mv(`${__dirname}/../../assets/${_id}v${req.user.__v + 1}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`, (err) => {
         if (err) {
           res.json({ success: false, error: err.message })
           return console.log(err)
+=======
+      src = `${_id}v${req.user.__v + 1}.${
+        fileImg.name.split('.')[fileImg.name.split('.').length - 1]
+      }`
+      fileImg.mv(
+        `${__dirname}/../../assets/${_id}v${req.user.__v + 1}.${
+          fileImg.name.split('.')[fileImg.name.split('.').length - 1]
+        }`,
+        (err) => {
+          if (err) {
+            res.json({ success: false, error: err.message })
+            return console.log(err)
+          }
+>>>>>>> rafael
         }
       })
     }
@@ -191,12 +226,20 @@ const userControllers = {
 
   sendEmail: async (req, res) => {
     const { firstName, email, action } = req.body
-
     try {
       let options = {
         from: 'miComida <micomidaweb@gmail.com>', //de
         to: email, //para
+<<<<<<< HEAD
         subject: 'Bienvenido',
+=======
+        subject:
+          action === 'sign'
+            ? 'Bienvenido'
+            : action === 'orderConfirm'
+            ? 'Orden confirmada'
+            : 'Orden cancelada',
+>>>>>>> rafael
         html: html(firstName, action),
       }
       transport.sendMail(options, (err, info) => {
