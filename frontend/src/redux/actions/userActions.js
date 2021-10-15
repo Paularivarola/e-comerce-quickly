@@ -29,7 +29,7 @@ const userActions = {
           window.scrollTo(0, 0)
           props.history.push('/')
           let socket = io(`${HOST}`, {
-            query: { socketId: userData._id, admin: userData.data.admin.flag },
+            query: { socketId: userData._id, admin: false },
           })
           dispatch({ type: 'SET_SOCKET', payload: { socket } })
           return dispatch({
