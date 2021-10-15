@@ -5,13 +5,10 @@ const adminUserControllers = {
   createAdminUser: async (req, res) => {
     const { firstName, lastName, password, email } = req.body
     const { key } = req.user.data.admin
-    console.log(req.body)
     const pw = bcrypt.hashSync(password)
     try {
-      console.log('llego')
       // let match = key && bcrypt.compareSync(process.env.SECRETORKEY, key);
       // if (!match) throw new Error("key error");
-      console.log(req.body)
       const nuevaKey = bcrypt.hashSync(process.env.SECRETORKEY)
       const newUser = new User({
         data: {
@@ -23,7 +20,6 @@ const adminUserControllers = {
         },
       })
       let user = await newUser.save()
-      console.log('bien')
       res.json({
         success: true,
         response: user,
@@ -60,8 +56,6 @@ const adminUserControllers = {
       let match = key && bcrypt.compareSync(process.env.SECRETORKEY, key)
       if (!match) throw new Error('key error')
       await User.findOneAndDelete({ _id: req.params.id })
-      console.log(req.params.id)
-      console.log('llego')
       res.json({ success: true })
     } catch (error) {
       res.json({ success: false, error: error.message })

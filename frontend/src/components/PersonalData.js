@@ -6,29 +6,11 @@ import styles from '../styles/personalData.module.css'
 import userActions from '../redux/actions/userActions'
 import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
-import { BsPencilSquare, BsCheckSquare, BsXSquare } from 'react-icons/bs'
+import { BsPencilSquare, BsCheckSquare } from 'react-icons/bs'
 import { connect } from 'react-redux'
 
 const MyTextField = ({ name, inputHandler }) => {
   const [update, setUpdate] = useState(false)
-  const icons = (
-    <InputAdornment position='end'>
-      {!update ? (
-        <IconButton onClick={() => setUpdate(true)} edge='end'>
-          <BsPencilSquare style={{ size: '1.5em', color: 'tomato' }} />
-        </IconButton>
-      ) : (
-        <>
-          <IconButton onClick={() => setUpdate(false)} edge='end'>
-            <BsCheckSquare style={{ size: '1.5em', color: 'tomato' }} />
-          </IconButton>
-          <IconButton onClick={() => setUpdate(false)} edge='end'>
-            <BsXSquare style={{ size: '1.5em', color: 'tomato' }} />
-          </IconButton>
-        </>
-      )}
-    </InputAdornment>
-  )
 
   return (
     <TextField
@@ -60,10 +42,6 @@ const MyTextField = ({ name, inputHandler }) => {
 }
 
 const PersonalData = ({ user, updateUser }) => {
-  const initialState = {
-    firstName: user?.firstName,
-    lastName: user?.lastName,
-  }
   const [userData, setUserData] = useState()
 
   useEffect(() => {
@@ -87,10 +65,9 @@ const PersonalData = ({ user, updateUser }) => {
   }
 
   const validatorFront = () => {
-    let initialValues = Object.values(initialState)
-    let valid = Object.values(userData).some((value, index) => {
-      return value !== initialValues[index]
-    })
+    // let valid = Object.values(userData).some((value, index) => {
+    //   return value !== initialValues[index]
+    // })
 
     // if (!valid) {
     //   return setUpdate(false)
@@ -98,7 +75,6 @@ const PersonalData = ({ user, updateUser }) => {
     // if(user.firstName && user.lastName && user.email && user.email.includes('@') && user.password && user.repPass && user.password === user.repPass){
     //   aca sale la funcion linda
     // }
-    console.log('esta todo bien')
     updateUser({ action: 'updateData', userData })
   }
 
@@ -111,7 +87,13 @@ const PersonalData = ({ user, updateUser }) => {
               className={styles.containImage}
               style={{
                 backgroundImage: `url("${
-                  user ? (user.google || user.admin.flag ? user.src : user.src !== 'assets/user.png' ? 'https://quickly-food.herokuapp.com/' + user.src : '/assets/user.png') : '/assets/user.png'
+                  user
+                    ? user.google || user.admin.flag
+                      ? user.src
+                      : user.src !== 'assets/user.png'
+                      ? 'https://quickly-food.herokuapp.com/' + user.src
+                      : '/assets/user.png'
+                    : '/assets/user.png'
                 }")`,
               }}
             ></div>
@@ -133,7 +115,16 @@ const PersonalData = ({ user, updateUser }) => {
             >
               <MyTextField name={user?.firstName} inputHandler={inputHandler} />
               <MyTextField name={user?.lastName} inputHandler={inputHandler} />
-              <TextField type='email' disabled name='email' defaultValue={user?.email} label='Email' variant='outlined' color='warning' onChange={inputHandler} />
+              <TextField
+                type='email'
+                disabled
+                name='email'
+                defaultValue={user?.email}
+                label='Email'
+                variant='outlined'
+                color='warning'
+                onChange={inputHandler}
+              />
             </Box>
           )}
           <div className={styles.buttonBox}>

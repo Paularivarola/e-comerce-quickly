@@ -49,7 +49,9 @@ const userControllers = {
   logIn: async (req, res) => {
     const { email, password, google } = req.body
     try {
-      let user = await User.findOne({ 'data.email': email }).populate({ path: 'cart.productId', model: 'product' }).populate({ path: 'ordersId', model: 'order' })
+      let user = await User.findOne({ 'data.email': email })
+        .populate({ path: 'cart.productId', model: 'product' })
+        .populate({ path: 'ordersId', model: 'order' })
       if (!user) throw new Error('No encotramos una cuenta asociada a ese email')
       if (user.data.google && !google) {
         throw new Error('Debes iniciar sesión con Google')
@@ -69,7 +71,6 @@ const userControllers = {
         token,
       })
     } catch (error) {
-      console.log(error)
       res.json({ success: false, error: error.message })
     }
   },
@@ -118,7 +119,9 @@ const userControllers = {
     try {
       if (!operation) throw new Error()
       if (action === 'updatePass' && !bcrypt.compareSync(currentPassword, req.user.data.password)) throw new Error('Contraseña incorrecta')
-      let user = await User.findOneAndUpdate({ _id }, operation, options).populate({ path: 'cart.productId', model: 'product' }).populate({ path: 'ordersId', model: 'order' })
+      let user = await User.findOneAndUpdate({ _id }, operation, options)
+        .populate({ path: 'cart.productId', model: 'product' })
+        .populate({ path: 'ordersId', model: 'order' })
       res.json({
         success: true,
         user: {
@@ -165,7 +168,6 @@ const userControllers = {
       })
       res.json({ success: true, paymentMethodAttached })
     } catch (error) {
-      console.log(error)
       return res.json({ success: false, error: error.message })
     }
   },
@@ -183,26 +185,23 @@ const userControllers = {
   },
   confirmPayment: async (req, res) => {
     const { payment_method, paymentIntent } = req.body
-    console.log(req.body)
     try {
       let confirmation = await stripe.paymentIntents.confirm(paymentIntent, {
         payment_method,
       })
       res.json({ success: true, confirmation })
     } catch (error) {
-      console.log(error.message)
       return res.json({ success: false, error: error.message })
     }
   },
 
   sendEmail: async (req, res) => {
     const { firstName, email, action } = req.body
-
     try {
       let options = {
         from: 'miComida <micomidaweb@gmail.com>', //de
         to: email, //para
-        subject: 'Bienvenido',
+        subject: action === 'sign' ? 'Bienvenido' : action === 'orderConfirm' ? 'Orden confirmada' : 'Orden cancelada',
         html: html(firstName, action),
       }
       transport.sendMail(options, (err, info) => {

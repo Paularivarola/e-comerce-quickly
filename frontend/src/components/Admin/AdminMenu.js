@@ -26,7 +26,7 @@ const AdminMenu = (props) => {
 
     return (
         <header className={props.open ? `${styles.mainContainer}` : `${styles.close}`}>
-            <img src="/assets/logo-cocina-prueba.png" style={{ width: '100%', marginTop: '5vh' }} alt="Logo" />
+            <img src='/assets/quicklyLogo.png' style={{ width: '100%', marginTop: '5vh' }} alt="Logo" />
             <nav className={styles.adminNav}>
                 <div>
                     <Accordion expanded={expanded === 'panel4'} onChange={handleChangeSpecial('panel4')} >
@@ -58,7 +58,7 @@ const AdminMenu = (props) => {
                             <Typography sx={{ width: '100%', flexShrink: 0 }}>
                                 <span className={styles.navItem}>
                                     <MdPerson />
-                                    Clientes
+                                    Usuarios
                                 </span>
                             </Typography>
                         </AccordionSummary>
@@ -75,7 +75,7 @@ const AdminMenu = (props) => {
                                     <span onClick={() => {
                                         setView('Nuevo Usuario')
                                     }} className={view === 'Nuevo Usuario' ? `${styles.navItemActive}` : `${styles.navItem}`}>
-                                        Crear Usuario
+                                        Crear Admin
                                     </span>
                                 </Link>
                             </Typography>
@@ -106,11 +106,6 @@ const AdminMenu = (props) => {
                                         Ver Todos
                                     </span>
                                 </Link>
-                                <span onClick={() => {
-                                    setView('Carros Abandonados')
-                                }} className={view === 'Carros Abandonados' ? `${styles.navItemActive}` : `${styles.navItem}`}>
-                                    Carros Abandonados
-                                </span>
                             </Typography>
                         </AccordionDetails>
                     </Accordion>

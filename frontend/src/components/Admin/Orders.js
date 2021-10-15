@@ -1,5 +1,4 @@
 import * as React from 'react';
-import styles2 from '../../styles/customer.module.css'
 import { connect } from 'react-redux'
 import adminOrderActions from '../../redux/actions/admin/adminOrderActions';
 

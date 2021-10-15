@@ -8,7 +8,6 @@ const userActions = {
     return async (dispatch) => {
       try {
         let res = await axios.post(`${HOST}/api/user/signUp`, user)
-        console.log(res)
         if (res.data.success) {
           const { user, userData, token } = res.data
           let keep = false
@@ -102,7 +101,6 @@ const userActions = {
           },
         })
         const { ordersId } = response.data
-        console.log(ordersId)
         dispatch({ type: 'UPDATE_USER_ORDERS', payload: ordersId })
       } catch (error) {
         console.log(error)

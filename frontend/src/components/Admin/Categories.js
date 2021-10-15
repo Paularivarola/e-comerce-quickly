@@ -1,4 +1,4 @@
-
+import styles from '../../styles/dashboard.module.css'
 import { Pie } from 'react-chartjs-2'
 const Categories = (props) => {
 
@@ -23,9 +23,11 @@ const Categories = (props) => {
             label: 'My First Dataset',
             data: figures,
             backgroundColor: [
-                '#F88F01',
-                '#E27802',
-                '#ffcd56'
+                '#FE6849',
+                '#cf543b',
+                '#a1412e',
+                '#793022',
+                '#4d1c12'
             ],
             hoverOffset: 4
         }]
@@ -36,7 +38,7 @@ const Categories = (props) => {
     }
     return (
         <div style={{ width: '100%', padding: '0 15%' }}>
-            <div style={{ width: '100%', padding: '0 5px' }} className='prueba2'>
+            <div style={{ width: '100%', padding: '0 5px' }} className={styles.circleGraph} >
                 <Pie data={data} options={options} />
             </div>
         </div>

@@ -35,6 +35,7 @@ const CardTost = ({ properties, setCardTost, accept, deny }) => {
       }, time || 1500)
     }
     return () => clearTimeout(timeout.current)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

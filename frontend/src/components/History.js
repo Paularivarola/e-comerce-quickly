@@ -13,6 +13,7 @@ const Order = ({ userData, order, index, cancellOrder }) => {
   const { street, number, alias } = order?.deliveryAddress
   useEffect(() => {
     setAddress(`${street} ${number} ${alias}`)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   let deliveryTime = order.deliveryTime.split(' ').slice(4, 5)[0]
   deliveryTime = deliveryTime.split(':').slice(0, 2).join(':')
@@ -58,7 +59,11 @@ const Order = ({ userData, order, index, cancellOrder }) => {
               cancelButtonText: 'No',
             }).then((result) => {
               if (result.isConfirmed) {
-                cancellOrder(order._id)
+                cancellOrder({
+                  orderId: order?._id,
+                  action: 'orderCancell',
+                  firstName: userData?.data?.firstName,
+                })
               }
             })
           }
@@ -80,7 +85,13 @@ const History = ({ orders, userData, cancellOrder, ...props }) => {
         </div>
       )}
       {[...orders]?.reverse().map((order, index) => (
-        <Order cancellOrder={cancellOrder} key={order._id} userData={userData} order={order} index={index} />
+        <Order
+          cancellOrder={cancellOrder}
+          key={order._id}
+          userData={userData}
+          order={order}
+          index={index}
+        />
       ))}
     </div>
   )

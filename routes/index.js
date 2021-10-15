@@ -14,7 +14,6 @@ router.route('/user/signUp').post(validatorSignUp, userControllers.signUp, userC
 router.route('/user/logIn').post(userControllers.logIn)
 router.route('/user/token').get(passport, userControllers.verifyToken)
 router.route('/user').put(passport, userControllers.updateUser).delete(passport, userControllers.deleteUser)
-router.route('/mob/userimg').post(userControllers.uploadImgMob)
 
 // PRODUCTS
 router.route('/products').get(productControllers.getProducts).put(productControllers.manageCart)
@@ -22,8 +21,8 @@ router.route('/products/favs').put(passport, productControllers.favHandler)
 router.route('/products/keep-cart').post(productControllers.keepCart)
 
 //ORDERS
-router.route('/orders').post(orderControllers.createOrder).get(passport, orderControllers.getUserOrders)
-router.route('/order/:id').put(orderControllers.cancellOrder)
+router.route('/orders').post(orderControllers.createOrder, userControllers.sendEmail).get(passport, orderControllers.getUserOrders)
+router.route('/order/:id').put(orderControllers.cancellOrder, userControllers.sendEmail)
 
 //EMAIL
 // router.route('/mail').post(passport)

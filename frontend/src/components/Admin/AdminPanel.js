@@ -5,14 +5,12 @@ import AdminMenu from './AdminMenu'
 import Dashboard from './Dashboard'
 import Customers from './Customers'
 import Customer from './Customer'
-import Orders from './Orders'
+import OrdersPage from './OrdersPage'
 import Products from './Products'
 import Abandoned from './Abandoned'
 import Reviews from './Reviews'
 import Product from './Product'
 import Preloader from '../Preloader'
-import { FaBell, FaEnvelope } from "react-icons/fa";
-import { MdOutlineMenu } from "react-icons/md";
 import adminUsersActions from '../../redux/actions/admin/adminUserActions'
 import adminProductActions from '../../redux/actions/admin/adminProductActions'
 import adminOrderActions from '../../redux/actions/admin/adminOrderActions'
@@ -53,9 +51,9 @@ const AdminPanel = (props) => {
     return (
         <>
             <div className={styles.mainContainer}>
-                <AdminMenu open={open} view={view} setView={setView} />
+                <AdminMenu open={open} view={view} setView={setView} setOpen={setOpen} />
                 <main className={styles.bodyContainer} >
-                    <section className={styles.header}>
+                    {/* <section className={styles.header}>
                         <MdOutlineMenu onClick={() => setOpen(!open)} />
                         <h1>{view}</h1>
                         <div className={styles.userSection}>
@@ -63,12 +61,12 @@ const AdminPanel = (props) => {
                             <FaBell />
                             <div className={styles.profilePic} style={{ backgroundImage: "url('https://www.tsensor.online/wp-content/uploads/2020/04/avatar-icon-png-105-images-in-collection-page-3-avatarpng-512_512.png')" }}></div>
                         </div>
-                    </section>
+                    </section> */}
                     <section className={styles.viewContainer}>
                         {view === 'Escritorio' && <Dashboard setView={setView} />}
                         {view === 'Clientes' && <Customers setView={setView} />}
                         {view === 'Nuevo Usuario' && <Customer />}
-                        {view === 'Pedidos' && <Orders />}
+                        {view === 'Pedidos' && <OrdersPage />}
                         {view === 'Carros Abandonados' && <Abandoned />}
                         {view === 'Productos' && <Products setView={setView} />}
                         {view === 'Reviews' && <Reviews />}

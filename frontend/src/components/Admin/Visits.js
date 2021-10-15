@@ -1,4 +1,5 @@
 import { Bar } from 'react-chartjs-2'
+import styles from '../../styles/dashboard.module.css'
 
 const Visits = () => {
     const data = {
@@ -21,7 +22,7 @@ const Visits = () => {
 
     }
     return (
-        <div style={{ width: '100%', padding: '0 5px' }}>
+        <div style={{ width: '100%', padding: '0 5px' }} className={styles.graph}>
             <Bar data={data} options={options} />
         </div>
     )

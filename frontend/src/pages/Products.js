@@ -18,6 +18,7 @@ const Products = (props) => {
   useEffect(() => {
     props.getProducts()
     props.history.location.pathname === '/products' && props.history.push('/products/all')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   useEffect(() => {
     setProducts(
@@ -26,6 +27,7 @@ const Products = (props) => {
         return path === 'all' || path === prod.category
       })
     )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [window.location.pathname, props.products])
 
   const setModal = (bool, product) => {

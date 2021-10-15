@@ -5,8 +5,8 @@ import ProductCard from './ProductCard';
 const Favorites = (props) => {
     return (
         <div className={styles.favouritesContainer}>
-            {props.user.favouriteProductsId.length
-                ? props.user.favouriteProductsId.map(favourite => <ProductCard data={favourite} />)
+            {props.favorites.length
+                ? props.favorites.map(favourite => <ProductCard data={favourite} />)
                 : <span className={styles.warning}><MdOutlineInfo />El usuario no ha guardado ningún favorito.</span>}
         </div>
     )

@@ -47,23 +47,18 @@ const adminUsersActions = {
   deleteUser: (userId) => {
     let token = localStorage.getItem('token')
     return async (dispatch) => {
-      let response = await axios.delete('http://localhost:4000/api/admin/user/' + userId, {
+      let response = await axios.delete(`${HOST}/api/admin/user/` + userId, {
         headers: {
           Authorization: 'Bearer ' + token,
         },
       })
-      console.log(response)
       if (response.data.success) {
         await dispatch({ type: 'DELETE_USER', payload: userId })
         return response.data
       }
     }
   },
-  countVisit: () => {
-    return async (dispatch) => {
-      await axios.post('http://localhost:4000/api/admin/general')
-    }
-  },
+
   getUser: (id) => {
     return async (dispatch) => {
       dispatch({ type: 'GET_USER', payload: id })
