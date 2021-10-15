@@ -54,7 +54,11 @@ const PaymentCard = ({ updateUser, card, id, setActive, active, index, act }) =>
   }
 
   return (
-    <div onClick={() => setActive && setActive({ ...act, card: index })} style={{ cursor: 'pointer' }} className={active ? styles.activeCard : styles.addressCard}>
+    <div
+      onClick={() => setActive && setActive({ ...act, card: index })}
+      style={{ cursor: 'pointer' }}
+      className={active ? styles.activeCard : styles.addressCard}
+    >
       <span className={styles.addressAlias}>
         Tarjeta {card?.brand.toUpperCase()} ...{card?.last4}
       </span>
@@ -80,7 +84,11 @@ const Address = ({ updateUser, address, active, setActive, index, act }) => {
     })
   }
   return (
-    <div onClick={() => setActive && setActive({ ...act, address: index })} style={{ cursor: 'pointer' }} className={active ? styles.activeCard : styles.addressCard}>
+    <div
+      onClick={() => setActive && setActive({ ...act, address: index })}
+      style={{ cursor: 'pointer' }}
+      className={active ? styles.activeCard : styles.addressCard}
+    >
       <div>
         <span className={styles.addressAlias}>{address?.alias.toUpperCase()}</span>
         <span className={styles.addressName}>{address.street + ', ' + address.number + ' - ' + address.apartment}</span>
@@ -130,14 +138,16 @@ const Addresses = ({ updateUser, userData, active, setActive, modal, setModal, v
 
   return (
     <div className={styles.mainAddress}>
-      {cardTost.view && <CardTost properties={cardTost} setCardTost={setCardTost} />}
+      {cardTost?.view && <CardTost properties={cardTost} setCardTost={setCardTost} />}
       <img className={styles.world} src={view ? 'https://i.postimg.cc/L5DpZzqw/globoterraqueo.png' : 'https://i.postimg.cc/QtKg6LzK/tarjeta.png'} alt='world' />
       {((!userData?.addresses?.length && view) || (!userData?.paymentCards?.length && !view)) && (
         <>
           <div className={styles.containFormAddress}>
             <h1 className={styles.message}>{view ? 'No tenes ninguna direccion todavia' : 'No hay tarjetas cargadas'}</h1>
             <h1 className={styles.message2}>
-              {view ? 'Asegurese de tener al menos una dirección cargada antes de realizar su compra' : 'Asegurese de tener al menos una tarjeta cargada antes de realizar su compra'}
+              {view
+                ? 'Asegurese de tener al menos una dirección cargada antes de realizar su compra'
+                : 'Asegurese de tener al menos una tarjeta cargada antes de realizar su compra'}
             </h1>
           </div>
         </>
@@ -147,25 +157,33 @@ const Addresses = ({ updateUser, userData, active, setActive, modal, setModal, v
         <div className={styles.addressesContainer}>
           {view
             ? userData.addresses.map((address, index) => (
-              <Address key={address._id} address={address} updateUser={updateUser} index={index} act={active} active={index === active?.address} setActive={setActive} setCardTost={setCardTost} />
-            ))
+                <Address
+                  key={address._id}
+                  address={address}
+                  updateUser={updateUser}
+                  index={index}
+                  act={active}
+                  active={index === active?.address}
+                  setActive={setActive}
+                  setCardTost={setCardTost}
+                />
+              ))
             : userData?.paymentCards?.map((payment, index) => (
-              <PaymentCard
-                updateUser={updateUser}
-                card={payment.card}
-                id={payment.id}
-                key={payment.id}
-                index={index}
-                active={active?.card === index}
-                act={active}
-                setActive={setActive}
-                setCardTost={setCardTost}
-              />
-            ))}
+                <PaymentCard
+                  updateUser={updateUser}
+                  card={payment.card}
+                  id={payment.id}
+                  key={payment.id}
+                  index={index}
+                  active={active?.card === index}
+                  act={active}
+                  setActive={setActive}
+                  setCardTost={setCardTost}
+                />
+              ))}
         </div>
       ) : null}
 
-      {/* {cardTost && <CardTost properties={cardTost} setCardTost={setCardTost} accept={functionX} deny={() => setCardTost(null)} />} */}
       {modal &&
         (!view ? (
           <div className={styles.containFormModal} data-modal='addressModal'>
