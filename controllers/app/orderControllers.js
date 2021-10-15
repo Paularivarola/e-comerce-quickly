@@ -8,7 +8,7 @@ const orderControllers = {
     var date = new Date()
     var deliveryTime = new Date()
     date.setTime(date.getTime() - 180 * 60 * 1000)
-    deliveryTime.setTime(date.getTime() - 150 * 60 * 1000)
+    deliveryTime.setTime(date.getTime() + 30 * 60 * 1000)
     try {
       let newOrder = new Order({
         date,
