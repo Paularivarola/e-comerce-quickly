@@ -2,7 +2,9 @@ const User = require('../../models/User')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const transport = require('../../config/transport')
-const stripe = require('stripe')('sk_test_51JiHmiD8MtlvyDMX4r6FFdMzuJU3h60v7z60iYIo1n2u4b5PeWUzzigyKCiPpMkoHXIJ4u0SWDvjsQ3BTXPz0wpn00mAvDx3wa')
+const stripe = require('stripe')(
+  'sk_test_51JiHmiD8MtlvyDMX4r6FFdMzuJU3h60v7z60iYIo1n2u4b5PeWUzzigyKCiPpMkoHXIJ4u0SWDvjsQ3BTXPz0wpn00mAvDx3wa'
+)
 
 const userControllers = {
   signUp: async (req, res, next) => {
@@ -21,11 +23,6 @@ const userControllers = {
       if (req.files) {
         const { fileImg } = req.files
         picture = `${newUser._id}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`
-<<<<<<< HEAD
-        fileImg.mv(`${__dirname}/../../assets/${newUser._id}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`, (err) => {
-          if (err) return console.log(err)
-        })
-=======
         fileImg.mv(
           `${__dirname}/../../assets/${newUser._id}.${
             fileImg.name.split('.')[fileImg.name.split('.').length - 1]
@@ -34,7 +31,6 @@ const userControllers = {
             if (err) return console.log(err)
           }
         )
->>>>>>> rafael
       } else {
         picture = src ? src : 'assets/user.png'
       }
@@ -54,13 +50,17 @@ const userControllers = {
       return next()
     } catch (error) {
       console.log(error)
-      error.message.includes('Google') ? res.json({ error: [{ message: error.message }] }) : res.json({ success: false, error: error.message })
+      error.message.includes('Google')
+        ? res.json({ error: [{ message: error.message }] })
+        : res.json({ success: false, error: error.message })
     }
   },
   logIn: async (req, res) => {
     const { email, password, google } = req.body
     try {
-      let user = await User.findOne({ 'data.email': email }).populate({ path: 'cart.productId', model: 'product' }).populate({ path: 'ordersId', model: 'order' })
+      let user = await User.findOne({ 'data.email': email })
+        .populate({ path: 'cart.productId', model: 'product' })
+        .populate({ path: 'ordersId', model: 'order' })
       if (!user) throw new Error('No encotramos una cuenta asociada a ese email')
       if (user.data.google && !google) {
         throw new Error('Debes iniciar sesión con Google')
@@ -99,13 +99,6 @@ const userControllers = {
     let src
     if (req.files) {
       const { fileImg } = req.files
-<<<<<<< HEAD
-      src = `${_id}v${req.user.__v + 1}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`
-      fileImg.mv(`${__dirname}/../../assets/${_id}v${req.user.__v + 1}.${fileImg.name.split('.')[fileImg.name.split('.').length - 1]}`, (err) => {
-        if (err) {
-          res.json({ success: false, error: err.message })
-          return console.log(err)
-=======
       src = `${_id}v${req.user.__v + 1}.${
         fileImg.name.split('.')[fileImg.name.split('.').length - 1]
       }`
@@ -118,9 +111,8 @@ const userControllers = {
             res.json({ success: false, error: err.message })
             return console.log(err)
           }
->>>>>>> rafael
         }
-      })
+      )
     }
 
     let operation =
@@ -146,8 +138,11 @@ const userControllers = {
     let options = { new: true }
     try {
       if (!operation) throw new Error()
-      if (action === 'updatePass' && !bcrypt.compareSync(currentPassword, req.user.data.password)) throw new Error('Contraseña incorrecta')
-      let user = await User.findOneAndUpdate({ _id }, operation, options).populate({ path: 'cart.productId', model: 'product' }).populate({ path: 'ordersId', model: 'order' })
+      if (action === 'updatePass' && !bcrypt.compareSync(currentPassword, req.user.data.password))
+        throw new Error('Contraseña incorrecta')
+      let user = await User.findOneAndUpdate({ _id }, operation, options)
+        .populate({ path: 'cart.productId', model: 'product' })
+        .populate({ path: 'ordersId', model: 'order' })
       res.json({
         success: true,
         user: {
@@ -230,16 +225,12 @@ const userControllers = {
       let options = {
         from: 'miComida <micomidaweb@gmail.com>', //de
         to: email, //para
-<<<<<<< HEAD
-        subject: 'Bienvenido',
-=======
         subject:
           action === 'sign'
             ? 'Bienvenido'
             : action === 'orderConfirm'
             ? 'Orden confirmada'
             : 'Orden cancelada',
->>>>>>> rafael
         html: html(firstName, action),
       }
       transport.sendMail(options, (err, info) => {
