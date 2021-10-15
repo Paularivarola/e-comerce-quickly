@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.8cc02f5d.chunk.css",
+    "main.css": "/static/css/main.b422c388.chunk.css",
     "main.js": "/static/js/main.bf5a2e5e.chunk.js",
     "main.js.map": "/static/js/main.bf5a2e5e.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.f5cfbed7.js",
@@ -10,7 +10,7 @@
     "static/js/2.ab9de2e5.chunk.js.map": "/static/js/2.ab9de2e5.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.e1b25a95.chunk.css.map": "/static/css/2.e1b25a95.chunk.css.map",
-    "static/css/main.8cc02f5d.chunk.css.map": "/static/css/main.8cc02f5d.chunk.css.map",
+    "static/css/main.b422c388.chunk.css.map": "/static/css/main.b422c388.chunk.css.map",
     "static/js/2.ab9de2e5.chunk.js.LICENSE.txt": "/static/js/2.ab9de2e5.chunk.js.LICENSE.txt",
     "static/media/styles.css": "/static/media/revicons.e8746a62.woff"
   },
@@ -18,7 +18,7 @@
     "static/js/runtime-main.f5cfbed7.js",
     "static/css/2.e1b25a95.chunk.css",
     "static/js/2.ab9de2e5.chunk.js",
-    "static/css/main.8cc02f5d.chunk.css",
+    "static/css/main.b422c388.chunk.css",
     "static/js/main.bf5a2e5e.chunk.js"
   ]
 }

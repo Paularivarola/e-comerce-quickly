@@ -127,5 +127,5 @@
   padding: 0.5rem 1rem;
 }
 .containButtonSend button:hover {
-  opacity: 80%;
+  background-color: rgba(255, 99, 71, 0.739);
 }
