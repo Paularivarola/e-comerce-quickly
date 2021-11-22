@@ -2,7 +2,7 @@
 Version mobile del proyecto Quickly Food.
 
 ## Trabajo realizado
-Mobile App desarrollada en 15 días como challenge grupal durante mi transcurso por el bootcamp de MindHub. Es una app pensada para un comercio gastronómico que quiera tener su propia aplicación de comida rápida y delivery a domicilio en donde, el usuario puede crearse una cuenta, realizar un pedido y pago online, ingresar sus datos para asi recibir su pedido a domicilio. Tambien tiene su perfil en donde puede controlar el estado de su pedido actual. Este es modificado dese un panel de administración
+Web app desarrollada en 15 días como challenge grupal durante mi transcurso por el bootcamp de MindHub. Es una app pensada para un comercio gastronómico que quiera tener su propia aplicación de comida rápida y delivery a domicilio en donde, el usuario puede crearse una cuenta, realizar un pedido y pago online, ingresar sus datos para asi recibir su pedido a domicilio. Tambien tiene su perfil en donde puede controlar el estado de su pedido actual. Este es modificado desde un panel de administración
 <br></br>
 
 <div align='center'>
@@ -21,20 +21,24 @@ bash
 npm install
 
 # Ejecutar
-expo start
+npm start
 
 
 ## Tecnologías 🛠️
 Este proyecto fue realizado por las siguientes tecnologías
 
->- [Expo](https://docs.expo.dev/) - Framework y plataforma para aplicaciones universales hechas en React.
->- [React Native](https://reactnative.dev/) - Framework para construir aplicaciones nativas
+>- [React](https://docs.expo.dev/) - Framework y plataforma para aplicaciones universales hechas en React.
 >- [Redux](https://redux.js.org/) - Utilizado para trabajar con un estado global
->- [Node](https://nodejs.org/es/) - Entorno de ejecución para JavaScript
+>- [Node js](https://nodejs.org/es/) - Entorno de ejecución para JavaScript
 >- [Express](https://expressjs.com/es/) - Librería de Node utilizada en la construccion de la API
 >- [MongoDB](https://www.mongodb.com/) - Base de datos
 >- [Mongoose](https://mongoosejs.com/) - Modelado de objetos (Object Document Mapper (ODM))
+>- [Passport](https:///) - Libreria passport para autenticación de usuarios.
 >- [Socket](https://socket.io/) - Framework para controlar datos en tiempo real
+>- [Joi](https:///) - Libreria Joi para validar datos de formulario.
+>- [Bcrypt](https:///) - Libreria Bcrypt para protección de contraseña.
+>- [Json Web Token](https:///) - Seguridad al iniciar sesión en la web app.
+
 
 ## Desarrollado por 🤓
 >- [Daniel Sepúlveda](https://github.com/DanSepulveda)
