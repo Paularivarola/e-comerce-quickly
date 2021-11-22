@@ -1,5 +1,5 @@
 ## Quickly mobile app - E-commerce 🍔
-Version mobile del proyecto Quickly Food.
+Version Web app del proyecto Quickly Food.
 
 ## Trabajo realizado
 Web app desarrollada en 15 días como challenge grupal durante mi transcurso por el bootcamp de MindHub. Es una app pensada para un comercio gastronómico que quiera tener su propia aplicación de comida rápida y delivery a domicilio en donde, el usuario puede crearse una cuenta, realizar un pedido y pago online, ingresar sus datos para asi recibir su pedido a domicilio. Tambien tiene su perfil en donde puede controlar el estado de su pedido actual. Este es modificado desde un panel de administración
