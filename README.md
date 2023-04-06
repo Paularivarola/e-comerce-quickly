@@ -5,6 +5,7 @@ Version Web app del proyecto Quickly Food.
 Web app desarrollada en 15 días como challenge grupal durante mi transcurso por el bootcamp de MindHub. Es una app pensada para un comercio gastronómico que quiera tener su propia aplicación de comida rápida y delivery a domicilio en donde, el usuario puede crearse una cuenta, realizar un pedido y pago online, ingresar sus datos para asi recibir su pedido a domicilio. Tambien tiene su perfil en donde puede controlar el estado de su pedido actual. Este es modificado desde un panel de administración
 <br></br>
 
+<img src="https://camo.githubusercontent.com/f6208d0472cf84e4ff3f8256a7f8f9094549a35f73c859fdfa51e55efaa7d4b2/68747470733a2f2f6d656469612e67697068792e636f6d2f6d656469612f3464656458354b63633837493062727461672f67697068792e676966"></img>
 
 
 <br></br>
