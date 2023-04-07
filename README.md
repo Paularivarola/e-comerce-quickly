@@ -17,12 +17,13 @@ Web app desarrollada en 15 días como challenge grupal durante mi transcurso por
 
 ## Empezamos! 🚀
 
-bash
+```bash
 # Instalar dependencias para el cliente
 npm install
 
 # Ejecutar
-npm start
+expo start
+```
 
 
 ## Tecnologías 🛠️
